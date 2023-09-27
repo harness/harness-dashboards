@@ -1,0 +1,14 @@
+*.swp
+*.ipr
+*.iws
+*.orig
+*.xml.bak
+*.jar
+
+bazel-*
+.bazelrc
+.ijwb
+bazelrc.cache
+bazelrc.gcp
+harness-dashboards
+.DS_Store
