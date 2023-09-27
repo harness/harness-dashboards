@@ -1,0 +1,533 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 104,
+  "links": [],
+  "liveNow": true,
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P395BF20BBBA74F0A"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 12,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<a href=\"https://docs.google.com/spreadsheets/d/1lAdvzOSbJuUrDOmYmbk2iZWpqKVLkGc9bLLzqbr8Yjk/edit?usp=sharing\">Resource usage spreadsheet</a>\n\n\n<table>\n  <tr>\n    <th>Name</th>\n    <th>AccountId</th>\n  </tr>\n  <tr>\n    <td>Crabel Capital Management, LLC</td>\n    <td>dqAWlhDWTjGn0Rie85EwwA</td>\n  </tr>\n  <tr>\n    <td>JAS Worldwide</td>\n    <td>eKD84MPkTGSIIWlKedPjYg</td>\n  </tr>\n  <tr>\n    <td>Superlogica</td>\n    <td>0iQojjIqSaGHhDRhDhukaQ</td>\n  </tr>\n  <tr>\n    <td>RisingWave Labs</td>\n    <td>6P8wiTFqSPul99qcIkRUNQ</td>\n  </tr>\n  <tr>\n    <td>Zenni Optical</td>\n    <td>5WETBa8LS4WThfMvB-JKfQ</td>\n  </tr>\n  <tr>\n    <td>Lumos</td>\n    <td>uHZJN3pqSdORjA0KQA2kWw</td>\n  </tr>\n  <tr>\n    <td>Qrvey Inc</td>\n    <td>Xw6pc8GAQ2yPyrRzYnsUGg</td>\n  </tr>\n  <tr>\n    <td>Capital Rx</td>\n    <td>TkD5TecxSsWa0sknd5crgw</td>\n  </tr>\n  <tr>\n    <td>Oyster®</td>\n    <td>Q8_q5d7BQy-0iAh0D8klTw</td>\n  </tr>\n  <tr>\n    <td>Kajabi</td>\n    <td>ngDRzuBUQZGu6HZ6SxEDXQ</td>\n  </tr>\n  <tr>\n    <td>Victoria's Secret</td>\n    <td>Z03lJZRES_-aqW_yIcFY3A</td>\n  </tr>\n  <tr>\n    <td>Yum! Brands [Parent]</td>\n    <td>NpCRJSifREe50rA4-isQ2w</td>\n  </tr>\n  <tr>\n    <td>pushgaming.com</td>\n    <td>uLyRQTI6TN-x1Uud-KdgLg</td>\n  </tr>\n  <tr>\n    <td>Medically Home</td>\n    <td>-DPM3aWgT4-YylEBU3w_ow</td>\n  </tr>\n  <tr>\n    <td>Squire</td>\n    <td>YVyn8N_ASqaljNcRQv8HEQ</td>\n  </tr>\n  <tr>\n    <td>Aiwyn</td>\n    <td>CDST6l-0T5OqX_8syJ2quQ</td>\n  </tr>\n  <tr>\n    <td>Crown Castle</td>\n    <td>AHn6O7saTFOHakniOX3Mrg</td>\n  </tr>\n</table>\n",
+        "mode": "markdown"
+      },
+      "pluginVersion": "9.3.1",
+      "title": "Account information",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "id": 2,
+      "panels": [],
+      "title": "Account Overview",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "9j9hW0q4z"
+      },
+      "description": "aggregated per minute\nsum by(owner_id,os) (increase(harness_ci_pipeline_per_account_running_executions{}[1m]))",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [
+            "max",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "sortBy": "Max",
+          "sortDesc": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "9j9hW0q4z"
+          },
+          "editorMode": "code",
+          "expr": "sum by(driver) (harness_ci_pipeline_running_executions)",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Usage across platform",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {}
+        }
+      ],
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "9j9hW0q4z"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "calcs": [
+            "max",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "sortBy": "Max",
+          "sortDesc": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "9j9hW0q4z"
+          },
+          "editorMode": "code",
+          "expr": "sum by(owner_id) (harness_ci_pipeline_per_account_running_executions)",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Usage per account",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {}
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "9j9hW0q4z"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 22
+      },
+      "id": 4,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [
+            "max",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "sortBy": "Max",
+          "sortDesc": true
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 200
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "9j9hW0q4z"
+          },
+          "editorMode": "code",
+          "expr": "sum by(owner_id, os) (harness_ci_pipeline_per_account_running_executions{owner_id=~\"$account\"})",
+          "interval": "",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Pipelines per account",
+      "transparent": true,
+      "type": "barchart"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 37,
+  "style": "dark",
+  "tags": [
+    "CIE",
+    "Baremetal"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "dlite-prod-west1-primary",
+          "value": "dlite-prod-west1-primary"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "9j9hW0q4z"
+        },
+        "definition": "kubernetes_io:container_uptime{container_name=~\"dlite.*\"}",
+        "hide": 0,
+        "includeAll": false,
+        "label": "cluster",
+        "multi": false,
+        "name": "cluster",
+        "options": [],
+        "query": {
+          "query": "kubernetes_io:container_uptime{container_name=~\"dlite.*\"}",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": ".*cluster_name=\\\"([\\d\\w\\-]+)\\\".*",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "Q8_q5d7BQy-0iAh0D8klTw",
+          "value": "Q8_q5d7BQy-0iAh0D8klTw"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "account",
+        "multi": false,
+        "name": "account",
+        "options": [
+          {
+            "selected": false,
+            "text": "dqAWlhDWTjGn0Rie85EwwA",
+            "value": "dqAWlhDWTjGn0Rie85EwwA"
+          },
+          {
+            "selected": false,
+            "text": "eKD84MPkTGSIIWlKedPjYg",
+            "value": "eKD84MPkTGSIIWlKedPjYg"
+          },
+          {
+            "selected": false,
+            "text": "0iQojjIqSaGHhDRhDhukaQ",
+            "value": "0iQojjIqSaGHhDRhDhukaQ"
+          },
+          {
+            "selected": false,
+            "text": "6P8wiTFqSPul99qcIkRUNQ",
+            "value": "6P8wiTFqSPul99qcIkRUNQ"
+          },
+          {
+            "selected": false,
+            "text": "5WETBa8LS4WThfMvB-JKfQ",
+            "value": "5WETBa8LS4WThfMvB-JKfQ"
+          },
+          {
+            "selected": false,
+            "text": "uHZJN3pqSdORjA0KQA2kWw",
+            "value": "uHZJN3pqSdORjA0KQA2kWw"
+          },
+          {
+            "selected": false,
+            "text": "Xw6pc8GAQ2yPyrRzYnsUGg",
+            "value": "Xw6pc8GAQ2yPyrRzYnsUGg"
+          },
+          {
+            "selected": false,
+            "text": "TkD5TecxSsWa0sknd5crgw",
+            "value": "TkD5TecxSsWa0sknd5crgw"
+          },
+          {
+            "selected": true,
+            "text": "Q8_q5d7BQy-0iAh0D8klTw",
+            "value": "Q8_q5d7BQy-0iAh0D8klTw"
+          },
+          {
+            "selected": false,
+            "text": "ngDRzuBUQZGu6HZ6SxEDXQ",
+            "value": "ngDRzuBUQZGu6HZ6SxEDXQ"
+          },
+          {
+            "selected": false,
+            "text": "Z03lJZRES_-aqW_yIcFY3A",
+            "value": "Z03lJZRES_-aqW_yIcFY3A"
+          },
+          {
+            "selected": false,
+            "text": "NpCRJSifREe50rA4-isQ2w",
+            "value": "NpCRJSifREe50rA4-isQ2w"
+          },
+          {
+            "selected": false,
+            "text": "uLyRQTI6TN-x1Uud-KdgLg",
+            "value": "uLyRQTI6TN-x1Uud-KdgLg"
+          },
+          {
+            "selected": false,
+            "text": "DPM3aWgT4-YylEBU3w_ow",
+            "value": "DPM3aWgT4-YylEBU3w_ow"
+          },
+          {
+            "selected": false,
+            "text": "YVyn8N_ASqaljNcRQv8HEQ",
+            "value": "YVyn8N_ASqaljNcRQv8HEQ"
+          },
+          {
+            "selected": false,
+            "text": "CDST6l-0T5OqX_8syJ2quQ",
+            "value": "CDST6l-0T5OqX_8syJ2quQ"
+          },
+          {
+            "selected": false,
+            "text": "AHn6O7saTFOHakniOX3Mrg",
+            "value": "AHn6O7saTFOHakniOX3Mrg"
+          },
+          {
+            "selected": false,
+            "text": "9UuUfLwaQ-6ZowvbG7qtLQ",
+            "value": "9UuUfLwaQ-6ZowvbG7qtLQ"
+          }
+        ],
+        "query": "dqAWlhDWTjGn0Rie85EwwA,\neKD84MPkTGSIIWlKedPjYg,\n0iQojjIqSaGHhDRhDhukaQ,\n6P8wiTFqSPul99qcIkRUNQ,\n5WETBa8LS4WThfMvB-JKfQ,\nuHZJN3pqSdORjA0KQA2kWw,\nXw6pc8GAQ2yPyrRzYnsUGg,\nTkD5TecxSsWa0sknd5crgw,\nQ8_q5d7BQy-0iAh0D8klTw,\nngDRzuBUQZGu6HZ6SxEDXQ,\nZ03lJZRES_-aqW_yIcFY3A,\nNpCRJSifREe50rA4-isQ2w,\nuLyRQTI6TN-x1Uud-KdgLg,\nDPM3aWgT4-YylEBU3w_ow,\nYVyn8N_ASqaljNcRQv8HEQ,\nCDST6l-0T5OqX_8syJ2quQ,\nAHn6O7saTFOHakniOX3Mrg,\n9UuUfLwaQ-6ZowvbG7qtLQ",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-12h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Baremetal Customer Migration",
+  "uid": "67kDKte4z",
+  "version": 25,
+  "weekStart": ""
+}
