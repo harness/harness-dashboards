@@ -37,4 +37,5 @@ build_bazel_module Platform
 build_bazel_module SCM
 build_bazel_module STO
 build_bazel_module System_Health
-build_bazel_module System_Usability 
+build_bazel_module System_Usability
+build_bazel_module CET
