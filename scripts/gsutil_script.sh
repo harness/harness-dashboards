@@ -34,4 +34,4 @@ gsutil_cp_module SCM
 gsutil_cp_module STO
 gsutil_cp_module System_Health
 gsutil_cp_module System_Usability 
-gsutil_cp_module CET
+gsutil_cp_module Continuous_Error_Tracking
