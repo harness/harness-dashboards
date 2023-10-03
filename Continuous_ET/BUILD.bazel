@@ -12,7 +12,7 @@ pkg_tar(
 	":dashboards",
     ],
     mode = "0600",
-    package_dir = "/harness-dashboards/Continuous_Error_Tracking/",
+    package_dir = "/harness-dashboards/Continuous_ET/",
     tags = [
         "manual",
         "no-cache",
