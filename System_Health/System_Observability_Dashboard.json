@@ -82,7 +82,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "builder",
-          "expr": "sum by(job) (io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{environment=\"$env\", serviceName=\"$service\", job=\"$job\"})",
+          "expr": "sum by(job) (io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
           "legendFormat": "4xx_Count",
           "range": true,
           "refId": "A"
@@ -93,7 +93,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "builder",
-          "expr": "sum by(job) (io_dropwizard_jetty_MutableServletContextHandler_5xx_responses_count{environment=\"$env\", serviceName=\"$service\", job=\"$job\"})",
+          "expr": "sum by(job) (io_dropwizard_jetty_MutableServletContextHandler_5xx_responses_count{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
           "hide": false,
           "legendFormat": "5xx_Count",
           "range": true,
@@ -105,7 +105,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "builder",
-          "expr": "sum by(job) (io_dropwizard_jetty_MutableServletContextHandler_requests_count{environment=\"$env\", serviceName=\"$service\", job=\"$job\"})",
+          "expr": "sum by(job) (io_dropwizard_jetty_MutableServletContextHandler_requests_count{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
           "hide": false,
           "legendFormat": "Total_Count",
           "range": true,
@@ -234,7 +234,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "builder",
-          "expr": "sum by(environment) (io_dropwizard_jetty_MutableServletContextHandler_requests_snapshot_95thPercentile{environment=\"$env\", serviceName=\"$service\", job=\"$job\"})",
+          "expr": "sum by(environment) (io_dropwizard_jetty_MutableServletContextHandler_requests_snapshot_95thPercentile{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
           "legendFormat": "99.9%",
           "range": true,
           "refId": "A"
@@ -1779,7 +1779,7 @@
     "list": [
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "ProdSetup-ManagedPrometheus",
           "value": "ProdSetup-ManagedPrometheus"
         },
@@ -1798,7 +1798,7 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "free",
           "value": "free"
         },
@@ -1826,8 +1826,8 @@
       {
         "current": {
           "selected": false,
-          "text": "ng-manager",
-          "value": "ng-manager"
+          "text": "pipeline-service",
+          "value": "pipeline-service"
         },
         "datasource": {
           "type": "prometheus",
@@ -1853,8 +1853,8 @@
       {
         "current": {
           "selected": false,
-          "text": "ng-manager-free",
-          "value": "ng-manager-free"
+          "text": "pipeline-service-free",
+          "value": "pipeline-service-free"
         },
         "datasource": {
           "type": "prometheus",
@@ -1881,10 +1881,10 @@
         "current": {
           "selected": true,
           "text": [
-            "All"
+            "pipeline-service-7fc88fb994-v4zjb"
           ],
           "value": [
-            "$__all"
+            "pipeline-service-7fc88fb994-v4zjb"
           ]
         },
         "datasource": {
@@ -1911,13 +1911,13 @@
     ]
   },
   "time": {
-    "from": "now-30m",
-    "to": "now"
+    "from": "2023-10-06T11:26:28.195Z",
+    "to": "2023-10-06T14:26:28.195Z"
   },
   "timepicker": {},
   "timezone": "",
   "title": "System Observability Dashboard",
   "uid": "B42-bJq4k",
-  "version": 29,
+  "version": 30,
   "weekStart": ""
 }
