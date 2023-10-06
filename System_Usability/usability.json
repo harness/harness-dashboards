@@ -131,7 +131,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(cluster) (increase(login_success_count{cluster=\"$cluster\", environment=\"prod\"}[1d]))",
+          "expr": "sum by(cluster) (delta(login_success_count{cluster=\"$cluster\", environment=\"prod\"}[1d]))",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -145,7 +145,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (cluster) (increase(login_failure_count{cluster=\"$cluster\", environment=\"prod\"}[1d]))",
+          "expr": "sum by (cluster) (delta(login_failure_count{cluster=\"$cluster\", environment=\"prod\"}[1d]))",
           "hide": false,
           "interval": "",
           "legendFormat": "Failure",
@@ -248,7 +248,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(cluster) (increase(login_success_count{cluster=\"$cluster\", environment=\"free\"}[1d]))",
+          "expr": "sum by(cluster) (delta(login_success_count{cluster=\"$cluster\", environment=\"free\"}[1d]))",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -262,7 +262,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (cluster) (increase(login_failure_count{cluster=\"$cluster\", environment=\"free\"}[1d]))",
+          "expr": "sum by (cluster) (delta(login_failure_count{cluster=\"$cluster\", environment=\"free\"}[1d]))",
           "hide": false,
           "interval": "",
           "legendFormat": "Failure",
@@ -365,7 +365,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(cluster) (increase(login_success_count{cluster=\"$cluster\", environment=\"compliance\"}[1d]))",
+          "expr": "sum by(cluster) (delta(login_success_count{cluster=\"$cluster\", environment=\"compliance\"}[1d]))",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -379,7 +379,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (cluster) (increase(login_failure_count{cluster=\"$cluster\", environment=\"compliance\"}[1d]))",
+          "expr": "sum by (cluster) (delta(login_failure_count{cluster=\"$cluster\", environment=\"compliance\"}[1d]))",
           "hide": false,
           "interval": "",
           "legendFormat": "Failure",
@@ -472,9 +472,11 @@
       "id": 11,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "mean"
+          ],
           "displayMode": "table",
-          "placement": "bottom",
+          "placement": "right",
           "showLegend": true
         },
         "tooltip": {
@@ -568,9 +570,11 @@
       "id": 33,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "mean"
+          ],
           "displayMode": "table",
-          "placement": "bottom",
+          "placement": "right",
           "showLegend": true
         },
         "tooltip": {
@@ -586,7 +590,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (environment) (increase(pipeline_execution_end_count{cluster=\"$cluster\", environment=\"free\"}[1d]))",
+          "expr": "sum by (environment) (delta(pipeline_execution_end_count{cluster=\"$cluster\", environment=\"free\"}[1d]))",
           "interval": "",
           "legendFormat": "{{$__interval}}",
           "range": true,
@@ -664,9 +668,11 @@
       "id": 34,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "mean"
+          ],
           "displayMode": "table",
-          "placement": "bottom",
+          "placement": "right",
           "showLegend": true
         },
         "tooltip": {
@@ -682,7 +688,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (environment) (increase(pipeline_execution_end_count{cluster=\"$cluster\", environment=\"compliance\"}[1d]))",
+          "expr": "sum by (environment) (delta(pipeline_execution_end_count{cluster=\"$cluster\", environment=\"compliance\"}[1d]))",
           "interval": "",
           "legendFormat": "{{$__interval}}",
           "range": true,
@@ -749,7 +755,24 @@
           },
           "unit": "none"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Total"
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 9,
@@ -757,12 +780,14 @@
         "x": 0,
         "y": 19
       },
-      "id": 37,
+      "id": 38,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "mean"
+          ],
           "displayMode": "table",
-          "placement": "bottom",
+          "placement": "right",
           "showLegend": true
         },
         "tooltip": {
@@ -778,14 +803,33 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (environment) (increase(pipeline_execution_end_count{cluster=\"$cluster\", environment=\"prod\"}[1d]))",
+          "expr": "sum by (status) (delta(pipeline_execution_end_count{cluster=\"$cluster\", environment=\"prod\"}[1d]))",
           "interval": "",
-          "legendFormat": "{{$__interval}}",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
       "title": "Daily Pipeline Status (Prod1)",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "ABORTED",
+                "APPROVAL_REJECTED",
+                "EXPIRED",
+                "FAILED",
+                "IGNORE_FAILED",
+                "SUCCEEDED"
+              ],
+              "reducer": "sum"
+            }
+          }
+        }
+      ],
       "type": "timeseries"
     },
     {
@@ -845,7 +889,24 @@
           },
           "unit": "none"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Total"
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 9,
@@ -853,12 +914,14 @@
         "x": 8,
         "y": 19
       },
-      "id": 36,
+      "id": 39,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "mean"
+          ],
           "displayMode": "table",
-          "placement": "bottom",
+          "placement": "right",
           "showLegend": true
         },
         "tooltip": {
@@ -874,15 +937,33 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (environment,status) (increase(pipeline_execution_end_count{cluster=\"$cluster\", environment=\"free\"}[1d]))",
+          "expr": "sum by (status) (delta(pipeline_execution_end_count{cluster=\"$cluster\", environment=\"free\"}[1d]))",
           "interval": "",
-          "legendFormat": "status",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
       "title": "Daily Pipeline Status (Prod2)",
-      "transformations": [],
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "ABORTED",
+                "APPROVAL_REJECTED",
+                "EXPIRED",
+                "FAILED",
+                "IGNORE_FAILED",
+                "SUCCEEDED"
+              ],
+              "reducer": "sum"
+            }
+          }
+        }
+      ],
       "type": "timeseries"
     },
     {
@@ -942,7 +1023,24 @@
           },
           "unit": "none"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Total"
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 9,
@@ -973,7 +1071,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (status) (increase(pipeline_execution_end_count{cluster=\"$cluster\", environment=\"compliance\"}[1d]))",
+          "expr": "sum by (status) (delta(pipeline_execution_end_count{cluster=\"$cluster\", environment=\"compliance\"}[1d]))",
           "interval": "",
           "legendFormat": "__auto",
           "range": true,
@@ -983,14 +1081,19 @@
       "title": "Daily Pipeline Status (Prod3)",
       "transformations": [
         {
-          "id": "filterFieldsByName",
+          "id": "calculateField",
           "options": {
-            "include": {
-              "names": [
-                "Time",
-                "SUCCEEDED",
-                "FAILED"
-              ]
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "ABORTED",
+                "APPROVAL_REJECTED",
+                "EXPIRED",
+                "FAILED",
+                "IGNORE_FAILED",
+                "SUCCEEDED"
+              ],
+              "reducer": "sum"
             }
           }
         }
@@ -1363,13 +1466,13 @@
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Production Metrics Dashboard",
   "uid": "F9dOkEgIk",
-  "version": 9,
+  "version": 10,
   "weekStart": ""
 }
