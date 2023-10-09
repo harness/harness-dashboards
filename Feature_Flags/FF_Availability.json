@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 109,
+  "id": 110,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -703,8 +703,8 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
+        "h": 5,
+        "w": 24,
         "x": 0,
         "y": 12
       },
@@ -740,91 +740,12 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P395BF20BBBA74F0A"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 12
-      },
-      "id": 38,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "title": "LB Errors",
-      "type": "timeseries"
-    },
-    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 20
+        "y": 17
       },
       "id": 29,
       "panels": [],
@@ -894,7 +815,7 @@
         "h": 5,
         "w": 24,
         "x": 0,
-        "y": 21
+        "y": 18
       },
       "id": 33,
       "options": {
@@ -974,7 +895,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -986,10 +908,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
+        "h": 5,
+        "w": 24,
         "x": 0,
-        "y": 26
+        "y": 23
       },
       "id": 44,
       "options": {
@@ -1031,7 +953,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 34
+        "y": 28
       },
       "id": 27,
       "panels": [],
@@ -1084,7 +1006,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1100,7 +1023,7 @@
         "h": 5,
         "w": 24,
         "x": 0,
-        "y": 35
+        "y": 29
       },
       "id": 34,
       "options": {
@@ -1180,7 +1103,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1192,10 +1116,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
+        "h": 6,
+        "w": 24,
         "x": 0,
-        "y": 40
+        "y": 34
       },
       "id": 45,
       "options": {
@@ -1234,7 +1158,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 48
+        "y": 40
       },
       "id": 25,
       "panels": [],
@@ -1247,7 +1171,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 49
+        "y": 41
       },
       "id": 23,
       "panels": [],
@@ -1300,7 +1224,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1316,7 +1241,7 @@
         "h": 5,
         "w": 24,
         "x": 0,
-        "y": 50
+        "y": 42
       },
       "id": 32,
       "options": {
@@ -1396,7 +1321,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1408,10 +1334,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
+        "h": 5,
+        "w": 24,
         "x": 0,
-        "y": 55
+        "y": 47
       },
       "id": 46,
       "options": {
@@ -1459,6 +1385,6 @@
   "timezone": "",
   "title": "FF Availability",
   "uid": "Lbkg1664k",
-  "version": 23,
+  "version": 24,
   "weekStart": ""
 }
