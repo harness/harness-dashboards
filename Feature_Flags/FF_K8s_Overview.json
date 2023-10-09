@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 87,
+  "id": 71,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -108,7 +108,9 @@
       "options": {
         "legend": {
           "calcs": [
-            "mean"
+            "mean",
+            "max",
+            "sum"
           ],
           "displayMode": "table",
           "placement": "right",
@@ -126,10 +128,58 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum by(matched_url_path_rule, backend_target_name) (rate(loadbalancing_googleapis_com:https_request_count{backend_target_name=~\".*($env).*(cf|ff|pushpin).*\"}[$__interval]))",
+          "expr": "sum by(matched_url_path_rule, backend_target_name) (rate(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=~\".*($env).*(cf|ff|pushpin).*\"}[$__interval]))",
           "legendFormat": "{{matched_url_path_rule}} ({{backend_target_name}})",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by(forwarding_rule_name) (rate(logging_googleapis_com:user_ff_lb_admin_requests_gateway[$__interval]))",
+          "hide": false,
+          "legendFormat": "/cf/admin (gateway)",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by(forwarding_rule_name) (rate(logging_googleapis_com:user_ff_lb_admin_requests_prod[$__interval]))",
+          "hide": false,
+          "legendFormat": "/cf/admin (prod)",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by(forwarding_rule_name) (rate(logging_googleapis_com:user_ff_lb_admin_requests_free[$__interval]))",
+          "hide": false,
+          "legendFormat": "/cf/admin (free)",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by(forwarding_rule_name) (rate(logging_googleapis_com:user_ff_lb_admin_requests_comp[$__interval]))",
+          "hide": false,
+          "legendFormat": "/cf/admin (comp)",
+          "range": true,
+          "refId": "E"
         }
       ],
       "title": "GLB Total Requests",
@@ -202,7 +252,9 @@
       "options": {
         "legend": {
           "calcs": [
-            "mean"
+            "mean",
+            "max",
+            "sum"
           ],
           "displayMode": "table",
           "placement": "right",
@@ -220,10 +272,47 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
+          "expr": "sum by(namespace, job) (rate(ff_auth_service_http_requests_total{cluster=~\"$cluster\", namespace=~\"$namespace\", job=~\"$container.*\"}[$__interval]))",
+          "hide": false,
+          "legendFormat": "{{namespace}}/{{job}}",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
           "expr": "sum by(namespace, job) (rate(ff_http_requests_total{cluster=~\"$cluster\", namespace=~\"$namespace\", job=~\"$container.*\"}[$__interval]))",
+          "hide": false,
           "legendFormat": "{{namespace}}/{{job}}",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by(namespace, job) (rate(request_received{cluster=~\"$cluster\", namespace=~\"$namespace\", job=\"ff-pushpin\"}[$__interval]))",
+          "hide": false,
+          "legendFormat": "{{namespace}}/{{job}}",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by(namespace, job) (rate(ff_proxy_http_requests_total{cluster=~\"$cluster\", namespace=~\"$namespace\", job=~\"$container.*\"}[$__interval]))",
+          "hide": false,
+          "legendFormat": "{{namespace}}/{{job}}",
+          "range": true,
+          "refId": "C"
         }
       ],
       "title": "FF Total Requests",
@@ -297,7 +386,8 @@
       "options": {
         "legend": {
           "calcs": [
-            "mean"
+            "mean",
+            "max"
           ],
           "displayMode": "table",
           "placement": "bottom",
@@ -315,7 +405,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.5, sum by (matched_url_path_rule, backend_target_name, le) (rate(loadbalancing_googleapis_com:https_total_latencies_bucket{backend_target_name=~\".*($env).*(cf|ff|pushpin).*\", matched_url_path_rule!=\"/api/1.0/stream\"}[$__interval])))",
+          "expr": "histogram_quantile(0.5, sum by (matched_url_path_rule, backend_target_name, le) (rate(loadbalancing_googleapis_com:https_total_latencies_bucket{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=~\".*($env).*(cf|ff|pushpin).*\", matched_url_path_rule!=\"/api/1.0/stream\"}[$__interval])))",
           "legendFormat": "{{matched_url_path_rule}} ({{backend_target_name}})",
           "range": true,
           "refId": "A"
@@ -392,7 +482,8 @@
       "options": {
         "legend": {
           "calcs": [
-            "mean"
+            "mean",
+            "max"
           ],
           "displayMode": "table",
           "placement": "bottom",
@@ -410,7 +501,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.9, sum by (matched_url_path_rule, backend_target_name, le) (rate(loadbalancing_googleapis_com:https_total_latencies_bucket{backend_target_name=~\".*($env).*(cf|ff|pushpin).*\", matched_url_path_rule!=\"/api/1.0/stream\"}[$__interval])))",
+          "expr": "histogram_quantile(0.9, sum by (matched_url_path_rule, backend_target_name, le) (rate(loadbalancing_googleapis_com:https_total_latencies_bucket{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=~\".*($env).*(cf|ff|pushpin).*\", matched_url_path_rule!=\"/api/1.0/stream\"}[$__interval])))",
           "legendFormat": "{{matched_url_path_rule}} ({{backend_target_name}})",
           "range": true,
           "refId": "A"
@@ -487,7 +578,8 @@
       "options": {
         "legend": {
           "calcs": [
-            "mean"
+            "mean",
+            "max"
           ],
           "displayMode": "table",
           "placement": "bottom",
@@ -505,7 +597,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.95, sum by (matched_url_path_rule, backend_target_name, le) (rate(loadbalancing_googleapis_com:https_total_latencies_bucket{backend_target_name=~\".*($env).*(cf|ff|pushpin).*\", matched_url_path_rule!=\"/api/1.0/stream\"}[$__interval])))",
+          "expr": "histogram_quantile(0.95, sum by (matched_url_path_rule, backend_target_name, le) (rate(loadbalancing_googleapis_com:https_total_latencies_bucket{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=~\".*($env).*(cf|ff|pushpin).*\", matched_url_path_rule!=\"/api/1.0/stream\"}[$__interval])))",
           "legendFormat": "{{matched_url_path_rule}} ({{backend_target_name}})",
           "range": true,
           "refId": "A"
@@ -574,7 +666,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -595,7 +688,7 @@
       "options": {
         "legend": {
           "calcs": [
-            "mean"
+            "changeCount"
           ],
           "displayMode": "table",
           "placement": "right",
@@ -670,7 +763,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -691,7 +785,10 @@
       "id": 194,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "max",
+            "sum"
+          ],
           "displayMode": "table",
           "placement": "right",
           "showLegend": true
@@ -731,7 +828,7 @@
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
-            "axisPlacement": "auto",
+            "axisPlacement": "hidden",
             "axisSoftMin": 0,
             "barAlignment": 0,
             "drawStyle": "line",
@@ -752,7 +849,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "none"
+              "mode": "normal"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -763,7 +860,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -800,8 +898,8 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum by (namespace, container, image_spec) (kube_pod_container_info{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"$container.*\"})",
-          "legendFormat": "{{namespace}}/{{container}}/{{image_spec}}",
+          "expr": "sum by (namespace, container, image_spec, version) (label_replace(kube_pod_container_info{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"$container\"}, \"version\", \"$1\", \"image_spec\", \".*/([0-9a-z-]+[:@].*)\")) * 0 + 1",
+          "legendFormat": "{{namespace}}/{{container}} - {{version}}",
           "range": true,
           "refId": "A"
         }
@@ -812,7 +910,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P395BF20BBBA74F0A"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -859,7 +957,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -881,7 +980,8 @@
       "options": {
         "legend": {
           "calcs": [
-            "mean"
+            "mean",
+            "sum"
           ],
           "displayMode": "table",
           "placement": "right",
@@ -896,7 +996,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P395BF20BBBA74F0A"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "sum by (namespace_name, container_name) (delta(logging_googleapis_com:log_entry_count{monitored_resource=\"k8s_container\", severity=~\"ERROR|CRITICAL\", cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", container_name=~\"$container\", pod_name=~\"$pod\"}[1m]))",
@@ -953,7 +1053,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1058,7 +1159,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1125,7 +1227,340 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 92
+        "y": 100
+      },
+      "id": 241,
+      "panels": [],
+      "title": "Memorystore Redis",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 1,
+            "axisSoftMin": 0,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0.8
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 101
+      },
+      "id": 243,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "repeat": "redis_instance",
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by(instance_id) (rate(redis_googleapis_com:stats_cpu_utilization{instance_id=~\"$redis_instance\", monitored_resource=\"redis_instance\", role=\"primary\"}[$__interval]))",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "CPU Utilisation ($redis_instance)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 858993459
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 101
+      },
+      "id": 245,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "repeat": "redis_instance",
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "redis_googleapis_com:stats_memory_usage{instance_id=~\"$redis_instance\", monitored_resource=\"redis_instance\", role=\"primary\"}",
+          "legendFormat": "{{instance_id}}",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "redis_googleapis_com:stats_memory_maxmemory{instance_id=~\"$redis_instance\", monitored_resource=\"redis_instance\", role=\"primary\"}",
+          "hide": false,
+          "legendFormat": "{{instance_id}}",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Memory Utilisation  ($redis_instance)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMin": 0,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 101
+      },
+      "id": 247,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "repeat": "redis_instance",
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "redis_googleapis_com:keyspace_keys{instance_id=~\"$redis_instance\", monitored_resource=\"redis_instance\", role=\"primary\"}",
+          "legendFormat": "{{instance_id}} - keys",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "redis_googleapis_com:keyspace_keys_with_expiration{instance_id=~\"$redis_instance\", monitored_resource=\"redis_instance\", role=\"primary\"}",
+          "hide": false,
+          "legendFormat": "{{instance_id}} - keys with exp",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Total Keys  ($redis_instance)",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 125
       },
       "id": 33,
       "panels": [],
@@ -1178,7 +1613,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1193,13 +1629,16 @@
         "h": 8,
         "w": 6,
         "x": 0,
-        "y": 93
+        "y": 126
       },
       "id": 29,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -1217,8 +1656,8 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "rate(cloudsql_googleapis_com:database_postgresql_transaction_count{database_id=~\"$database_id(-replica)?\", database=\"cf_db\"}[$__interval])",
-          "legendFormat": "{{database_id}}",
+          "expr": "sum by (database_id) (rate(cloudsql_googleapis_com:database_postgresql_transaction_count{database_id=~\"$database_id(-replica)?\", database=\"cf_db\"}[$__interval]))",
+          "legendFormat": "{{label_name}}",
           "range": true,
           "refId": "A"
         }
@@ -1272,7 +1711,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1287,13 +1727,16 @@
         "h": 8,
         "w": 6,
         "x": 6,
-        "y": 93
+        "y": 126
       },
       "id": 36,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -1366,7 +1809,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1381,13 +1825,16 @@
         "h": 8,
         "w": 6,
         "x": 12,
-        "y": 93
+        "y": 126
       },
       "id": 41,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -1472,7 +1919,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1488,13 +1936,16 @@
         "h": 8,
         "w": 6,
         "x": 18,
-        "y": 93
+        "y": 126
       },
       "id": 66,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
@@ -1534,7 +1985,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": false,
+  "refresh": "30s",
   "schemaVersion": 37,
   "style": "dark",
   "tags": [],
@@ -1543,9 +1994,13 @@
       {
         "allValue": ".*",
         "current": {
-          "selected": false,
-          "text": "ProdSetup-ManagedPrometheus",
-          "value": "ProdSetup-ManagedPrometheus"
+          "selected": true,
+          "text": [
+            "ProdSetup-ManagedPrometheus"
+          ],
+          "value": [
+            "ProdSetup-ManagedPrometheus"
+          ]
         },
         "hide": 0,
         "includeAll": true,
@@ -1556,174 +2011,14 @@
         "query": "prometheus",
         "queryValue": "",
         "refresh": 1,
-        "regex": "(ProdSetup|QASetup)-.*",
+        "regex": "(ProdSetup|UATSetup|QASetup)-.*",
         "skipUrlSync": false,
         "type": "datasource"
       },
       {
         "allValue": ".*",
         "current": {
-          "selected": true,
-          "text": [
-            "prod-private-uswest1-primary"
-          ],
-          "value": [
-            "prod-private-uswest1-primary"
-          ]
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${datasource}"
-        },
-        "definition": "kubernetes_io:container_uptime{container_name=~\"ff-.*|pushpin-.*\"}",
-        "hide": 0,
-        "includeAll": true,
-        "label": "Cluster",
-        "multi": true,
-        "name": "cluster",
-        "options": [],
-        "query": {
-          "query": "kubernetes_io:container_uptime{container_name=~\"ff-.*|pushpin-.*\"}",
-          "refId": "StandardVariableQuery"
-        },
-        "refresh": 1,
-        "regex": ".*cluster_name=\\\"([\\d\\w\\-]+)\\\".*",
-        "skipUrlSync": false,
-        "sort": 1,
-        "type": "query"
-      },
-      {
-        "allValue": ".*",
-        "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${datasource}"
-        },
-        "definition": "kubernetes_io:container_uptime{cluster_name=~\"$cluster\", container_name=~\"ff-.*|pushpin-.*\"}",
-        "hide": 0,
-        "includeAll": true,
-        "label": "Namespace",
-        "multi": true,
-        "name": "namespace",
-        "options": [],
-        "query": {
-          "query": "kubernetes_io:container_uptime{cluster_name=~\"$cluster\", container_name=~\"ff-.*|pushpin-.*\"}",
-          "refId": "StandardVariableQuery"
-        },
-        "refresh": 1,
-        "regex": ".*namespace_name=\\\"([\\d\\w\\-]+)\\\".*",
-        "skipUrlSync": false,
-        "sort": 1,
-        "type": "query"
-      },
-      {
-        "allValue": ".*(cf|ff|pushpin).*",
-        "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${datasource}"
-        },
-        "definition": "kube_pod_info{cluster=~\"$cluster\", namespace=~\"$namespace\", pod=~\"ff-.*|pushpin-.*\"}",
-        "hide": 0,
-        "includeAll": true,
-        "label": "Container",
-        "multi": true,
-        "name": "container",
-        "options": [],
-        "query": {
-          "query": "kube_pod_info{cluster=~\"$cluster\", namespace=~\"$namespace\", pod=~\"ff-.*|pushpin-.*\"}",
-          "refId": "StandardVariableQuery"
-        },
-        "refresh": 1,
-        "regex": ".*pod=\\\"([a-z\\-]+)-[\\w\\d\\-]+\\\".*",
-        "skipUrlSync": false,
-        "sort": 1,
-        "type": "query"
-      },
-      {
-        "allValue": ".*",
-        "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${datasource}"
-        },
-        "definition": "kubernetes_io:container_uptime{cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", container_name=~\"$container.*\", pod_name=~\"ff-.*|pushpin-.*\"}",
-        "hide": 0,
-        "includeAll": true,
-        "label": "Pod",
-        "multi": true,
-        "name": "pod",
-        "options": [],
-        "query": {
-          "query": "kubernetes_io:container_uptime{cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", container_name=~\"$container.*\", pod_name=~\"ff-.*|pushpin-.*\"}",
-          "refId": "StandardVariableQuery"
-        },
-        "refresh": 1,
-        "regex": ".*pod_name=\\\"([\\d\\w\\-]+)\\\".*",
-        "skipUrlSync": false,
-        "sort": 1,
-        "type": "query"
-      },
-      {
-        "allValue": ".*",
-        "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${datasource}"
-        },
-        "definition": "cloudsql_googleapis_com:database_uptime{database_id=~\".*cf.*\", database_id!~\".*replica.*\"}",
-        "hide": 0,
-        "includeAll": true,
-        "label": "Database ID",
-        "multi": true,
-        "name": "database_id",
-        "options": [],
-        "query": {
-          "query": "cloudsql_googleapis_com:database_uptime{database_id=~\".*cf.*\", database_id!~\".*replica.*\"}",
-          "refId": "StandardVariableQuery"
-        },
-        "refresh": 1,
-        "regex": "/.*database_id=\\\"([\\w\\-\\:]+)\\\".*/",
-        "skipUrlSync": false,
-        "sort": 1,
-        "type": "query"
-      },
-      {
-        "allValue": ".*",
-        "current": {
-          "selected": true,
+          "selected": false,
           "text": [
             "All"
           ],
@@ -1762,17 +2057,208 @@
         "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"
+      },
+      {
+        "allValue": "",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(kubernetes_io:container_uptime{container_name=~\"ff-.*|pushpin-.*\"}, cluster_name)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Cluster",
+        "multi": true,
+        "name": "cluster",
+        "options": [],
+        "query": {
+          "query": "label_values(kubernetes_io:container_uptime{container_name=~\"ff-.*|pushpin-.*\"}, cluster_name)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "allValue": "",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(kubernetes_io:container_uptime{cluster_name=~\"$cluster\", container_name=~\"ff-.*|pushpin-.*\"}, namespace_name)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Namespace",
+        "multi": true,
+        "name": "namespace",
+        "options": [],
+        "query": {
+          "query": "label_values(kubernetes_io:container_uptime{cluster_name=~\"$cluster\", container_name=~\"ff-.*|pushpin-.*\"}, namespace_name)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "allValue": "",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(kubernetes_io:container_uptime{cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", container_name=~\"(ff-.*|pushpin-worker|pushpin-pushpin)\", container_name!~\".*db-migration\"}, container_name)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Container",
+        "multi": true,
+        "name": "container",
+        "options": [],
+        "query": {
+          "query": "label_values(kubernetes_io:container_uptime{cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", container_name=~\"(ff-.*|pushpin-worker|pushpin-pushpin)\", container_name!~\".*db-migration\"}, container_name)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "allValue": "",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(kubernetes_io:container_uptime{cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", container_name=~\"$container.*\", container_name!~\".*db-migration\",  pod_name=~\"ff-.*|pushpin-.*\"}, pod_name)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Pod",
+        "multi": true,
+        "name": "pod",
+        "options": [],
+        "query": {
+          "query": "label_values(kubernetes_io:container_uptime{cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", container_name=~\"$container.*\", container_name!~\".*db-migration\",  pod_name=~\"ff-.*|pushpin-.*\"}, pod_name)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "allValue": "",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(cloudsql_googleapis_com:database_uptime{database_id=~\".*cf.*\", database_id!~\".*replica.*\"}, database_id)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Database ID",
+        "multi": true,
+        "name": "database_id",
+        "options": [],
+        "query": {
+          "query": "label_values(cloudsql_googleapis_com:database_uptime{database_id=~\".*cf.*\", database_id!~\".*replica.*\"}, database_id)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "(?<value>.*:(?<text>[\\w\\d\\-]+))",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(redis_googleapis_com:server_uptime{instance_id=~\".*(ff-primary).*\", instance_id!~\".*(failover).*\", monitored_resource=\"redis_instance\", role=\"primary\"}, instance_id)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Redis Instance",
+        "multi": true,
+        "name": "redis_instance",
+        "options": [],
+        "query": {
+          "query": "label_values(redis_googleapis_com:server_uptime{instance_id=~\".*(ff-primary).*\", instance_id!~\".*(failover).*\", monitored_resource=\"redis_instance\", role=\"primary\"}, instance_id)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "(?<value>.*/(?<text>[\\w\\d\\-]+))",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
       }
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "FF K8s Overview",
   "uid": "4EpIRS34k",
-  "version": 61,
+  "version": 62,
   "weekStart": ""
 }
