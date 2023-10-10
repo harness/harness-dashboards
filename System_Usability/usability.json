@@ -131,7 +131,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(cluster) (delta(login_success_count{cluster=\"$cluster\", environment=\"prod\"}[1d]))",
+          "expr": "sum by(cluster) (delta(custom_googleapis_com:opencensus_login_success_count{monitored_resource=\"k8s_container\", environment=\"prod\"}[1d]))",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -145,7 +145,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (cluster) (delta(login_failure_count{cluster=\"$cluster\", environment=\"prod\"}[1d]))",
+          "expr": "sum by(cluster) (delta(custom_googleapis_com:opencensus_login_failure_count{monitored_resource=\"k8s_container\", environment=\"prod\"}[1d]))",
           "hide": false,
           "interval": "",
           "legendFormat": "Failure",
@@ -248,7 +248,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(cluster) (delta(login_success_count{cluster=\"$cluster\", environment=\"free\"}[1d]))",
+          "expr": "sum by(cluster) (delta(custom_googleapis_com:opencensus_login_success_count{monitored_resource=\"k8s_container\", environment=\"free\"}[1d]))",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -262,7 +262,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (cluster) (delta(login_failure_count{cluster=\"$cluster\", environment=\"free\"}[1d]))",
+          "expr": "sum by(cluster) (delta(custom_googleapis_com:opencensus_login_failure_count{monitored_resource=\"k8s_container\", environment=\"free\"}[1d]))",
           "hide": false,
           "interval": "",
           "legendFormat": "Failure",
@@ -365,7 +365,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(cluster) (delta(login_success_count{cluster=\"$cluster\", environment=\"compliance\"}[1d]))",
+          "expr": "sum by(cluster) (delta(custom_googleapis_com:opencensus_login_success_count{monitored_resource=\"k8s_container\", environment=\"compliance\"}[1d]))",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -379,7 +379,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (cluster) (delta(login_failure_count{cluster=\"$cluster\", environment=\"compliance\"}[1d]))",
+          "expr": "sum by(cluster) (delta(custom_googleapis_com:opencensus_login_failure_count{monitored_resource=\"k8s_container\", environment=\"compliance\"}[1d]))",
           "hide": false,
           "interval": "",
           "legendFormat": "Failure",
@@ -492,7 +492,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (environment) (increase(pipeline_execution_end_count{cluster=\"$cluster\", environment=\"prod\"}[1d]))",
+          "expr": "sum by (environment) (delta(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"prod\"}[1d]))",
           "interval": "",
           "legendFormat": "{{$__interval}}",
           "range": true,
@@ -590,7 +590,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (environment) (delta(pipeline_execution_end_count{cluster=\"$cluster\", environment=\"free\"}[1d]))",
+          "expr": "sum by (environment) (delta(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"free\"}[1d]))",
           "interval": "",
           "legendFormat": "{{$__interval}}",
           "range": true,
@@ -688,7 +688,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (environment) (delta(pipeline_execution_end_count{cluster=\"$cluster\", environment=\"compliance\"}[1d]))",
+          "expr": "sum by (environment) (delta(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"compliance\"}[1d]))",
           "interval": "",
           "legendFormat": "{{$__interval}}",
           "range": true,
@@ -803,7 +803,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (status) (delta(pipeline_execution_end_count{cluster=\"$cluster\", environment=\"prod\"}[1d]))",
+          "expr": "sum by (status) (delta(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"prod\"}[1d]))",
           "interval": "",
           "legendFormat": "__auto",
           "range": true,
@@ -937,7 +937,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (status) (delta(pipeline_execution_end_count{cluster=\"$cluster\", environment=\"free\"}[1d]))",
+          "expr": "sum by (status) (delta(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"free\"}[1d]))",
           "interval": "",
           "legendFormat": "__auto",
           "range": true,
@@ -1071,7 +1071,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (status) (delta(pipeline_execution_end_count{cluster=\"$cluster\", environment=\"compliance\"}[1d]))",
+          "expr": "sum by (status) (delta(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"compliance\"}[1d]))",
           "interval": "",
           "legendFormat": "__auto",
           "range": true,
@@ -1438,7 +1438,7 @@
       },
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "prod",
           "value": "prod"
         },
@@ -1466,13 +1466,13 @@
     ]
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Production Metrics Dashboard",
   "uid": "F9dOkEgIk",
-  "version": 10,
+  "version": 12,
   "weekStart": ""
 }
