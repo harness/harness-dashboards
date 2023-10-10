@@ -46,7 +46,7 @@
           "showLineNumbers": false,
           "showMiniMap": false
         },
-        "content": "<p><strong><a href=\"https://harness.atlassian.net/wiki/spaces/PLATFORM/pages/21469332598/Service+Health+Computation\" target=\"_blank\" style=\"background-color: rgb(98, 126, 168); color: white; padding: 12px; font-size: 1.2em; display: flex; align-items: center;\">Service Health Computation</a></strong></p>",
+        "content": "<p style=\"justify-content: center; align-items: center;\">\n    <strong>\n        <a href=\"https://harness.atlassian.net/wiki/spaces/PLATFORM/pages/21469332598/Service+Health+Computation\" target=\"_blank\" style=\"background-color: rgb(98, 126, 168); color: white; padding: 12px; font-size: 1.2em; display: flex; align-items: center; justify-content: center;\">\n            Service Health\n        </a>\n    </strong>\n</p>\n",
         "mode": "html"
       },
       "pluginVersion": "9.3.1",
@@ -58,30 +58,6 @@
         "uid": "P395BF20BBBA74F0A"
       },
       "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "#627ea8",
-            "mode": "fixed"
-          },
-          "mappings": [],
-          "noValue": "QA",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 5,
@@ -90,24 +66,16 @@
       },
       "id": 83,
       "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
         },
-        "text": {
-          "valueSize": 25
-        },
-        "textMode": "auto"
+        "content": "<p style=\"justify-content: center; align-items: center;\">\n    <strong>\n        <a href=\"https://console.cloud.google.com/kubernetes/workload/overview?project=qa-setup&pageState=(%22savedViews%22:(%22i%22:%227a675b0fb4a344e2ada68c75b3c0b1cb%22,%22c%22:%5B%22gke%2Fus-west1%2Fqa-private%22%5D,%22n%22:%5B%22harness-nextgen%22%5D))\" target=\"_blank\" style=\"background-color: rgb(98, 126, 168); color: white; padding: 12px; font-size: 1.2em; display: flex; align-items: center; justify-content: center;\">\n            QA\n        </a>\n    </strong>\n</p>\n",
+        "mode": "html"
       },
       "pluginVersion": "9.3.1",
-      "type": "stat"
+      "type": "text"
     },
     {
       "datasource": {
@@ -115,26 +83,6 @@
         "uid": "P395BF20BBBA74F0A"
       },
       "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "#627ea8",
-            "mode": "fixed"
-          },
-          "mappings": [],
-          "noValue": "Prod",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 5,
@@ -143,24 +91,16 @@
       },
       "id": 86,
       "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
         },
-        "text": {
-          "valueSize": 25
-        },
-        "textMode": "auto"
+        "content": "\n\n<p style=\"justify-content: center; align-items: center;\">\n    <strong>\n        <a href=\"https://console.cloud.google.com/kubernetes/workload/overview?project=prod-setup-205416&pageState=(%22savedViews%22:(%22i%22:%2292130b653a46411d817bdebcd0d8329e%22,%22c%22:%5B%22gke%2Fus-west1%2Fprod-private-uswest1-primary%22%5D,%22n%22:%5B%22harness-nextgen%22%5D))\" target=\"_blank\" style=\"background-color: rgb(98, 126, 168); color: white; padding: 12px; font-size: 1.2em; display: flex; align-items: center; justify-content: center;\">\n            Prod1\n        </a>\n    </strong>\n</p>",
+        "mode": "html"
       },
       "pluginVersion": "9.3.1",
-      "type": "stat"
+      "type": "text"
     },
     {
       "datasource": {
@@ -168,26 +108,6 @@
         "uid": "P395BF20BBBA74F0A"
       },
       "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "#627ea8",
-            "mode": "fixed"
-          },
-          "mappings": [],
-          "noValue": "Free",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 5,
@@ -196,24 +116,16 @@
       },
       "id": 85,
       "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
         },
-        "text": {
-          "valueSize": 25
-        },
-        "textMode": "auto"
+        "content": "\n\n<p style=\"justify-content: center; align-items: center;\">\n    <strong>\n        <a href=\"https://console.cloud.google.com/kubernetes/workload/overview?project=prod-setup-205416&pageState=(%22savedViews%22:(%22i%22:%2292130b653a46411d817bdebcd0d8329e%22,%22c%22:%5B%22gke%2Fus-west1%2Fprod-private-uswest1-primary%22%5D,%22n%22:%5B%22harness-nextgen-free%22%5D))\" target=\"_blank\" style=\"background-color: rgb(98, 126, 168); color: white; padding: 12px; font-size: 1.2em; display: flex; align-items: center; justify-content: center;\">\n            Prod2\n        </a>\n    </strong>\n</p>\n",
+        "mode": "html"
       },
       "pluginVersion": "9.3.1",
-      "type": "stat"
+      "type": "text"
     },
     {
       "datasource": {
@@ -221,26 +133,6 @@
         "uid": "P395BF20BBBA74F0A"
       },
       "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "#627ea8",
-            "mode": "fixed"
-          },
-          "mappings": [],
-          "noValue": "Compliance",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 5,
@@ -249,24 +141,16 @@
       },
       "id": 84,
       "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
         },
-        "text": {
-          "valueSize": 25
-        },
-        "textMode": "auto"
+        "content": "\n<p style=\"justify-content: center; align-items: center;\">\n    <strong>\n        <a href=\"https://console.cloud.google.com/kubernetes/workload/overview?project=prod-setup-205416&pageState=(%22savedViews%22:(%22i%22:%2292130b653a46411d817bdebcd0d8329e%22,%22c%22:%5B%22gke%2Fus-west1%2Fprod-private-uswest1-primary%22%5D,%22n%22:%5B%22harness-nextgen-compliance%22%5D))\" target=\"_blank\" style=\"background-color: rgb(98, 126, 168); color: white; padding: 12px; font-size: 1.2em; display: flex; align-items: center; justify-content: center;\">\n            Prod3\n        </a>\n    </strong>\n</p>\n",
+        "mode": "html"
       },
       "pluginVersion": "9.3.1",
-      "type": "stat"
+      "type": "text"
     },
     {
       "datasource": {
@@ -274,26 +158,6 @@
         "uid": "P395BF20BBBA74F0A"
       },
       "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "#627ea8",
-            "mode": "fixed"
-          },
-          "mappings": [],
-          "noValue": "ng-manager",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 4,
@@ -302,24 +166,16 @@
       },
       "id": 79,
       "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
         },
-        "text": {
-          "valueSize": 25
-        },
-        "textMode": "auto"
+        "content": "<p style=\"justify-content: center; align-items: center;\">\n    <strong>\n        <a  target=\"_blank\" style=\"background-color: rgb(98, 126, 168); color: white; padding: 12px; font-size: 1.2em; display: flex; align-items: center; justify-content: center;\">\n           ng-manager\n        </a>\n    </strong>\n</p>\n\n",
+        "mode": "html"
       },
       "pluginVersion": "9.3.1",
-      "type": "stat"
+      "type": "text"
     },
     {
       "datasource": {
@@ -369,6 +225,17 @@
                 "to": 2500
               },
               "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -640,6 +507,17 @@
                 "to": 2500
               },
               "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -910,6 +788,17 @@
                 "to": 2500
               },
               "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -1180,6 +1069,17 @@
                 "to": 2500
               },
               "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -1408,26 +1308,6 @@
         "uid": "P395BF20BBBA74F0A"
       },
       "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "#627ea8",
-            "mode": "fixed"
-          },
-          "mappings": [],
-          "noValue": "cg-manager",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 4,
@@ -1436,24 +1316,16 @@
       },
       "id": 87,
       "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
         },
-        "text": {
-          "valueSize": 25
-        },
-        "textMode": "auto"
+        "content": "<p style=\"justify-content: center; align-items: center;\">\n    <strong>\n        <a  target=\"_blank\" style=\"background-color: rgb(98, 126, 168); color: white; padding: 12px; font-size: 1.2em; display: flex; align-items: center; justify-content: center;\">\n           cg-manager\n        </a>\n    </strong>\n</p>\n\n",
+        "mode": "html"
       },
       "pluginVersion": "9.3.1",
-      "type": "stat"
+      "type": "text"
     },
     {
       "datasource": {
@@ -1503,6 +1375,17 @@
                 "to": 2500
               },
               "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -1773,6 +1656,17 @@
                 "to": 2500
               },
               "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -2043,6 +1937,17 @@
                 "to": 2500
               },
               "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -2313,6 +2218,17 @@
                 "to": 2500
               },
               "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -2541,30 +2457,6 @@
         "uid": "P395BF20BBBA74F0A"
       },
       "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "#627ea8",
-            "mode": "fixed"
-          },
-          "mappings": [],
-          "noValue": "access-control",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 4,
@@ -2573,24 +2465,16 @@
       },
       "id": 88,
       "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
         },
-        "text": {
-          "valueSize": 25
-        },
-        "textMode": "auto"
+        "content": "<p style=\"justify-content: center; align-items: center;\">\n    <strong>\n        <a  target=\"_blank\" style=\"background-color: rgb(98, 126, 168); color: white; padding: 12px; font-size: 1.2em; display: flex; align-items: center; justify-content: center;\">\n           access-control\n        </a>\n    </strong>\n</p>\n\n",
+        "mode": "html"
       },
       "pluginVersion": "9.3.1",
-      "type": "stat"
+      "type": "text"
     },
     {
       "datasource": {
@@ -2640,6 +2524,17 @@
                 "to": 2500
               },
               "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -2911,6 +2806,17 @@
                 "to": 2500
               },
               "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -3181,6 +3087,17 @@
                 "to": 2500
               },
               "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -3451,6 +3368,17 @@
                 "to": 2500
               },
               "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -3679,30 +3607,6 @@
         "uid": "P395BF20BBBA74F0A"
       },
       "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "#627ea8",
-            "mode": "fixed"
-          },
-          "mappings": [],
-          "noValue": "pipeline-service",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 4,
@@ -3711,24 +3615,16 @@
       },
       "id": 96,
       "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
         },
-        "text": {
-          "valueSize": 25
-        },
-        "textMode": "auto"
+        "content": "<p style=\"justify-content: center; align-items: center;\">\n    <strong>\n        <a  target=\"_blank\" style=\"background-color: rgb(98, 126, 168); color: white; padding: 12px; font-size: 1.2em; display: flex; align-items: center; justify-content: center;\">\n           pipeline-service\n        </a>\n    </strong>\n</p>\n\n",
+        "mode": "html"
       },
       "pluginVersion": "9.3.1",
-      "type": "stat"
+      "type": "text"
     },
     {
       "datasource": {
@@ -3778,6 +3674,17 @@
                 "to": 2500
               },
               "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -3841,7 +3748,7 @@
             "type": "prometheus",
             "uid": "By6zGQL4k"
           },
-          "editorMode": "builder",
+          "editorMode": "code",
           "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{cluster=\"qa-private\", environment=\"qa\", serviceName=\"pipeline-service\", job=\"pipeline-service\"}[5m]))",
           "legendFormat": "4xx_Count",
           "range": true,
@@ -4049,6 +3956,17 @@
                 "to": 2500
               },
               "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -4320,6 +4238,17 @@
                 "to": 2500
               },
               "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -4591,6 +4520,17 @@
                 "to": 2500
               },
               "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -4820,30 +4760,6 @@
         "uid": "P395BF20BBBA74F0A"
       },
       "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "#627ea8",
-            "mode": "fixed"
-          },
-          "mappings": [],
-          "noValue": "gitops-service",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
       "gridPos": {
         "h": 2,
         "w": 4,
@@ -4852,1005 +4768,16 @@
       },
       "id": 107,
       "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
         },
-        "text": {
-          "valueSize": 25
-        },
-        "textMode": "auto"
+        "content": "<p style=\"justify-content: center; align-items: center;\">\n    <strong>\n        <a  target=\"_blank\" style=\"background-color: rgb(98, 126, 168); color: white; padding: 12px; font-size: 1.2em; display: flex; align-items: center; justify-content: center;\">\n           gitops-service\n        </a>\n    </strong>\n</p>\n\n",
+        "mode": "html"
       },
       "pluginVersion": "9.3.1",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P395BF20BBBA74F0A"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 4,
-          "mappings": [
-            {
-              "options": {
-                "from": 0,
-                "result": {
-                  "color": "green",
-                  "index": 0,
-                  "text": "Healthy"
-                },
-                "to": 1.9999
-              },
-              "type": "range"
-            },
-            {
-              "options": {
-                "from": 2,
-                "result": {
-                  "color": "orange",
-                  "index": 1,
-                  "text": "Warning"
-                },
-                "to": 13.9999
-              },
-              "type": "range"
-            },
-            {
-              "options": {
-                "from": 14,
-                "result": {
-                  "color": "red",
-                  "index": 2,
-                  "text": "Unhealthy"
-                },
-                "to": 2500
-              },
-              "type": "range"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Service_Health"
-            },
-            "properties": [
-              {
-                "id": "links",
-                "value": [
-                  {
-                    "targetBlank": true,
-                    "title": "Service_Dashboard",
-                    "url": "https://grafana.harness.io/d/AOwPSl_Vk/gitopsmetrics?orgId=1&var-dataSource=QASetup-ManagedPrometheus&var-cluster=qa-private&var-job=gitops-service&from=$__from&to=$__to\n"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 5,
-        "x": 4,
-        "y": 10
-      },
-      "id": 109,
-      "links": [],
-      "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "fields": "/^Service_Health$/",
-          "values": false
-        },
-        "textMode": "value"
-      },
-      "pluginVersion": "9.3.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P395BF20BBBA74F0A"
-          },
-          "refId": "A"
-        }
-      ],
-      "transformations": [
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Total_Error_Count",
-            "binary": {
-              "left": "4xx_Count",
-              "reducer": "sum",
-              "right": "5xx_Count"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Total_Error_Rate",
-            "binary": {
-              "left": "Total_Error_Count",
-              "operator": "/",
-              "reducer": "sum",
-              "right": "Total_Count"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Error_Rate_Transform_1",
-            "binary": {
-              "left": "Total_Error_Rate",
-              "operator": "*",
-              "reducer": "sum",
-              "right": "10000"
-            },
-            "mode": "binary",
-            "reduce": {
-              "include": [
-                "Total_Error_Rate"
-              ],
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Final_Error_Rate",
-            "binary": {
-              "left": "Error_Rate_Transform_1",
-              "operator": "/",
-              "reducer": "sum",
-              "right": "150"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Response_Time_Transform_1",
-            "binary": {
-              "left": "Response_Time",
-              "operator": "*",
-              "reducer": "sum",
-              "right": "10000"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Final_Response_Time",
-            "binary": {
-              "left": "Response_Time_Transform_1",
-              "operator": "/",
-              "reducer": "sum",
-              "right": "1200"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Service_Health",
-            "binary": {
-              "left": "Final_Error_Rate",
-              "reducer": "sum",
-              "right": "Final_Response_Time"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P395BF20BBBA74F0A"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 4,
-          "mappings": [
-            {
-              "options": {
-                "from": 0,
-                "result": {
-                  "color": "green",
-                  "index": 0,
-                  "text": "Healthy"
-                },
-                "to": 1.9999
-              },
-              "type": "range"
-            },
-            {
-              "options": {
-                "from": 2,
-                "result": {
-                  "color": "orange",
-                  "index": 1,
-                  "text": "Warning"
-                },
-                "to": 13.9999
-              },
-              "type": "range"
-            },
-            {
-              "options": {
-                "from": 14,
-                "result": {
-                  "color": "red",
-                  "index": 2,
-                  "text": "Unhealthy"
-                },
-                "to": 2500
-              },
-              "type": "range"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Service_Health"
-            },
-            "properties": [
-              {
-                "id": "links",
-                "value": [
-                  {
-                    "targetBlank": true,
-                    "title": "Service_Dashboard",
-                    "url": "https://grafana.harness.io/d/AOwPSl_Vk/gitopsmetrics?orgId=1&var-dataSource=ProdSetup-ManagedPrometheus&var-cluster=prod-private-uswest1-primary&var-job=gitops-service&from=$__from&to=$__to"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 5,
-        "x": 9,
-        "y": 10
-      },
-      "id": 110,
-      "links": [],
-      "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "fields": "/^Service_Health$/",
-          "values": false
-        },
-        "textMode": "value"
-      },
-      "pluginVersion": "9.3.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P395BF20BBBA74F0A"
-          },
-          "refId": "A"
-        }
-      ],
-      "transformations": [
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Total_Error_Count",
-            "binary": {
-              "left": "4xx_Count",
-              "reducer": "sum",
-              "right": "5xx_Count"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Total_Error_Rate",
-            "binary": {
-              "left": "Total_Error_Count",
-              "operator": "/",
-              "reducer": "sum",
-              "right": "Total_Count"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Error_Rate_Transform_1",
-            "binary": {
-              "left": "Total_Error_Rate",
-              "operator": "*",
-              "reducer": "sum",
-              "right": "10000"
-            },
-            "mode": "binary",
-            "reduce": {
-              "include": [
-                "Total_Error_Rate"
-              ],
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Final_Error_Rate",
-            "binary": {
-              "left": "Error_Rate_Transform_1",
-              "operator": "/",
-              "reducer": "sum",
-              "right": "150"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Response_Time_Transform_1",
-            "binary": {
-              "left": "Response_Time",
-              "operator": "*",
-              "reducer": "sum",
-              "right": "10000"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Final_Response_Time",
-            "binary": {
-              "left": "Response_Time_Transform_1",
-              "operator": "/",
-              "reducer": "sum",
-              "right": "1200"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Service_Health",
-            "binary": {
-              "left": "Final_Error_Rate",
-              "reducer": "sum",
-              "right": "Final_Response_Time"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P395BF20BBBA74F0A"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 4,
-          "mappings": [
-            {
-              "options": {
-                "from": 0,
-                "result": {
-                  "color": "green",
-                  "index": 0,
-                  "text": "Healthy"
-                },
-                "to": 1.9999
-              },
-              "type": "range"
-            },
-            {
-              "options": {
-                "from": 2,
-                "result": {
-                  "color": "orange",
-                  "index": 1,
-                  "text": "Warning"
-                },
-                "to": 13.9999
-              },
-              "type": "range"
-            },
-            {
-              "options": {
-                "from": 14,
-                "result": {
-                  "color": "red",
-                  "index": 2,
-                  "text": "Unhealthy"
-                },
-                "to": 2500
-              },
-              "type": "range"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Service_Health"
-            },
-            "properties": [
-              {
-                "id": "links",
-                "value": [
-                  {
-                    "targetBlank": true,
-                    "title": "Service_Dashboard",
-                    "url": "https://grafana.harness.io/d/AOwPSl_Vk/gitopsmetrics?orgId=1&var-dataSource=ProdSetup-ManagedPrometheus&var-cluster=prod-private-uswest1-primary&var-job=gitops-service-free&from=$__from&to=$__to"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 5,
-        "x": 14,
-        "y": 10
-      },
-      "id": 111,
-      "links": [],
-      "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "fields": "/^Service_Health$/",
-          "values": false
-        },
-        "textMode": "value"
-      },
-      "pluginVersion": "9.3.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P395BF20BBBA74F0A"
-          },
-          "refId": "A"
-        }
-      ],
-      "transformations": [
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Total_Error_Count",
-            "binary": {
-              "left": "4xx_Count",
-              "reducer": "sum",
-              "right": "5xx_Count"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Total_Error_Rate",
-            "binary": {
-              "left": "Total_Error_Count",
-              "operator": "/",
-              "reducer": "sum",
-              "right": "Total_Count"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Error_Rate_Transform_1",
-            "binary": {
-              "left": "Total_Error_Rate",
-              "operator": "*",
-              "reducer": "sum",
-              "right": "10000"
-            },
-            "mode": "binary",
-            "reduce": {
-              "include": [
-                "Total_Error_Rate"
-              ],
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Final_Error_Rate",
-            "binary": {
-              "left": "Error_Rate_Transform_1",
-              "operator": "/",
-              "reducer": "sum",
-              "right": "150"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Response_Time_Transform_1",
-            "binary": {
-              "left": "Response_Time",
-              "operator": "*",
-              "reducer": "sum",
-              "right": "10000"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Final_Response_Time",
-            "binary": {
-              "left": "Response_Time_Transform_1",
-              "operator": "/",
-              "reducer": "sum",
-              "right": "1200"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Service_Health",
-            "binary": {
-              "left": "Final_Error_Rate",
-              "reducer": "sum",
-              "right": "Final_Response_Time"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P395BF20BBBA74F0A"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 4,
-          "mappings": [
-            {
-              "options": {
-                "from": 0,
-                "result": {
-                  "color": "green",
-                  "index": 0,
-                  "text": "Healthy"
-                },
-                "to": 1.9999
-              },
-              "type": "range"
-            },
-            {
-              "options": {
-                "from": 2,
-                "result": {
-                  "color": "orange",
-                  "index": 1,
-                  "text": "Warning"
-                },
-                "to": 13.9999
-              },
-              "type": "range"
-            },
-            {
-              "options": {
-                "from": 14,
-                "result": {
-                  "color": "red",
-                  "index": 2,
-                  "text": "Unhealthy"
-                },
-                "to": 2500
-              },
-              "type": "range"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Service_Health"
-            },
-            "properties": [
-              {
-                "id": "links",
-                "value": [
-                  {
-                    "targetBlank": true,
-                    "title": "Service_Dashboard",
-                    "url": "https://grafana.harness.io/d/AOwPSl_Vk/gitopsmetrics?orgId=1&var-dataSource=ProdSetup-ManagedPrometheus&var-cluster=prod-private-uswest1-primary&var-job=gitops-service-compliance&from=$__from&to=$__to"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 5,
-        "x": 19,
-        "y": 10
-      },
-      "id": 112,
-      "links": [],
-      "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "mean"
-          ],
-          "fields": "/^Service_Health$/",
-          "values": false
-        },
-        "textMode": "value"
-      },
-      "pluginVersion": "9.3.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P395BF20BBBA74F0A"
-          },
-          "refId": "A"
-        }
-      ],
-      "transformations": [
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Total_Error_Count",
-            "binary": {
-              "left": "4xx_Count",
-              "reducer": "sum",
-              "right": "5xx_Count"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Total_Error_Rate",
-            "binary": {
-              "left": "Total_Error_Count",
-              "operator": "/",
-              "reducer": "sum",
-              "right": "Total_Count"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Error_Rate_Transform_1",
-            "binary": {
-              "left": "Total_Error_Rate",
-              "operator": "*",
-              "reducer": "sum",
-              "right": "10000"
-            },
-            "mode": "binary",
-            "reduce": {
-              "include": [
-                "Total_Error_Rate"
-              ],
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Final_Error_Rate",
-            "binary": {
-              "left": "Error_Rate_Transform_1",
-              "operator": "/",
-              "reducer": "sum",
-              "right": "150"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Response_Time_Transform_1",
-            "binary": {
-              "left": "Response_Time",
-              "operator": "*",
-              "reducer": "sum",
-              "right": "10000"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Final_Response_Time",
-            "binary": {
-              "left": "Response_Time_Transform_1",
-              "operator": "/",
-              "reducer": "sum",
-              "right": "1200"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Service_Health",
-            "binary": {
-              "left": "Final_Error_Rate",
-              "reducer": "sum",
-              "right": "Final_Response_Time"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        }
-      ],
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P395BF20BBBA74F0A"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "#627ea8",
-            "mode": "fixed"
-          },
-          "mappings": [],
-          "noValue": "platform-service",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 4,
-        "x": 0,
-        "y": 12
-      },
-      "id": 92,
-      "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {
-          "valueSize": 25
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "9.3.1",
-      "type": "stat"
+      "type": "text"
     },
     {
       "datasource": {
@@ -5900,6 +4827,1170 @@
                 "to": 2500
               },
               "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Service_Health"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Service_Dashboard",
+                    "url": "https://grafana.harness.io/d/B42-bJq4k/system-observability-dashboard?orgId=1&var-dataSource=QASetup-ManagedPrometheus&var-env=qa&var-service=pipeline-service&var-job=pipeline-service&from=$__from&to=$__to"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 5,
+        "x": 4,
+        "y": 10
+      },
+      "id": 113,
+      "links": [],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "/^Service_Health$/",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "9.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "By6zGQL4k"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{cluster=\"qa-private\", environment=\"qa\", serviceName=\"gitops-service\", job=\"gitops-prod\"}[5m]))",
+          "legendFormat": "4xx_Count",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "By6zGQL4k"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_5xx_responses_count{cluster=\"qa-private\", environment=\"qa\", serviceName=\"gitops-service\", job=\"gitops-free\"}[5m]))",
+          "hide": false,
+          "legendFormat": "5xx_Count",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "By6zGQL4k"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_requests_count{cluster=\"qa-private\", environment=\"qa\", serviceName=\"gitops-service\", job=\"gitops-compliance\"}[5m]))",
+          "hide": false,
+          "legendFormat": "Total_Count",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "By6zGQL4k"
+          },
+          "editorMode": "builder",
+          "expr": "avg by(job) (io_dropwizard_jetty_MutableServletContextHandler_requests_snapshot_95thPercentile{cluster=\"qa-private\", environment=\"qa\", serviceName=\"pipeline-service\", job=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "Response_Time",
+          "range": true,
+          "refId": "D"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total_Error_Count",
+            "binary": {
+              "left": "4xx_Count",
+              "reducer": "sum",
+              "right": "5xx_Count"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total_Error_Rate",
+            "binary": {
+              "left": "Total_Error_Count",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Total_Count"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Error_Rate_Transform_1",
+            "binary": {
+              "left": "Total_Error_Rate",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "10000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [
+                "Total_Error_Rate"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Final_Error_Rate",
+            "binary": {
+              "left": "Error_Rate_Transform_1",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "150"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Response_Time_Transform_1",
+            "binary": {
+              "left": "Response_Time",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "10000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Final_Response_Time",
+            "binary": {
+              "left": "Response_Time_Transform_1",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "1200"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Service_Health",
+            "binary": {
+              "left": "Final_Error_Rate",
+              "reducer": "sum",
+              "right": "Final_Response_Time"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P395BF20BBBA74F0A"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 4,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "Healthy"
+                },
+                "to": 1.9999
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 2,
+                "result": {
+                  "color": "orange",
+                  "index": 1,
+                  "text": "Warning"
+                },
+                "to": 13.9999
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 14,
+                "result": {
+                  "color": "red",
+                  "index": 2,
+                  "text": "Unhealthy"
+                },
+                "to": 2500
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Service_Health"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Service_Dashboard",
+                    "url": "https://grafana.harness.io/d/B42-bJq4k/system-observability-dashboard?orgId=1&var-dataSource=QASetup-ManagedPrometheus&var-env=qa&var-service=pipeline-service&var-job=pipeline-service&from=$__from&to=$__to"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 5,
+        "x": 9,
+        "y": 10
+      },
+      "id": 114,
+      "links": [],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "/^Service_Health$/",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "9.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P395BF20BBBA74F0A"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{cluster=\"prod-private-uswest1-primary\", environment=\"prod\", serviceName=\"gitops-service\", job=\"gitops-prod\"}[5m]))",
+          "legendFormat": "4xx_Count",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P395BF20BBBA74F0A"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_5xx_responses_count{cluster=\"prod-private-uswest1-primary\", environment=\"prod\", serviceName=\"gitops-service\", job=\"gitops-free\"}[5m]))",
+          "hide": false,
+          "legendFormat": "5xx_Count",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P395BF20BBBA74F0A"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_requests_count{cluster=\"prod-private-uswest1-primary\", environment=\"prod\", serviceName=\"gitops-service\", job=\"gitops-compliance\"}[5m]))",
+          "hide": false,
+          "legendFormat": "Total_Count",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P395BF20BBBA74F0A"
+          },
+          "editorMode": "code",
+          "expr": "avg by(job) (io_dropwizard_jetty_MutableServletContextHandler_requests_snapshot_95thPercentile{cluster=\"prod-private-uswest1-primary\", environment=\"prod\", serviceName=\"pipeline-service\", job=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "Response_Time",
+          "range": true,
+          "refId": "D"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total_Error_Count",
+            "binary": {
+              "left": "4xx_Count",
+              "reducer": "sum",
+              "right": "5xx_Count"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total_Error_Rate",
+            "binary": {
+              "left": "Total_Error_Count",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Total_Count"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Error_Rate_Transform_1",
+            "binary": {
+              "left": "Total_Error_Rate",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "10000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [
+                "Total_Error_Rate"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Final_Error_Rate",
+            "binary": {
+              "left": "Error_Rate_Transform_1",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "150"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Response_Time_Transform_1",
+            "binary": {
+              "left": "Response_Time",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "10000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Final_Response_Time",
+            "binary": {
+              "left": "Response_Time_Transform_1",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "1200"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Service_Health",
+            "binary": {
+              "left": "Final_Error_Rate",
+              "reducer": "sum",
+              "right": "Final_Response_Time"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P395BF20BBBA74F0A"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 4,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "Healthy"
+                },
+                "to": 1.9999
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 2,
+                "result": {
+                  "color": "orange",
+                  "index": 1,
+                  "text": "Warning"
+                },
+                "to": 13.9999
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 14,
+                "result": {
+                  "color": "red",
+                  "index": 2,
+                  "text": "Unhealthy"
+                },
+                "to": 2500
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Service_Health"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Service_Dashboard",
+                    "url": "https://grafana.harness.io/d/B42-bJq4k/system-observability-dashboard?orgId=1&var-dataSource=QASetup-ManagedPrometheus&var-env=qa&var-service=pipeline-service&var-job=pipeline-service&from=$__from&to=$__to"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 5,
+        "x": 14,
+        "y": 10
+      },
+      "id": 116,
+      "links": [],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "/^Service_Health$/",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "9.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P395BF20BBBA74F0A"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{cluster=\"prod-private-uswest1-primary\", environment=\"free\", serviceName=\"gitops-service\", job=\"gitops-prod\"}[5m]))",
+          "legendFormat": "4xx_Count",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P395BF20BBBA74F0A"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_5xx_responses_count{cluster=\"prod-private-uswest1-primary\", environment=\"free\", serviceName=\"gitops-service\", job=\"gitops-free\"}[5m]))",
+          "hide": false,
+          "legendFormat": "5xx_Count",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P395BF20BBBA74F0A"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_requests_count{cluster=\"prod-private-uswest1-primary\", environment=\"free\", serviceName=\"gitops-service\", job=\"gitops-compliance\"}[5m]))",
+          "hide": false,
+          "legendFormat": "Total_Count",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P395BF20BBBA74F0A"
+          },
+          "editorMode": "code",
+          "expr": "avg by(job) (io_dropwizard_jetty_MutableServletContextHandler_requests_snapshot_95thPercentile{cluster=\"prod-private-uswest1-primary\", environment=\"free\", serviceName=\"pipeline-service\", job=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "Response_Time",
+          "range": true,
+          "refId": "D"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total_Error_Count",
+            "binary": {
+              "left": "4xx_Count",
+              "reducer": "sum",
+              "right": "5xx_Count"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total_Error_Rate",
+            "binary": {
+              "left": "Total_Error_Count",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Total_Count"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Error_Rate_Transform_1",
+            "binary": {
+              "left": "Total_Error_Rate",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "10000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [
+                "Total_Error_Rate"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Final_Error_Rate",
+            "binary": {
+              "left": "Error_Rate_Transform_1",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "150"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Response_Time_Transform_1",
+            "binary": {
+              "left": "Response_Time",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "10000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Final_Response_Time",
+            "binary": {
+              "left": "Response_Time_Transform_1",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "1200"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Service_Health",
+            "binary": {
+              "left": "Final_Error_Rate",
+              "reducer": "sum",
+              "right": "Final_Response_Time"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P395BF20BBBA74F0A"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 4,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "Healthy"
+                },
+                "to": 1.9999
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 2,
+                "result": {
+                  "color": "orange",
+                  "index": 1,
+                  "text": "Warning"
+                },
+                "to": 13.9999
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 14,
+                "result": {
+                  "color": "red",
+                  "index": 2,
+                  "text": "Unhealthy"
+                },
+                "to": 2500
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Service_Health"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Service_Dashboard",
+                    "url": "https://grafana.harness.io/d/B42-bJq4k/system-observability-dashboard?orgId=1&var-dataSource=QASetup-ManagedPrometheus&var-env=qa&var-service=pipeline-service&var-job=pipeline-service&from=$__from&to=$__to"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 5,
+        "x": 19,
+        "y": 10
+      },
+      "id": 117,
+      "links": [],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "/^Service_Health$/",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "9.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P395BF20BBBA74F0A"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{cluster=\"prod-private-uswest1-primary\", environment=\"compliance\", serviceName=\"gitops-service\", job=\"gitops-prod\"}[5m]))",
+          "legendFormat": "4xx_Count",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P395BF20BBBA74F0A"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_5xx_responses_count{cluster=\"prod-private-uswest1-primary\", environment=\"compliance\", serviceName=\"gitops-service\", job=\"gitops-free\"}[5m]))",
+          "hide": false,
+          "legendFormat": "5xx_Count",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P395BF20BBBA74F0A"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_requests_count{cluster=\"prod-private-uswest1-primary\", environment=\"compliance\", serviceName=\"gitops-service\", job=\"gitops-compliance\"}[5m]))",
+          "hide": false,
+          "legendFormat": "Total_Count",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P395BF20BBBA74F0A"
+          },
+          "editorMode": "code",
+          "expr": "avg by(job) (io_dropwizard_jetty_MutableServletContextHandler_requests_snapshot_95thPercentile{cluster=\"prod-private-uswest1-primary\", environment=\"compliance\", serviceName=\"pipeline-service\", job=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "Response_Time",
+          "range": true,
+          "refId": "D"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total_Error_Count",
+            "binary": {
+              "left": "4xx_Count",
+              "reducer": "sum",
+              "right": "5xx_Count"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total_Error_Rate",
+            "binary": {
+              "left": "Total_Error_Count",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Total_Count"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Error_Rate_Transform_1",
+            "binary": {
+              "left": "Total_Error_Rate",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "10000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [
+                "Total_Error_Rate"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Final_Error_Rate",
+            "binary": {
+              "left": "Error_Rate_Transform_1",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "150"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Response_Time_Transform_1",
+            "binary": {
+              "left": "Response_Time",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "10000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Final_Response_Time",
+            "binary": {
+              "left": "Response_Time_Transform_1",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "1200"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Service_Health",
+            "binary": {
+              "left": "Final_Error_Rate",
+              "reducer": "sum",
+              "right": "Final_Response_Time"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P395BF20BBBA74F0A"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 2,
+        "w": 4,
+        "x": 0,
+        "y": 12
+      },
+      "id": 92,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<p style=\"justify-content: center; align-items: center;\">\n    <strong>\n        <a  target=\"_blank\" style=\"background-color: rgb(98, 126, 168); color: white; padding: 12px; font-size: 1.2em; display: flex; align-items: center; justify-content: center;\">\n           platform-service\n        </a>\n    </strong>\n</p>\n\n",
+        "mode": "html"
+      },
+      "pluginVersion": "9.3.1",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "By6zGQL4k"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 4,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "Healthy"
+                },
+                "to": 1.9999
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 2,
+                "result": {
+                  "color": "orange",
+                  "index": 1,
+                  "text": "Warning"
+                },
+                "to": 13.9999
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 14,
+                "result": {
+                  "color": "red",
+                  "index": 2,
+                  "text": "Unhealthy"
+                },
+                "to": 2500
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -6171,6 +6262,17 @@
                 "to": 2500
               },
               "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -6442,6 +6544,17 @@
                 "to": 2500
               },
               "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -6674,27 +6787,285 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "fixedColor": "#627ea8",
-            "mode": "fixed"
+            "mode": "thresholds"
           },
-          "mappings": [],
-          "noValue": "ce-nextgen",
+          "decimals": 4,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "Healthy"
+                },
+                "to": 1.9999
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 2,
+                "result": {
+                  "color": "orange",
+                  "index": 1,
+                  "text": "Warning"
+                },
+                "to": 13.9999
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 14,
+                "result": {
+                  "color": "red",
+                  "index": 2,
+                  "text": "Unhealthy"
+                },
+                "to": 2500
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
+            }
+          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": null
-              },
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Service_Health"
+            },
+            "properties": [
               {
-                "color": "red",
-                "value": 80
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Service_Dashboard",
+                    "url": "https://grafana.harness.io/d/B42-bJq4k/system-observability-dashboard?orgId=1&var-dataSource=ProdSetup-ManagedPrometheus&var-env=free&var-service=pipeline-service&var-job=pipeline-service-free&from=$__from&to=$__to"
+                  }
+                ]
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       },
+      "gridPos": {
+        "h": 2,
+        "w": 5,
+        "x": 19,
+        "y": 12
+      },
+      "id": 115,
+      "links": [],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "/^Service_Health$/",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "9.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P395BF20BBBA74F0A"
+          },
+          "editorMode": "code",
+          "expr": "sum by(job) (delta(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{cluster=\"prod-private-uswest1-primary\", environment=\"localhost\", serviceName=\"platform-service\", job=\"platform-service-compliance\"}[5m]))",
+          "legendFormat": "4xx_Count",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P395BF20BBBA74F0A"
+          },
+          "editorMode": "code",
+          "expr": "sum by(job) (delta(io_dropwizard_jetty_MutableServletContextHandler_5xx_responses_count{cluster=\"prod-private-uswest1-primary\", environment=\"localhost\", serviceName=\"platform-service\", job=\"platform-service-compliance\"}[5m]))",
+          "hide": false,
+          "legendFormat": "5xx_Count",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P395BF20BBBA74F0A"
+          },
+          "editorMode": "code",
+          "expr": "sum by(job) (delta(io_dropwizard_jetty_MutableServletContextHandler_requests_count{cluster=\"prod-private-uswest1-primary\", environment=\"localhost\", serviceName=\"platform-service\", job=\"platform-service-compliance\"}[5m]))",
+          "hide": false,
+          "legendFormat": "Total_Count",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P395BF20BBBA74F0A"
+          },
+          "editorMode": "code",
+          "expr": "avg by(job) (io_dropwizard_jetty_MutableServletContextHandler_requests_snapshot_95thPercentile{cluster=\"prod-private-uswest1-primary\", environment=\"localhost\", serviceName=\"platform-service\", job=\"platform-service-compliance\"})",
+          "hide": false,
+          "legendFormat": "Response_Time",
+          "range": true,
+          "refId": "D"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total_Error_Count",
+            "binary": {
+              "left": "4xx_Count",
+              "reducer": "sum",
+              "right": "5xx_Count"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total_Error_Rate",
+            "binary": {
+              "left": "Total_Error_Count",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Total_Count"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Error_Rate_Transform_1",
+            "binary": {
+              "left": "Total_Error_Rate",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "10000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [
+                "Total_Error_Rate"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Final_Error_Rate",
+            "binary": {
+              "left": "Error_Rate_Transform_1",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "150"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Response_Time_Transform_1",
+            "binary": {
+              "left": "Response_Time",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "10000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Final_Response_Time",
+            "binary": {
+              "left": "Response_Time_Transform_1",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "1200"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Service_Health",
+            "binary": {
+              "left": "Final_Error_Rate",
+              "reducer": "sum",
+              "right": "Final_Response_Time"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P395BF20BBBA74F0A"
+      },
+      "description": "",
       "gridPos": {
         "h": 2,
         "w": 4,
@@ -6703,24 +7074,16 @@
       },
       "id": 93,
       "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
         },
-        "text": {
-          "valueSize": 25
-        },
-        "textMode": "auto"
+        "content": "<p style=\"justify-content: center; align-items: center;\">\n    <strong>\n        <a  target=\"_blank\" style=\"background-color: rgb(98, 126, 168); color: white; padding: 12px; font-size: 1.2em; display: flex; align-items: center; justify-content: center;\">\n           ce-nextgen\n        </a>\n    </strong>\n</p>\n\n",
+        "mode": "html"
       },
       "pluginVersion": "9.3.1",
-      "type": "stat"
+      "type": "text"
     },
     {
       "datasource": {
@@ -6770,6 +7133,17 @@
                 "to": 2500
               },
               "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -7041,6 +7415,17 @@
                 "to": 2500
               },
               "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -7312,6 +7697,17 @@
                 "to": 2500
               },
               "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -7544,27 +7940,285 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "fixedColor": "#627ea8",
-            "mode": "fixed"
+            "mode": "thresholds"
           },
-          "mappings": [],
-          "noValue": "ci-manager",
+          "decimals": 4,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "Healthy"
+                },
+                "to": 1.9999
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 2,
+                "result": {
+                  "color": "orange",
+                  "index": 1,
+                  "text": "Warning"
+                },
+                "to": 13.9999
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 14,
+                "result": {
+                  "color": "red",
+                  "index": 2,
+                  "text": "Unhealthy"
+                },
+                "to": 2500
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
+            }
+          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": null
-              },
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Service_Health"
+            },
+            "properties": [
               {
-                "color": "red",
-                "value": 80
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Service_Dashboard",
+                    "url": "https://grafana.harness.io/d/B42-bJq4k/system-observability-dashboard?orgId=1&var-dataSource=ProdSetup-ManagedPrometheus&var-env=localhost&var-service=ce-nextgen-application&var-job=ce-nextgen-free&from=$__from&to=$__to"
+                  }
+                ]
               }
             ]
           }
-        },
-        "overrides": []
+        ]
       },
+      "gridPos": {
+        "h": 2,
+        "w": 5,
+        "x": 19,
+        "y": 14
+      },
+      "id": 120,
+      "links": [],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "/^Service_Health$/",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "9.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P395BF20BBBA74F0A"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{environment=\"localhost\", serviceName=\"ce-nextgen-application\", job=\"ce-nextgen-compliance\"}[5m]))",
+          "legendFormat": "4xx_Count",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P395BF20BBBA74F0A"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_5xx_responses_count{environment=\"localhost\", serviceName=\"ce-nextgen-application\", job=\"ce-nextgen-complaince\"}[5m]))",
+          "hide": false,
+          "legendFormat": "5xx_Count",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P395BF20BBBA74F0A"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_requests_count{environment=\"localhost\", serviceName=\"ce-nextgen-application\", job=\"ce-nextgen-compliance\"}[5m]))",
+          "hide": false,
+          "legendFormat": "Total_Count",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P395BF20BBBA74F0A"
+          },
+          "editorMode": "code",
+          "expr": "avg by(job) (io_dropwizard_jetty_MutableServletContextHandler_requests_snapshot_95thPercentile{environment=\"localhost\", serviceName=\"ce-nextgen-application\", job=\"ce-nextgen-compliance\"})",
+          "hide": false,
+          "legendFormat": "Response_Time",
+          "range": true,
+          "refId": "D"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total_Error_Count",
+            "binary": {
+              "left": "4xx_Count",
+              "reducer": "sum",
+              "right": "5xx_Count"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total_Error_Rate",
+            "binary": {
+              "left": "Total_Error_Count",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Total_Count"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Error_Rate_Transform_1",
+            "binary": {
+              "left": "Total_Error_Rate",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "10000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [
+                "Total_Error_Rate"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Final_Error_Rate",
+            "binary": {
+              "left": "Error_Rate_Transform_1",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "150"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Response_Time_Transform_1",
+            "binary": {
+              "left": "Response_Time",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "10000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Final_Response_Time",
+            "binary": {
+              "left": "Response_Time_Transform_1",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "1200"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Service_Health",
+            "binary": {
+              "left": "Final_Error_Rate",
+              "reducer": "sum",
+              "right": "Final_Response_Time"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P395BF20BBBA74F0A"
+      },
+      "description": "",
       "gridPos": {
         "h": 2,
         "w": 4,
@@ -7573,24 +8227,16 @@
       },
       "id": 97,
       "options": {
-        "colorMode": "background",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
         },
-        "text": {
-          "valueSize": 25
-        },
-        "textMode": "auto"
+        "content": "<p style=\"justify-content: center; align-items: center;\">\n    <strong>\n        <a  target=\"_blank\" style=\"background-color: rgb(98, 126, 168); color: white; padding: 12px; font-size: 1.2em; display: flex; align-items: center; justify-content: center;\">\n           ci-manager\n        </a>\n    </strong>\n</p>\n\n",
+        "mode": "html"
       },
       "pluginVersion": "9.3.1",
-      "type": "stat"
+      "type": "text"
     },
     {
       "datasource": {
@@ -7640,6 +8286,17 @@
                 "to": 2500
               },
               "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -7703,8 +8360,8 @@
             "type": "prometheus",
             "uid": "By6zGQL4k"
           },
-          "editorMode": "builder",
-          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{cluster=\"qa-private\", environment=\"localhost\", serviceName=\"platform-service\", job=\"platform-service\"}[5m]))",
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{cluster=\"qa-private\", environment=\"qa\", serviceName=\"ci-manager\", job=\"ci-manager-prod\"}[5m]))",
           "legendFormat": "4xx_Count",
           "range": true,
           "refId": "A"
@@ -7714,8 +8371,8 @@
             "type": "prometheus",
             "uid": "By6zGQL4k"
           },
-          "editorMode": "builder",
-          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_5xx_responses_count{cluster=\"qa-private\", environment=\"localhost\", serviceName=\"platform-service\", job=\"platform-service\"}[5m]))",
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_5xx_responses_count{cluster=\"qa-private\", environment=\"prod\", serviceName=\"ci-manager\", job=\"ci-manager-prod\"}[5m]))",
           "hide": false,
           "legendFormat": "5xx_Count",
           "range": true,
@@ -7726,7 +8383,7 @@
             "type": "prometheus",
             "uid": "By6zGQL4k"
           },
-          "editorMode": "builder",
+          "editorMode": "code",
           "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_requests_count{cluster=\"qa-private\", environment=\"localhost\", serviceName=\"platform-service\", job=\"platform-service\"}[5m]))",
           "hide": false,
           "legendFormat": "Total_Count",
@@ -7738,7 +8395,853 @@
             "type": "prometheus",
             "uid": "By6zGQL4k"
           },
-          "editorMode": "builder",
+          "editorMode": "code",
+          "expr": "avg by(job) (io_dropwizard_jetty_MutableServletContextHandler_requests_snapshot_95thPercentile{cluster=\"qa-private\", environment=\"localhost\", serviceName=\"platform-service\", job=\"platform-service\"})",
+          "hide": false,
+          "legendFormat": "Response_Time",
+          "range": true,
+          "refId": "D"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total_Error_Count",
+            "binary": {
+              "left": "4xx_Count",
+              "reducer": "sum",
+              "right": "5xx_Count"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total_Error_Rate",
+            "binary": {
+              "left": "Total_Error_Count",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Total_Count"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Error_Rate_Transform_1",
+            "binary": {
+              "left": "Total_Error_Rate",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "10000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [
+                "Total_Error_Rate"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Final_Error_Rate",
+            "binary": {
+              "left": "Error_Rate_Transform_1",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "150"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Response_Time_Transform_1",
+            "binary": {
+              "left": "Response_Time",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "10000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Final_Response_Time",
+            "binary": {
+              "left": "Response_Time_Transform_1",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "1200"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Service_Health",
+            "binary": {
+              "left": "Final_Error_Rate",
+              "reducer": "sum",
+              "right": "Final_Response_Time"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "By6zGQL4k"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 4,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "Healthy"
+                },
+                "to": 1.9999
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 2,
+                "result": {
+                  "color": "orange",
+                  "index": 1,
+                  "text": "Warning"
+                },
+                "to": 13.9999
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 14,
+                "result": {
+                  "color": "red",
+                  "index": 2,
+                  "text": "Unhealthy"
+                },
+                "to": 2500
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Service_Health"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Service_Dashboard",
+                    "url": "https://grafana.harness.io/d/B42-bJq4k/system-observability-dashboard?orgId=1&var-dataSource=QASetup-ManagedPrometheus&var-env=localhost&var-service=platform-service&var-job=platform-service&from=$__from&to=$__to"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 5,
+        "x": 9,
+        "y": 16
+      },
+      "id": 118,
+      "links": [],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "/^Service_Health$/",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "9.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "By6zGQL4k"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{cluster=\"qa-private\", environment=\"qa\", serviceName=\"ci-manager\", job=\"ci-manager-prod\"}[5m]))",
+          "legendFormat": "4xx_Count",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "By6zGQL4k"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_5xx_responses_count{cluster=\"qa-private\", environment=\"prod\", serviceName=\"ci-manager\", job=\"ci-manager-prod\"}[5m]))",
+          "hide": false,
+          "legendFormat": "5xx_Count",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "By6zGQL4k"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_requests_count{cluster=\"qa-private\", environment=\"localhost\", serviceName=\"platform-service\", job=\"platform-service\"}[5m]))",
+          "hide": false,
+          "legendFormat": "Total_Count",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "By6zGQL4k"
+          },
+          "editorMode": "code",
+          "expr": "avg by(job) (io_dropwizard_jetty_MutableServletContextHandler_requests_snapshot_95thPercentile{cluster=\"qa-private\", environment=\"localhost\", serviceName=\"platform-service\", job=\"platform-service\"})",
+          "hide": false,
+          "legendFormat": "Response_Time",
+          "range": true,
+          "refId": "D"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total_Error_Count",
+            "binary": {
+              "left": "4xx_Count",
+              "reducer": "sum",
+              "right": "5xx_Count"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total_Error_Rate",
+            "binary": {
+              "left": "Total_Error_Count",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Total_Count"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Error_Rate_Transform_1",
+            "binary": {
+              "left": "Total_Error_Rate",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "10000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [
+                "Total_Error_Rate"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Final_Error_Rate",
+            "binary": {
+              "left": "Error_Rate_Transform_1",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "150"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Response_Time_Transform_1",
+            "binary": {
+              "left": "Response_Time",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "10000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Final_Response_Time",
+            "binary": {
+              "left": "Response_Time_Transform_1",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "1200"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Service_Health",
+            "binary": {
+              "left": "Final_Error_Rate",
+              "reducer": "sum",
+              "right": "Final_Response_Time"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "By6zGQL4k"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 4,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "Healthy"
+                },
+                "to": 1.9999
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 2,
+                "result": {
+                  "color": "orange",
+                  "index": 1,
+                  "text": "Warning"
+                },
+                "to": 13.9999
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 14,
+                "result": {
+                  "color": "red",
+                  "index": 2,
+                  "text": "Unhealthy"
+                },
+                "to": 2500
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Service_Health"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Service_Dashboard",
+                    "url": "https://grafana.harness.io/d/B42-bJq4k/system-observability-dashboard?orgId=1&var-dataSource=QASetup-ManagedPrometheus&var-env=localhost&var-service=platform-service&var-job=platform-service&from=$__from&to=$__to"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 5,
+        "x": 14,
+        "y": 16
+      },
+      "id": 119,
+      "links": [],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "/^Service_Health$/",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "9.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "By6zGQL4k"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{cluster=\"qa-private\", environment=\"qa\", serviceName=\"ci-manager\", job=\"ci-manager-prod\"}[5m]))",
+          "legendFormat": "4xx_Count",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "By6zGQL4k"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_5xx_responses_count{cluster=\"qa-private\", environment=\"prod\", serviceName=\"ci-manager\", job=\"ci-manager-prod\"}[5m]))",
+          "hide": false,
+          "legendFormat": "5xx_Count",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "By6zGQL4k"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_requests_count{cluster=\"qa-private\", environment=\"localhost\", serviceName=\"platform-service\", job=\"platform-service\"}[5m]))",
+          "hide": false,
+          "legendFormat": "Total_Count",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "By6zGQL4k"
+          },
+          "editorMode": "code",
+          "expr": "avg by(job) (io_dropwizard_jetty_MutableServletContextHandler_requests_snapshot_95thPercentile{cluster=\"qa-private\", environment=\"localhost\", serviceName=\"platform-service\", job=\"platform-service\"})",
+          "hide": false,
+          "legendFormat": "Response_Time",
+          "range": true,
+          "refId": "D"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total_Error_Count",
+            "binary": {
+              "left": "4xx_Count",
+              "reducer": "sum",
+              "right": "5xx_Count"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total_Error_Rate",
+            "binary": {
+              "left": "Total_Error_Count",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Total_Count"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Error_Rate_Transform_1",
+            "binary": {
+              "left": "Total_Error_Rate",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "10000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [
+                "Total_Error_Rate"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Final_Error_Rate",
+            "binary": {
+              "left": "Error_Rate_Transform_1",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "150"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Response_Time_Transform_1",
+            "binary": {
+              "left": "Response_Time",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "10000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Final_Response_Time",
+            "binary": {
+              "left": "Response_Time_Transform_1",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "1200"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Service_Health",
+            "binary": {
+              "left": "Final_Error_Rate",
+              "reducer": "sum",
+              "right": "Final_Response_Time"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "By6zGQL4k"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 4,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "Healthy"
+                },
+                "to": 1.9999
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 2,
+                "result": {
+                  "color": "orange",
+                  "index": 1,
+                  "text": "Warning"
+                },
+                "to": 13.9999
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 14,
+                "result": {
+                  "color": "red",
+                  "index": 2,
+                  "text": "Unhealthy"
+                },
+                "to": 2500
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "#808080",
+                  "index": 3,
+                  "text": "-"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Service_Health"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Service_Dashboard",
+                    "url": "https://grafana.harness.io/d/B42-bJq4k/system-observability-dashboard?orgId=1&var-dataSource=QASetup-ManagedPrometheus&var-env=localhost&var-service=platform-service&var-job=platform-service&from=$__from&to=$__to"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 5,
+        "x": 19,
+        "y": 16
+      },
+      "id": 121,
+      "links": [],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "/^Service_Health$/",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "9.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "By6zGQL4k"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{cluster=\"qa-private\", environment=\"qa\", serviceName=\"ci-manager\", job=\"ci-manager-prod\"}[5m]))",
+          "legendFormat": "4xx_Count",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "By6zGQL4k"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_5xx_responses_count{cluster=\"qa-private\", environment=\"prod\", serviceName=\"ci-manager\", job=\"ci-manager-prod\"}[5m]))",
+          "hide": false,
+          "legendFormat": "5xx_Count",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "By6zGQL4k"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_requests_count{cluster=\"qa-private\", environment=\"localhost\", serviceName=\"platform-service\", job=\"platform-service\"}[5m]))",
+          "hide": false,
+          "legendFormat": "Total_Count",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "By6zGQL4k"
+          },
+          "editorMode": "code",
           "expr": "avg by(job) (io_dropwizard_jetty_MutableServletContextHandler_requests_snapshot_95thPercentile{cluster=\"qa-private\", environment=\"localhost\", serviceName=\"platform-service\", job=\"platform-service\"})",
           "hide": false,
           "legendFormat": "Response_Time",
@@ -7872,13 +9375,13 @@
     "list": []
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-1m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
-  "title": "OPS Dashboard",
+  "title": "Microservices Health Dashboard",
   "uid": "mToVpMeVk",
-  "version": 25,
+  "version": 26,
   "weekStart": ""
 }
