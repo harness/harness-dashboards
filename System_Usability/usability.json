@@ -1238,7 +1238,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "avg by(environment) (active_delegate_count{cluster=\"$cluster\"})",
+          "expr": "avg by(environment) (custom_googleapis_com:opencensus_delegate_task_creation{monitored_resource=\"k8s_container\",cluster_name=\"prod-private-uswest1-primary\"})",
           "interval": "",
           "legendFormat": "__auto",
           "range": true,
@@ -1373,7 +1373,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (environment) (rate(delegate_task_creation{cluster=\"$cluster\"}[1m]))",
+          "expr": "sum by (environment) (rate(custom_googleapis_com:opencensus_delegate_task_creation{monitored_resource=\"k8s_container\",cluster_name=\"prod-private-uswest1-primary\"}[1m]))",
           "interval": "",
           "legendFormat": "__auto",
           "range": true,
@@ -1438,9 +1438,9 @@
       },
       {
         "current": {
-          "selected": true,
-          "text": "prod",
-          "value": "prod"
+          "selected": false,
+          "text": "compliance",
+          "value": "compliance"
         },
         "datasource": {
           "type": "prometheus",
@@ -1473,6 +1473,6 @@
   "timezone": "",
   "title": "Production Metrics Dashboard",
   "uid": "F9dOkEgIk",
-  "version": 12,
+  "version": 13,
   "weekStart": ""
 }
