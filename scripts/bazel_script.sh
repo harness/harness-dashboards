@@ -39,3 +39,4 @@ build_bazel_module STO
 build_bazel_module System_Health
 build_bazel_module System_Usability
 build_bazel_module Continuous_ET
+build_bazel_module Weaviate

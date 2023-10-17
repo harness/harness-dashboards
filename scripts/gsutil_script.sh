@@ -35,3 +35,4 @@ gsutil_cp_module STO
 gsutil_cp_module System_Health
 gsutil_cp_module System_Usability 
 gsutil_cp_module Continuous_ET
+gsutil_cp_module Weaviate
