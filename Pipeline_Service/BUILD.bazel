@@ -12,7 +12,7 @@ pkg_tar(
 	":dashboards",
     ],
     mode = "0600",
-    package_dir = "/harness-dashboards/Pipeline/",
+    package_dir = "/harness-dashboards/Pipeline_Service/",
     tags = [
         "manual",
         "no-cache",
