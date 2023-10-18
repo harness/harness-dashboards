@@ -122,6 +122,7 @@
         "y": 1
       },
       "id": 14,
+      "interval": "5m",
       "options": {
         "legend": {
           "calcs": [
@@ -215,10 +216,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           }
@@ -249,6 +246,7 @@
         "y": 1
       },
       "id": 29,
+      "interval": "15m",
       "options": {
         "legend": {
           "calcs": [
@@ -324,7 +322,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -373,6 +371,7 @@
         "y": 10
       },
       "id": 4,
+      "interval": "5m",
       "options": {
         "legend": {
           "calcs": [
@@ -401,7 +400,7 @@
           "editorMode": "code",
           "expr": "sum by (cluster) (harness_ci_pipeline_running_executions{})",
           "instant": false,
-          "interval": "1m",
+          "interval": "5m",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -425,10 +424,10 @@
           "custom": {
             "axisCenteredZero": false,
             "axisColorMode": "text",
-            "axisLabel": "",
+            "axisLabel": "Count",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -446,7 +445,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "none"
+              "mode": "normal"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -459,10 +458,6 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           }
@@ -476,6 +471,7 @@
         "y": 10
       },
       "id": 20,
+      "interval": "5m",
       "options": {
         "legend": {
           "calcs": [
@@ -504,8 +500,8 @@
           "editorMode": "code",
           "expr": "sum by(driver,os) (harness_ci_pipeline_running_executions)",
           "instant": false,
-          "interval": "1m",
-          "legendFormat": "__auto",
+          "interval": "5m",
+          "legendFormat": "{{driver}}->{{os}}",
           "range": true,
           "refId": "A"
         }
@@ -547,7 +543,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -595,6 +591,7 @@
         "y": 18
       },
       "id": 10,
+      "interval": "5m",
       "options": {
         "legend": {
           "calcs": [
@@ -621,7 +618,7 @@
           },
           "editorMode": "code",
           "expr": "sum by(owner_id) (harness_ci_pipeline_per_account_running_executions)",
-          "interval": "1m",
+          "interval": "5m",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -647,7 +644,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
@@ -695,6 +692,7 @@
         "y": 18
       },
       "id": 42,
+      "interval": "5m",
       "options": {
         "legend": {
           "calcs": [
@@ -721,9 +719,9 @@
             "uid": "9j9hW0q4z"
           },
           "editorMode": "code",
-          "expr": "sum by(namespace) (harness_ci_pipeline_running_executions)",
+          "expr": "sum by(new_namespace) (label_replace(harness_ci_pipeline_running_executions{}, \"new_namespace\", \"$1\", \"pod\", \"([a-z]+-[a-z]+)-.*\"))",
           "instant": false,
-          "interval": "1m",
+          "interval": "5m",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -906,15 +904,15 @@
               },
               {
                 "color": "#6ED0E0",
-                "value": 6
+                "value": 0.1
               },
               {
                 "color": "#EAB839",
-                "value": 9
+                "value": 3
               },
               {
                 "color": "red",
-                "value": 12
+                "value": 5
               }
             ]
           }
@@ -948,7 +946,7 @@
             "uid": "9j9hW0q4z"
           },
           "editorMode": "code",
-          "expr": "(100*sum(harness_ci_pipeline_pool_fallbacks{pool_id=\"linux-amd64-bare-metal\"})/sum(harness_ci_pipeline_execution_total{driver=\"nomad\"}))",
+          "expr": "(100%sum(harness_ci_pipeline_pool_fallbacks{pool_id=\"linux-amd64-bare-metal\"})/sum(harness_ci_pipeline_execution_total{driver=\"nomad\"}))",
           "interval": "",
           "legendFormat": "nomad",
           "range": true,
@@ -1001,7 +999,6 @@
           },
           "decimals": 0,
           "mappings": [],
-          "max": 20,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1044,7 +1041,7 @@
             "uid": "9j9hW0q4z"
           },
           "editorMode": "code",
-          "expr": "sum by(namespace) (increase(harness_ci_pipeline_pool_fallbacks{pool_id=\"linux-amd64-bare-metal\"}[1m]))",
+          "expr": "sum by(new_namespace) (label_replace(harness_ci_pipeline_pool_fallbacks{pool_id=\"linux-amd64-bare-metal\"}, \"new_namespace\", \"$1\", \"pod\", \"([a-z]+-[a-z]+)-.*\"))",
           "interval": "",
           "legendFormat": "__auto",
           "range": true,
@@ -1113,7 +1110,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "#EAB839",
@@ -1146,7 +1144,7 @@
       "options": {
         "legend": {
           "calcs": [
-            "lastNotNull"
+            "mean"
           ],
           "displayMode": "table",
           "placement": "right",
@@ -1166,7 +1164,7 @@
             "uid": "9j9hW0q4z"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.90, sum by(le,namespace,location,pool_id) (rate(harness_ci_runner_wait_duration_seconds_bucket{driver=\"google\"}[$__rate_interval])))",
+          "expr": "histogram_quantile(0.90, sum by(le,location,namespace,pool_id) (rate(harness_ci_runner_wait_duration_seconds_bucket{driver=\"google\"}[$__rate_interval])))",
           "interval": "",
           "legendFormat": "{{location}}/{{namespace}}/{{pool_id}}",
           "range": true,
@@ -1222,7 +1220,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "#EAB839",
@@ -1254,7 +1253,9 @@
       "id": 21,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "mean"
+          ],
           "displayMode": "table",
           "placement": "right",
           "showLegend": true
@@ -1326,7 +1327,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "#EAB839",
@@ -1359,7 +1361,7 @@
       "options": {
         "legend": {
           "calcs": [
-            "lastNotNull"
+            "mean"
           ],
           "displayMode": "table",
           "placement": "right",
@@ -1379,7 +1381,7 @@
           "editorMode": "code",
           "expr": "histogram_quantile(0.75, sum by(le,namespace,location,pool_id) (rate(harness_ci_runner_wait_duration_seconds_bucket{driver=\"google\"}[$__rate_interval])))",
           "interval": "",
-          "legendFormat": "{{location}}/{{namespace}}/{{pool_id}}",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
@@ -1433,7 +1435,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "#EAB839",
@@ -1465,7 +1468,9 @@
       "id": 25,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "mean"
+          ],
           "displayMode": "table",
           "placement": "right",
           "showLegend": true
@@ -1537,7 +1542,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "#EAB839",
@@ -1570,7 +1576,6 @@
       "options": {
         "legend": {
           "calcs": [
-            "lastNotNull",
             "mean"
           ],
           "displayMode": "table",
@@ -1645,7 +1650,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "#EAB839",
@@ -1677,7 +1683,9 @@
       "id": 23,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "mean"
+          ],
           "displayMode": "table",
           "placement": "right",
           "showLegend": true
@@ -1749,7 +1757,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1770,8 +1779,8 @@
       "options": {
         "legend": {
           "calcs": [
-            "max",
-            "mean"
+            "lastNotNull",
+            "max"
           ],
           "displayMode": "table",
           "placement": "right",
@@ -1790,17 +1799,10 @@
           },
           "editorMode": "code",
           "expr": "sum by(driver,pool_id) (((harness_ci_pipeline_execution_errors_total{}) / harness_ci_pipeline_execution_total)*100)",
-          "legendFormat": "__auto",
+          "interval": "",
+          "legendFormat": "{{driver}}->{{pool_id}}",
           "range": true,
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "9j9hW0q4z"
-          },
-          "hide": false,
-          "refId": "B"
         }
       ],
       "title": "Pipeline failures due to system",
@@ -1815,7 +1817,24 @@
     "Baremetal"
   ],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "hide": 2,
+        "label": "GCP",
+        "name": "GCP",
+        "query": "GCP",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "hide": 2,
+        "label": "nomad",
+        "name": "Baremetal",
+        "query": "Baremetal",
+        "skipUrlSync": false,
+        "type": "constant"
+      }
+    ]
   },
   "time": {
     "from": "now-24h",
@@ -1825,6 +1844,6 @@
   "timezone": "America/Chicago",
   "title": "BareMetal Dashboard",
   "uid": "fmNVaJ3Vk",
-  "version": 54,
+  "version": 55,
   "weekStart": ""
 }
