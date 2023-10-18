@@ -40,3 +40,4 @@ build_bazel_module System_Health
 build_bazel_module System_Usability
 build_bazel_module Continuous_ET
 build_bazel_module Pipeline_Service
+build_bazel_module Weaviate
