@@ -1,0 +1,1507 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 126,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "(sum(rate(custom_googleapis_com:opencensus_learning_engine_task_success_count{monitored_resource=\"k8s_container\",environment=\"$env\"}[5m])) by (environment) )",
+          "instant": false,
+          "legendFormat": "Success",
+          "range": true,
+          "refId": "Success"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "(sum(rate(custom_googleapis_com:opencensus_learning_engine_task_failed_count{monitored_resource=\"k8s_container\",environment=\"$env\"}[5m])) by (environment) )",
+          "hide": false,
+          "legendFormat": "Failed",
+          "range": true,
+          "refId": "Failed"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "(sum(rate(custom_googleapis_com:opencensus_learning_engine_task_timeout_count{monitored_resource=\"k8s_container\",environment=\"$env\"}[5m])) by (environment) )",
+          "hide": false,
+          "legendFormat": "Timeout",
+          "range": true,
+          "refId": "Timeout"
+        }
+      ],
+      "title": "LE tasks completion rate (count/s)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "max(custom_googleapis_com:opencensus_learning_engine_task_queued_count{monitored_resource='k8s_container',environment=\"$env\"})",
+          "hide": false,
+          "legendFormat": "Overall queued",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "max(custom_googleapis_com:opencensus_learning_engine_deployment_task_queued_count{monitored_resource='k8s_container',environment=\"$env\"})",
+          "hide": false,
+          "legendFormat": "Deployment queued",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "max(custom_googleapis_com:opencensus_learning_engine_service_health_task_queued_count{monitored_resource='k8s_container',environment=\"$env\"})",
+          "hide": false,
+          "legendFormat": "Service health queued",
+          "range": true,
+          "refId": "F"
+        }
+      ],
+      "title": "LE tasks queued count (max)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 18
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "(max(custom_googleapis_com:opencensus_learning_engine_max_queued_time_prod{monitored_resource=\"k8s_container\"}))/1000",
+          "instant": false,
+          "legendFormat": "Overall",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "(max(custom_googleapis_com:opencensus_learning_engine_deployment_max_queued_time_prod{monitored_resource=\"k8s_container\"}))/1000",
+          "hide": false,
+          "legendFormat": "Deployment",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "(max(custom_googleapis_com:opencensus_learning_engine_service_health_max_queued_time_prod{monitored_resource=\"k8s_container\"}))/1000",
+          "hide": false,
+          "legendFormat": "Service health",
+          "range": true,
+          "refId": "Timeout"
+        }
+      ],
+      "title": "LE tasks max queued time (s)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 27
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "max(custom_googleapis_com:opencensus_learning_engine_task_running_count{monitored_resource='k8s_container',environment=\"$env\"})",
+          "hide": false,
+          "legendFormat": "Overall running",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "max(custom_googleapis_com:opencensus_learning_engine_deployment_task_running_count{monitored_resource='k8s_container',environment=\"$env\"})",
+          "hide": false,
+          "legendFormat": "Deployment running",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "max(custom_googleapis_com:opencensus_learning_engine_service_health_task_running_count{monitored_resource='k8s_container',environment=\"$env\"})",
+          "hide": false,
+          "legendFormat": "Service health running",
+          "range": true,
+          "refId": "F"
+        }
+      ],
+      "title": "LE tasks running count (max)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 36
+      },
+      "id": 7,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(custom_googleapis_com:opencensus_learning_engine_task_success_count{monitored_resource=\"k8s_container\",environment=\"$env\"}) by (environment)",
+          "instant": false,
+          "legendFormat": "Success",
+          "range": true,
+          "refId": "Success"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "sum(custom_googleapis_com:opencensus_learning_engine_task_failed_count{monitored_resource=\"k8s_container\",environment=\"$env\"})by (environment)",
+          "hide": false,
+          "legendFormat": "Failed",
+          "range": true,
+          "refId": "Failed"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "sum(custom_googleapis_com:opencensus_learning_engine_task_timeout_count{monitored_resource=\"k8s_container\",environment=\"$env\"}) by (environment) ",
+          "hide": false,
+          "legendFormat": "Timeout",
+          "range": true,
+          "refId": "Timeout"
+        }
+      ],
+      "title": "LE tasks completion count",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 45
+      },
+      "id": 17,
+      "panels": [],
+      "title": "LE Task Type Specific Metrics",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 46
+      },
+      "id": 15,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"15000\",environment=\"$env\"}[5m])) by (environment))-(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"0\",environment=\"$env\"}[5m])) by (environment))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "0-15 s",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"30000\",environment=\"$env\"}[5m])) by (environment))-(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"15000\",environment=\"$env\"}[5m])) by (environment))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "15-30 s",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"60000\",environment=\"$env\"}[5m])) by (environment))-(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"30000\",environment=\"$env\"}[5m])) by (environment))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "30-60s",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"120000\",environment=\"$env\"}[5m])) by (environment))-(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"60000\",environment=\"$env\"}[5m])) by (environment))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "60-120s",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"240000\",environment=\"$env\"}[5m])) by (environment))-(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"120000\",environment=\"$env\"}[5m])) by (environment))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "120-240s",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"480000\",environment=\"$env\"}[5m])) by (environment))-(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"240000\",environment=\"$env\"}[5m])) by (environment))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "240-480s",
+          "range": true,
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"960000\",environment=\"$env\"}[5m])) by (environment))-(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"480000\",environment=\"$env\"}[5m])) by (environment))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "480-960s",
+          "range": true,
+          "refId": "G"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"1920000\",environment=\"$env\"}[5m])) by (environment))-(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"960000\",environment=\"$env\"}[5m])) by (environment))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "960-1920s",
+          "range": true,
+          "refId": "H"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"+Inf\",environment=\"$env\"}[5m])) by (environment))-(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"1920000\",environment=\"$env\"}[5m])) by (environment))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": ">1920s",
+          "range": true,
+          "refId": "I"
+        }
+      ],
+      "title": "Number of tasks completed with different wait time buckets",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 57
+      },
+      "id": 13,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "100*(((sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"15000\",environment=\"$env\"}) by (environment)) - (sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"0\",environment=\"$env\"}) by (environment)))/(sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"+Inf\",environment=\"$env\"}) by (environment)))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "0-15 s",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "100*(((sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"30000\",environment=\"$env\"}) by (environment)) - (sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"15000\",environment=\"$env\"}) by (environment)))/(sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"+Inf\",environment=\"$env\"}) by (environment)))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "15-30 s",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "100*(((sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"60000\",environment=\"$env\"}) by (environment)) - (sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"30000\",environment=\"$env\"}) by (environment)))/(sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"+Inf\",environment=\"$env\"}) by (environment)))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "30-60s",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "100*(((sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"120000\",environment=\"$env\"}) by (environment)) - (sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"60000\",environment=\"$env\"}) by (environment)))/(sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"+Inf\",environment=\"$env\"}) by (environment)))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "60-120s",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "100*(((sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"240000\",environment=\"$env\"}) by (environment)) - (sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"120000\",environment=\"$env\"}) by (environment)))/(sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"+Inf\",environment=\"$env\"}) by (environment)))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "120-240s",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "100*(((sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"480000\",environment=\"$env\"}) by (environment)) - (sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"240000\",environment=\"$env\"}) by (environment)))/(sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"+Inf\",environment=\"$env\"}) by (environment)))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "240-480s",
+          "range": true,
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "100*(((sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"960000\",environment=\"$env\"}) by (environment)) - (sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"480000\",environment=\"$env\"}) by (environment)))/(sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"+Inf\",environment=\"$env\"}) by (environment)))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "480-960s",
+          "range": true,
+          "refId": "G"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "100*(((sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"1920000\",environment=\"$env\"}) by (environment)) - (sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"960000\",environment=\"$env\"}) by (environment)))/(sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"+Inf\",environment=\"$env\"}) by (environment)))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "960-1920s",
+          "range": true,
+          "refId": "H"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "100*(((sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"+Inf\",environment=\"$env\"}) by (environment)) - (sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"1920000\",environment=\"$env\"}) by (environment)))/(sum(custom_googleapis_com:opencensus_learning_engine_task_wait_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"+Inf\",environment=\"$env\"}) by (environment)))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": ">1920s",
+          "range": true,
+          "refId": "I"
+        }
+      ],
+      "title": "% of tasks completed with different wait time buckets",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 68
+      },
+      "id": 11,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"15000\",environment=\"$env\"}[5m])) by (environment))-(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"0\",environment=\"$env\"}[5m])) by (environment))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "0-15 s",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"30000\",environment=\"$env\"}[5m])) by (environment))-(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"15000\",environment=\"$env\"}[5m])) by (environment))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "15-30 s",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"60000\",environment=\"$env\"}[5m])) by (environment))-(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"30000\",environment=\"$env\"}[5m])) by (environment))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "30-60s",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"120000\",environment=\"$env\"}[5m])) by (environment))-(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"60000\",environment=\"$env\"}[5m])) by (environment))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "60-120s",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"240000\",environment=\"$env\"}[5m])) by (environment))-(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"120000\",environment=\"$env\"}[5m])) by (environment))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "120-240s",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"480000\",environment=\"$env\"}[5m])) by (environment))-(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"240000\",environment=\"$env\"}[5m])) by (environment))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "240-480s",
+          "range": true,
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"960000\",environment=\"$env\"}[5m])) by (environment))-(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"480000\",environment=\"$env\"}[5m])) by (environment))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "480-960s",
+          "range": true,
+          "refId": "G"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"1920000\",environment=\"$env\"}[5m])) by (environment))-(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"960000\",environment=\"$env\"}[5m])) by (environment))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "960-1920s",
+          "range": true,
+          "refId": "H"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"+Inf\",environment=\"$env\"}[5m])) by (environment))-(sum(increase(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"1920000\",environment=\"$env\"}[5m])) by (environment))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": ">1920s",
+          "range": true,
+          "refId": "I"
+        }
+      ],
+      "title": "Number of tasks completed with different running time buckets",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 79
+      },
+      "id": 9,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "100*(((sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"15000\",environment=\"$env\"}) by (environment)) - (sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"0\",environment=\"$env\"}) by (environment)))/(sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"+Inf\",environment=\"$env\"}) by (environment)))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "0-15 s",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "100*(((sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"30000\",environment=\"$env\"}) by (environment)) - (sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"15000\",environment=\"$env\"}) by (environment)))/(sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"+Inf\",environment=\"$env\"}) by (environment)))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "15-30 s",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "100*(((sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"60000\",environment=\"$env\"}) by (environment)) - (sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"30000\",environment=\"$env\"}) by (environment)))/(sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"+Inf\",environment=\"$env\"}) by (environment)))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "30-60s",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "100*(((sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"120000\",environment=\"$env\"}) by (environment)) - (sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"60000\",environment=\"$env\"}) by (environment)))/(sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"+Inf\",environment=\"$env\"}) by (environment)))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "60-120s",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "100*(((sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"240000\",environment=\"$env\"}) by (environment)) - (sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"120000\",environment=\"$env\"}) by (environment)))/(sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"+Inf\",environment=\"$env\"}) by (environment)))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "120-240s",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "100*(((sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"480000\",environment=\"$env\"}) by (environment)) - (sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"240000\",environment=\"$env\"}) by (environment)))/(sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"+Inf\",environment=\"$env\"}) by (environment)))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "240-480s",
+          "range": true,
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "100*(((sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"960000\",environment=\"$env\"}) by (environment)) - (sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"480000\",environment=\"$env\"}) by (environment)))/(sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"+Inf\",environment=\"$env\"}) by (environment)))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "480-960s",
+          "range": true,
+          "refId": "G"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "100*(((sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"1920000\",environment=\"$env\"}) by (environment)) - (sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"960000\",environment=\"$env\"}) by (environment)))/(sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"+Inf\",environment=\"$env\"}) by (environment)))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": "960-1920s",
+          "range": true,
+          "refId": "H"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "100*(((sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"+Inf\",environment=\"$env\"}) by (environment)) - (sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"1920000\",environment=\"$env\"}) by (environment)))/(sum(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\",leTaskType=\"$leTaskType\",le=\"+Inf\",environment=\"$env\"}) by (environment)))",
+          "hide": false,
+          "interval": "300s",
+          "legendFormat": ">1920s",
+          "range": true,
+          "refId": "I"
+        }
+      ],
+      "title": "% of tasks completed with different running time buckets",
+      "type": "timeseries"
+    }
+  ],
+  "schemaVersion": 37,
+  "style": "dark",
+  "tags": [
+    "SRM"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "service_guard_log_analysis",
+          "value": "service_guard_log_analysis"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "aoIl1JLVk"
+        },
+        "definition": "label_values(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\"}, leTaskType)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "LE Task Type",
+        "multi": false,
+        "name": "leTaskType",
+        "options": [],
+        "query": {
+          "query": "label_values(custom_googleapis_com:opencensus_learning_engine_task_running_time_bucket{monitored_resource=\"k8s_container\"}, leTaskType)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "prod",
+          "value": "prod"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Env",
+        "multi": false,
+        "name": "env",
+        "options": [
+          {
+            "selected": true,
+            "text": "prod",
+            "value": "prod"
+          }
+        ],
+        "query": "prod",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "ProdSetup-ManagedPrometheus",
+          "value": "ProdSetup-ManagedPrometheus"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "DataSource",
+        "multi": false,
+        "name": "dataSource",
+        "options": [],
+        "query": "prometheus",
+        "queryValue": "",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-12h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Learning engine dashboard Prod",
+  "uid": "ruAIoZnSz",
+  "version": 3,
+  "weekStart": ""
+}
