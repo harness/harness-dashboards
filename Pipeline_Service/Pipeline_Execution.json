@@ -599,7 +599,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "mode": "continuous-GrYlRd"
           },
           "custom": {
             "axisCenteredZero": false,
@@ -676,13 +676,13 @@
           },
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "avg(delta(custom_googleapis_com:opencensus_pipeline_execution_active_count{monitored_resource=\"k8s_container\", environment=\"$env\"}[10m]))",
-          "legendFormat": "Increase in Last 10 mins",
+          "expr": "sum by(environment) (avg by(accountId) (rate(custom_googleapis_com:opencensus_pipeline_execution_active_count{monitored_resource=\"k8s_container\", environment=\"$env\"}[10m])))",
+          "legendFormat": "Rate",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Delta in Running Pipeline Executions in last 10min",
+      "title": "Rate Of Running Pipeline Executions in last 10min",
       "transformations": [],
       "type": "timeseries"
     },
@@ -694,7 +694,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "mode": "continuous-RdYlGr"
           },
           "custom": {
             "axisCenteredZero": false,
@@ -770,14 +770,14 @@
             "uid": "${dataSource}"
           },
           "editorMode": "builder",
-          "expr": "avg(delta(custom_googleapis_com:opencensus_node_execution_active_count{monitored_resource=\"k8s_container\", environment=\"$env\"}[10m]))",
+          "expr": "sum by(environment) (avg by(accountId) (rate(custom_googleapis_com:opencensus_node_execution_active_count{monitored_resource=\"k8s_container\", environment=\"$env\"}[10m])))",
           "interval": "",
           "legendFormat": "Running Nodes",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Delta in Running Nodes in last 10mins",
+      "title": "Rate of Running Nodes in last 10mins",
       "type": "timeseries"
     },
     {
@@ -864,13 +864,13 @@
             "uid": "${dataSource}"
           },
           "editorMode": "builder",
-          "expr": "topk(3, max by(accountId) (increase(custom_googleapis_com:opencensus_pipeline_execution_active_count{monitored_resource=\"k8s_container\", environment=\"$env\"}[10m])) > 50)",
+          "expr": "topk(5, avg by(accountId) (increase(custom_googleapis_com:opencensus_pipeline_execution_active_count{monitored_resource=\"k8s_container\", environment=\"$env\"}[10m]))) > 200",
           "legendFormat": "{{accountId}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Top 3 Accounts Running Executions in Last 10mins more than 50",
+      "title": "Top 5 Accounts Running Executions in Last 10mins more than 200",
       "type": "timeseries"
     },
     {
@@ -957,14 +957,14 @@
             "uid": "${dataSource}"
           },
           "editorMode": "builder",
-          "expr": "topk(3, max by(accountId) (increase(custom_googleapis_com:opencensus_node_execution_active_count{monitored_resource=\"k8s_container\", environment=\"$env\"}[10m])) > 500)",
+          "expr": "topk(5, avg by(accountId) (increase(custom_googleapis_com:opencensus_node_execution_active_count{monitored_resource=\"k8s_container\", environment=\"$env\"}[10m]))) > 2000",
           "interval": "",
           "legendFormat": "{{accountId}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Top 3 Account Running Nodes in Last 10mins more than 500",
+      "title": "Top 5 Account Running Nodes in Last 10mins more than 2000",
       "type": "timeseries"
     }
   ],
@@ -977,8 +977,8 @@
       {
         "current": {
           "selected": false,
-          "text": "QASetup-ManagedPrometheus",
-          "value": "QASetup-ManagedPrometheus"
+          "text": "ProdSetup-ManagedPrometheus",
+          "value": "ProdSetup-ManagedPrometheus"
         },
         "hide": 0,
         "includeAll": false,
@@ -995,9 +995,9 @@
       },
       {
         "current": {
-          "selected": true,
-          "text": "qa",
-          "value": "qa"
+          "selected": false,
+          "text": "free",
+          "value": "free"
         },
         "datasource": {
           "type": "prometheus",
@@ -1030,6 +1030,6 @@
   "timezone": "",
   "title": "Pipeline Service Metrics",
   "uid": "iy-7pykSk",
-  "version": 11,
+  "version": 16,
   "weekStart": ""
 }
