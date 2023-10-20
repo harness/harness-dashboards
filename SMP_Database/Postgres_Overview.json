@@ -530,8 +530,7 @@
         "dashLength": 10,
         "dashes": false,
         "datasource": {
-          "type": "prometheus",
-          "uid": "By6zGQL4k"
+          "uid": "$datasource"
         },
         "decimals": 1,
         "editable": true,
@@ -579,8 +578,7 @@
           {
             "alias": "Buffers Allocated",
             "datasource": {
-              "type": "prometheus",
-              "uid": "By6zGQL4k"
+              "uid": "$datasource"
             },
             "dsType": "prometheus",
             "editorMode": "code",
@@ -637,8 +635,7 @@
           {
             "alias": "Buffers Allocated",
             "datasource": {
-              "type": "prometheus",
-              "uid": "By6zGQL4k"
+              "uid": "$datasource"
             },
             "dsType": "prometheus",
             "editorMode": "code",
@@ -695,8 +692,7 @@
           {
             "alias": "Buffers Allocated",
             "datasource": {
-              "type": "prometheus",
-              "uid": "By6zGQL4k"
+              "uid": "$datasource"
             },
             "dsType": "prometheus",
             "editorMode": "code",
@@ -753,8 +749,7 @@
           {
             "alias": "Buffers Allocated",
             "datasource": {
-              "type": "prometheus",
-              "uid": "By6zGQL4k"
+              "uid": "$datasource"
             },
             "dsType": "prometheus",
             "editorMode": "code",
@@ -811,8 +806,7 @@
           {
             "alias": "Buffers Allocated",
             "datasource": {
-              "type": "prometheus",
-              "uid": "By6zGQL4k"
+              "uid": "$datasource"
             },
             "dsType": "prometheus",
             "editorMode": "code",
