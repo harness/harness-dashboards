@@ -1324,7 +1324,7 @@
             "uid": "By6zGQL4k"
           },
           "editorMode": "builder",
-          "expr": "sum by(job) (rate(ff_worker_service_sent_messages{namespace=\"${namespace:text}\"}[$__interval]))",
+          "expr": "sum(rate(ff_worker_service_sent_messages{namespace=\"${namespace:text}\"}[$__interval]))",
           "legendFormat": "Sent Messages",
           "range": true,
           "refId": "A"
@@ -1419,7 +1419,7 @@
             "uid": "By6zGQL4k"
           },
           "editorMode": "builder",
-          "expr": "sum by(job) (rate(ff_worker_service_dropped_messages{namespace=\"${namespace:text}\"}[$__interval]))",
+          "expr": "sum(rate(ff_worker_service_dropped_messages{namespace=\"${namespace:text}\"}[$__interval]))",
           "legendFormat": "Dropped Messages",
           "range": true,
           "refId": "A"
