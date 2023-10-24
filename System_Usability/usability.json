@@ -492,7 +492,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (environment) (delta(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"prod\"}[1d]))",
+          "expr": "sum by (environment) (delta(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", cluster_name=\"prod-private-uswest1-primary\", environment=\"prod\"}[1d]))",
           "interval": "",
           "legendFormat": "{{$__interval}}",
           "range": true,
@@ -1238,7 +1238,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "avg by(environment) (custom_googleapis_com:opencensus_delegate_task_creation{monitored_resource=\"k8s_container\",cluster_name=\"prod-private-uswest1-primary\"})",
+          "expr": "avg by(environment) (custom_googleapis_com:opencensus_active_delegate_count{monitored_resource=\"k8s_container\",cluster_name=\"prod-private-uswest1-primary\"})",
           "interval": "",
           "legendFormat": "__auto",
           "range": true,
@@ -1415,11 +1415,7 @@
           "text": "prod-private-uswest1-primary",
           "value": "prod-private-uswest1-primary"
         },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
-        },
-        "definition": "label_values(login_success_count, cluster)",
+        "definition": "label_values(up, cluster)",
         "hide": 0,
         "includeAll": false,
         "label": "Cluster",
@@ -1427,7 +1423,7 @@
         "name": "cluster",
         "options": [],
         "query": {
-          "query": "label_values(login_success_count, cluster)",
+          "query": "label_values(up, cluster)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -1438,9 +1434,10 @@
       },
       {
         "current": {
-          "selected": false,
-          "text": "compliance",
-          "value": "compliance"
+          "isNone": true,
+          "selected": true,
+          "text": "None",
+          "value": ""
         },
         "datasource": {
           "type": "prometheus",
@@ -1473,6 +1470,6 @@
   "timezone": "",
   "title": "Production Metrics Dashboard",
   "uid": "F9dOkEgIk",
-  "version": 13,
+  "version": 14,
   "weekStart": ""
 }
