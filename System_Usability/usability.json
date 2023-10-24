@@ -1415,7 +1415,7 @@
           "text": "prod-private-uswest1-primary",
           "value": "prod-private-uswest1-primary"
         },
-        "definition": "label_values(up, cluster)",
+        "definition": "label_values(up{}, cluster)",
         "hide": 0,
         "includeAll": false,
         "label": "Cluster",
@@ -1423,7 +1423,7 @@
         "name": "cluster",
         "options": [],
         "query": {
-          "query": "label_values(up, cluster)",
+          "query": "label_values(up{}, cluster)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -1434,16 +1434,15 @@
       },
       {
         "current": {
-          "isNone": true,
-          "selected": true,
-          "text": "None",
-          "value": ""
+          "selected": false,
+          "text": "free",
+          "value": "free"
         },
         "datasource": {
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(login_success_count, environment)",
+        "definition": "label_values(custom_googleapis_com:opencensus_login_success_count{monitored_resource=\"k8s_container\"}, environment)",
         "hide": 0,
         "includeAll": false,
         "label": "Env",
@@ -1451,7 +1450,7 @@
         "name": "env",
         "options": [],
         "query": {
-          "query": "label_values(login_success_count, environment)",
+          "query": "label_values(custom_googleapis_com:opencensus_login_success_count{monitored_resource=\"k8s_container\"}, environment)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -1470,6 +1469,6 @@
   "timezone": "",
   "title": "Production Metrics Dashboard",
   "uid": "F9dOkEgIk",
-  "version": 14,
+  "version": 15,
   "weekStart": ""
 }
