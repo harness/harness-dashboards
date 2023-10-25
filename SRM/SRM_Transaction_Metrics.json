@@ -126,11 +126,15 @@
             "type": "prometheus",
             "uid": "${dataSource}"
           },
+          "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "avg by(method) (io_harness_cvng_resources_total{cluster=\"$cluster\", namespace=\"$env\", method=~\"$method\", quantile=\"0.95\", resource=\"$resource\"}) * 1000",
+          "expr": "max by(method) (io_harness_cvng_resources_total{cluster=\"$cluster\", namespace=\"$env\", method=~\"$method\", quantile=\"0.95\", resource=\"$resource\"}) * 1000",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "useBackend": false
         }
       ],
       "title": "95th percentile Request  (ms)",
@@ -204,7 +208,7 @@
               }
             ]
           },
-          "unit": "cpm"
+          "unit": "percent"
         },
         "overrides": []
       },
@@ -213,6 +217,202 @@
         "w": 24,
         "x": 0,
         "y": 14
+      },
+      "id": 19,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "(sum by(method) (rate(io_harness_cvng_resources_responses_total{cluster=\"$cluster\", namespace=\"$env\", method=~\"$method\", resource=\"$resource\", statusCode=\"4xx\"}[5m])) * 100) / sum by(method) (rate(io_harness_cvng_resources_responses_total{cluster=\"$cluster\", namespace=\"$env\", method=~\"$method\", resource=\"$resource\"}[5m]))",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Error % per min 4xx[5m]",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 26
+      },
+      "id": 20,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "(sum by(method) (rate(io_harness_cvng_resources_responses_total{cluster=\"$cluster\", namespace=\"$env\", method=~\"$method\", resource=\"$resource\", statusCode=\"5xx\"}[5m])) * 100) / sum by(method) (rate(io_harness_cvng_resources_responses_total{cluster=\"$cluster\", namespace=\"$env\", method=~\"$method\", resource=\"$resource\"}[5m]))",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Error % per min 5xx[5m]",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "cpm"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 38
       },
       "id": 8,
       "options": {
@@ -233,14 +433,18 @@
             "type": "prometheus",
             "uid": "${dataSource}"
           },
+          "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "sum by(method) (rate(io_harness_cvng_resources_exceptions_total{cluster=\"$cluster\", namespace=\"$env\", method=~\"$method\", resource=\"$resource\"}[1m])) * 60",
+          "expr": "sum by(method) (rate(io_harness_cvng_resources_exceptions_total{cluster=\"$cluster\", namespace=\"$env\", method=~\"$method\", resource=\"$resource\"}[5m])) * 60",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "useBackend": false
         }
       ],
-      "title": "Error Rate(per min)",
+      "title": "Error Rate[5m](per min)",
       "type": "timeseries"
     },
     {
@@ -249,7 +453,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 26
+        "y": 50
       },
       "id": 4,
       "panels": [],
@@ -302,7 +506,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -315,10 +520,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 12,
         "w": 24,
         "x": 0,
-        "y": 27
+        "y": 51
       },
       "id": 2,
       "options": {
@@ -339,14 +544,18 @@
             "type": "prometheus",
             "uid": "${dataSource}"
           },
+          "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "avg by(method) (rate(io_harness_cvng_resources_total_count{cluster=\"$cluster\", namespace=\"$env\", method=~\"$method\", resource=\"$resource\"}[1m])) * 60",
+          "expr": "sum by(method) (rate(io_harness_cvng_resources_total_count{cluster=\"$cluster\", namespace=\"$env\", method=~\"$method\", resource=\"$resource\"}[5m])) * 60",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "useBackend": false
         }
       ],
-      "title": "HTTP Requests Rate(per min)",
+      "title": "HTTP Requests Rate[5m](per min)",
       "type": "timeseries"
     },
     {
@@ -355,7 +564,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 35
+        "y": 63
       },
       "id": 18,
       "panels": [],
@@ -375,8 +584,8 @@
       {
         "current": {
           "selected": false,
-          "text": "QASetup-ManagedPrometheus",
-          "value": "bbace31e-f9b2-49c9-9218-ee9eb931ec08"
+          "text": "ProdSetup-ManagedPrometheus",
+          "value": "e4a3d5a0-c094-488c-b9dd-ba946db96bea"
         },
         "hide": 0,
         "includeAll": false,
@@ -394,8 +603,8 @@
       {
         "current": {
           "selected": false,
-          "text": "qa-private",
-          "value": "qa-private"
+          "text": "prod-private-uswest1-primary",
+          "value": "prod-private-uswest1-primary"
         },
         "datasource": {
           "type": "prometheus",
@@ -421,8 +630,8 @@
       {
         "current": {
           "selected": false,
-          "text": "harness-nextgen",
-          "value": "harness-nextgen"
+          "text": "harness-nextgen-free",
+          "value": "harness-nextgen-free"
         },
         "datasource": {
           "type": "prometheus",
@@ -480,28 +689,28 @@
         "current": {
           "selected": true,
           "text": [
-            "getListV2",
-            "updateMonitoredServiceFromTemplateInput",
-            "getSLOAssociatedMonitoredServices",
             "delete",
-            "getAllMonitoredServicesWithHealthSources",
+            "deleteSLOV2Data",
             "getList",
-            "getAnomaliesSummary",
-            "saveMonitoredServiceFromYaml",
             "updateMonitoredService",
-            "deleteSLOV2Data"
+            "updateMonitoredServiceFromTemplateInput",
+            "getListV2",
+            "getAnomaliesSummary",
+            "getAllMonitoredServicesWithHealthSources",
+            "saveMonitoredServiceFromYaml",
+            "getSLOAssociatedMonitoredServices"
           ],
           "value": [
-            "getListV2",
-            "updateMonitoredServiceFromTemplateInput",
-            "getSLOAssociatedMonitoredServices",
             "delete",
-            "getAllMonitoredServicesWithHealthSources",
+            "deleteSLOV2Data",
             "getList",
-            "getAnomaliesSummary",
-            "saveMonitoredServiceFromYaml",
             "updateMonitoredService",
-            "deleteSLOV2Data"
+            "updateMonitoredServiceFromTemplateInput",
+            "getListV2",
+            "getAnomaliesSummary",
+            "getAllMonitoredServicesWithHealthSources",
+            "saveMonitoredServiceFromYaml",
+            "getSLOAssociatedMonitoredServices"
           ]
         },
         "datasource": {
@@ -535,6 +744,6 @@
   "timezone": "",
   "title": "Key Transaction Metrics",
   "uid": "r0EApeZIz1",
-  "version": 4,
+  "version": 24,
   "weekStart": ""
 }

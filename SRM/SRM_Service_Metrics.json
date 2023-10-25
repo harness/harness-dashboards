@@ -112,47 +112,79 @@
             "type": "prometheus",
             "uid": "${dataSource}"
           },
+          "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "sum(rate(io_harness_cvng_io_dropwizard_jetty_MutableServletContextHandler_requests_count{namespace=\"harness-nextgen\", method=\"get\"}[5m])) * 60",
+          "expr": "sum(rate(io_harness_cvng_io_dropwizard_jetty_MutableServletContextHandler_requests_count{namespace=\"$namespace\", method=\"get\"}[5m])) * 60",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
           "legendFormat": "GET",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "useBackend": false
         },
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${dataSource}"
           },
+          "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "sum(rate(io_harness_cvng_io_dropwizard_jetty_MutableServletContextHandler_requests_count{namespace=\"harness-nextgen\", method=\"post\"}[5m])) * 60",
+          "expr": "sum(rate(io_harness_cvng_io_dropwizard_jetty_MutableServletContextHandler_requests_count{namespace=\"$namespace\", method=\"post\"}[5m])) * 60",
+          "fullMetaSearch": false,
           "hide": false,
+          "includeNullMetadata": true,
           "legendFormat": "POST",
           "range": true,
-          "refId": "B"
+          "refId": "B",
+          "useBackend": false
         },
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${dataSource}"
           },
+          "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "sum(rate(io_harness_cvng_io_dropwizard_jetty_MutableServletContextHandler_requests_count{namespace=\"harness-nextgen\", method=\"put\"}[5m])) * 60",
+          "expr": "sum(rate(io_harness_cvng_io_dropwizard_jetty_MutableServletContextHandler_requests_count{namespace=\"$namespace\", method=\"put\"}[5m])) * 60",
+          "fullMetaSearch": false,
           "hide": false,
+          "includeNullMetadata": true,
           "legendFormat": "PUT",
           "range": true,
-          "refId": "C"
+          "refId": "C",
+          "useBackend": false
         },
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${dataSource}"
           },
+          "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "sum(rate(io_harness_cvng_io_dropwizard_jetty_MutableServletContextHandler_requests_count{namespace=\"harness-nextgen\", method=\"delete\"}[5m])) * 60",
+          "expr": "sum(rate(io_harness_cvng_io_dropwizard_jetty_MutableServletContextHandler_requests_count{namespace=\"$namespace\", method=\"delete\"}[5m])) * 60",
+          "fullMetaSearch": false,
           "hide": false,
+          "includeNullMetadata": true,
           "legendFormat": "DELETE",
           "range": true,
-          "refId": "D"
+          "refId": "D",
+          "useBackend": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "sum(rate(io_harness_cvng_io_dropwizard_jetty_MutableServletContextHandler_requests_count{namespace=\"$namespace\",method=\"\"}[5m])) * 60",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
+          "legendFormat": "Total",
+          "range": true,
+          "refId": "E",
+          "useBackend": false
         }
       ],
       "title": "Requests",
@@ -215,32 +247,7 @@
           },
           "unit": "ms"
         },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "99th percentile"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 9,
@@ -267,36 +274,48 @@
             "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "editorMode": "builder",
-          "expr": "avg(io_harness_cvng_io_dropwizard_jetty_MutableServletContextHandler_requests{namespace=\"harness-nextgen\", quantile=\"0.95\", method=~\"get|post|put|delete\"}) * 1000",
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "max(io_harness_cvng_io_dropwizard_jetty_MutableServletContextHandler_requests{namespace=\"$namespace\", quantile=\"0.95\", method=\"\"}) * 1000",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
           "legendFormat": "95th percentile",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "useBackend": false
         },
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "editorMode": "builder",
-          "expr": "avg(io_harness_cvng_io_dropwizard_jetty_MutableServletContextHandler_requests{namespace=\"harness-nextgen\", quantile=\"0.99\", method=~\"get\"}) * 1000",
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "max(io_harness_cvng_io_dropwizard_jetty_MutableServletContextHandler_requests{namespace=\"$namespace\", quantile=\"0.99\", method=\"\"}) * 1000",
+          "fullMetaSearch": false,
           "hide": false,
+          "includeNullMetadata": true,
           "legendFormat": "99th percentile",
           "range": true,
-          "refId": "B"
+          "refId": "B",
+          "useBackend": false
         },
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${dataSource}"
           },
+          "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "avg(io_harness_custom_metric_io_dropwizard_jetty_MutableServletContextHandler_requests_mean{namespace=\"harness-nextgen\"}) * 1000",
+          "expr": "max(io_harness_custom_metric_io_dropwizard_jetty_MutableServletContextHandler_requests_mean{namespace=\"$namespace\"}) * 1000",
+          "fullMetaSearch": false,
           "hide": false,
+          "includeNullMetadata": true,
           "legendFormat": "Average",
           "range": true,
-          "refId": "C"
+          "refId": "C",
+          "useBackend": false
         }
       ],
       "title": "Latency",
@@ -386,14 +405,98 @@
             "type": "prometheus",
             "uid": "${dataSource}"
           },
+          "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "avg(io_harness_cvng_io_dropwizard_jetty_MutableServletContextHandler_percent{namespace=\"harness-nextgen\", duration=\"5m\"})",
-          "legendFormat": "Error",
+          "expr": "max(io_harness_cvng_io_dropwizard_jetty_MutableServletContextHandler_percent{namespace=\"$namespace\", duration=\"1m\", statusCode=\"4xx\"})",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "[1m]-4xx",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "useBackend": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "max(io_harness_cvng_io_dropwizard_jetty_MutableServletContextHandler_percent{namespace=\"$namespace\", duration=\"5m\", statusCode=\"4xx\"})",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
+          "legendFormat": "[5m]-4xx",
+          "range": true,
+          "refId": "B",
+          "useBackend": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "max(io_harness_cvng_io_dropwizard_jetty_MutableServletContextHandler_percent{namespace=\"$namespace\", duration=\"15m\", statusCode=\"4xx\"})",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
+          "legendFormat": "[15m]-4xx",
+          "range": true,
+          "refId": "C",
+          "useBackend": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "max(io_harness_cvng_io_dropwizard_jetty_MutableServletContextHandler_percent{namespace=\"$namespace\", duration=\"1m\", statusCode=\"5xx\"})",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
+          "legendFormat": "[1m]-5xx",
+          "range": true,
+          "refId": "D",
+          "useBackend": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "max(io_harness_cvng_io_dropwizard_jetty_MutableServletContextHandler_percent{namespace=\"$namespace\", duration=\"5m\", statusCode=\"5xx\"})",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
+          "legendFormat": "[5m]-5xx",
+          "range": true,
+          "refId": "E",
+          "useBackend": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "max(io_harness_cvng_io_dropwizard_jetty_MutableServletContextHandler_percent{namespace=\"$namespace\", duration=\"15m\", statusCode=\"5xx\"})",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
+          "legendFormat": "[15m]-5xx",
+          "range": true,
+          "refId": "F",
+          "useBackend": false
         }
       ],
-      "title": "HTTP Error Percentage[5m]",
+      "title": "HTTP Error Percentage[1m],[5m],[15m]",
       "type": "timeseries"
     },
     {
@@ -442,8 +545,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -480,26 +582,34 @@
             "type": "prometheus",
             "uid": "${dataSource}"
           },
+          "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "sum(rate(io_harness_cvng_io_dropwizard_jetty_MutableServletContextHandler_responses_total_total{namespace=\"harness-nextgen\", statusCode=\"4xx\"}[5m])) * 60",
+          "expr": "sum(rate(io_harness_cvng_io_dropwizard_jetty_MutableServletContextHandler_responses_total_total{namespace=\"$namespace\", statusCode=\"4xx\"}[5m])) * 60",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
           "legendFormat": "4xx",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "useBackend": false
         },
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${dataSource}"
           },
+          "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "sum(rate(io_harness_cvng_io_dropwizard_jetty_MutableServletContextHandler_responses_total_total{namespace=\"harness-nextgen\", statusCode=\"5xx\"}[5m])) * 60",
+          "expr": "sum(rate(io_harness_cvng_io_dropwizard_jetty_MutableServletContextHandler_responses_total_total{namespace=\"$namespace\", statusCode=\"5xx\"}[5m])) * 60",
+          "fullMetaSearch": false,
           "hide": false,
+          "includeNullMetadata": true,
           "legendFormat": "5xx",
           "range": true,
-          "refId": "B"
+          "refId": "B",
+          "useBackend": false
         }
       ],
-      "title": "HTTP Errors Count",
+      "title": "HTTP Errors Rate[5m]",
       "type": "timeseries"
     }
   ],
@@ -514,7 +624,7 @@
     "list": [
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "ProdSetup-ManagedPrometheus",
           "value": "e4a3d5a0-c094-488c-b9dd-ba946db96bea"
         },
@@ -560,7 +670,7 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "harness-nextgen-free",
           "value": "harness-nextgen-free"
         },
@@ -595,6 +705,6 @@
   "timezone": "",
   "title": "CVNG Service Metrics",
   "uid": "SwcnugnSk",
-  "version": 18,
+  "version": 38,
   "weekStart": ""
 }
