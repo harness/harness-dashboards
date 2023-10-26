@@ -112,7 +112,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "vector_index_size{job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}",
+          "expr": "vector_index_size{job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}",
           "interval": "",
           "legendFormat": "{{class_name}} / {{shard_name}}",
           "range": true,
@@ -208,7 +208,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "rate(vector_index_maintenance_durations_ms_sum{job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval]) / rate(vector_index_maintenance_durations_ms_count{job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])",
+          "expr": "rate(vector_index_maintenance_durations_ms_sum{job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval]) / rate(vector_index_maintenance_durations_ms_count{job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])",
           "format": "time_series",
           "interval": "",
           "legendFormat": "{{step}} ({{class_name}}/{{shard_name}})",
@@ -303,7 +303,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "rate(vector_index_durations_ms_sum{operation=\"create\", job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])/rate(vector_index_durations_ms_count{operation=\"create\", job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])",
+          "expr": "rate(vector_index_durations_ms_sum{operation=\"create\", job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])/rate(vector_index_durations_ms_count{operation=\"create\", job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])",
           "interval": "",
           "legendFormat": "{{step}} ({{class_name}}/{{shard_name}})",
           "range": true,
@@ -315,7 +315,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "builder",
-          "expr": "concurrent_goroutines{class_name=\"object batcher\", job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}",
+          "expr": "concurrent_goroutines{class_name=\"object batcher\", job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "Concurrent goroutines",
@@ -410,7 +410,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "rate(vector_index_durations_ms_sum{operation=\"delete\", job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])/rate(vector_index_durations_ms_count{operation=\"delete\", job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])",
+          "expr": "rate(vector_index_durations_ms_sum{operation=\"delete\", job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])/rate(vector_index_durations_ms_count{operation=\"delete\", job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])",
           "interval": "",
           "legendFormat": "{{step}} ({{class_name}}/{{shard_name}})",
           "range": true,
@@ -429,8 +429,8 @@
       {
         "current": {
           "selected": true,
-          "text": "QASetup-ManagedPrometheus",
-          "value": "QASetup-ManagedPrometheus"
+          "text": "ProdSetup-ManagedPrometheus",
+          "value": "ProdSetup-ManagedPrometheus"
         },
         "hide": 0,
         "includeAll": false,
@@ -447,15 +447,15 @@
       },
       {
         "current": {
-          "selected": false,
-          "text": "harness-nextgen",
-          "value": "harness-nextgen"
+          "selected": true,
+          "text": "harness-nextgen-compliance",
+          "value": "harness-nextgen-compliance"
         },
         "datasource": {
           "type": "prometheus",
           "uid": "${datasource}"
         },
-        "definition": "label_values(process_cpu_seconds_total{job=\"weaviate\"}, namespace)",
+        "definition": "label_values(lsm_segment_size, namespace)",
         "hide": 0,
         "includeAll": false,
         "label": "Namespace",
@@ -463,7 +463,7 @@
         "name": "namespace",
         "options": [],
         "query": {
-          "query": "label_values(process_cpu_seconds_total{job=\"weaviate\"}, namespace)",
+          "query": "label_values(lsm_segment_size, namespace)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -475,14 +475,14 @@
       {
         "current": {
           "selected": false,
-          "text": "qa-private",
-          "value": "qa-private"
+          "text": "prod-private-uswest1-primary",
+          "value": "prod-private-uswest1-primary"
         },
         "datasource": {
           "type": "prometheus",
           "uid": "${datasource}"
         },
-        "definition": "label_values(process_cpu_seconds_total{job=\"weaviate\"}, cluster)",
+        "definition": "label_values(lsm_segment_size, cluster)",
         "hide": 0,
         "includeAll": false,
         "label": "Cluster",
@@ -490,7 +490,33 @@
         "name": "cluster",
         "options": [],
         "query": {
-          "query": "label_values(process_cpu_seconds_total{job=\"weaviate\"}, cluster)",
+          "query": "label_values(lsm_segment_size, cluster)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "weaviate-compliance",
+          "value": "weaviate-compliance"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(lsm_segment_size, job)",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "job",
+        "options": [],
+        "query": {
+          "query": "label_values(lsm_segment_size, job)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -509,6 +535,6 @@
   "timezone": "",
   "title": "Vector Index",
   "uid": "03GWjZC7z",
-  "version": 7,
+  "version": 8,
   "weekStart": ""
 }

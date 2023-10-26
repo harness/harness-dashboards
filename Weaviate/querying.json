@@ -114,7 +114,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "rate(queries_durations_ms_sum{job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval]) / rate(queries_durations_ms_count{job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])",
+          "expr": "rate(queries_durations_ms_sum{job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval]) / rate(queries_durations_ms_count{job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])",
           "legendFormat": "{{class_name}} ",
           "range": true,
           "refId": "A"
@@ -208,7 +208,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "rate(queries_durations_ms_count{job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])",
+          "expr": "rate(queries_durations_ms_count{job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])",
           "legendFormat": "{{class_name}}",
           "range": true,
           "refId": "A"
@@ -302,7 +302,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.90, sum(rate(queries_durations_ms_bucket{job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])) by (le,class_name))",
+          "expr": "histogram_quantile(0.90, sum(rate(queries_durations_ms_bucket{job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])) by (le,class_name))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -396,7 +396,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.95, sum(rate(queries_durations_ms_bucket{job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])) by (le,class_name))",
+          "expr": "histogram_quantile(0.95, sum(rate(queries_durations_ms_bucket{job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])) by (le,class_name))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -491,7 +491,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "rate(queries_filtered_vector_durations_ms_sum{operation=\"filter\",job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval]) / rate(queries_filtered_vector_durations_ms_count{operation=\"filter\",job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])",
+          "expr": "rate(queries_filtered_vector_durations_ms_sum{operation=\"filter\",job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval]) / rate(queries_filtered_vector_durations_ms_count{operation=\"filter\",job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])",
           "legendFormat": "{{class_name}}/{{operation}}/{{shard_name}}",
           "range": true,
           "refId": "Filter"
@@ -624,7 +624,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "builder",
-          "expr": "sum(concurrent_queries_count{query_type=\"batch\", job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"})",
+          "expr": "sum(concurrent_queries_count{query_type=\"batch\", job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"})",
           "hide": false,
           "legendFormat": "Batch (Objects)",
           "range": true,
@@ -662,7 +662,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(concurrent_queries_count{query_type=\"update_object\", job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"})",
+          "expr": "sum(concurrent_queries_count{query_type=\"update_object\", job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "Update (Objects)",
@@ -675,7 +675,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum(concurrent_queries_count{query_type=\"merge_object\",job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"})",
+          "expr": "sum(concurrent_queries_count{query_type=\"merge_object\",job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"})",
           "hide": false,
           "legendFormat": "Merge (Objects)",
           "range": true,
@@ -687,7 +687,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum(concurrent_queries_count{query_type=\"delete_object\",job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"})",
+          "expr": "sum(concurrent_queries_count{query_type=\"delete_object\",job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"})",
           "hide": false,
           "legendFormat": "Delete (Objects)",
           "range": true,
@@ -699,7 +699,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum(concurrent_queries_count{query_type=\"add_reference\", job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"})",
+          "expr": "sum(concurrent_queries_count{query_type=\"add_reference\", job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"})",
           "hide": false,
           "legendFormat": "Add (Reference)",
           "range": true,
@@ -711,7 +711,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum(concurrent_queries_count{query_type=\"update_reference\",job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"})",
+          "expr": "sum(concurrent_queries_count{query_type=\"update_reference\",job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"})",
           "hide": false,
           "legendFormat": "Update (Reference)",
           "range": true,
@@ -723,7 +723,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum(concurrent_queries_count{query_type=\"delete_reference\",job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"})",
+          "expr": "sum(concurrent_queries_count{query_type=\"delete_reference\",job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"})",
           "hide": false,
           "legendFormat": "Delete (Reference)",
           "range": true,
@@ -780,7 +780,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -818,7 +819,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(concurrent_queries_count{query_type=\"aggregate\",job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"})",
+          "expr": "sum(concurrent_queries_count{query_type=\"aggregate\",job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"})",
           "interval": "",
           "legendFormat": "Aggregate",
           "range": true,
@@ -874,8 +875,8 @@
       {
         "current": {
           "selected": false,
-          "text": "QASetup-ManagedPrometheus",
-          "value": "QASetup-ManagedPrometheus"
+          "text": "ProdSetup-ManagedPrometheus",
+          "value": "ProdSetup-ManagedPrometheus"
         },
         "hide": 0,
         "includeAll": false,
@@ -900,7 +901,7 @@
           "type": "prometheus",
           "uid": "${datasource}"
         },
-        "definition": "label_values(process_cpu_seconds_total{job=\"weaviate\"}, namespace)",
+        "definition": "label_values(lsm_segment_size, namespace)",
         "hide": 0,
         "includeAll": false,
         "label": "Namespace",
@@ -908,7 +909,7 @@
         "name": "namespace",
         "options": [],
         "query": {
-          "query": "label_values(process_cpu_seconds_total{job=\"weaviate\"}, namespace)",
+          "query": "label_values(lsm_segment_size, namespace)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -920,14 +921,14 @@
       {
         "current": {
           "selected": false,
-          "text": "qa-private",
-          "value": "qa-private"
+          "text": "prod-private-uswest1-primary",
+          "value": "prod-private-uswest1-primary"
         },
         "datasource": {
           "type": "prometheus",
           "uid": "${datasource}"
         },
-        "definition": "label_values(process_cpu_seconds_total{job=\"weaviate\"}, cluster)",
+        "definition": "label_values(lsm_segment_size, cluster)",
         "hide": 0,
         "includeAll": false,
         "label": "Cluster",
@@ -935,7 +936,34 @@
         "name": "cluster",
         "options": [],
         "query": {
-          "query": "label_values(process_cpu_seconds_total{job=\"weaviate\"}, cluster)",
+          "query": "label_values(lsm_segment_size, cluster)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "weaviate",
+          "value": "weaviate"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(lsm_segment_size, job)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "job",
+        "multi": false,
+        "name": "query0",
+        "options": [],
+        "query": {
+          "query": "label_values(lsm_segment_size, job)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -954,6 +982,6 @@
   "timezone": "",
   "title": "Querying",
   "uid": "ImxRLXe7z",
-  "version": 12,
+  "version": 15,
   "weekStart": ""
 }
