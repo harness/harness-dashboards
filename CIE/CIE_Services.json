@@ -55,7 +55,7 @@
           "custom": {
             "axisCenteredZero": false,
             "axisColorMode": "text",
-            "axisLabel": "",
+            "axisLabel": "Number of stages",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "bars",
@@ -173,7 +173,7 @@
           "custom": {
             "axisCenteredZero": false,
             "axisColorMode": "text",
-            "axisLabel": "",
+            "axisLabel": "Number of stages",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "bars",
@@ -250,7 +250,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(container_name,namespace_name) (increase(logging_googleapis_com:user_cie_execution_started{cluster_name=\"$cluster\", container_name=\"ci-manager\",namespace=\"harness-nextgen\"}[1h]))",
+          "expr": "sum by(container_name,namespace_name) (increase(logging_googleapis_com:user_cie_execution_started{cluster_name=\"$cluster\", container_name=\"ci-manager\",namespace=\"harness-nextgen-free\"}[1h]))",
           "hide": false,
           "instant": false,
           "interval": "",
@@ -265,7 +265,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(container_name,namespace_name) (increase(logging_googleapis_com:user_cie_stage_completed{cluster_name=\"$cluster\", container_name=\"ci-manager\",namespace=\"harness-nextgen\"}[1h]))",
+          "expr": "sum by(container_name,namespace_name) (increase(logging_googleapis_com:user_cie_stage_completed{cluster_name=\"$cluster\", container_name=\"ci-manager\",namespace=\"harness-nextgen-free\"}[1h]))",
           "format": "time_series",
           "hide": false,
           "interval": "",
@@ -274,7 +274,7 @@
           "refId": "B"
         }
       ],
-      "title": "CIE Executions in 1hr [Prod1]",
+      "title": "CIE Executions in 1hr [Prod2]",
       "type": "timeseries"
     },
     {
@@ -291,7 +291,7 @@
           "custom": {
             "axisCenteredZero": false,
             "axisColorMode": "text",
-            "axisLabel": "",
+            "axisLabel": "Number of stages",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "bars",
