@@ -113,7 +113,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "rate(startup_durations_ms_sum{job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])/rate(startup_durations_ms_count{job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])",
+          "expr": "rate(startup_durations_ms_sum{job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])/rate(startup_durations_ms_count{job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])",
           "interval": "",
           "legendFormat": "{{operation}} ({{class_name}} / {{shard_name}})",
           "range": true,
@@ -182,7 +182,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(startup_durations_ms_sum{operation=\"lsm_startup_bucket\", job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"})",
+          "expr": "sum(startup_durations_ms_sum{operation=\"lsm_startup_bucket\", job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"})",
           "interval": "",
           "legendFormat": "",
           "range": true,
@@ -251,7 +251,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "sum(startup_durations_ms_sum{operation=\"hnsw_read_all_commitlogs\",job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"})",
+          "expr": "sum(startup_durations_ms_sum{operation=\"hnsw_read_all_commitlogs\",job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"})",
           "interval": "",
           "legendFormat": "",
           "range": true,
@@ -320,7 +320,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "startup_durations_ms_sum{operation=\"shard_total_init\",job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}",
+          "expr": "startup_durations_ms_sum{operation=\"shard_total_init\",job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}",
           "interval": "",
           "legendFormat": "{{class_name}}/{{shard_name}}",
           "range": true,
@@ -415,7 +415,7 @@
           },
           "editorMode": "code",
           "exemplar": true,
-          "expr": "rate(startup_diskio_throughput_sum{job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])/rate(startup_diskio_throughput_count{job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])",
+          "expr": "rate(startup_diskio_throughput_sum{job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])/rate(startup_diskio_throughput_count{job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])",
           "interval": "",
           "legendFormat": "{{operation}} ({{class_name}}/{{shard_name}})",
           "range": true,
@@ -433,9 +433,9 @@
     "list": [
       {
         "current": {
-          "selected": true,
-          "text": "QASetup-ManagedPrometheus",
-          "value": "QASetup-ManagedPrometheus"
+          "selected": false,
+          "text": "ProdSetup-ManagedPrometheus",
+          "value": "ProdSetup-ManagedPrometheus"
         },
         "hide": 0,
         "includeAll": false,
@@ -460,7 +460,7 @@
           "type": "prometheus",
           "uid": "${datasource}"
         },
-        "definition": "label_values(process_cpu_seconds_total{job=\"weaviate\"}, namespace)",
+        "definition": "label_values(lsm_segment_size, namespace)",
         "hide": 0,
         "includeAll": false,
         "label": "Namespace",
@@ -468,7 +468,7 @@
         "name": "namespace",
         "options": [],
         "query": {
-          "query": "label_values(process_cpu_seconds_total{job=\"weaviate\"}, namespace)",
+          "query": "label_values(lsm_segment_size, namespace)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -480,14 +480,14 @@
       {
         "current": {
           "selected": false,
-          "text": "qa-private",
-          "value": "qa-private"
+          "text": "prod-private-uswest1-primary",
+          "value": "prod-private-uswest1-primary"
         },
         "datasource": {
           "type": "prometheus",
           "uid": "${datasource}"
         },
-        "definition": "label_values(process_cpu_seconds_total{job=\"weaviate\"}, cluster)",
+        "definition": "label_values(lsm_segment_size, cluster)",
         "hide": 0,
         "includeAll": false,
         "label": "Cluster",
@@ -495,7 +495,33 @@
         "name": "cluster",
         "options": [],
         "query": {
-          "query": "label_values(process_cpu_seconds_total{job=\"weaviate\"}, cluster)",
+          "query": "label_values(lsm_segment_size, cluster)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "weaviate-prod",
+          "value": "weaviate-prod"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(lsm_segment_size, job)",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "job",
+        "options": [],
+        "query": {
+          "query": "label_values(lsm_segment_size, job)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -514,6 +540,6 @@
   "timezone": "",
   "title": "Startup times",
   "uid": "oZZHUUC7k",
-  "version": 9,
+  "version": 12,
   "weekStart": ""
 }
