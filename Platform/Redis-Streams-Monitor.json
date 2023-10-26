@@ -714,17 +714,17 @@
             "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "editorMode": "builder",
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_events_framework_deadletter_queue_size{cluster=\"$cluster\", environment=\"$env\", exported_namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_behind_by_count{cluster=\"$cluster\", environment=\"$env\", exported_namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Dead Letter Queue Size (All Streams)",
+      "title": "Consumer Group Behind From Stream (All Streams)",
       "type": "timeseries"
     },
     {
@@ -810,17 +810,17 @@
             "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "editorMode": "builder",
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_events_framework_deadletter_queue_size{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", exported_namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_behind_by_count{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", exported_namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Dead Letter Queue Size (Per Stream Selection)",
+      "title": "Consumer Group Behind From Stream (Per Stream Selection)",
       "type": "timeseries"
     },
     {
@@ -913,17 +913,17 @@
             "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "editorMode": "builder",
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(consumergroupName) (redis_streams_consumer_group_behind_by_count{cluster=\"$cluster\", environment=\"$env\", exported_namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_pending_count{cluster=\"$cluster\", environment=\"$env\", exported_namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Stream Behind Count By Consumer Group Name (All Streams)",
+      "title": "Consumer Group Pending Count (All Streams)",
       "type": "timeseries"
     },
     {
@@ -1009,17 +1009,17 @@
             "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "editorMode": "builder",
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_consumer_group_behind_by_count{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", exported_namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_pending_count{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", exported_namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Streams Behind Count By Use Case Name (Per Stream Selection)",
+      "title": "Consumer Group Pending Count (Per Stream Selection)",
       "type": "timeseries"
     },
     {
@@ -1112,17 +1112,17 @@
             "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "editorMode": "builder",
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(consumergroupName) (redis_streams_consumer_group_pending_count{cluster=\"$cluster\", environment=\"$env\", exported_namespace=\"$namespace\"})",
+          "expr": "avg by(exported_namespace, usecaseName) (redis_streams_events_framework_deadletter_queue_size{cluster=\"$cluster\", environment=\"$env\", exported_namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "{{exported_namespace}}:streams:deadletter_queue:{{usecaseName}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Stream Pending Count By Consumer Group Name (All Streams)",
+      "title": "Dead Letter Queue Size (All Streams)",
       "type": "timeseries"
     },
     {
@@ -1208,17 +1208,17 @@
             "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "editorMode": "builder",
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_consumer_group_pending_count{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", exported_namespace=\"$namespace\"})",
+          "expr": "avg by(exported_namespace, usecaseName) (redis_streams_events_framework_deadletter_queue_size{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", exported_namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "{{exported_namespace}}:streams:deadletter_queue:{{usecaseName}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Streams Pending Count By Use Case Name (Per Stream Selection)",
+      "title": "Dead Letter Queue Size (Per Stream Selection)",
       "type": "timeseries"
     }
   ],
@@ -1229,7 +1229,7 @@
     "list": [
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "QASetup-ManagedPrometheus",
           "value": "QASetup-ManagedPrometheus"
         },
@@ -1303,8 +1303,8 @@
       {
         "current": {
           "selected": true,
-          "text": "full_sync_stream",
-          "value": "full_sync_stream"
+          "text": "entity_crud",
+          "value": "entity_crud"
         },
         "datasource": {
           "type": "prometheus",
