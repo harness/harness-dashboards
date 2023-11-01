@@ -2246,7 +2246,7 @@
         "type": "query"
       },
       {
-        "allValue": "",
+        "allValue": "ff-.*|pushpin-.*",
         "current": {
           "selected": true,
           "text": [
@@ -2354,6 +2354,6 @@
   "timezone": "",
   "title": "K8s Overview",
   "uid": "ff_k8s_overview",
-  "version": 15,
+  "version": 16,
   "weekStart": ""
 }
