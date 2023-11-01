@@ -1,864 +1,413 @@
 {
-  "annotations": {
-    "list": [
+   "graphTooltip": 1,
+   "panels": [
       {
-        "builtIn": 1,
-        "datasource": {
-          "type": "grafana",
-          "uid": "-- Grafana --"
-        },
-        "enable": true,
-        "hide": true,
-        "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations & Alerts",
-        "target": {
-          "limit": 100,
-          "matchAny": false,
-          "tags": [],
-          "type": "dashboard"
-        },
-        "type": "dashboard"
+         "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 0
+         },
+         "id": 1,
+         "repeat": "namespace",
+         "title": "${namespace}",
+         "type": "row"
+      },
+      {
+         "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+         },
+         "fieldConfig": {
+            "defaults": {
+               "noValue": 0,
+               "unit": "short"
+            }
+         },
+         "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 0
+         },
+         "id": 2,
+         "links": [
+            {
+               "targetBlank": true,
+               "title": "GCP Logs",
+               "url": "https://cloudlogging.app.goo.gl/B8abNvYYxqeZAGP69"
+            }
+         ],
+         "options": {
+            "legend": {
+               "calcs": [
+                  "sum"
+               ],
+               "displayMode": "table",
+               "placement": "right"
+            }
+         },
+         "pluginVersion": "v10.1.0",
+         "targets": [
+            {
+               "datasource": {
+                  "type": "prometheus",
+                  "uid": "$datasource"
+               },
+               "expr": "sum by(container_name, namespace_name)\n(label_replace(\n  increase(\n    logging_googleapis_com:log_entry_count{\n      monitored_resource=\"k8s_container\",\n      cluster_name=~\"$cluster\",\n      namespace_name=~\"$namespace\",\n      pod_name=~\"$container.*\",\n      severity=~\"ERROR|CRITICAL\",\n    }[$__interval]\n  ),\n  \"container_name\", \"$1\", \"pod_name\", \"^(ff-[a-z]-server|pushpin).*\"\n))\n",
+               "legendFormat": "{{container_name}}\n"
+            }
+         ],
+         "title": "Errors by service",
+         "type": "timeseries"
+      },
+      {
+         "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+         },
+         "fieldConfig": {
+            "defaults": {
+               "noValue": 0,
+               "unit": "short"
+            }
+         },
+         "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 12
+         },
+         "id": 3,
+         "links": [
+            {
+               "targetBlank": true,
+               "title": "GCP Logs",
+               "url": "https://cloudlogging.app.goo.gl/B8abNvYYxqeZAGP69"
+            }
+         ],
+         "options": {
+            "legend": {
+               "calcs": [
+                  "sum"
+               ],
+               "displayMode": "table",
+               "placement": "right"
+            }
+         },
+         "pluginVersion": "v10.1.0",
+         "targets": [
+            {
+               "datasource": {
+                  "type": "prometheus",
+                  "uid": "$datasource"
+               },
+               "expr": "sum by(container_name, namespace_name)\n(label_replace(\n  increase(\n    logging_googleapis_com:log_entry_count{\n      monitored_resource=\"k8s_container\",\n      cluster_name=~\"$cluster\",\n      namespace_name=~\"$namespace\",\n      pod_name=~\"$container.*\",\n      severity=~\"ERROR|CRITICAL\",\n    }[$__interval] offset 1w\n  ),\n  \"container_name\", \"$1\", \"pod_name\", \"^(ff-[a-z]-server|pushpin).*\"\n))\n",
+               "legendFormat": "{{container_name}}\n"
+            }
+         ],
+         "title": "Errors by service (prev week)",
+         "type": "timeseries"
+      },
+      {
+         "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+         },
+         "fieldConfig": {
+            "defaults": {
+               "noValue": 0,
+               "unit": "short"
+            }
+         },
+         "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 0
+         },
+         "id": 4,
+         "links": [
+            {
+               "targetBlank": true,
+               "title": "GCP Logs",
+               "url": "https://cloudlogging.app.goo.gl/B8abNvYYxqeZAGP69"
+            }
+         ],
+         "options": {
+            "legend": {
+               "calcs": [
+                  "sum"
+               ],
+               "displayMode": "table",
+               "placement": "right"
+            }
+         },
+         "pluginVersion": "v10.1.0",
+         "targets": [
+            {
+               "datasource": {
+                  "type": "prometheus",
+                  "uid": "$datasource"
+               },
+               "expr": "sum by(namespace_name)\n(increase(\n  logging_googleapis_com:log_entry_count{\n    monitored_resource=\"k8s_container\",\n    cluster_name=~\"$cluster\",\n    namespace_name=~\"$namespace\",\n    pod_name=~\"$container.*\",\n    severity=~\"ERROR|CRITICAL\",\n  }[$__interval]\n))\n",
+               "legendFormat": "{{container_name}}\n"
+            }
+         ],
+         "title": "Errors total",
+         "type": "timeseries"
+      },
+      {
+         "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+         },
+         "fieldConfig": {
+            "defaults": {
+               "noValue": 0,
+               "unit": "short"
+            }
+         },
+         "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 12
+         },
+         "id": 5,
+         "links": [
+            {
+               "targetBlank": true,
+               "title": "GCP Logs",
+               "url": "https://cloudlogging.app.goo.gl/B8abNvYYxqeZAGP69"
+            }
+         ],
+         "options": {
+            "legend": {
+               "calcs": [
+                  "sum"
+               ],
+               "displayMode": "table",
+               "placement": "right"
+            }
+         },
+         "pluginVersion": "v10.1.0",
+         "targets": [
+            {
+               "datasource": {
+                  "type": "prometheus",
+                  "uid": "$datasource"
+               },
+               "expr": "sum by(namespace_name)\n(increase(\n  logging_googleapis_com:log_entry_count{\n    monitored_resource=\"k8s_container\",\n    cluster_name=~\"$cluster\",\n    namespace_name=~\"$namespace\",\n    pod_name=~\"$container.*\",\n    severity=~\"ERROR|CRITICAL\",\n  }[$__interval] offset 1w\n))\n",
+               "legendFormat": "{{container_name}}\n"
+            }
+         ],
+         "title": "Errors total (prev week)",
+         "type": "timeseries"
+      },
+      {
+         "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+         },
+         "fieldConfig": {
+            "defaults": {
+               "noValue": 0,
+               "unit": "short"
+            }
+         },
+         "gridPos": {
+            "h": 4,
+            "w": 24,
+            "x": 0,
+            "y": 13
+         },
+         "id": 6,
+         "options": {
+            "legend": {
+               "displayMode": "table",
+               "placement": "right"
+            }
+         },
+         "pluginVersion": "v10.1.0",
+         "targets": [
+            {
+               "datasource": {
+                  "type": "prometheus",
+                  "uid": "$datasource"
+               },
+               "expr": "sum by (namespace_name)\n(increase(\n  logging_googleapis_com:user_ff_admin_server_new_error_logs{\n    monitored_resource=\"k8s_container\",\n    cluster_name=~\"$cluster\",\n    namespace_name=~\"$namespace\",\n    pod_name=~\"$container.*\",\n  }[$__interval]\n))\n",
+               "legendFormat": "ff-admin\n"
+            },
+            {
+               "datasource": {
+                  "type": "prometheus",
+                  "uid": "$datasource"
+               },
+               "expr": "sum by (namespace_name)\n(increase(\n  logging_googleapis_com:user_ff_auth_server_new_error_logs{\n    monitored_resource=\"k8s_container\",\n    cluster_name=~\"$cluster\",\n    namespace_name=~\"$namespace\",\n    pod_name=~\"$container.*\",\n  }[$__interval]\n))\n",
+               "legendFormat": "ff-auth\n"
+            },
+            {
+               "datasource": {
+                  "type": "prometheus",
+                  "uid": "$datasource"
+               },
+               "expr": "sum by (namespace_name)\n(increase(\n  logging_googleapis_com:user_ff_client_server_new_error_logs{\n    monitored_resource=\"k8s_container\",\n    cluster_name=~\"$cluster\",\n    namespace_name=~\"$namespace\",\n    pod_name=~\"$container.*\",\n  }[$__interval]\n))\n",
+               "legendFormat": "ff-client\n"
+            },
+            {
+               "datasource": {
+                  "type": "prometheus",
+                  "uid": "$datasource"
+               },
+               "expr": "sum by (namespace_name)\n(increase(\n  logging_googleapis_com:user_ff_metrics_server_new_error_logs{\n    monitored_resource=\"k8s_container\",\n    cluster_name=~\"$cluster\",\n    namespace_name=~\"$namespace\",\n    pod_name=~\"$container.*\",\n  }[$__interval]\n))\n",
+               "legendFormat": "ff-metrics\n"
+            },
+            {
+               "datasource": {
+                  "type": "prometheus",
+                  "uid": "$datasource"
+               },
+               "expr": "sum by (namespace_name)\n(increase(\n  logging_googleapis_com:user_ff_proxy_new_error_logs{\n    monitored_resource=\"k8s_container\",\n    cluster_name=~\"$cluster\",\n    namespace_name=~\"$namespace\",\n    pod_name=~\"$container.*\",\n  }[$__interval]\n))\n",
+               "legendFormat": "ff-proxy\n"
+            },
+            {
+               "datasource": {
+                  "type": "prometheus",
+                  "uid": "$datasource"
+               },
+               "expr": "sum by (namespace_name)\n(increase(\n  logging_googleapis_com:user_ff_pushpin_new_error_logs{\n    monitored_resource=\"k8s_container\",\n    cluster_name=~\"$cluster\",\n    namespace_name=~\"$namespace\",\n    pod_name=~\"$container.*\",\n  }[$__interval]\n))\n",
+               "legendFormat": "pushpin\n"
+            }
+         ],
+         "title": "New error logs",
+         "type": "timeseries"
+      },
+      {
+         "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+         },
+         "fieldConfig": {
+            "defaults": {
+               "custom": {
+                  "stacking": {
+                     "0": "n",
+                     "1": "o",
+                     "2": "r",
+                     "3": "m",
+                     "4": "a",
+                     "5": "l",
+                     "mode": "normal"
+                  }
+               },
+               "noValue": 0,
+               "unit": "short"
+            }
+         },
+         "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 19
+         },
+         "id": 7,
+         "options": {
+            "legend": {
+               "calcs": [
+                  "sum"
+               ],
+               "displayMode": "table",
+               "placement": "right"
+            }
+         },
+         "pluginVersion": "v10.1.0",
+         "targets": [
+            {
+               "datasource": {
+                  "type": "prometheus",
+                  "uid": "$datasource"
+               },
+               "expr": "sum by (namespace, container, version) (label_replace(kube_pod_container_info{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"$container\"}, \"version\", \"$1\", \"image_spec\", \".*:(.*)\")) * 0 + 1\n",
+               "legendFormat": "{{container}}: {{version}}\n"
+            }
+         ],
+         "title": "Releases",
+         "type": "timeseries"
       }
-    ]
-  },
-  "editable": true,
-  "fiscalYearStartMonth": 0,
-  "graphTooltip": 0,
-  "id": 109,
-  "links": [],
-  "liveNow": false,
-  "panels": [
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 0
-      },
-      "id": 5,
-      "panels": [],
-      "repeat": "namespace",
-      "repeatDirection": "h",
-      "title": "$namespace",
-      "type": "row"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
+   ],
+   "schemaVersion": 36,
+   "templating": {
+      "list": [
+         {
+            "name": "datasource",
+            "query": "prometheus",
+            "refresh": 1,
+            "regex": "(ProdSetup|UATSetup|QASetup)-.*",
+            "type": "datasource"
+         },
+         {
+            "datasource": {
+               "type": "prometheus",
+               "uid": "${datasource}"
             },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
+            "name": "cluster",
+            "query": "label_values(kubernetes_io:container_uptime{container_name=~\"ff-.*|pushpin-.*\"}, cluster_name)",
+            "refresh": 1,
+            "sort": 1,
+            "type": "query"
+         },
+         {
+            "current": {
+               "selected": false,
+               "text": [
+                  "All"
+               ],
+               "value": [
+                  "$__all"
+               ]
             },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
+            "datasource": {
+               "type": "prometheus",
+               "uid": "${datasource}"
             },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "noValue": "0",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 12,
-        "x": 0,
-        "y": 1
-      },
-      "id": 40,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "GCP Logs",
-          "url": "https://console.cloud.google.com/logs/query;query=resource.type%3D%22k8s_container%22%0Aseverity%3DERROR%0Aresource.labels.container_name%3D%22ff-admin-server%22%20OR%0Aresource.labels.container_name%3D%22ff-auth-server%22%20OR%0Aresource.labels.container_name%3D%22ff-client-server%22%20OR%0Aresource.labels.container_name%3D%22ff-metrics-server%22%20OR%0Aresource.labels.container_name%3D%22ff-proxy%22%20OR%0Aresource.labels.container_name%3D%22pushpin-puhspin%22%20OR%0Aresource.labels.container_name%3D%22pushpin-worker%22;cursorTimestamp=2023-08-15T14:26:29.498043795Z;duration=PT1H?project=prod-setup-205416"
-        }
-      ],
-      "options": {
-        "legend": {
-          "calcs": [
-            "sum"
-          ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true,
-          "width": 200
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "expr": "sum by(container_name, namespace_name) (label_replace(increase(logging_googleapis_com:log_entry_count{monitored_resource=\"k8s_container\", cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", severity=~\"ERROR|CRITICAL\", pod_name=~\"$container.*\", severity=~\"ERROR|CRITICAL\"}[$__interval]), \"container_name\", \"$1\", \"pod_name\", \"^(ff-[a-z]-server|pushpin).*\"))",
-          "legendFormat": "{{container_name}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Errors by service ($namespace)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
+            "includeAll": true,
+            "multi": true,
+            "name": "namespace",
+            "query": "label_values(kubernetes_io:container_uptime{cluster_name=~\"$cluster\", container_name=~\"ff-.*|pushpin-.*\"}, namespace_name)",
+            "refresh": 1,
+            "sort": 1,
+            "type": "query"
+         },
+         {
+            "current": {
+               "selected": false,
+               "text": [
+                  "All"
+               ],
+               "value": [
+                  "$__all"
+               ]
             },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
+            "datasource": {
+               "type": "prometheus",
+               "uid": "${datasource}"
             },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "noValue": "0",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 12,
-        "x": 12,
-        "y": 1
-      },
-      "id": 3,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "GCP Logs",
-          "url": "https://console.cloud.google.com/logs/query;query=resource.type%3D%22k8s_container%22%0Aseverity%3DERROR%0Aresource.labels.container_name%3D%22ff-admin-server%22%20OR%0Aresource.labels.container_name%3D%22ff-auth-server%22%20OR%0Aresource.labels.container_name%3D%22ff-client-server%22%20OR%0Aresource.labels.container_name%3D%22ff-metrics-server%22%20OR%0Aresource.labels.container_name%3D%22ff-proxy%22%20OR%0Aresource.labels.container_name%3D%22pushpin-puhspin%22%20OR%0Aresource.labels.container_name%3D%22pushpin-worker%22;cursorTimestamp=2023-08-15T14:26:29.498043795Z;duration=PT1H?project=prod-setup-205416"
-        }
-      ],
-      "options": {
-        "legend": {
-          "calcs": [
-            "sum"
-          ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true,
-          "width": 200
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "repeatDirection": "v",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "expr": "sum by(namespace_name) (increase(logging_googleapis_com:log_entry_count{monitored_resource=\"k8s_container\", cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", severity=~\"ERROR|CRITICAL\", pod_name=~\"$container.*\", severity=~\"ERROR|CRITICAL\"}[$__interval]))",
-          "legendFormat": "Total",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Total errors ($namespace)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "noValue": "0",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 12,
-        "x": 0,
-        "y": 7
-      },
-      "id": 22,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "GCP Logs",
-          "url": "https://console.cloud.google.com/logs/query;query=resource.type%3D%22k8s_container%22%0Aseverity%3DERROR%0Aresource.labels.container_name%3D%22ff-admin-server%22%20OR%0Aresource.labels.container_name%3D%22ff-auth-server%22%20OR%0Aresource.labels.container_name%3D%22ff-client-server%22%20OR%0Aresource.labels.container_name%3D%22ff-metrics-server%22%20OR%0Aresource.labels.container_name%3D%22ff-proxy%22%20OR%0Aresource.labels.container_name%3D%22pushpin-puhspin%22%20OR%0Aresource.labels.container_name%3D%22pushpin-worker%22;cursorTimestamp=2023-08-15T14:26:29.498043795Z;duration=PT1H?project=prod-setup-205416"
-        }
-      ],
-      "options": {
-        "legend": {
-          "calcs": [
-            "sum"
-          ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true,
-          "width": 200
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "expr": "sum by(container_name, namespace_name) (label_replace(increase(logging_googleapis_com:log_entry_count{monitored_resource=\"k8s_container\", cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", severity=~\"ERROR|CRITICAL\", pod_name=~\"$container\", severity=~\"ERROR|CRITICAL\"}[$__interval] offset 1w), \"container_name\", \"$1\", \"pod_name\", \"^(ff-[a-z]-server|pushpin)\"))",
-          "legendFormat": "{{container_name}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Last week errors by service ($namespace)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "noValue": "0",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 12,
-        "x": 12,
-        "y": 7
-      },
-      "id": 23,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "GCP Logs",
-          "url": "https://console.cloud.google.com/logs/query;query=resource.type%3D%22k8s_container%22%0Aseverity%3DERROR%0Aresource.labels.container_name%3D%22ff-admin-server%22%20OR%0Aresource.labels.container_name%3D%22ff-auth-server%22%20OR%0Aresource.labels.container_name%3D%22ff-client-server%22%20OR%0Aresource.labels.container_name%3D%22ff-metrics-server%22%20OR%0Aresource.labels.container_name%3D%22ff-proxy%22%20OR%0Aresource.labels.container_name%3D%22pushpin-puhspin%22%20OR%0Aresource.labels.container_name%3D%22pushpin-worker%22;cursorTimestamp=2023-08-15T14:26:29.498043795Z;duration=PT1H?project=prod-setup-205416"
-        }
-      ],
-      "options": {
-        "legend": {
-          "calcs": [
-            "sum"
-          ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true,
-          "width": 200
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "repeatDirection": "v",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "expr": "sum by(namespace_name) (increase(logging_googleapis_com:log_entry_count{monitored_resource=\"k8s_container\", cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", severity=~\"ERROR|CRITICAL\", pod_name=~\"$container.*\", severity=~\"ERROR|CRITICAL\"}[$__interval] offset 1w))",
-          "legendFormat": "Total",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Last week total errors ($namespace)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "noValue": "0",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 24,
-        "x": 0,
-        "y": 13
-      },
-      "id": 53,
-      "links": [
-        {
-          "targetBlank": true,
-          "title": "GCP Logs",
-          "url": "https://console.cloud.google.com/logs/query;query=resource.type%3D%22k8s_container%22%0Aseverity%3DERROR%0Aresource.labels.container_name%3D%22ff-admin-server%22%20OR%0Aresource.labels.container_name%3D%22ff-auth-server%22%20OR%0Aresource.labels.container_name%3D%22ff-client-server%22%20OR%0Aresource.labels.container_name%3D%22ff-metrics-server%22%20OR%0Aresource.labels.container_name%3D%22ff-proxy%22%20OR%0Aresource.labels.container_name%3D%22pushpin-puhspin%22%20OR%0Aresource.labels.container_name%3D%22pushpin-worker%22;cursorTimestamp=2023-08-15T14:26:29.498043795Z;duration=PT1H?project=prod-setup-205416"
-        }
-      ],
-      "options": {
-        "legend": {
-          "calcs": [
-            "sum"
-          ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true,
-          "width": 200
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "expr": "sum by (namespace_name) (increase(logging_googleapis_com:user_ff_admin_server_new_error_logs{cluster_name=~\"$cluster\", monitored_resource=\"k8s_container\", namespace_name=~\"$namespace\", pod_name=~\"$container.*\"}[$__interval]))",
-          "legendFormat": "ff-admin",
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "expr": "sum by (namespace_name) (increase(logging_googleapis_com:user_ff_auth_server_new_error_logs{cluster_name=~\"$cluster\", monitored_resource=\"k8s_container\", namespace_name=~\"$namespace\", pod_name=~\"$container.*\"}[$__interval]))",
-          "hide": false,
-          "legendFormat": "ff-auth",
-          "range": true,
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "expr": "sum by (namespace_name) (increase(logging_googleapis_com:user_ff_client_server_new_error_logs{cluster_name=~\"$cluster\", monitored_resource=\"k8s_container\", namespace_name=~\"$namespace\", pod_name=~\"$container.*\"}[$__interval]))",
-          "hide": false,
-          "legendFormat": "ff-client",
-          "range": true,
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "expr": "sum by (namespace_name) (increase(logging_googleapis_com:user_ff_metrics_server_new_error_logs{cluster_name=~\"$cluster\", monitored_resource=\"k8s_container\", namespace_name=~\"$namespace\", pod_name=~\"$container.*\"}[$__interval]))",
-          "hide": false,
-          "legendFormat": "ff-metrics",
-          "range": true,
-          "refId": "D"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "expr": "sum by (namespace_name) (increase(logging_googleapis_com:user_ff_proxy_new_error_logs{cluster_name=~\"$cluster\", monitored_resource=\"k8s_container\", namespace_name=~\"$namespace\", pod_name=~\"$container.*\"}[$__interval]))",
-          "hide": false,
-          "legendFormat": "ff-proxy",
-          "range": true,
-          "refId": "E"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "expr": "sum by (namespace_name) (increase(logging_googleapis_com:user_ff_pushpin_new_error_logs{cluster_name=~\"$cluster\", monitored_resource=\"k8s_container\", namespace_name=~\"$namespace\", pod_name=~\"$container.*\"}[$__interval]))",
-          "hide": false,
-          "legendFormat": "ff-pushpin",
-          "range": true,
-          "refId": "F"
-        }
-      ],
-      "title": "New error logs ($namespace)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "P395BF20BBBA74F0A"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "axisSoftMax": 1,
-            "axisSoftMin": 0,
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "normal"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 24,
-        "x": 0,
-        "y": 17
-      },
-      "id": 7,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "9.3.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "P395BF20BBBA74F0A"
-          },
-          "editorMode": "code",
-          "expr": "sum by (namespace, container, version) (label_replace(kube_pod_container_info{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"$container\"}, \"version\", \"$1\", \"image_spec\", \".*:(.*)\")) * 0 + 1",
-          "format": "time_series",
-          "legendFormat": "{{container}}: {{version}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Releases",
-      "transformations": [],
-      "type": "timeseries"
-    }
-  ],
-  "refresh": false,
-  "schemaVersion": 37,
-  "style": "dark",
-  "tags": [],
-  "templating": {
-    "list": [
-      {
-        "allValue": "(ProdSetup|QASetup)-.*",
-        "current": {
-          "selected": true,
-          "text": [
-            "ProdSetup-ManagedPrometheus"
-          ],
-          "value": [
-            "ProdSetup-ManagedPrometheus"
-          ]
-        },
-        "hide": 0,
-        "includeAll": true,
-        "label": "Datasource",
-        "multi": true,
-        "name": "datasource",
-        "options": [],
-        "query": "prometheus",
-        "queryValue": "",
-        "refresh": 1,
-        "regex": "(ProdSetup|UATSetup|QASetup)-.*",
-        "skipUrlSync": false,
-        "type": "datasource"
-      },
-      {
-        "allValue": "",
-        "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${datasource}"
-        },
-        "definition": "label_values(kubernetes_io:container_uptime{container_name=~\"ff-.*|pushpin-.*\"}, cluster_name)",
-        "hide": 0,
-        "includeAll": true,
-        "label": "Cluster",
-        "multi": true,
-        "name": "cluster",
-        "options": [],
-        "query": {
-          "query": "label_values(kubernetes_io:container_uptime{container_name=~\"ff-.*|pushpin-.*\"}, cluster_name)",
-          "refId": "StandardVariableQuery"
-        },
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 1,
-        "type": "query"
-      },
-      {
-        "allValue": "",
-        "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${datasource}"
-        },
-        "definition": "label_values(kubernetes_io:container_uptime{cluster_name=~\"$cluster\", container_name=~\"ff-.*|pushpin-.*\"}, namespace_name)",
-        "hide": 0,
-        "includeAll": true,
-        "label": "Namespace",
-        "multi": true,
-        "name": "namespace",
-        "options": [],
-        "query": {
-          "query": "label_values(kubernetes_io:container_uptime{cluster_name=~\"$cluster\", container_name=~\"ff-.*|pushpin-.*\"}, namespace_name)",
-          "refId": "StandardVariableQuery"
-        },
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 1,
-        "type": "query"
-      },
-      {
-        "allValue": "ff-.*|pushpin-.*",
-        "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${datasource}"
-        },
-        "definition": "label_values(kubernetes_io:container_uptime{cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", container_name=~\"(ff-.*|pushpin-worker|pushpin-pushpin)\", container_name!~\".*db-migration\"}, container_name)",
-        "hide": 0,
-        "includeAll": true,
-        "label": "Container",
-        "multi": true,
-        "name": "container",
-        "options": [],
-        "query": {
-          "query": "label_values(kubernetes_io:container_uptime{cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", container_name=~\"(ff-.*|pushpin-worker|pushpin-pushpin)\", container_name!~\".*db-migration\"}, container_name)",
-          "refId": "StandardVariableQuery"
-        },
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 1,
-        "type": "query"
-      }
-    ]
-  },
-  "time": {
-    "from": "now-7d",
-    "to": "now"
-  },
-  "timepicker": {},
-  "timezone": "",
-  "title": "Weekly Health Report",
-  "uid": "cBuzJ6e4k",
-  "version": 21,
-  "weekStart": ""
+            "includeAll": "ff-.*|pushpin-.*",
+            "multi": true,
+            "name": "container",
+            "query": "label_values(kubernetes_io:container_uptime{cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", container_name=~\"ff-.*|pushpin-worker|pushpin-pushpin\", container_name!~\".*db-migration\"}, container_name)",
+            "refresh": 1,
+            "sort": 1,
+            "type": "query"
+         }
+      ]
+   },
+   "time": {
+      "from": "now-7d",
+      "to": "now"
+   },
+   "timezone": "utc",
+   "title": "Weekly Health Report",
+   "uid": "ff_weekly_health"
 }
