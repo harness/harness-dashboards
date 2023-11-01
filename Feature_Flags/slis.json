@@ -1,0 +1,3205 @@
+{
+   "graphTooltip": 1,
+   "panels": [
+      {
+         "collapsed": true,
+         "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 0
+         },
+         "id": 1,
+         "panels": [
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 0.059999999999999998,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 0.050000000000000003
+                           }
+                        ]
+                     },
+                     "unit": "percentunit"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 0,
+                  "y": 1
+               },
+               "id": 2,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by () (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"prod-cf-auth-backend\", response_code=\"500\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"prod-cf-auth-backend\", response_code=\"501\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"prod-cf-auth-backend\", response_code=\"502\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"prod-cf-auth-backend\", response_code=\"503\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"prod-cf-auth-backend\", response_code=\"504\"}[5m]) OR\n  up * 0\n)\n",
+                     "legendFormat": "5xx"
+                  },
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by (matched_url_path_rule) (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{\n      matched_url_path_rule!=\"UNMATCHED\",\n      backend_target_name=\"prod-cf-auth-backend\"\n  }[5m])\n)\n",
+                     "legendFormat": "all"
+                  }
+               ],
+               "title": "Rate of 5xx errors: ff-auth",
+               "transformations": [
+                  {
+                     "id": "calculateField",
+                     "options": {
+                        "binary": {
+                           "left": "5xx",
+                           "operator": "/",
+                           "reducer": "sum",
+                           "right": "all"
+                        },
+                        "mode": "binary",
+                        "reduce": {
+                           "include": [ ],
+                           "reducer": "allValues"
+                        },
+                        "replaceFields": true
+                     }
+                  }
+               ],
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 35000,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 30000
+                           }
+                        ]
+                     },
+                     "unit": "ms"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 12,
+                  "y": 1
+               },
+               "id": 3,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "histogram_quantile(0.95, sum by (matched_url_path_rule, backend_target_name, le)\n(rate(\n  loadbalancing_googleapis_com:https_total_latencies_bucket{\n    backend_target_name=\"prod-cf-auth-backend\",\n    matched_url_path_rule!=\"UNMATCHED\"\n  }[5m])\n))\n",
+                     "legendFormat": "{{matched_url_path_rule}}"
+                  }
+               ],
+               "title": "Request latency: ff-auth",
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 0.059999999999999998,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 0.050000000000000003
+                           }
+                        ]
+                     },
+                     "unit": "percentunit"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 0,
+                  "y": 7
+               },
+               "id": 4,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum (rate(ff_http_requests_total{job=\"ff-admin-server\", namespace=\"harness-nextgen\", code=~\"5.*\"}[5m]) OR up * 0)\n",
+                     "legendFormat": "5xx"
+                  },
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum (rate(ff_http_requests_total{job=\"ff-admin-server\", namespace=\"harness-nextgen\"}[5m]) OR up * 0)\n",
+                     "legendFormat": "all"
+                  }
+               ],
+               "title": "Rate of 5xx errors: ff-admin",
+               "transformations": [
+                  {
+                     "id": "calculateField",
+                     "options": {
+                        "binary": {
+                           "left": "5xx",
+                           "operator": "/",
+                           "reducer": "sum",
+                           "right": "all"
+                        },
+                        "mode": "binary",
+                        "reduce": {
+                           "include": [ ],
+                           "reducer": "allValues"
+                        },
+                        "replaceFields": true
+                     }
+                  }
+               ],
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 35000,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 30000
+                           }
+                        ]
+                     },
+                     "unit": "ms"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 12,
+                  "y": 7
+               },
+               "id": 5,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "histogram_quantile(0.95, sum by (job, le)\n(rate(\n  ff_http_requests_content_length_histogram_bucket{\n    job=\"ff-admin-server\",\n    namespace=\"harness-nextgen\"\n  }[5m])\n))\n",
+                     "legendFormat": "{{job}}"
+                  }
+               ],
+               "title": "Request latency: ff-admin",
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 0.059999999999999998,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 0.050000000000000003
+                           }
+                        ]
+                     },
+                     "unit": "percentunit"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 0,
+                  "y": 13
+               },
+               "id": 6,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by () (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"prod-cf-client-backend\", response_code=\"500\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"prod-cf-client-backend\", response_code=\"501\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"prod-cf-client-backend\", response_code=\"502\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"prod-cf-client-backend\", response_code=\"503\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"prod-cf-client-backend\", response_code=\"504\"}[5m]) OR\n  up * 0\n)\n",
+                     "legendFormat": "5xx"
+                  },
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by (matched_url_path_rule) (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{\n      matched_url_path_rule!=\"UNMATCHED\",\n      backend_target_name=\"prod-cf-client-backend\"\n  }[5m])\n)\n",
+                     "legendFormat": "all"
+                  }
+               ],
+               "title": "Rate of 5xx errors: ff-client",
+               "transformations": [
+                  {
+                     "id": "calculateField",
+                     "options": {
+                        "binary": {
+                           "left": "5xx",
+                           "operator": "/",
+                           "reducer": "sum",
+                           "right": "all"
+                        },
+                        "mode": "binary",
+                        "reduce": {
+                           "include": [ ],
+                           "reducer": "allValues"
+                        },
+                        "replaceFields": true
+                     }
+                  }
+               ],
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 35000,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 30000
+                           }
+                        ]
+                     },
+                     "unit": "ms"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 12,
+                  "y": 13
+               },
+               "id": 7,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "histogram_quantile(0.95, sum by (matched_url_path_rule, backend_target_name, le)\n(rate(\n  loadbalancing_googleapis_com:https_total_latencies_bucket{\n    backend_target_name=\"prod-cf-client-backend\",\n    matched_url_path_rule!=\"UNMATCHED\"\n  }[5m])\n))\n",
+                     "legendFormat": "{{matched_url_path_rule}}"
+                  }
+               ],
+               "title": "Request latency: ff-client",
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 0.059999999999999998,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 0.050000000000000003
+                           }
+                        ]
+                     },
+                     "unit": "percentunit"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 0,
+                  "y": 19
+               },
+               "id": 8,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by () (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"prod-cf-metric-backend\", response_code=\"500\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"prod-cf-metric-backend\", response_code=\"501\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"prod-cf-metric-backend\", response_code=\"502\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"prod-cf-metric-backend\", response_code=\"503\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"prod-cf-metric-backend\", response_code=\"504\"}[5m]) OR\n  up * 0\n)\n",
+                     "legendFormat": "5xx"
+                  },
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by (matched_url_path_rule) (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{\n      matched_url_path_rule!=\"UNMATCHED\",\n      backend_target_name=\"prod-cf-metric-backend\"\n  }[5m])\n)\n",
+                     "legendFormat": "all"
+                  }
+               ],
+               "title": "Rate of 5xx errors: ff-metric",
+               "transformations": [
+                  {
+                     "id": "calculateField",
+                     "options": {
+                        "binary": {
+                           "left": "5xx",
+                           "operator": "/",
+                           "reducer": "sum",
+                           "right": "all"
+                        },
+                        "mode": "binary",
+                        "reduce": {
+                           "include": [ ],
+                           "reducer": "allValues"
+                        },
+                        "replaceFields": true
+                     }
+                  }
+               ],
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 35000,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 30000
+                           }
+                        ]
+                     },
+                     "unit": "ms"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 12,
+                  "y": 19
+               },
+               "id": 9,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "histogram_quantile(0.95, sum by (matched_url_path_rule, backend_target_name, le)\n(rate(\n  loadbalancing_googleapis_com:https_total_latencies_bucket{\n    backend_target_name=\"prod-cf-metric-backend\",\n    matched_url_path_rule!=\"UNMATCHED\"\n  }[5m])\n))\n",
+                     "legendFormat": "{{matched_url_path_rule}}"
+                  }
+               ],
+               "title": "Request latency: ff-metric",
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 0.059999999999999998,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 0.050000000000000003
+                           }
+                        ]
+                     },
+                     "unit": "percentunit"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 0,
+                  "y": 25
+               },
+               "id": 10,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by () (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"prod-pushpin-backend\", response_code=\"500\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"prod-pushpin-backend\", response_code=\"501\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"prod-pushpin-backend\", response_code=\"502\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"prod-pushpin-backend\", response_code=\"503\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"prod-pushpin-backend\", response_code=\"504\"}[5m]) OR\n  up * 0\n)\n",
+                     "legendFormat": "5xx"
+                  },
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by (matched_url_path_rule) (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{\n      matched_url_path_rule!=\"UNMATCHED\",\n      backend_target_name=\"prod-pushpin-backend\"\n  }[5m])\n)\n",
+                     "legendFormat": "all"
+                  }
+               ],
+               "title": "Rate of 5xx errors: pushpin",
+               "transformations": [
+                  {
+                     "id": "calculateField",
+                     "options": {
+                        "binary": {
+                           "left": "5xx",
+                           "operator": "/",
+                           "reducer": "sum",
+                           "right": "all"
+                        },
+                        "mode": "binary",
+                        "reduce": {
+                           "include": [ ],
+                           "reducer": "allValues"
+                        },
+                        "replaceFields": true
+                     }
+                  }
+               ],
+               "type": "timeseries"
+            }
+         ],
+         "title": "Prod 1",
+         "type": "row"
+      },
+      {
+         "collapsed": true,
+         "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 30
+         },
+         "id": 11,
+         "panels": [
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 0.059999999999999998,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 0.050000000000000003
+                           }
+                        ]
+                     },
+                     "unit": "percentunit"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 0,
+                  "y": 31
+               },
+               "id": 12,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum (rate(ff_http_requests_total{job=\"ff-admin-server\", namespace=\"harness-nextgen-free\", code=~\"5.*\"}[5m]) OR up * 0)\n",
+                     "legendFormat": "5xx"
+                  },
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum (rate(ff_http_requests_total{job=\"ff-admin-server\", namespace=\"harness-nextgen-free\"}[5m]) OR up * 0)\n",
+                     "legendFormat": "all"
+                  }
+               ],
+               "title": "Rate of 5xx errors: ff-admin",
+               "transformations": [
+                  {
+                     "id": "calculateField",
+                     "options": {
+                        "binary": {
+                           "left": "5xx",
+                           "operator": "/",
+                           "reducer": "sum",
+                           "right": "all"
+                        },
+                        "mode": "binary",
+                        "reduce": {
+                           "include": [ ],
+                           "reducer": "allValues"
+                        },
+                        "replaceFields": true
+                     }
+                  }
+               ],
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 35000,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 30000
+                           }
+                        ]
+                     },
+                     "unit": "ms"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 12,
+                  "y": 31
+               },
+               "id": 13,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "histogram_quantile(0.95, sum by (job, le)\n(rate(\n  ff_http_requests_content_length_histogram_bucket{\n    job=\"ff-admin-server\",\n    namespace=\"harness-nextgen-free\"\n  }[5m])\n))\n",
+                     "legendFormat": "{{job}}"
+                  }
+               ],
+               "title": "Request latency: ff-admin",
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 0.059999999999999998,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 0.050000000000000003
+                           }
+                        ]
+                     },
+                     "unit": "percentunit"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 0,
+                  "y": 37
+               },
+               "id": 14,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by () (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"free-cf-client-backend\", response_code=\"500\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"free-cf-client-backend\", response_code=\"501\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"free-cf-client-backend\", response_code=\"502\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"free-cf-client-backend\", response_code=\"503\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"free-cf-client-backend\", response_code=\"504\"}[5m]) OR\n  up * 0\n)\n",
+                     "legendFormat": "5xx"
+                  },
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by (matched_url_path_rule) (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{\n      matched_url_path_rule!=\"UNMATCHED\",\n      backend_target_name=\"free-cf-client-backend\"\n  }[5m])\n)\n",
+                     "legendFormat": "all"
+                  }
+               ],
+               "title": "Rate of 5xx errors: ff-client",
+               "transformations": [
+                  {
+                     "id": "calculateField",
+                     "options": {
+                        "binary": {
+                           "left": "5xx",
+                           "operator": "/",
+                           "reducer": "sum",
+                           "right": "all"
+                        },
+                        "mode": "binary",
+                        "reduce": {
+                           "include": [ ],
+                           "reducer": "allValues"
+                        },
+                        "replaceFields": true
+                     }
+                  }
+               ],
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 35000,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 30000
+                           }
+                        ]
+                     },
+                     "unit": "ms"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 12,
+                  "y": 37
+               },
+               "id": 15,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "histogram_quantile(0.95, sum by (matched_url_path_rule, backend_target_name, le)\n(rate(\n  loadbalancing_googleapis_com:https_total_latencies_bucket{\n    backend_target_name=\"free-cf-client-backend\",\n    matched_url_path_rule!=\"UNMATCHED\"\n  }[5m])\n))\n",
+                     "legendFormat": "{{matched_url_path_rule}}"
+                  }
+               ],
+               "title": "Request latency: ff-client",
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 0.059999999999999998,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 0.050000000000000003
+                           }
+                        ]
+                     },
+                     "unit": "percentunit"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 0,
+                  "y": 43
+               },
+               "id": 16,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by () (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"free-cf-metric-backend\", response_code=\"500\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"free-cf-metric-backend\", response_code=\"501\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"free-cf-metric-backend\", response_code=\"502\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"free-cf-metric-backend\", response_code=\"503\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"free-cf-metric-backend\", response_code=\"504\"}[5m]) OR\n  up * 0\n)\n",
+                     "legendFormat": "5xx"
+                  },
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by (matched_url_path_rule) (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{\n      matched_url_path_rule!=\"UNMATCHED\",\n      backend_target_name=\"free-cf-metric-backend\"\n  }[5m])\n)\n",
+                     "legendFormat": "all"
+                  }
+               ],
+               "title": "Rate of 5xx errors: ff-metric",
+               "transformations": [
+                  {
+                     "id": "calculateField",
+                     "options": {
+                        "binary": {
+                           "left": "5xx",
+                           "operator": "/",
+                           "reducer": "sum",
+                           "right": "all"
+                        },
+                        "mode": "binary",
+                        "reduce": {
+                           "include": [ ],
+                           "reducer": "allValues"
+                        },
+                        "replaceFields": true
+                     }
+                  }
+               ],
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 35000,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 30000
+                           }
+                        ]
+                     },
+                     "unit": "ms"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 12,
+                  "y": 43
+               },
+               "id": 17,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "histogram_quantile(0.95, sum by (matched_url_path_rule, backend_target_name, le)\n(rate(\n  loadbalancing_googleapis_com:https_total_latencies_bucket{\n    backend_target_name=\"free-cf-metric-backend\",\n    matched_url_path_rule!=\"UNMATCHED\"\n  }[5m])\n))\n",
+                     "legendFormat": "{{matched_url_path_rule}}"
+                  }
+               ],
+               "title": "Request latency: ff-metric",
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 0.059999999999999998,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 0.050000000000000003
+                           }
+                        ]
+                     },
+                     "unit": "percentunit"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 0,
+                  "y": 49
+               },
+               "id": 18,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by () (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"free-pushpin-backend\", response_code=\"500\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"free-pushpin-backend\", response_code=\"501\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"free-pushpin-backend\", response_code=\"502\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"free-pushpin-backend\", response_code=\"503\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"free-pushpin-backend\", response_code=\"504\"}[5m]) OR\n  up * 0\n)\n",
+                     "legendFormat": "5xx"
+                  },
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by (matched_url_path_rule) (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{\n      matched_url_path_rule!=\"UNMATCHED\",\n      backend_target_name=\"free-pushpin-backend\"\n  }[5m])\n)\n",
+                     "legendFormat": "all"
+                  }
+               ],
+               "title": "Rate of 5xx errors: pushpin",
+               "transformations": [
+                  {
+                     "id": "calculateField",
+                     "options": {
+                        "binary": {
+                           "left": "5xx",
+                           "operator": "/",
+                           "reducer": "sum",
+                           "right": "all"
+                        },
+                        "mode": "binary",
+                        "reduce": {
+                           "include": [ ],
+                           "reducer": "allValues"
+                        },
+                        "replaceFields": true
+                     }
+                  }
+               ],
+               "type": "timeseries"
+            }
+         ],
+         "title": "Prod 2",
+         "type": "row"
+      },
+      {
+         "collapsed": true,
+         "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 55
+         },
+         "id": 19,
+         "panels": [
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 0.059999999999999998,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 0.050000000000000003
+                           }
+                        ]
+                     },
+                     "unit": "percentunit"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 0,
+                  "y": 56
+               },
+               "id": 20,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum (rate(ff_http_requests_total{job=\"ff-admin-server\", namespace=\"harness-nextgen-compliance\", code=~\"5.*\"}[5m]) OR up * 0)\n",
+                     "legendFormat": "5xx"
+                  },
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum (rate(ff_http_requests_total{job=\"ff-admin-server\", namespace=\"harness-nextgen-compliance\"}[5m]) OR up * 0)\n",
+                     "legendFormat": "all"
+                  }
+               ],
+               "title": "Rate of 5xx errors: ff-admin",
+               "transformations": [
+                  {
+                     "id": "calculateField",
+                     "options": {
+                        "binary": {
+                           "left": "5xx",
+                           "operator": "/",
+                           "reducer": "sum",
+                           "right": "all"
+                        },
+                        "mode": "binary",
+                        "reduce": {
+                           "include": [ ],
+                           "reducer": "allValues"
+                        },
+                        "replaceFields": true
+                     }
+                  }
+               ],
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 35000,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 30000
+                           }
+                        ]
+                     },
+                     "unit": "ms"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 12,
+                  "y": 56
+               },
+               "id": 21,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "histogram_quantile(0.95, sum by (job, le)\n(rate(\n  ff_http_requests_content_length_histogram_bucket{\n    job=\"ff-admin-server\",\n    namespace=\"harness-nextgen-compliance\"\n  }[5m])\n))\n",
+                     "legendFormat": "{{job}}"
+                  }
+               ],
+               "title": "Request latency: ff-admin",
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 0.059999999999999998,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 0.050000000000000003
+                           }
+                        ]
+                     },
+                     "unit": "percentunit"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 0,
+                  "y": 62
+               },
+               "id": 22,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by () (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"comp-cf-client-backend\", response_code=\"500\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"comp-cf-client-backend\", response_code=\"501\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"comp-cf-client-backend\", response_code=\"502\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"comp-cf-client-backend\", response_code=\"503\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"comp-cf-client-backend\", response_code=\"504\"}[5m]) OR\n  up * 0\n)\n",
+                     "legendFormat": "5xx"
+                  },
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by (matched_url_path_rule) (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{\n      matched_url_path_rule!=\"UNMATCHED\",\n      backend_target_name=\"comp-cf-client-backend\"\n  }[5m])\n)\n",
+                     "legendFormat": "all"
+                  }
+               ],
+               "title": "Rate of 5xx errors: ff-client",
+               "transformations": [
+                  {
+                     "id": "calculateField",
+                     "options": {
+                        "binary": {
+                           "left": "5xx",
+                           "operator": "/",
+                           "reducer": "sum",
+                           "right": "all"
+                        },
+                        "mode": "binary",
+                        "reduce": {
+                           "include": [ ],
+                           "reducer": "allValues"
+                        },
+                        "replaceFields": true
+                     }
+                  }
+               ],
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 35000,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 30000
+                           }
+                        ]
+                     },
+                     "unit": "ms"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 12,
+                  "y": 62
+               },
+               "id": 23,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "histogram_quantile(0.95, sum by (matched_url_path_rule, backend_target_name, le)\n(rate(\n  loadbalancing_googleapis_com:https_total_latencies_bucket{\n    backend_target_name=\"comp-cf-client-backend\",\n    matched_url_path_rule!=\"UNMATCHED\"\n  }[5m])\n))\n",
+                     "legendFormat": "{{matched_url_path_rule}}"
+                  }
+               ],
+               "title": "Request latency: ff-client",
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 0.059999999999999998,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 0.050000000000000003
+                           }
+                        ]
+                     },
+                     "unit": "percentunit"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 0,
+                  "y": 68
+               },
+               "id": 24,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by () (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"comp-cf-metric-backend\", response_code=\"500\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"comp-cf-metric-backend\", response_code=\"501\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"comp-cf-metric-backend\", response_code=\"502\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"comp-cf-metric-backend\", response_code=\"503\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"comp-cf-metric-backend\", response_code=\"504\"}[5m]) OR\n  up * 0\n)\n",
+                     "legendFormat": "5xx"
+                  },
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by (matched_url_path_rule) (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{\n      matched_url_path_rule!=\"UNMATCHED\",\n      backend_target_name=\"comp-cf-metric-backend\"\n  }[5m])\n)\n",
+                     "legendFormat": "all"
+                  }
+               ],
+               "title": "Rate of 5xx errors: ff-metric",
+               "transformations": [
+                  {
+                     "id": "calculateField",
+                     "options": {
+                        "binary": {
+                           "left": "5xx",
+                           "operator": "/",
+                           "reducer": "sum",
+                           "right": "all"
+                        },
+                        "mode": "binary",
+                        "reduce": {
+                           "include": [ ],
+                           "reducer": "allValues"
+                        },
+                        "replaceFields": true
+                     }
+                  }
+               ],
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 35000,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 30000
+                           }
+                        ]
+                     },
+                     "unit": "ms"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 12,
+                  "y": 68
+               },
+               "id": 25,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "histogram_quantile(0.95, sum by (matched_url_path_rule, backend_target_name, le)\n(rate(\n  loadbalancing_googleapis_com:https_total_latencies_bucket{\n    backend_target_name=\"comp-cf-metric-backend\",\n    matched_url_path_rule!=\"UNMATCHED\"\n  }[5m])\n))\n",
+                     "legendFormat": "{{matched_url_path_rule}}"
+                  }
+               ],
+               "title": "Request latency: ff-metric",
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 0.059999999999999998,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 0.050000000000000003
+                           }
+                        ]
+                     },
+                     "unit": "percentunit"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 0,
+                  "y": 74
+               },
+               "id": 26,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by () (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"comp-pushpin-backend\", response_code=\"500\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"comp-pushpin-backend\", response_code=\"501\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"comp-pushpin-backend\", response_code=\"502\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"comp-pushpin-backend\", response_code=\"503\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"comp-pushpin-backend\", response_code=\"504\"}[5m]) OR\n  up * 0\n)\n",
+                     "legendFormat": "5xx"
+                  },
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "ProdSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by (matched_url_path_rule) (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{\n      matched_url_path_rule!=\"UNMATCHED\",\n      backend_target_name=\"comp-pushpin-backend\"\n  }[5m])\n)\n",
+                     "legendFormat": "all"
+                  }
+               ],
+               "title": "Rate of 5xx errors: pushpin",
+               "transformations": [
+                  {
+                     "id": "calculateField",
+                     "options": {
+                        "binary": {
+                           "left": "5xx",
+                           "operator": "/",
+                           "reducer": "sum",
+                           "right": "all"
+                        },
+                        "mode": "binary",
+                        "reduce": {
+                           "include": [ ],
+                           "reducer": "allValues"
+                        },
+                        "replaceFields": true
+                     }
+                  }
+               ],
+               "type": "timeseries"
+            }
+         ],
+         "title": "Prod 3",
+         "type": "row"
+      },
+      {
+         "collapsed": true,
+         "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 80
+         },
+         "id": 27,
+         "panels": [
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 0.059999999999999998,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 0.050000000000000003
+                           }
+                        ]
+                     },
+                     "unit": "percentunit"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 0,
+                  "y": 81
+               },
+               "id": 28,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "UATSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by () (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"ff-auth-server-backend-service\", response_code=\"500\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"ff-auth-server-backend-service\", response_code=\"501\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"ff-auth-server-backend-service\", response_code=\"502\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"ff-auth-server-backend-service\", response_code=\"503\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"ff-auth-server-backend-service\", response_code=\"504\"}[5m]) OR\n  up * 0\n)\n",
+                     "legendFormat": "5xx"
+                  },
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "QASetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by (matched_url_path_rule) (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{\n      matched_url_path_rule!=\"UNMATCHED\",\n      backend_target_name=\"ff-auth-server-backend-service\"\n  }[5m])\n)\n",
+                     "legendFormat": "all"
+                  }
+               ],
+               "title": "Rate of 5xx errors: ff-auth",
+               "transformations": [
+                  {
+                     "id": "calculateField",
+                     "options": {
+                        "binary": {
+                           "left": "5xx",
+                           "operator": "/",
+                           "reducer": "sum",
+                           "right": "all"
+                        },
+                        "mode": "binary",
+                        "reduce": {
+                           "include": [ ],
+                           "reducer": "allValues"
+                        },
+                        "replaceFields": true
+                     }
+                  }
+               ],
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 35000,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 30000
+                           }
+                        ]
+                     },
+                     "unit": "ms"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 12,
+                  "y": 81
+               },
+               "id": 29,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "QASetup-ManagedPrometheus"
+                     },
+                     "expr": "histogram_quantile(0.95, sum by (matched_url_path_rule, backend_target_name, le)\n(rate(\n  loadbalancing_googleapis_com:https_total_latencies_bucket{\n    backend_target_name=\"ff-auth-server-backend-service\",\n    matched_url_path_rule!=\"UNMATCHED\"\n  }[5m])\n))\n",
+                     "legendFormat": "{{matched_url_path_rule}}"
+                  }
+               ],
+               "title": "Request latency: ff-auth",
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 0.059999999999999998,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 0.050000000000000003
+                           }
+                        ]
+                     },
+                     "unit": "percentunit"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 0,
+                  "y": 87
+               },
+               "id": 30,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "QASetup-ManagedPrometheus"
+                     },
+                     "expr": "sum (rate(ff_http_requests_total{cluster=\"qa-private\", namespace=\"harness-nextgen\", job=\"ff-admin-server\", code=~\"5.*\"}[5m]) OR up * 0)\n",
+                     "legendFormat": "5xx"
+                  },
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "QASetup-ManagedPrometheus"
+                     },
+                     "expr": "sum (rate(ff_http_requests_total{cluster=\"qa-private\", namespace=\"harness-nextgen\", job=\"ff-admin-server\"}[5m]) OR up * 0)\n",
+                     "legendFormat": "all"
+                  }
+               ],
+               "title": "Rate of 5xx errors: ff-admin",
+               "transformations": [
+                  {
+                     "id": "calculateField",
+                     "options": {
+                        "binary": {
+                           "left": "5xx",
+                           "operator": "/",
+                           "reducer": "sum",
+                           "right": "all"
+                        },
+                        "mode": "binary",
+                        "reduce": {
+                           "include": [ ],
+                           "reducer": "allValues"
+                        },
+                        "replaceFields": true
+                     }
+                  }
+               ],
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 35000,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 30000
+                           }
+                        ]
+                     },
+                     "unit": "ms"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 12,
+                  "y": 87
+               },
+               "id": 31,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "QASetup-ManagedPrometheus"
+                     },
+                     "expr": "histogram_quantile(0.95, sum by (job, le)\n(rate(\n  ff_http_requests_content_length_histogram_bucket{\n    cluster=\"qa-private\",\n    job=\"ff-admin-server\",\n    namespace=\"harness-nextgen\"\n  }[5m])\n))\n",
+                     "legendFormat": "{{job}}"
+                  }
+               ],
+               "title": "Request latency: ff-admin",
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 0.059999999999999998,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 0.050000000000000003
+                           }
+                        ]
+                     },
+                     "unit": "percentunit"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 0,
+                  "y": 93
+               },
+               "id": 32,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "QASetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by () (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"ff-client-server-1-backend-service\", response_code=\"500\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"ff-client-server-1-backend-service\", response_code=\"501\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"ff-client-server-1-backend-service\", response_code=\"502\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"ff-client-server-1-backend-service\", response_code=\"503\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"ff-client-server-1-backend-service\", response_code=\"504\"}[5m]) OR\n  up * 0\n)\n",
+                     "legendFormat": "5xx"
+                  },
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "QASetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by (matched_url_path_rule) (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{\n      matched_url_path_rule!=\"UNMATCHED\",\n      backend_target_name=\"ff-client-server-1-backend-service\"\n  }[5m])\n)\n",
+                     "legendFormat": "all"
+                  }
+               ],
+               "title": "Rate of 5xx errors: ff-client",
+               "transformations": [
+                  {
+                     "id": "calculateField",
+                     "options": {
+                        "binary": {
+                           "left": "5xx",
+                           "operator": "/",
+                           "reducer": "sum",
+                           "right": "all"
+                        },
+                        "mode": "binary",
+                        "reduce": {
+                           "include": [ ],
+                           "reducer": "allValues"
+                        },
+                        "replaceFields": true
+                     }
+                  }
+               ],
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 35000,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 30000
+                           }
+                        ]
+                     },
+                     "unit": "ms"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 12,
+                  "y": 93
+               },
+               "id": 33,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "QASetup-ManagedPrometheus"
+                     },
+                     "expr": "histogram_quantile(0.95, sum by (matched_url_path_rule, backend_target_name, le)\n(rate(\n  loadbalancing_googleapis_com:https_total_latencies_bucket{\n    backend_target_name=\"ff-client-server-1-backend-service\",\n    matched_url_path_rule!=\"UNMATCHED\"\n  }[5m])\n))\n",
+                     "legendFormat": "{{matched_url_path_rule}}"
+                  }
+               ],
+               "title": "Request latency: ff-client",
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 0.059999999999999998,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 0.050000000000000003
+                           }
+                        ]
+                     },
+                     "unit": "percentunit"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 0,
+                  "y": 99
+               },
+               "id": 34,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "QASetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by () (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"ff-metrics-server-qa-backend-service\", response_code=\"500\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"ff-metrics-server-qa-backend-service\", response_code=\"501\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"ff-metrics-server-qa-backend-service\", response_code=\"502\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"ff-metrics-server-qa-backend-service\", response_code=\"503\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"ff-metrics-server-qa-backend-service\", response_code=\"504\"}[5m]) OR\n  up * 0\n)\n",
+                     "legendFormat": "5xx"
+                  },
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "QASetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by (matched_url_path_rule) (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{\n      matched_url_path_rule!=\"UNMATCHED\",\n      backend_target_name=\"ff-metrics-server-qa-backend-service\"\n  }[5m])\n)\n",
+                     "legendFormat": "all"
+                  }
+               ],
+               "title": "Rate of 5xx errors: ff-metric",
+               "transformations": [
+                  {
+                     "id": "calculateField",
+                     "options": {
+                        "binary": {
+                           "left": "5xx",
+                           "operator": "/",
+                           "reducer": "sum",
+                           "right": "all"
+                        },
+                        "mode": "binary",
+                        "reduce": {
+                           "include": [ ],
+                           "reducer": "allValues"
+                        },
+                        "replaceFields": true
+                     }
+                  }
+               ],
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 35000,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 30000
+                           }
+                        ]
+                     },
+                     "unit": "ms"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 12,
+                  "y": 99
+               },
+               "id": 35,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "QASetup-ManagedPrometheus"
+                     },
+                     "expr": "histogram_quantile(0.95, sum by (matched_url_path_rule, backend_target_name, le)\n(rate(\n  loadbalancing_googleapis_com:https_total_latencies_bucket{\n    backend_target_name=\"ff-metrics-server-qa-backend-service\",\n    matched_url_path_rule!=\"UNMATCHED\"\n  }[5m])\n))\n",
+                     "legendFormat": "{{matched_url_path_rule}}"
+                  }
+               ],
+               "title": "Request latency: ff-metric",
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 0.059999999999999998,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 0.050000000000000003
+                           }
+                        ]
+                     },
+                     "unit": "percentunit"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 0,
+                  "y": 105
+               },
+               "id": 36,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "QASetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by () (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"pushpin-1-backend-service\", response_code=\"500\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"pushpin-1-backend-service\", response_code=\"501\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"pushpin-1-backend-service\", response_code=\"502\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"pushpin-1-backend-service\", response_code=\"503\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"pushpin-1-backend-service\", response_code=\"504\"}[5m]) OR\n  up * 0\n)\n",
+                     "legendFormat": "5xx"
+                  },
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "QASetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by (matched_url_path_rule) (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{\n      matched_url_path_rule!=\"UNMATCHED\",\n      backend_target_name=\"pushpin-1-backend-service\"\n  }[5m])\n)\n",
+                     "legendFormat": "all"
+                  }
+               ],
+               "title": "Rate of 5xx errors: pushpin",
+               "transformations": [
+                  {
+                     "id": "calculateField",
+                     "options": {
+                        "binary": {
+                           "left": "5xx",
+                           "operator": "/",
+                           "reducer": "sum",
+                           "right": "all"
+                        },
+                        "mode": "binary",
+                        "reduce": {
+                           "include": [ ],
+                           "reducer": "allValues"
+                        },
+                        "replaceFields": true
+                     }
+                  }
+               ],
+               "type": "timeseries"
+            }
+         ],
+         "title": "QA",
+         "type": "row"
+      },
+      {
+         "collapsed": true,
+         "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 111
+         },
+         "id": 37,
+         "panels": [
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 0.059999999999999998,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 0.050000000000000003
+                           }
+                        ]
+                     },
+                     "unit": "percentunit"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 0,
+                  "y": 112
+               },
+               "id": 38,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "UATSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by () (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"uat-ff-auth-backend\", response_code=\"500\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"uat-ff-auth-backend\", response_code=\"501\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"uat-ff-auth-backend\", response_code=\"502\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"uat-ff-auth-backend\", response_code=\"503\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"uat-ff-auth-backend\", response_code=\"504\"}[5m]) OR\n  up * 0\n)\n",
+                     "legendFormat": "5xx"
+                  },
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "UATSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by (matched_url_path_rule) (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{\n      matched_url_path_rule!=\"UNMATCHED\",\n      backend_target_name=\"uat-ff-auth-backend\"\n  }[5m])\n)\n",
+                     "legendFormat": "all"
+                  }
+               ],
+               "title": "Rate of 5xx errors: ff-auth",
+               "transformations": [
+                  {
+                     "id": "calculateField",
+                     "options": {
+                        "binary": {
+                           "left": "5xx",
+                           "operator": "/",
+                           "reducer": "sum",
+                           "right": "all"
+                        },
+                        "mode": "binary",
+                        "reduce": {
+                           "include": [ ],
+                           "reducer": "allValues"
+                        },
+                        "replaceFields": true
+                     }
+                  }
+               ],
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 35000,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 30000
+                           }
+                        ]
+                     },
+                     "unit": "ms"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 12,
+                  "y": 112
+               },
+               "id": 39,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "UATSetup-ManagedPrometheus"
+                     },
+                     "expr": "histogram_quantile(0.95, sum by (matched_url_path_rule, backend_target_name, le)\n(rate(\n  loadbalancing_googleapis_com:https_total_latencies_bucket{\n    backend_target_name=\"uat-ff-auth-backend\",\n    matched_url_path_rule!=\"UNMATCHED\"\n  }[5m])\n))\n",
+                     "legendFormat": "{{matched_url_path_rule}}"
+                  }
+               ],
+               "title": "Request latency: ff-auth",
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 0.059999999999999998,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 0.050000000000000003
+                           }
+                        ]
+                     },
+                     "unit": "percentunit"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 0,
+                  "y": 118
+               },
+               "id": 40,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "UATSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum (rate(ff_http_requests_total{job=\"ff-admin-server\", namespace=\"harness-nextgen\", code=~\"5.*\"}[5m]) OR up * 0)\n",
+                     "legendFormat": "5xx"
+                  },
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "UATSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum (rate(ff_http_requests_total{job=\"ff-admin-server\", namespace=\"harness-nextgen\"}[5m]) OR up * 0)\n",
+                     "legendFormat": "all"
+                  }
+               ],
+               "title": "Rate of 5xx errors: ff-admin",
+               "transformations": [
+                  {
+                     "id": "calculateField",
+                     "options": {
+                        "binary": {
+                           "left": "5xx",
+                           "operator": "/",
+                           "reducer": "sum",
+                           "right": "all"
+                        },
+                        "mode": "binary",
+                        "reduce": {
+                           "include": [ ],
+                           "reducer": "allValues"
+                        },
+                        "replaceFields": true
+                     }
+                  }
+               ],
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 35000,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 30000
+                           }
+                        ]
+                     },
+                     "unit": "ms"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 12,
+                  "y": 118
+               },
+               "id": 41,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "UATSetup-ManagedPrometheus"
+                     },
+                     "expr": "histogram_quantile(0.95, sum by (job, le)\n(rate(\n  ff_http_requests_content_length_histogram_bucket{\n    job=\"ff-admin-server\",\n    namespace=\"harness-nextgen\"\n  }[5m])\n))\n",
+                     "legendFormat": "{{job}}"
+                  }
+               ],
+               "title": "Request latency: ff-admin",
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 0.059999999999999998,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 0.050000000000000003
+                           }
+                        ]
+                     },
+                     "unit": "percentunit"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 0,
+                  "y": 124
+               },
+               "id": 42,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "UATSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by () (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"uat-ff-client-backend\", response_code=\"500\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"uat-ff-client-backend\", response_code=\"501\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"uat-ff-client-backend\", response_code=\"502\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"uat-ff-client-backend\", response_code=\"503\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"uat-ff-client-backend\", response_code=\"504\"}[5m]) OR\n  up * 0\n)\n",
+                     "legendFormat": "5xx"
+                  },
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "UATSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by (matched_url_path_rule) (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{\n      matched_url_path_rule!=\"UNMATCHED\",\n      backend_target_name=\"uat-ff-client-backend\"\n  }[5m])\n)\n",
+                     "legendFormat": "all"
+                  }
+               ],
+               "title": "Rate of 5xx errors: ff-client",
+               "transformations": [
+                  {
+                     "id": "calculateField",
+                     "options": {
+                        "binary": {
+                           "left": "5xx",
+                           "operator": "/",
+                           "reducer": "sum",
+                           "right": "all"
+                        },
+                        "mode": "binary",
+                        "reduce": {
+                           "include": [ ],
+                           "reducer": "allValues"
+                        },
+                        "replaceFields": true
+                     }
+                  }
+               ],
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 35000,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 30000
+                           }
+                        ]
+                     },
+                     "unit": "ms"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 12,
+                  "y": 124
+               },
+               "id": 43,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "UATSetup-ManagedPrometheus"
+                     },
+                     "expr": "histogram_quantile(0.95, sum by (matched_url_path_rule, backend_target_name, le)\n(rate(\n  loadbalancing_googleapis_com:https_total_latencies_bucket{\n    backend_target_name=\"uat-ff-client-backend\",\n    matched_url_path_rule!=\"UNMATCHED\"\n  }[5m])\n))\n",
+                     "legendFormat": "{{matched_url_path_rule}}"
+                  }
+               ],
+               "title": "Request latency: ff-client",
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 0.059999999999999998,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 0.050000000000000003
+                           }
+                        ]
+                     },
+                     "unit": "percentunit"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 0,
+                  "y": 130
+               },
+               "id": 44,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "UATSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by () (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"uat-ff-metric-backend\", response_code=\"500\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"uat-ff-metric-backend\", response_code=\"501\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"uat-ff-metric-backend\", response_code=\"502\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"uat-ff-metric-backend\", response_code=\"503\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"uat-ff-metric-backend\", response_code=\"504\"}[5m]) OR\n  up * 0\n)\n",
+                     "legendFormat": "5xx"
+                  },
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "UATSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by (matched_url_path_rule) (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{\n      matched_url_path_rule!=\"UNMATCHED\",\n      backend_target_name=\"uat-ff-metric-backend\"\n  }[5m])\n)\n",
+                     "legendFormat": "all"
+                  }
+               ],
+               "title": "Rate of 5xx errors: ff-metric",
+               "transformations": [
+                  {
+                     "id": "calculateField",
+                     "options": {
+                        "binary": {
+                           "left": "5xx",
+                           "operator": "/",
+                           "reducer": "sum",
+                           "right": "all"
+                        },
+                        "mode": "binary",
+                        "reduce": {
+                           "include": [ ],
+                           "reducer": "allValues"
+                        },
+                        "replaceFields": true
+                     }
+                  }
+               ],
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 35000,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 30000
+                           }
+                        ]
+                     },
+                     "unit": "ms"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 12,
+                  "y": 130
+               },
+               "id": 45,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "UATSetup-ManagedPrometheus"
+                     },
+                     "expr": "histogram_quantile(0.95, sum by (matched_url_path_rule, backend_target_name, le)\n(rate(\n  loadbalancing_googleapis_com:https_total_latencies_bucket{\n    backend_target_name=\"uat-ff-metric-backend\",\n    matched_url_path_rule!=\"UNMATCHED\"\n  }[5m])\n))\n",
+                     "legendFormat": "{{matched_url_path_rule}}"
+                  }
+               ],
+               "title": "Request latency: ff-metric",
+               "type": "timeseries"
+            },
+            {
+               "datasource": {
+                  "type": "datasource",
+                  "uid": "-- Mixed --"
+               },
+               "fieldConfig": {
+                  "defaults": {
+                     "custom": {
+                        "axisSoftMax": 0.059999999999999998,
+                        "thresholdsStyle": {
+                           "mode": "area"
+                        }
+                     },
+                     "noValue": 0,
+                     "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                           {
+                              "color": "green",
+                              "value": null
+                           },
+                           {
+                              "color": "dark-red",
+                              "value": 0.050000000000000003
+                           }
+                        ]
+                     },
+                     "unit": "percentunit"
+                  }
+               },
+               "gridPos": {
+                  "h": 5,
+                  "w": 12,
+                  "x": 0,
+                  "y": 136
+               },
+               "id": 46,
+               "options": {
+                  "legend": {
+                     "calcs": [
+                        "mean",
+                        "max"
+                     ],
+                     "displayMode": "table",
+                     "placement": "right"
+                  }
+               },
+               "pluginVersion": "v10.1.0",
+               "targets": [
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "UATSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by () (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"uat-pushpin-backend\", response_code=\"500\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"uat-pushpin-backend\", response_code=\"501\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"uat-pushpin-backend\", response_code=\"502\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"uat-pushpin-backend\", response_code=\"503\"}[5m]) OR\n  count_over_time(loadbalancing_googleapis_com:https_request_count{matched_url_path_rule!=\"UNMATCHED\", backend_target_name=\"uat-pushpin-backend\", response_code=\"504\"}[5m]) OR\n  up * 0\n)\n",
+                     "legendFormat": "5xx"
+                  },
+                  {
+                     "datasource": {
+                        "type": "prometheus",
+                        "uid": "UATSetup-ManagedPrometheus"
+                     },
+                     "expr": "sum by (matched_url_path_rule) (\n  count_over_time(loadbalancing_googleapis_com:https_request_count{\n      matched_url_path_rule!=\"UNMATCHED\",\n      backend_target_name=\"uat-pushpin-backend\"\n  }[5m])\n)\n",
+                     "legendFormat": "all"
+                  }
+               ],
+               "title": "Rate of 5xx errors: pushpin",
+               "transformations": [
+                  {
+                     "id": "calculateField",
+                     "options": {
+                        "binary": {
+                           "left": "5xx",
+                           "operator": "/",
+                           "reducer": "sum",
+                           "right": "all"
+                        },
+                        "mode": "binary",
+                        "reduce": {
+                           "include": [ ],
+                           "reducer": "allValues"
+                        },
+                        "replaceFields": true
+                     }
+                  }
+               ],
+               "type": "timeseries"
+            }
+         ],
+         "title": "UAT",
+         "type": "row"
+      }
+   ],
+   "schemaVersion": 36,
+   "time": {
+      "from": "now-3h",
+      "to": "now"
+   },
+   "timezone": "utc",
+   "title": "SLIs",
+   "uid": "ff_slis"
+}
