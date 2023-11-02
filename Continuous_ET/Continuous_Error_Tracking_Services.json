@@ -126,7 +126,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by (pod, SID) (agents_connected_active{cluster=~\"$cluster\", job=\"et-collector\", namespace=~\"$namespace\"})",
+          "expr": "sum by (SID) (agents_connected_active{cluster=~\"$cluster\", job=\"et-collector\", namespace=~\"$namespace\"})",
           "instant": false,
           "legendFormat": "{{SID}}",
           "range": true,
@@ -217,7 +217,7 @@
             "h": 5,
             "w": 24,
             "x": 0,
-            "y": 10
+            "y": 18
           },
           "id": 64,
           "options": {
@@ -314,7 +314,7 @@
             "h": 5,
             "w": 24,
             "x": 0,
-            "y": 15
+            "y": 23
           },
           "id": 4,
           "options": {
@@ -345,6 +345,107 @@
             }
           ],
           "title": "Pod Restarts",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "description": "This Grafana visualization calculates the average processing time per message for the chosen namespace and pods, allowing you to assess the efficiency of message handling. It's a valuable metric for optimizing message processing performance.",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 15,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineStyle": {
+                  "fill": "solid"
+                },
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "s"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 24,
+            "x": 0,
+            "y": 28
+          },
+          "id": 8,
+          "options": {
+            "legend": {
+              "calcs": [
+                "min",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true,
+              "sortBy": "Min",
+              "sortDesc": false
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${dataSource}"
+              },
+              "editorMode": "code",
+              "expr": "rate(stream_message_processing_seconds_sum{job=\"$service\", pod=~\"$pods\", namespace=\"$namespace\"}[$__interval]) / rate(stream_message_processing_seconds_count{job=\"$service\", pod=~\"$pods\", namespace=\"$namespace\"}[$__interval])",
+              "legendFormat": "{{streamName}} - {{pod}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Message Processing Time",
           "type": "timeseries"
         },
         {
@@ -449,7 +550,7 @@
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 20
+            "y": 33
           },
           "id": 8,
           "options": {
@@ -611,7 +712,7 @@
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 20
+            "y": 33
           },
           "id": 75,
           "options": {
@@ -773,7 +874,7 @@
             "h": 9,
             "w": 12,
             "x": 0,
-            "y": 29
+            "y": 42
           },
           "id": 76,
           "options": {
@@ -881,7 +982,7 @@
             "h": 9,
             "w": 12,
             "x": 12,
-            "y": 29
+            "y": 42
           },
           "id": 12,
           "options": {
@@ -1015,7 +1116,7 @@
             "h": 6,
             "w": 24,
             "x": 0,
-            "y": 38
+            "y": 51
           },
           "id": 78,
           "options": {
@@ -1061,7 +1162,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 11
+        "y": 13
       },
       "id": 51,
       "panels": [
@@ -1157,7 +1258,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 12
+            "y": 14
           },
           "id": 47,
           "options": {
@@ -1284,7 +1385,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 19
+            "y": 21
           },
           "id": 27,
           "options": {
@@ -1412,7 +1513,7 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 19
+            "y": 21
           },
           "id": 46,
           "options": {
@@ -1509,7 +1610,7 @@
             "h": 6,
             "w": 24,
             "x": 0,
-            "y": 27
+            "y": 29
           },
           "id": 7,
           "options": {
@@ -1560,7 +1661,7 @@
       "type": "row"
     }
   ],
-  "refresh": false,
+  "refresh": "1m",
   "schemaVersion": 37,
   "style": "dark",
   "tags": [
@@ -1761,6 +1862,6 @@
   "timezone": "",
   "title": "Continuous Error Tracking Services",
   "uid": "cet-service-metrics",
-  "version": 31,
+  "version": 43,
   "weekStart": ""
 }

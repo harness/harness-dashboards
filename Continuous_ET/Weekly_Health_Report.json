@@ -83,7 +83,13 @@
               "mode": "off"
             }
           },
-          "links": [],
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "GCP Logs",
+              "url": "https://console.cloud.google.com/logs/query;query=resource.type%3D%22k8s_container%22%0Aresource.labels.cluster_name%3D%22${cluster}%22%0Aresource.labels.namespace_name%3D%22${namespace}%22%0Alabels.k8s-pod%2Fapp%3D%22${__field.labels.container_name}%22%20severity%3DERROR%20OR%20CRITICAL%0A;aroundTime=${__value.time:date:iso};duration=PT30M?project=${project}"
+            }
+          ],
           "mappings": [],
           "noValue": "0",
           "thresholds": {
@@ -100,7 +106,32 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "error-tracking"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 6,
@@ -109,7 +140,13 @@
         "y": 1
       },
       "id": 40,
-      "links": [],
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "GCP Logs (Last 7 Days)",
+          "url": "https://console.cloud.google.com/logs/query;query=resource.type%3D%22k8s_container%22%0Aresource.labels.cluster_name%3D%22${cluster}%22%0Aresource.labels.namespace_name%3D%22${namespace}%22%20severity%3DERROR%20OR%20CRITICAL%0A;duration=P7D?project=${project}"
+        }
+      ],
       "options": {
         "legend": {
           "calcs": [
@@ -118,6 +155,8 @@
           "displayMode": "table",
           "placement": "right",
           "showLegend": true,
+          "sortBy": "Total",
+          "sortDesc": true,
           "width": 200
         },
         "tooltip": {
@@ -206,7 +245,13 @@
         "y": 1
       },
       "id": 3,
-      "links": [],
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "GCP Logs (Last 7 Days)",
+          "url": "https://console.cloud.google.com/logs/query;query=resource.type%3D%22k8s_container%22%0Aresource.labels.cluster_name%3D%22${cluster}%22%0Aresource.labels.namespace_name%3D%22${namespace}%22%20severity%3DERROR%20OR%20CRITICAL%0A;duration=P7D?project=${project}"
+        }
+      ],
       "options": {
         "legend": {
           "calcs": [
@@ -215,6 +260,8 @@
           "displayMode": "table",
           "placement": "right",
           "showLegend": true,
+          "sortBy": "Total",
+          "sortDesc": true,
           "width": 200
         },
         "tooltip": {
@@ -313,6 +360,8 @@
           "displayMode": "table",
           "placement": "right",
           "showLegend": true,
+          "sortBy": "Total",
+          "sortDesc": true,
           "width": 200
         },
         "tooltip": {
@@ -410,6 +459,8 @@
           "displayMode": "table",
           "placement": "right",
           "showLegend": true,
+          "sortBy": "Total",
+          "sortDesc": true,
           "width": 200
         },
         "tooltip": {
@@ -551,9 +602,9 @@
           ]
         },
         "hide": 0,
-        "includeAll": true,
+        "includeAll": false,
         "label": "Datasource",
-        "multi": true,
+        "multi": false,
         "name": "datasource",
         "options": [],
         "query": "prometheus",
@@ -580,9 +631,9 @@
         },
         "definition": "kubernetes_io:container_uptime{container_name=~\"et-.*|error-.*\"}",
         "hide": 0,
-        "includeAll": true,
+        "includeAll": false,
         "label": "Cluster",
-        "multi": true,
+        "multi": false,
         "name": "cluster",
         "options": [],
         "query": {
@@ -624,7 +675,7 @@
         "refresh": 1,
         "regex": ".*namespace_name=\\\"([\\d\\w\\-]+)\\\".*",
         "skipUrlSync": false,
-        "sort": 1,
+        "sort": 2,
         "type": "query"
       },
       {
@@ -690,6 +741,32 @@
         "skipUrlSync": false,
         "sort": 1,
         "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "prod-setup-205416",
+          "value": "prod-setup-205416"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "kubernetes_io:container_uptime{container_name=~\"et-.*|error-.*\"}",
+        "hide": 2,
+        "includeAll": false,
+        "multi": false,
+        "name": "project",
+        "options": [],
+        "query": {
+          "query": "kubernetes_io:container_uptime{container_name=~\"et-.*|error-.*\"}",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": ".*project_id=\\\"([\\d\\w\\-]+)\\\".*",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
       }
     ]
   },
@@ -701,6 +778,6 @@
   "timezone": "",
   "title": "Weekly Health Report",
   "uid": "g9lWsgGIz",
-  "version": 6,
+  "version": 13,
   "weekStart": ""
 }
