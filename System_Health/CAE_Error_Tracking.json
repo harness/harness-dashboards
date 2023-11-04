@@ -33,10 +33,10 @@
       "keepTime": true,
       "tags": [],
       "targetBlank": true,
-      "title": "Production Metrics",
+      "title": "Production Metrics Dashboard",
       "tooltip": "",
       "type": "link",
-      "url": "https://grafana.harness.io/d/F9dOkEgIk/production-metrics-dashboard?orgId=1&refresh=1m"
+      "url": "https://grafana.harness.io/d/F9dOkEgIk/production-metrics-dashboard?orgId=1"
     },
     {
       "asDropdown": false,
@@ -45,7 +45,7 @@
       "keepTime": true,
       "tags": [],
       "targetBlank": true,
-      "title": "Microservice version",
+      "title": "MicroService Versions Dashboard",
       "tooltip": "",
       "type": "link",
       "url": "https://grafana.harness.io/d/ZJD3rKZIz/microservice-version-dashboard?orgId=1"
@@ -57,7 +57,7 @@
       "keepTime": true,
       "tags": [],
       "targetBlank": true,
-      "title": "Microservice health dashboard",
+      "title": "MicroService Health Dashboard",
       "tooltip": "",
       "type": "link",
       "url": "https://grafana.harness.io/d/mToVpMeVk/microservices-health-dashboard?orgId=1"
