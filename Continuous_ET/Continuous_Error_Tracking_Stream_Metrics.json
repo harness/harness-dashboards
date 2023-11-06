@@ -601,7 +601,8 @@
                         "mode": "absolute",
                         "steps": [
                             {
-                                "color": "green"
+                                "color": "green",
+                                "value": null
                             },
                             {
                                 "color": "red",
@@ -753,7 +754,7 @@
                     "type": "prometheus",
                     "uid": "${dataSource}"
                 },
-                "definition": "stream_message_processing_seconds_sum{namespace=\"$namespace\", streamName=~\"$streamName\"}",
+                "definition": "kubernetes_io:container_uptime{namespace_name=~\"$namespace\"}",
                 "hide": 0,
                 "includeAll": true,
                 "label": "Pod Name",
@@ -761,24 +762,20 @@
                 "name": "pods",
                 "options": [],
                 "query": {
-                    "query": "stream_message_processing_seconds_sum{namespace=\"$namespace\", streamName=~\"$streamName\"}",
+                    "query": "kubernetes_io:container_uptime{namespace_name=~\"$namespace\"}",
                     "refId": "StandardVariableQuery"
                 },
                 "refresh": 2,
-                "regex": ".*pod=\\\"([\\d\\w\\-]+)\\\".*",
+                "regex": ".*pod_name=\\\"([\\d\\w\\-]+)\\\".*",
                 "skipUrlSync": false,
                 "sort": 1,
                 "type": "query"
             },
             {
                 "current": {
-                    "selected": true,
-                    "text": [
-                        "redis-et-prod2-primary"
-                    ],
-                    "value": [
-                        "projects/prod-setup-205416/locations/us-west1/instances/redis-et-prod2-primary"
-                    ]
+                    "selected": false,
+                    "text": "All",
+                    "value": "$__all"
                 },
                 "datasource": {
                     "type": "prometheus",
@@ -877,6 +874,6 @@
     "timezone": "",
     "title": "Continuous Error Tracking Stream Metrics",
     "uid": "xo_osXnSz",
-    "version": 33,
+    "version": 34,
     "weekStart": ""
 }
