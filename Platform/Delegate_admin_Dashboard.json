@@ -193,7 +193,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "aoIl1JLVk"
+        "uid": "${data_source}"
       },
       "fieldConfig": {
         "defaults": {
@@ -295,7 +295,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "aoIl1JLVk"
+            "uid": "${data_source}"
           },
           "editorMode": "builder",
           "expr": "heartbeat_received{delegateConnectionStatus=\"CONNECTED\", environment=\"$env\", accountId=~\"$account_id\"}",
