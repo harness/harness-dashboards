@@ -110,7 +110,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "avg by(pod) (rate(iterator_working_on_entity{cluster=\"$cluster\", namespace=\"$namespace\", environment=\"$environment\", job=\"$service\", iteratorName=\"$iteratorName\"}[3h]))",
+          "expr": "avg by(pod) (rate(custom_googleapis_com:opencensus_iterator_working_on_entity{monitored_resource='k8s_container' , cluster_name=\"$cluster\", environment=\"$environment\", job=\"$service\", iteratorName=\"$iteratorName\"}[3h]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -432,7 +432,7 @@
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values({__name__=\"iterator_working_on_entity\"}, cluster)",
+        "definition": "label_values(custom_googleapis_com:opencensus_iterator_working_on_entity{monitored_resource=\"k8s_container\"}, cluster_name)",
         "hide": 0,
         "includeAll": false,
         "label": "Cluster",
@@ -440,7 +440,7 @@
         "name": "cluster",
         "options": [],
         "query": {
-          "query": "label_values({__name__=\"iterator_working_on_entity\"}, cluster)",
+          "query": "label_values(custom_googleapis_com:opencensus_iterator_working_on_entity{monitored_resource=\"k8s_container\"}, cluster_name)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -459,7 +459,7 @@
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values({__name__=\"iterator_working_on_entity\"}, environment)",
+        "definition": "label_values(custom_googleapis_com:opencensus_iterator_working_on_entity{monitored_resource=\"k8s_container\"}, environment)",
         "hide": 0,
         "includeAll": false,
         "label": "Environment",
@@ -467,7 +467,7 @@
         "name": "environment",
         "options": [],
         "query": {
-          "query": "label_values({__name__=\"iterator_working_on_entity\"}, environment)",
+          "query": "label_values(custom_googleapis_com:opencensus_iterator_working_on_entity{monitored_resource=\"k8s_container\"}, environment)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
