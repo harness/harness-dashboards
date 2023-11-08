@@ -23,9 +23,9 @@
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "graphTooltip": 0,
+  "graphTooltip": 1,
   "links": [],
-  "liveNow": false,
+  "liveNow": true,
   "panels": [
     {
       "collapsed": false,
@@ -53,10 +53,10 @@
           "custom": {
             "axisCenteredZero": false,
             "axisColorMode": "series",
-            "axisLabel": "",
+            "axisLabel": "Number of user logins",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 20,
             "gradientMode": "none",
             "hideFrom": {
@@ -106,6 +106,7 @@
         "y": 1
       },
       "id": 8,
+      "interval": "5m",
       "options": {
         "legend": {
           "calcs": [
@@ -131,7 +132,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(cluster) (delta(custom_googleapis_com:opencensus_login_success_count{monitored_resource=\"k8s_container\", environment=\"prod\"}[1d]))",
+          "expr": "sum by(cluster) (increase(custom_googleapis_com:opencensus_login_success_count{monitored_resource=\"k8s_container\", environment=\"prod\"}[1d]))",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -145,7 +146,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(cluster) (delta(custom_googleapis_com:opencensus_login_failure_count{monitored_resource=\"k8s_container\", environment=\"prod\"}[1d]))",
+          "expr": "sum by(cluster) (increase(custom_googleapis_com:opencensus_login_failure_count{monitored_resource=\"k8s_container\", environment=\"prod\"}[1d]))",
           "hide": false,
           "interval": "",
           "legendFormat": "Failure",
@@ -170,10 +171,10 @@
           "custom": {
             "axisCenteredZero": false,
             "axisColorMode": "series",
-            "axisLabel": "",
+            "axisLabel": "Number of user logins",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 20,
             "gradientMode": "none",
             "hideFrom": {
@@ -223,6 +224,7 @@
         "y": 1
       },
       "id": 31,
+      "interval": "5m",
       "options": {
         "legend": {
           "calcs": [
@@ -248,7 +250,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(cluster) (delta(custom_googleapis_com:opencensus_login_success_count{monitored_resource=\"k8s_container\", environment=\"free\"}[1d]))",
+          "expr": "sum by(cluster) (increase(custom_googleapis_com:opencensus_login_success_count{monitored_resource=\"k8s_container\", environment=\"free\"}[1d]))",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -262,7 +264,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(cluster) (delta(custom_googleapis_com:opencensus_login_failure_count{monitored_resource=\"k8s_container\", environment=\"free\"}[1d]))",
+          "expr": "sum by(cluster) (increase(custom_googleapis_com:opencensus_login_failure_count{monitored_resource=\"k8s_container\", environment=\"free\"}[1d]))",
           "hide": false,
           "interval": "",
           "legendFormat": "Failure",
@@ -287,10 +289,10 @@
           "custom": {
             "axisCenteredZero": false,
             "axisColorMode": "series",
-            "axisLabel": "",
+            "axisLabel": "Number of user logins",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 20,
             "gradientMode": "none",
             "hideFrom": {
@@ -340,6 +342,7 @@
         "y": 1
       },
       "id": 32,
+      "interval": "5m",
       "options": {
         "legend": {
           "calcs": [
@@ -352,7 +355,7 @@
           "sortDesc": true
         },
         "tooltip": {
-          "mode": "multi",
+          "mode": "single",
           "sort": "asc"
         }
       },
@@ -365,7 +368,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(cluster) (delta(custom_googleapis_com:opencensus_login_success_count{monitored_resource=\"k8s_container\", environment=\"compliance\"}[1d]))",
+          "expr": "sum by(cluster) (increase(custom_googleapis_com:opencensus_login_success_count{monitored_resource=\"k8s_container\", environment=\"compliance\"}[1d]))",
           "format": "time_series",
           "instant": false,
           "interval": "",
@@ -379,7 +382,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(cluster) (delta(custom_googleapis_com:opencensus_login_failure_count{monitored_resource=\"k8s_container\", environment=\"compliance\"}[1d]))",
+          "expr": "sum by(cluster) (increase(custom_googleapis_com:opencensus_login_failure_count{monitored_resource=\"k8s_container\", environment=\"compliance\"}[1d]))",
           "hide": false,
           "interval": "",
           "legendFormat": "Failure",
@@ -417,10 +420,10 @@
           "custom": {
             "axisCenteredZero": false,
             "axisColorMode": "series",
-            "axisLabel": "",
+            "axisLabel": "Number of pipelines",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 20,
             "gradientMode": "hue",
             "hideFrom": {
@@ -446,6 +449,7 @@
           },
           "decimals": 0,
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -461,7 +465,32 @@
           },
           "unit": "none"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "prod"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 9,
@@ -470,6 +499,7 @@
         "y": 10
       },
       "id": 11,
+      "interval": "5m",
       "options": {
         "legend": {
           "calcs": [
@@ -492,7 +522,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (environment) (delta(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"prod\"}[1d]))",
+          "expr": "sum by (environment) (increase(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", cluster_name=\"prod-private-uswest1-primary\", environment=\"prod\"}[1d]))",
           "interval": "",
           "legendFormat": "{{$__interval}}",
           "range": true,
@@ -515,10 +545,10 @@
           "custom": {
             "axisCenteredZero": false,
             "axisColorMode": "series",
-            "axisLabel": "",
+            "axisLabel": "Number of pipelines",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 20,
             "gradientMode": "hue",
             "hideFrom": {
@@ -544,16 +574,13 @@
           },
           "decimals": 0,
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "#6a3857",
                 "value": null
-              },
-              {
-                "color": "#2846b1",
-                "value": 500
               }
             ]
           },
@@ -568,6 +595,7 @@
         "y": 10
       },
       "id": 33,
+      "interval": "5m",
       "options": {
         "legend": {
           "calcs": [
@@ -590,7 +618,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (environment) (delta(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"free\"}[1d]))",
+          "expr": "sum by (environment) (increase(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"free\"}[1d]))",
           "interval": "",
           "legendFormat": "{{$__interval}}",
           "range": true,
@@ -613,10 +641,10 @@
           "custom": {
             "axisCenteredZero": false,
             "axisColorMode": "series",
-            "axisLabel": "",
+            "axisLabel": "Number of pipelines",
             "axisPlacement": "auto",
             "barAlignment": 0,
-            "drawStyle": "line",
+            "drawStyle": "bars",
             "fillOpacity": 20,
             "gradientMode": "hue",
             "hideFrom": {
@@ -642,6 +670,7 @@
           },
           "decimals": 0,
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -666,6 +695,7 @@
         "y": 10
       },
       "id": 34,
+      "interval": "5m",
       "options": {
         "legend": {
           "calcs": [
@@ -732,7 +762,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "none"
+              "mode": "percent"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -740,16 +770,13 @@
           },
           "decimals": 0,
           "mappings": [],
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "#6a3857",
                 "value": null
-              },
-              {
-                "color": "#2846b1",
-                "value": 500
               }
             ]
           },
@@ -788,7 +815,9 @@
           ],
           "displayMode": "table",
           "placement": "right",
-          "showLegend": true
+          "showLegend": true,
+          "sortBy": "Mean",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "single",
@@ -803,7 +832,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (status) (delta(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"prod\"}[1d]))",
+          "expr": "sum by (status) (increase(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"prod\"}[1d]))",
           "interval": "",
           "legendFormat": "__auto",
           "range": true,
@@ -866,7 +895,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "none"
+              "mode": "percent"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -915,6 +944,7 @@
         "y": 19
       },
       "id": 39,
+      "interval": "5m",
       "options": {
         "legend": {
           "calcs": [
@@ -922,7 +952,9 @@
           ],
           "displayMode": "table",
           "placement": "right",
-          "showLegend": true
+          "showLegend": true,
+          "sortBy": "Mean",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "single",
@@ -937,7 +969,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (status) (delta(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"free\"}[1d]))",
+          "expr": "sum by (status) (increase(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"free\"}[1d]))",
           "interval": "",
           "legendFormat": "__auto",
           "range": true,
@@ -1000,7 +1032,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "none"
+              "mode": "percent"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -1049,6 +1081,7 @@
         "y": 19
       },
       "id": 35,
+      "interval": "5m",
       "options": {
         "legend": {
           "calcs": [
@@ -1056,7 +1089,9 @@
           ],
           "displayMode": "table",
           "placement": "right",
-          "showLegend": true
+          "showLegend": true,
+          "sortBy": "Mean",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "single",
@@ -1071,7 +1106,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (status) (delta(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"compliance\"}[1d]))",
+          "expr": "sum by (status) (increase(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"compliance\"}[1d]))",
           "interval": "",
           "legendFormat": "__auto",
           "range": true,
@@ -1238,7 +1273,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "avg by(environment) (custom_googleapis_com:opencensus_delegate_task_creation{monitored_resource=\"k8s_container\",cluster_name=\"prod-private-uswest1-primary\"})",
+          "expr": "avg by(environment) (custom_googleapis_com:opencensus_active_delegate_count{monitored_resource=\"k8s_container\",cluster_name=\"prod-private-uswest1-primary\"})",
           "interval": "",
           "legendFormat": "__auto",
           "range": true,
@@ -1382,6 +1417,312 @@
       ],
       "title": "Delegate Task Creation Rate",
       "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 37
+      },
+      "id": 49,
+      "panels": [],
+      "title": "Feature Flags",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P395BF20BBBA74F0A"
+      },
+      "description": "Shows which SDKs are being used",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 0,
+        "y": 38
+      },
+      "id": 47,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max",
+            "mean",
+            "last"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "J-cX-5I4k"
+          },
+          "editorMode": "code",
+          "expr": "sum by(sdk_language, sdk_version, sdk_type) (rate(ff_metrics_service_sdk_count{}[$__rate_interval]))",
+          "legendFormat": "{{sdk_type}}/{{sdk_language}} - {{sdk_version}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "SDK Usage",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P395BF20BBBA74F0A"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 8,
+        "y": 38
+      },
+      "id": 45,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max",
+            "mean",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P395BF20BBBA74F0A"
+          },
+          "editorMode": "code",
+          "expr": "sum by(matched_url_path_rule, response_code) (rate(loadbalancing_googleapis_com:https_request_count{backend_target_name=~\".*pushpin.*\"}[$__rate_interval]))",
+          "hide": false,
+          "legendFormat": "{{matched_url_path_rule}}: {{response_code}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Stream Request Rate",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P395BF20BBBA74F0A"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 16,
+        "y": 38
+      },
+      "id": 43,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P395BF20BBBA74F0A"
+          },
+          "editorMode": "code",
+          "expr": "sum by(matched_url_path_rule, response_code) (rate(loadbalancing_googleapis_com:https_request_count{backend_target_name=~\".*cf-client-backend\"}[$__rate_interval]))",
+          "hide": false,
+          "legendFormat": "{{response_code}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Evaluation Request Rate",
+      "type": "timeseries"
     }
   ],
   "refresh": "1m",
@@ -1417,9 +1758,9 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "${dataSource}"
+          "uid": "P395BF20BBBA74F0A"
         },
-        "definition": "label_values(login_success_count, cluster)",
+        "definition": "label_values(up{}, cluster)",
         "hide": 0,
         "includeAll": false,
         "label": "Cluster",
@@ -1427,34 +1768,7 @@
         "name": "cluster",
         "options": [],
         "query": {
-          "query": "label_values(login_success_count, cluster)",
-          "refId": "StandardVariableQuery"
-        },
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "current": {
-          "selected": false,
-          "text": "compliance",
-          "value": "compliance"
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
-        },
-        "definition": "label_values(login_success_count, environment)",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Env",
-        "multi": false,
-        "name": "env",
-        "options": [],
-        "query": {
-          "query": "label_values(login_success_count, environment)",
+          "query": "label_values(up{}, cluster)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -1473,6 +1787,6 @@
   "timezone": "",
   "title": "Production Metrics Dashboard",
   "uid": "F9dOkEgIk",
-  "version": 13,
+  "version": 17,
   "weekStart": ""
 }

@@ -24,7 +24,44 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "links": [],
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [],
+      "targetBlank": true,
+      "title": "MicroService Versions Dashboard",
+      "tooltip": "",
+      "type": "link",
+      "url": "https://grafana.harness.io/d/ZJD3rKZIz/microservice-version-dashboard?orgId=1"
+    },
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [],
+      "targetBlank": true,
+      "title": "Production Metrics Dashboard",
+      "tooltip": "",
+      "type": "link",
+      "url": "https://grafana.harness.io/d/F9dOkEgIk/production-metrics-dashboard?orgId=1"
+    },
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [],
+      "targetBlank": true,
+      "title": "MicroService Change and Stability Monitor",
+      "tooltip": "",
+      "type": "link",
+      "url": "https://grafana.harness.io/d/CrU8DceVk/cae-error-tracking?orgId=1"
+    }
+  ],
   "liveNow": false,
   "panels": [
     {
@@ -9382,6 +9419,6 @@
   "timezone": "",
   "title": "Microservices Health Dashboard",
   "uid": "mToVpMeVk",
-  "version": 26,
+  "version": 27,
   "weekStart": ""
 }

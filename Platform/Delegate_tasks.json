@@ -122,7 +122,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P395BF20BBBA74F0A"
+        "uid": "${dataSource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -199,10 +199,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P395BF20BBBA74F0A"
+            "uid": "${dataSource}"
           },
           "editorMode": "builder",
-          "expr": "sum(delta(delegate_task_creation{cluster=\"$cluster\", environment=\"$env\"}[5m]))",
+          "expr": "sum(delta(custom_googleapis_com:opencensus_delegate_task_creation{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"$env\"}[10m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -214,7 +214,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P395BF20BBBA74F0A"
+        "uid": "${dataSource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -291,10 +291,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P395BF20BBBA74F0A"
+            "uid": "${dataSource}"
           },
           "editorMode": "builder",
-          "expr": "sum by(taskType) (delta(delegate_task_creation_by_type{cluster=\"$cluster\", environment=\"$env\"}[5m]))",
+          "expr": "sum by(taskType) (delta(custom_googleapis_com:opencensus_delegate_task_creation_by_type{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"$env\"}[10m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -358,7 +358,32 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "sum(delta(custom_googleapis_com:opencensus_delegate_task_acquire{monitored_resource=\"k8s_container\", cluster_name=\"prod-private-uswest1-primary\", environment=\"free\"}[10m]))"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 9,
@@ -386,7 +411,7 @@
             "uid": "P395BF20BBBA74F0A"
           },
           "editorMode": "builder",
-          "expr": "sum(delta(delegate_task_acquire{cluster=\"$cluster\", environment=\"$env\"}[5m]))",
+          "expr": "sum(delta(custom_googleapis_com:opencensus_delegate_task_acquire{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"$env\"}[10m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -398,7 +423,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P395BF20BBBA74F0A"
+        "uid": "${dataSource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -475,10 +500,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P395BF20BBBA74F0A"
+            "uid": "${dataSource}"
           },
           "editorMode": "builder",
-          "expr": "sum(delta(delegate_response{cluster=\"$cluster\", environment=\"$env\"}[5m]))",
+          "expr": "sum(delta(custom_googleapis_com:opencensus_delegate_response{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"$env\"}[10m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -490,7 +515,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P395BF20BBBA74F0A"
+        "uid": "${dataSource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -567,10 +592,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P395BF20BBBA74F0A"
+            "uid": "${dataSource}"
           },
           "editorMode": "builder",
-          "expr": "sum(delta(delegate_task_rebroadcast{cluster=\"$cluster\", environment=\"$env\"}[5m]))",
+          "expr": "sum(delta(custom_googleapis_com:opencensus_delegate_task_rebroadcast{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"$env\"}[10m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -582,7 +607,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P395BF20BBBA74F0A"
+        "uid": "${dataSource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -659,10 +684,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P395BF20BBBA74F0A"
+            "uid": "${dataSource}"
           },
           "editorMode": "builder",
-          "expr": "sum(delta(delegate_task_expired{cluster=\"$cluster\", environment=\"$env\"}[5m]))",
+          "expr": "sum(delta(custom_googleapis_com:opencensus_delegate_task_expired{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"$env\"}[10m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -674,7 +699,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P395BF20BBBA74F0A"
+        "uid": "${dataSource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -751,10 +776,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P395BF20BBBA74F0A"
+            "uid": "${dataSource}"
           },
           "editorMode": "builder",
-          "expr": "sum(delta(delegate_task_no_eligible_delegates{cluster=\"$cluster\", environment=\"$env\"}[5m]))",
+          "expr": "sum(delta(custom_googleapis_com:opencensus_delegate_task_no_eligible_delegates{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"$env\"}[10m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -789,15 +814,15 @@
       },
       {
         "current": {
-          "selected": false,
-          "text": "prod",
-          "value": "prod"
+          "selected": true,
+          "text": "free",
+          "value": "free"
         },
         "datasource": {
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values({__name__=\"delegate_task_creation\"}, environment)",
+        "definition": "label_values({__name__=\"active_delegate_task\"}, environment)",
         "hide": 0,
         "includeAll": false,
         "label": "Env",
@@ -805,7 +830,7 @@
         "name": "env",
         "options": [],
         "query": {
-          "query": "label_values({__name__=\"delegate_task_creation\"}, environment)",
+          "query": "label_values({__name__=\"active_delegate_task\"}, environment)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -824,7 +849,7 @@
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values({__name__=\"delegate_task_creation\"}, cluster)",
+        "definition": "label_values({__name__=\"active_delegate_task\"}, cluster)",
         "hide": 0,
         "includeAll": false,
         "label": "Cluster",
@@ -832,7 +857,7 @@
         "name": "cluster",
         "options": [],
         "query": {
-          "query": "label_values({__name__=\"delegate_task_creation\"}, cluster)",
+          "query": "label_values({__name__=\"active_delegate_task\"}, cluster)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -851,6 +876,6 @@
   "timezone": "",
   "title": "Delegate tasks",
   "uid": "Xus3WJr4z",
-  "version": 2,
+  "version": 13,
   "weekStart": ""
 }

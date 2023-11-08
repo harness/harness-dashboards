@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 104,
   "links": [],
   "liveNow": true,
   "panels": [
@@ -312,7 +311,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -386,8 +386,8 @@
       {
         "current": {
           "selected": false,
-          "text": "dlite-prod-west1-primary",
-          "value": "dlite-prod-west1-primary"
+          "text": "dlite-prod-us-west1-primary",
+          "value": "dlite-prod-us-west1-primary"
         },
         "datasource": {
           "type": "prometheus",
@@ -413,8 +413,8 @@
       {
         "current": {
           "selected": true,
-          "text": "Q8_q5d7BQy-0iAh0D8klTw",
-          "value": "Q8_q5d7BQy-0iAh0D8klTw"
+          "text": "uLyRQTI6TN-x1Uud-KdgLg",
+          "value": "uLyRQTI6TN-x1Uud-KdgLg"
         },
         "hide": 0,
         "includeAll": false,
@@ -463,7 +463,7 @@
             "value": "TkD5TecxSsWa0sknd5crgw"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "Q8_q5d7BQy-0iAh0D8klTw",
             "value": "Q8_q5d7BQy-0iAh0D8klTw"
           },
@@ -483,7 +483,7 @@
             "value": "NpCRJSifREe50rA4-isQ2w"
           },
           {
-            "selected": false,
+            "selected": true,
             "text": "uLyRQTI6TN-x1Uud-KdgLg",
             "value": "uLyRQTI6TN-x1Uud-KdgLg"
           },
@@ -511,9 +511,24 @@
             "selected": false,
             "text": "9UuUfLwaQ-6ZowvbG7qtLQ",
             "value": "9UuUfLwaQ-6ZowvbG7qtLQ"
+          },
+          {
+            "selected": false,
+            "text": "wBqrjr1wRaWBc2AWxWsV1g",
+            "value": "wBqrjr1wRaWBc2AWxWsV1g"
+          },
+          {
+            "selected": false,
+            "text": "NpCRJSifREe50rA4-isQ2w",
+            "value": "NpCRJSifREe50rA4-isQ2w"
+          },
+          {
+            "selected": false,
+            "text": "7_LU_MsxRum1b06IWeZhEQ",
+            "value": "7_LU_MsxRum1b06IWeZhEQ"
           }
         ],
-        "query": "dqAWlhDWTjGn0Rie85EwwA,\neKD84MPkTGSIIWlKedPjYg,\n0iQojjIqSaGHhDRhDhukaQ,\n6P8wiTFqSPul99qcIkRUNQ,\n5WETBa8LS4WThfMvB-JKfQ,\nuHZJN3pqSdORjA0KQA2kWw,\nXw6pc8GAQ2yPyrRzYnsUGg,\nTkD5TecxSsWa0sknd5crgw,\nQ8_q5d7BQy-0iAh0D8klTw,\nngDRzuBUQZGu6HZ6SxEDXQ,\nZ03lJZRES_-aqW_yIcFY3A,\nNpCRJSifREe50rA4-isQ2w,\nuLyRQTI6TN-x1Uud-KdgLg,\nDPM3aWgT4-YylEBU3w_ow,\nYVyn8N_ASqaljNcRQv8HEQ,\nCDST6l-0T5OqX_8syJ2quQ,\nAHn6O7saTFOHakniOX3Mrg,\n9UuUfLwaQ-6ZowvbG7qtLQ",
+        "query": "dqAWlhDWTjGn0Rie85EwwA,\neKD84MPkTGSIIWlKedPjYg,\n0iQojjIqSaGHhDRhDhukaQ,\n6P8wiTFqSPul99qcIkRUNQ,\n5WETBa8LS4WThfMvB-JKfQ,\nuHZJN3pqSdORjA0KQA2kWw,\nXw6pc8GAQ2yPyrRzYnsUGg,\nTkD5TecxSsWa0sknd5crgw,\nQ8_q5d7BQy-0iAh0D8klTw,\nngDRzuBUQZGu6HZ6SxEDXQ,\nZ03lJZRES_-aqW_yIcFY3A,\nNpCRJSifREe50rA4-isQ2w,\nuLyRQTI6TN-x1Uud-KdgLg,\nDPM3aWgT4-YylEBU3w_ow,\nYVyn8N_ASqaljNcRQv8HEQ,\nCDST6l-0T5OqX_8syJ2quQ,\nAHn6O7saTFOHakniOX3Mrg,\n9UuUfLwaQ-6ZowvbG7qtLQ,\nwBqrjr1wRaWBc2AWxWsV1g,\nNpCRJSifREe50rA4-isQ2w,\n7_LU_MsxRum1b06IWeZhEQ",
         "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"
@@ -521,13 +536,13 @@
     ]
   },
   "time": {
-    "from": "now-12h",
+    "from": "now-30d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Baremetal Customer Migration",
   "uid": "67kDKte4z",
-  "version": 25,
+  "version": 26,
   "weekStart": ""
 }

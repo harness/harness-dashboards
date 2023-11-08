@@ -589,7 +589,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "P395BF20BBBA74F0A"
+        "uid": "${dataSource}"
       },
       "description": "",
       "fieldConfig": {
@@ -667,10 +667,10 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "P395BF20BBBA74F0A"
+            "uid": "${dataSource}"
           },
           "editorMode": "builder",
-          "expr": "sum(delta(perpetual_task_create{cluster=\"$cluster\", environment=\"$env\"}[5m]))",
+          "expr": "sum(delta(custom_googleapis_com:opencensus_perpetual_task_create{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"$env\"}[10m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -763,7 +763,7 @@
             "uid": "P395BF20BBBA74F0A"
           },
           "editorMode": "builder",
-          "expr": "sum(delta(perpetual_task_assigned{cluster=\"$cluster\", environment=\"$env\"}[5m]))",
+          "expr": "sum(delta(custom_googleapis_com:opencensus_perpetual_task_assigned{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", environment=\"$env\"}[10m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -894,8 +894,8 @@
       {
         "current": {
           "selected": true,
-          "text": "prod",
-          "value": "prod"
+          "text": "free",
+          "value": "free"
         },
         "datasource": {
           "type": "prometheus",
@@ -955,6 +955,6 @@
   "timezone": "",
   "title": "Perpetual Tasks",
   "uid": "n5w7gA94k",
-  "version": 2,
+  "version": 13,
   "weekStart": ""
 }

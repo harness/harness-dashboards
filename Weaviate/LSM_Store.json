@@ -82,7 +82,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum by (level, unit) (lsm_segment_size{strategy=\"replace\", job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"})",
+          "expr": "sum by (level, unit) (lsm_segment_size{strategy=\"replace\", job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"})",
           "legendFormat": "Level {{level}} / {{unit}} ",
           "range": true,
           "refId": "A"
@@ -145,7 +145,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum by (level, unit) (lsm_segment_size{strategy=\"setcollection\", job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"})",
+          "expr": "sum by (level, unit) (lsm_segment_size{strategy=\"setcollection\", job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"})",
           "legendFormat": "Level {{level}} / {{unit}} ",
           "range": true,
           "refId": "A"
@@ -208,7 +208,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum by (level, unit) (lsm_segment_size{strategy=\"mapcollection\", job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"})",
+          "expr": "sum by (level, unit) (lsm_segment_size{strategy=\"mapcollection\", job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"})",
           "legendFormat": "Level {{level}} / {{unit}} ",
           "range": true,
           "refId": "A"
@@ -301,7 +301,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "lsm_memtable_size{job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}",
+          "expr": "lsm_memtable_size{job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}",
           "legendFormat": "{{path}}",
           "range": true,
           "refId": "A"
@@ -393,7 +393,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "rate(lsm_memtable_durations_ms_sum{job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])/rate(lsm_memtable_durations_ms_count{job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])",
+          "expr": "rate(lsm_memtable_durations_ms_sum{job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])/rate(lsm_memtable_durations_ms_count{job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])",
           "legendFormat": "{{operation}} ({{path}})",
           "range": true,
           "refId": "A"
@@ -486,7 +486,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "rate(lsm_bloom_filters_duration_ms_sum{strategy=\"replace\", job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])/rate(lsm_bloom_filters_duration_ms_count{strategy=\"replace\", job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])",
+          "expr": "rate(lsm_bloom_filters_duration_ms_sum{strategy=\"replace\", job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])/rate(lsm_bloom_filters_duration_ms_count{strategy=\"replace\", job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}[$__interval])",
           "legendFormat": "{{operation}} ({{class_name}}/{{shard_name}})",
           "range": true,
           "refId": "A"
@@ -550,7 +550,7 @@
             "type": "prometheus",
             "uid": "${datasource}"
           },
-          "expr": "sum(lsm_bloom_filters_duration_ms_count{operation=\"get_false_positive\", job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"})/(sum(lsm_bloom_filters_duration_ms_count{operation=\"get_true_negative\", job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"})+sum(lsm_bloom_filters_duration_ms_count{operation=\"get_true_positive\", job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"})+sum(lsm_bloom_filters_duration_ms_count{operation=\"get_false_positive\", job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}))",
+          "expr": "sum(lsm_bloom_filters_duration_ms_count{operation=\"get_false_positive\", job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"})/(sum(lsm_bloom_filters_duration_ms_count{operation=\"get_true_negative\", job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"})+sum(lsm_bloom_filters_duration_ms_count{operation=\"get_true_positive\", job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"})+sum(lsm_bloom_filters_duration_ms_count{operation=\"get_false_positive\", job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}))",
           "refId": "A"
         }
       ],
@@ -612,7 +612,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum(lsm_bloom_filters_duration_ms_count{operation=\"get_true_positive\", job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"})",
+          "expr": "sum(lsm_bloom_filters_duration_ms_count{operation=\"get_true_positive\", job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"})",
           "legendFormat": "True Positives",
           "range": true,
           "refId": "A"
@@ -623,7 +623,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum(lsm_bloom_filters_duration_ms_count{operation=\"get_true_negative\", job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"})",
+          "expr": "sum(lsm_bloom_filters_duration_ms_count{operation=\"get_true_negative\", job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"})",
           "hide": false,
           "legendFormat": "True Negatives",
           "range": true,
@@ -635,7 +635,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum(lsm_bloom_filters_duration_ms_count{operation=\"get_false_positive\", job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"})",
+          "expr": "sum(lsm_bloom_filters_duration_ms_count{operation=\"get_false_positive\", job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"})",
           "hide": false,
           "legendFormat": "False Positives",
           "range": true,
@@ -700,7 +700,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum(lsm_segment_size{strategy=\"replace\", job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"})",
+          "expr": "sum(lsm_segment_size{strategy=\"replace\", job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"})",
           "legendFormat": "Object Storage",
           "range": true,
           "refId": "A"
@@ -711,7 +711,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum(lsm_segment_size{strategy=\"mapcollection\", job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}) + ignoring(strategy) sum(lsm_segment_size{strategy=\"setcollection\", job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"})",
+          "expr": "sum(lsm_segment_size{strategy=\"mapcollection\", job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}) + ignoring(strategy) sum(lsm_segment_size{strategy=\"setcollection\", job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"})",
           "hide": false,
           "legendFormat": "Inverted Index",
           "range": true,
@@ -731,8 +731,8 @@
       {
         "current": {
           "selected": true,
-          "text": "QASetup-ManagedPrometheus",
-          "value": "QASetup-ManagedPrometheus"
+          "text": "ProdSetup-ManagedPrometheus",
+          "value": "ProdSetup-ManagedPrometheus"
         },
         "hide": 0,
         "includeAll": false,
@@ -749,15 +749,15 @@
       },
       {
         "current": {
-          "selected": false,
-          "text": "harness-nextgen",
-          "value": "harness-nextgen"
+          "selected": true,
+          "text": "harness-nextgen-compliance",
+          "value": "harness-nextgen-compliance"
         },
         "datasource": {
           "type": "prometheus",
           "uid": "${datasource}"
         },
-        "definition": "label_values(process_cpu_seconds_total{job=\"weaviate\"}, namespace)",
+        "definition": "label_values(lsm_segment_size, namespace)",
         "hide": 0,
         "includeAll": false,
         "label": "Namespace",
@@ -765,7 +765,7 @@
         "name": "namespace",
         "options": [],
         "query": {
-          "query": "label_values(process_cpu_seconds_total{job=\"weaviate\"}, namespace)",
+          "query": "label_values(lsm_segment_size, namespace)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -777,14 +777,14 @@
       {
         "current": {
           "selected": false,
-          "text": "qa-private",
-          "value": "qa-private"
+          "text": "prod-private-uswest1-primary",
+          "value": "prod-private-uswest1-primary"
         },
         "datasource": {
           "type": "prometheus",
           "uid": "${datasource}"
         },
-        "definition": "label_values(process_cpu_seconds_total{job=\"weaviate\"}, cluster)",
+        "definition": "label_values(lsm_segment_size, cluster)",
         "hide": 0,
         "includeAll": false,
         "label": "Cluster",
@@ -792,7 +792,33 @@
         "name": "cluster",
         "options": [],
         "query": {
-          "query": "label_values(process_cpu_seconds_total{job=\"weaviate\"}, cluster)",
+          "query": "label_values(lsm_segment_size, cluster)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "weaviate-compliance",
+          "value": "weaviate-compliance"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(lsm_segment_size, job)",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "job",
+        "options": [],
+        "query": {
+          "query": "label_values(lsm_segment_size, job)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -811,6 +837,6 @@
   "timezone": "",
   "title": "LSM Store",
   "uid": "hPd0sernz",
-  "version": 10,
+  "version": 12,
   "weekStart": ""
 }

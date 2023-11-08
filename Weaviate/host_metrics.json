@@ -80,7 +80,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "process_resident_memory_bytes{job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}/ 1000000",
+          "expr": "process_resident_memory_bytes{job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}/ 1000000",
           "legendFormat": "Resident Memory",
           "range": true,
           "refId": "A"
@@ -91,7 +91,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "process_virtual_memory_bytes{job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}/ 1000000",
+          "expr": "process_virtual_memory_bytes{job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}/ 1000000",
           "legendFormat": "Virtual Memory",
           "range": true,
           "refId": "B"
@@ -181,7 +181,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "rate(process_cpu_seconds_total{job=\"weaviate\", namespace=\"$namespace\", cluster=\"$cluster\"}[5m])",
+          "expr": "rate(process_cpu_seconds_total{job=\"$job\", namespace=\"$namespace\", cluster=\"$cluster\"}[5m])",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -252,7 +252,7 @@
           "type": "prometheus",
           "uid": "${datasource}"
         },
-        "definition": "label_values(process_cpu_seconds_total{job=\"weaviate\"}, namespace)",
+        "definition": "label_values(lsm_segment_size, namespace)",
         "hide": 0,
         "includeAll": false,
         "label": "namespace",
@@ -260,7 +260,7 @@
         "name": "namespace",
         "options": [],
         "query": {
-          "query": "label_values(process_cpu_seconds_total{job=\"weaviate\"}, namespace)",
+          "query": "label_values(lsm_segment_size, namespace)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -279,7 +279,7 @@
           "type": "prometheus",
           "uid": "${datasource}"
         },
-        "definition": "label_values(process_cpu_seconds_total{job=\"weaviate\"}, cluster)",
+        "definition": "label_values(lsm_segment_size, cluster)",
         "hide": 0,
         "includeAll": false,
         "label": "Cluster",
@@ -287,7 +287,33 @@
         "name": "cluster",
         "options": [],
         "query": {
-          "query": "label_values(process_cpu_seconds_total{job=\"weaviate\"}, cluster)",
+          "query": "label_values(lsm_segment_size, cluster)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "weaviate",
+          "value": "weaviate"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "label_values(lsm_segment_size, job)",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "job",
+        "options": [],
+        "query": {
+          "query": "label_values(lsm_segment_size, job)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -330,6 +356,6 @@
   "timezone": "browser",
   "title": "Host Metrics Mac",
   "uid": "node-exporter-mac",
-  "version": 13,
+  "version": 15,
   "weekStart": ""
 }
