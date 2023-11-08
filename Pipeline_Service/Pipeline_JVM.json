@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 65,
+  "id": 154,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -36,17 +36,17 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-RdYlGr"
+            "mode": "palette-classic"
           },
           "custom": {
             "axisCenteredZero": false,
-            "axisColorMode": "text",
+            "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
@@ -81,746 +81,28 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "decbytes"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 12,
         "x": 0,
         "y": 0
-      },
-      "id": 11,
-      "options": {
-        "legend": {
-          "calcs": [
-            "mean"
-          ],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "builder",
-          "expr": "sum by(environment) (delta(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", environment=\"$env\"}[10m]))",
-          "legendFormat": "Delta Count",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Pipeline Completion Count in last 10mins",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "series",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "APPROVAL_REJECTED",
-                  "ABORTED",
-                  "ERRORED",
-                  "EXPIRED",
-                  "FAILED",
-                  "IGNORE_FAILED",
-                  "SUCCEEDED"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 0
-      },
-      "id": 13,
-      "options": {
-        "legend": {
-          "calcs": [
-            "mean"
-          ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true,
-          "sortBy": "Mean",
-          "sortDesc": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "builder",
-          "expr": "sum by(status) (delta(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", environment=\"$env\"}[1h]))",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Hourly Pipeline Completed Statuses",
-      "transformations": [
-        {
-          "id": "calculateField",
-          "options": {
-            "mode": "reduceRow",
-            "reduce": {
-              "include": [
-                "ABORTED",
-                "APPROVAL_REJECTED",
-                "ERRORED",
-                "EXPIRED",
-                "FAILED",
-                "IGNORE_FAILED",
-                "SUCCEEDED"
-              ],
-              "reducer": "sum"
-            }
-          }
-        }
-      ],
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "series",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "PercentageOfSuccess"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": true,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 8
-      },
-      "id": 2,
-      "options": {
-        "legend": {
-          "calcs": [
-            "mean"
-          ],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "asc"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "builder",
-          "expr": "sum by(environment) (delta(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", environment=\"$env\", status=\"SUCCEEDED\"}[10m]))",
-          "legendFormat": "Success",
-          "range": true,
-          "refId": "Succeeded Executions"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "builder",
-          "expr": "sum by(environment) (delta(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", environment=\"$env\", status=\"IGNORE_FAILED\"}[10m]))",
-          "hide": false,
-          "legendFormat": "IgnoreFailed",
-          "range": true,
-          "refId": "IgnoreFailed Executions"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "builder",
-          "expr": "sum by(environment) (delta(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", environment=\"$env\"}[10m]))",
-          "hide": false,
-          "legendFormat": "Total",
-          "range": true,
-          "refId": "Total"
-        }
-      ],
-      "title": "% of Success Executions in last 10min",
-      "transformations": [
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Total_Success",
-            "binary": {
-              "left": "Success",
-              "reducer": "sum",
-              "right": "IgnoreFailed"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Total_Success_Rate",
-            "binary": {
-              "left": "Total_Success",
-              "operator": "/",
-              "reducer": "sum",
-              "right": "Total"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "PercentageOfSuccess",
-            "binary": {
-              "left": "Total_Success_Rate",
-              "operator": "*",
-              "reducer": "sum",
-              "right": "100"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        }
-      ],
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "series",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "PercentageOfFailedOrExpired"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": true,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 8
-      },
-      "id": 9,
-      "options": {
-        "legend": {
-          "calcs": [
-            "mean"
-          ],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "asc"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "builder",
-          "expr": "sum by(environment) (delta(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", environment=\"$env\", status=\"FAILED\"}[10m]))",
-          "legendFormat": "Failed",
-          "range": true,
-          "refId": "Failed"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "builder",
-          "expr": "sum by(environment) (delta(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", environment=\"$env\", status=\"EXPIRED\"}[10m]))",
-          "hide": false,
-          "legendFormat": "Expired",
-          "range": true,
-          "refId": "Expired"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "builder",
-          "expr": "sum by(environment) (delta(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\", environment=\"$env\"}[10m]))",
-          "hide": false,
-          "legendFormat": "Total",
-          "range": true,
-          "refId": "Total"
-        }
-      ],
-      "title": "% of Failed/Expired Executions in last 10min",
-      "transformations": [
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Total_FAILED_EXPIRED",
-            "binary": {
-              "left": "Failed",
-              "reducer": "sum",
-              "right": "Expired"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Total_Fail_Expire_Rate",
-            "binary": {
-              "left": "Total_FAILED_EXPIRED",
-              "operator": "/",
-              "reducer": "sum",
-              "right": "Total"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        },
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "PercentageOfFailedOrExpired",
-            "binary": {
-              "left": "Total_Fail_Expire_Rate",
-              "operator": "*",
-              "reducer": "sum",
-              "right": "100"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            }
-          }
-        }
-      ],
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "series",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 17
-      },
-      "id": 4,
-      "options": {
-        "legend": {
-          "calcs": [
-            "mean"
-          ],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "asc"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "builder",
-          "exemplar": false,
-          "expr": "sum(avg by(accountId) (last_over_time(custom_googleapis_com:opencensus_pipeline_execution_active_count{monitored_resource=\"k8s_container\", environment=\"$env\"}[1m])))",
-          "legendFormat": "Running Executions",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Total Running Pipeline Executions",
-      "transformations": [],
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "series",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 17
       },
       "id": 8,
       "options": {
         "legend": {
-          "calcs": [
-            "mean"
-          ],
+          "calcs": [],
           "displayMode": "list",
           "placement": "bottom",
           "showLegend": true
         },
         "tooltip": {
           "mode": "multi",
-          "sort": "asc"
+          "sort": "desc"
         }
       },
       "targets": [
@@ -830,14 +112,37 @@
             "uid": "${dataSource}"
           },
           "editorMode": "builder",
-          "expr": "sum(avg by(accountId) (last_over_time(custom_googleapis_com:opencensus_node_execution_active_count{monitored_resource=\"k8s_container\", environment=\"$env\"}[1m])))",
-          "interval": "",
-          "legendFormat": "Running Nodes",
+          "expr": "sum by(environment) (jvm_memory_total_max{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "legendFormat": "Max",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "expr": "sum by(environment) (jvm_memory_total_committed{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "hide": false,
+          "legendFormat": "Committed",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "expr": "sum by(environment) (jvm_memory_total_used{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "hide": false,
+          "legendFormat": "Used",
+          "range": true,
+          "refId": "C"
         }
       ],
-      "title": "Total Running Node Executions",
+      "title": "JVM Total Memory Max, Committed, Used",
       "type": "timeseries"
     },
     {
@@ -848,7 +153,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-BlPu"
+            "mode": "palette-classic"
           },
           "custom": {
             "axisCenteredZero": false,
@@ -885,7 +190,335 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 9,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "expr": "sum by(environment) (jvm_memory_non_heap_used{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "legendFormat": "Used",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "expr": "sum by(environment) (jvm_memory_non_heap_committed{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "hide": false,
+          "legendFormat": "Committed",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "JVM Non-Heap Committed, Used",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 9
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "expr": "sum by(environment) (jvm_memory_heap_max{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "legendFormat": "Max",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "expr": "sum by(environment) (jvm_memory_heap_committed{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "hide": false,
+          "legendFormat": "Committed",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "expr": "sum by(environment) (jvm_memory_heap_used{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "hide": false,
+          "legendFormat": "Used",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "JVM Heap Max, Committed, Used",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 9
+      },
+      "id": 11,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "expr": "sum by(environment) (jvm_memory_pools_Metaspace_used{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "legendFormat": "Used",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "expr": "sum by(environment) (jvm_memory_pools_Metaspace_committed{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "hide": false,
+          "legendFormat": "Committed",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "JVM Metaspace Memory Pool Used, Committed",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -901,9 +534,9 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 26
+        "y": 18
       },
-      "id": 7,
+      "id": 12,
       "options": {
         "legend": {
           "calcs": [],
@@ -913,7 +546,7 @@
         },
         "tooltip": {
           "mode": "multi",
-          "sort": "asc"
+          "sort": "desc"
         }
       },
       "targets": [
@@ -923,15 +556,37 @@
             "uid": "${dataSource}"
           },
           "editorMode": "builder",
-          "exemplar": false,
-          "expr": "sum by(environment) (avg by(accountId) (rate(custom_googleapis_com:opencensus_pipeline_execution_active_count{monitored_resource=\"k8s_container\", environment=\"$env\"}[10m])))",
-          "legendFormat": "Rate",
+          "expr": "sum by(environment) (jvm_threads_count{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "legendFormat": "Threads count",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "expr": "sum by(environment) (jvm_threads_daemon_count{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "hide": false,
+          "legendFormat": "Daemon Threads Count",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "expr": "sum by(environment) (jvm_threads_peak_count{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "hide": false,
+          "legendFormat": "Peak Threads Count",
+          "range": true,
+          "refId": "C"
         }
       ],
-      "title": "Rate Of Running Pipeline Executions in last 10min",
-      "transformations": [],
+      "title": "JVM Threads Count",
       "type": "timeseries"
     },
     {
@@ -942,7 +597,7 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "continuous-BlPu"
+            "mode": "palette-classic"
           },
           "custom": {
             "axisCenteredZero": false,
@@ -979,7 +634,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -995,9 +651,9 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 26
+        "y": 18
       },
-      "id": 3,
+      "id": 13,
       "options": {
         "legend": {
           "calcs": [],
@@ -1007,7 +663,7 @@
         },
         "tooltip": {
           "mode": "multi",
-          "sort": "asc"
+          "sort": "desc"
         }
       },
       "targets": [
@@ -1017,14 +673,37 @@
             "uid": "${dataSource}"
           },
           "editorMode": "builder",
-          "expr": "sum by(environment) (avg by(accountId) (rate(custom_googleapis_com:opencensus_node_execution_active_count{monitored_resource=\"k8s_container\", environment=\"$env\"}[10m])))",
-          "interval": "",
-          "legendFormat": "Running Nodes",
+          "expr": "sum by(environment) (jvm_threads_runnable_count{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "legendFormat": "Runnable",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "expr": "sum by(environment) (jvm_threads_timed_waiting_count{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "hide": false,
+          "legendFormat": "Timed Waiting",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "expr": "sum by(environment) (jvm_threads_waiting_count{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "hide": false,
+          "legendFormat": "Waiting",
+          "range": true,
+          "refId": "C"
         }
       ],
-      "title": "Rate of Running Nodes in last 10mins",
+      "title": "JVM Threads State",
       "type": "timeseries"
     },
     {
@@ -1088,9 +767,9 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 35
+        "y": 27
       },
-      "id": 5,
+      "id": 14,
       "options": {
         "legend": {
           "calcs": [],
@@ -1110,13 +789,25 @@
             "uid": "${dataSource}"
           },
           "editorMode": "builder",
-          "expr": "topk(5, avg by(accountId) (increase(custom_googleapis_com:opencensus_pipeline_execution_active_count{monitored_resource=\"k8s_container\", environment=\"$env\"}[10m]))) > 200",
-          "legendFormat": "{{accountId}}",
+          "expr": "sum by(environment) (jvm_threads_blocked_count{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "legendFormat": "Blocked",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "expr": "sum by(environment) (jvm_threads_deadlock_count{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "hide": false,
+          "legendFormat": "Deadlock",
+          "range": true,
+          "refId": "B"
         }
       ],
-      "title": "Top 5 Accounts Running Executions in Last 10mins more than 200",
+      "title": "JVM Threads Blocked / Deadlock State",
       "type": "timeseries"
     },
     {
@@ -1180,9 +871,193 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 35
+        "y": 27
       },
-      "id": 6,
+      "id": 15,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "expr": "sum by(environment) (org_eclipse_jetty_util_thread_QueuedThreadPool_dw_size{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "legendFormat": "Threads servicing requests",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "DW Threads Count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 36
+      },
+      "id": 16,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "expr": "avg by(environment) (org_eclipse_jetty_util_thread_QueuedThreadPool_dw_utilization{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "legendFormat": "Thread Utilization %",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "DW Threads Utilization",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 36
+      },
+      "id": 17,
       "options": {
         "legend": {
           "calcs": [],
@@ -1202,14 +1077,13 @@
             "uid": "${dataSource}"
           },
           "editorMode": "builder",
-          "expr": "topk(5, avg by(accountId) (increase(custom_googleapis_com:opencensus_node_execution_active_count{monitored_resource=\"k8s_container\", environment=\"$env\"}[10m]))) > 2000",
-          "interval": "",
-          "legendFormat": "{{accountId}}",
+          "expr": "sum by(environment) (org_eclipse_jetty_util_thread_QueuedThreadPool_dw_jobs{environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "legendFormat": "Queued Jobs waiting for DW Thread",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Top 5 Account Running Nodes in Last 10mins more than 2000",
+      "title": "Nos of Queued DW Jobs",
       "type": "timeseries"
     }
   ],
@@ -1234,7 +1108,7 @@
         "query": "prometheus",
         "queryValue": "",
         "refresh": 1,
-        "regex": "/Managed/",
+        "regex": "/Prometheus/",
         "skipUrlSync": false,
         "type": "datasource"
       },
@@ -1248,7 +1122,7 @@
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\"}, environment)",
+        "definition": "label_values(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count, environment)",
         "hide": 0,
         "includeAll": false,
         "label": "Env",
@@ -1256,7 +1130,92 @@
         "name": "env",
         "options": [],
         "query": {
-          "query": "label_values(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\"}, environment)",
+          "query": "label_values(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count, environment)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "pipeline-service",
+          "value": "pipeline-service"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${dataSource}"
+        },
+        "definition": "label_values(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{environment=\"$env\"}, serviceName)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Service",
+        "multi": false,
+        "name": "service",
+        "options": [],
+        "query": {
+          "query": "label_values(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{environment=\"$env\"}, serviceName)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "pipeline-service-free",
+          "value": "pipeline-service-free"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${dataSource}"
+        },
+        "definition": "label_values(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{environment=\"$env\", serviceName=\"$service\"}, job)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Job",
+        "multi": false,
+        "name": "job",
+        "options": [],
+        "query": {
+          "query": "label_values(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{environment=\"$env\", serviceName=\"$service\"}, job)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${dataSource}"
+        },
+        "definition": "label_values(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{serviceName =\"$service\", environment=\"$env\"}, pod)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Pod",
+        "multi": true,
+        "name": "pod",
+        "options": [],
+        "query": {
+          "query": "label_values(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{serviceName =\"$service\", environment=\"$env\"}, pod)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -1273,8 +1232,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Pipeline Service Execution Metrics",
-  "uid": "iy-7pykSk",
-  "version": 25,
+  "title": "Pipeline-Service JVM Observability",
+  "uid": "HCZgVp4Iz",
+  "version": 2,
   "weekStart": ""
 }

@@ -1,0 +1,1597 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 137,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "cps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "asc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max(custom_googleapis_com:opencensus_EngineExecutorService_submitted_meanRate{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "EngineExecutorService",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max(custom_googleapis_com:opencensus_PipelineExecutorService_submitted_meanRate{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PipelineExecutorService",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max(custom_googleapis_com:opencensus_PipelineMergeCreatorExecutorService_submitted_meanRate{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PipelineMergeCreatorExecutorService",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max(custom_googleapis_com:opencensus_PlanCreatorInternalExecutorService_submitted_meanRate{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PlanCreatorInternalExecutorService",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max(custom_googleapis_com:opencensus_PmsSdkCoreEventListener_submitted_meanRate{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PmsSdkCoreEventListener",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max(custom_googleapis_com:opencensus_PmsSdkOrchestrationEventListener_submitted_meanRate{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PmsSdkOrchestrationEventListener",
+          "range": true,
+          "refId": "F"
+        }
+      ],
+      "title": "Pipeline-Service Submitted Tasks MeanRate Stats",
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "cps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 17,
+      "options": {
+        "legend": {
+          "calcs": [
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "asc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max(custom_googleapis_com:opencensus_EngineExecutorService_completed_meanRate{monitored_resource=\"k8s_container\", environment=\"$env\"})",
+          "hide": false,
+          "legendFormat": "EngineExecutorService",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max(custom_googleapis_com:opencensus_PipelineExecutorService_completed_meanRate{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PipelineExecutorService",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max(custom_googleapis_com:opencensus_PipelineMergeCreatorExecutorService_completed_meanRate{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PipelineMergeCreatorExecutorService",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max(custom_googleapis_com:opencensus_PlanCreatorInternalExecutorService_completed_meanRate{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PlanCreatorInternalExecutorService",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max(custom_googleapis_com:opencensus_PmsSdkOrchestrationEventListener_completed_meanRate{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PmsSdkOrchestrationEventListener",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max(custom_googleapis_com:opencensus_PmsSdkCoreEventListener_completed_meanRate{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PmsSdkCoreEventListener",
+          "range": true,
+          "refId": "F"
+        }
+      ],
+      "title": "Pipeline-Service Completed Tasks MeanRate Stats",
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 20,
+      "options": {
+        "legend": {
+          "calcs": [
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "asc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_EngineExecutorService_running{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "EngineExecutorService",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PipelineExecutorService_running{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PipelineExecutorService",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PipelineMergeCreatorExecutorService_running{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PipelineMergeCreatorExecutorService",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PlanCreatorInternalExecutorService_running{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PlanCreatorInternalExecutorService",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PmsSdkCoreEventListener_running{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PmsSdkCoreEventListener",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PmsSdkOrchestrationEventListener_running{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PmsSdkOrchestrationEventListener",
+          "range": true,
+          "refId": "F"
+        }
+      ],
+      "title": "Pipeline-Service Running Count for Threads [max]",
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "cps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 18
+      },
+      "id": 23,
+      "options": {
+        "legend": {
+          "calcs": [
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "asc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max(custom_googleapis_com:opencensus_EngineExecutorService_submitted_fifteenMinuteRate{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "EngineExecutorService",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max(custom_googleapis_com:opencensus_PipelineExecutorService_submitted_fifteenMinuteRate{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PipelineExecutorService",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max(custom_googleapis_com:opencensus_PipelineMergeCreatorExecutorService_submitted_fifteenMinuteRate{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PipelineMergeCreatorExecutorService",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max(custom_googleapis_com:opencensus_PmsSdkOrchestrationEventListener_submitted_fifteenMinuteRate{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PmsSdkOrchestrationEventListener",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max(custom_googleapis_com:opencensus_PmsSdkCoreEventListener_submitted_fifteenMinuteRate{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PmsSdkCoreEventListener",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max(custom_googleapis_com:opencensus_PlanCreatorInternalExecutorService_submitted_fifteenMinuteRate{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PlanCreatorInternalExecutorService",
+          "range": true,
+          "refId": "F"
+        }
+      ],
+      "title": "Pipeline-Service Submitted Tasks FifteenMeanRate Stats",
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "cps"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 18
+      },
+      "id": 24,
+      "options": {
+        "legend": {
+          "calcs": [
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "asc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max(custom_googleapis_com:opencensus_EngineExecutorService_completed_fifteenMinuteRate{monitored_resource=\"k8s_container\", environment=\"$env\"})",
+          "hide": false,
+          "legendFormat": "EngineExecutorService",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max(custom_googleapis_com:opencensus_PipelineExecutorService_completed_fifteenMinuteRate{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PipelineExecutorService",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max(custom_googleapis_com:opencensus_PipelineMergeCreatorExecutorService_completed_fifteenMinuteRate{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PipelineMergeCreatorExecutorService",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max(custom_googleapis_com:opencensus_PlanCreatorInternalExecutorService_completed_fifteenMinuteRate{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PlanCreatorInternalExecutorService",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max(custom_googleapis_com:opencensus_PmsSdkCoreEventListener_completed_fifteenMinuteRate{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PmsSdkCoreEventListener",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max(custom_googleapis_com:opencensus_PmsSdkOrchestrationEventListener_completed_fifteenMinuteRate{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PmsSdkOrchestrationEventListener",
+          "range": true,
+          "refId": "F"
+        }
+      ],
+      "title": "Pipeline-Service Completed Tasks FifteenMeanRate Stats",
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 27
+      },
+      "id": 21,
+      "options": {
+        "legend": {
+          "calcs": [
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "asc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_EngineExecutorService_duration_mean{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "EngineExecutorService",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PipelineExecutorService_duration_mean{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PipelineExecutorService",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PipelineMergeCreatorExecutorService_duration_mean{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PipelineMergeCreatorExecutorService",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PmsSdkOrchestrationEventListener_duration_mean{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PmsSdkOrchestrationEventListener",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PmsSdkCoreEventListener_duration_mean{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PmsSdkCoreEventListener",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PlanCreatorInternalExecutorService_duration_mean{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PlanCreatorInternalExecutorService",
+          "range": true,
+          "refId": "F"
+        }
+      ],
+      "title": "Pipeline-Service Tasks TimeDuration Mean",
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 27
+      },
+      "id": 18,
+      "options": {
+        "legend": {
+          "calcs": [
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "asc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_EngineExecutorService_duration_99thPercentile{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "EngineExecutorService",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PipelineExecutorService_duration_99thPercentile{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PipelineExecutorService",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PipelineMergeCreatorExecutorService_duration_99thPercentile{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PipelineMergeCreatorExecutorService",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PlanCreatorInternalExecutorService_duration_99thPercentile{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PlanCreatorInternalExecutorService",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PmsSdkCoreEventListener_duration_99thPercentile{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PmsSdkCoreEventListener",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PmsSdkOrchestrationEventListener_duration_99thPercentile{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PmsSdkOrchestrationEventListener",
+          "range": true,
+          "refId": "F"
+        }
+      ],
+      "title": "Pipeline-Service Tasks TimeDuration 99 percentile",
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 36
+      },
+      "id": 19,
+      "options": {
+        "legend": {
+          "calcs": [
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "asc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_EngineExecutorService_idle_mean{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "EngineExecutorService",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PipelineExecutorService_idle_mean{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PipelineExecutorService",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PipelineMergeCreatorExecutorService_idle_mean{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PipelineMergeCreatorExecutorService",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PmsSdkOrchestrationEventListener_idle_mean{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PmsSdkOrchestrationEventListener",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PmsSdkCoreEventListener_idle_mean{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PmsSdkCoreEventListener",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PlanCreatorInternalExecutorService_idle_mean{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PlanCreatorInternalExecutorService",
+          "range": true,
+          "refId": "F"
+        }
+      ],
+      "title": "Pipeline-Service Tasks Idle Mean",
+      "transformations": [
+        {
+          "disabled": true,
+          "id": "calculateField",
+          "options": {
+            "alias": "EngineExecutoreService-duration",
+            "binary": {
+              "left": "EngineExecutorService",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "1000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 36
+      },
+      "id": 22,
+      "options": {
+        "legend": {
+          "calcs": [
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "asc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_EngineExecutorService_idle_99thPercentile{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "EngineExecutorService",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PipelineExecutorService_idle_99thPercentile{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PipelineExecutorService",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PipelineMergeCreatorExecutorService_idle_99thPercentile{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PipelineMergeCreatorExecutorService",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PlanCreatorInternalExecutorService_idle_99thPercentile{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PlanCreatorInternalExecutorService",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PmsSdkCoreEventListener_idle_99thPercentile{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PmsSdkCoreEventListener",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "max by(environment) (custom_googleapis_com:opencensus_PmsSdkOrchestrationEventListener_idle_99thPercentile{monitored_resource=\"k8s_container\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "hide": false,
+          "legendFormat": "PmsSdkOrchestrationEventListener",
+          "range": true,
+          "refId": "F"
+        }
+      ],
+      "title": "Pipeline-Service Tasks Idle 99 percentile",
+      "transformations": [
+        {
+          "disabled": true,
+          "id": "calculateField",
+          "options": {
+            "alias": "EngineExecutoreService-duration",
+            "binary": {
+              "left": "EngineExecutorService",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "1000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        }
+      ],
+      "type": "timeseries"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 37,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "ProdSetup-ManagedPrometheus",
+          "value": "ProdSetup-ManagedPrometheus"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "DataSource",
+        "multi": false,
+        "name": "dataSource",
+        "options": [],
+        "query": "prometheus",
+        "queryValue": "",
+        "refresh": 1,
+        "regex": "/Managed/",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "free",
+          "value": "free"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${dataSource}"
+        },
+        "definition": "label_values(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\"}, environment)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Env",
+        "multi": false,
+        "name": "env",
+        "options": [],
+        "query": {
+          "query": "label_values(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\"}, environment)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Pipeline-Service Threads Instrumentation",
+  "uid": "iy-7pykSk2",
+  "version": 20,
+  "weekStart": ""
+}
