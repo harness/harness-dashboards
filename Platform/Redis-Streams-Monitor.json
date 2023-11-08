@@ -117,9 +117,9 @@
             "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "editorMode": "builder",
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_memory_usage{cluster=\"$cluster\", environment=\"$env\", exported_namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName) (custom_googleapis_com:opencensus_redis_streams_memory_usage{monitored_resource='k8s_container', cluster_name=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "__auto",
@@ -213,9 +213,9 @@
             "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "editorMode": "builder",
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_memory_usage{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", exported_namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName) (custom_googleapis_com:opencensus_redis_streams_memory_usage{monitored_resource='k8s_container' , cluster_name=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "__auto",
@@ -316,9 +316,9 @@
             "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "editorMode": "builder",
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_length{cluster=\"$cluster\", environment=\"$env\", exported_namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName) (custom_googleapis_com:opencensus_redis_streams_length{monitored_resource='k8s_container' , cluster_name=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "__auto",
@@ -412,9 +412,9 @@
             "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "editorMode": "builder",
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_length{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", exported_namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName) (custom_googleapis_com:opencensus_redis_streams_length{monitored_resource='k8s_container' , cluster_name=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "__auto",
@@ -515,9 +515,9 @@
             "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "editorMode": "builder",
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_average_message_size{cluster=\"$cluster\", environment=\"$env\", exported_namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName) (custom_googleapis_com:opencensus_redis_streams_average_message_size{monitored_resource='k8s_container' , cluster_name=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "__auto",
@@ -611,9 +611,9 @@
             "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "editorMode": "builder",
+          "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_average_message_size{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", exported_namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName) (custom_googleapis_com:opencensus_redis_streams_average_message_size{monitored_resource='k8s_container' , cluster_name=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "__auto",
@@ -716,7 +716,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_behind_by_count{cluster=\"$cluster\", environment=\"$env\", exported_namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName, consumergroupName) (custom_googleapis_com:opencensus_redis_streams_consumer_group_behind_by_count{monitored_resource='k8s_container' , cluster_name=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
@@ -812,7 +812,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_behind_by_count{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", exported_namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName, consumergroupName) (custom_googleapis_com:opencensus_redis_streams_consumer_group_behind_by_count{monitored_resource='k8s_container' , cluster_name=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
@@ -915,7 +915,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_pending_count{cluster=\"$cluster\", environment=\"$env\", exported_namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName, consumergroupName) (custom_googleapis_com:opencensus_redis_streams_consumer_group_pending_count{monitored_resource='k8s_container' , cluster_name=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
@@ -1011,7 +1011,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_pending_count{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", exported_namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName, consumergroupName) (custom_googleapis_com:opencensus_redis_streams_consumer_group_pending_count{monitored_resource='k8s_container' , cluster_name=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
@@ -1114,7 +1114,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(exported_namespace, usecaseName) (redis_streams_events_framework_deadletter_queue_size{cluster=\"$cluster\", environment=\"$env\", exported_namespace=\"$namespace\"})",
+          "expr": "avg by(exported_namespace, usecaseName) (custom_googleapis_com:opencensus_redis_streams_events_framework_deadletter_queue_size{monitored_resource='k8s_container' , cluster_name=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{exported_namespace}}:streams:deadletter_queue:{{usecaseName}}",
@@ -1210,7 +1210,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(exported_namespace, usecaseName) (redis_streams_events_framework_deadletter_queue_size{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", exported_namespace=\"$namespace\"})",
+          "expr": "avg by(exported_namespace, usecaseName) (custom_googleapis_com:opencensus_redis_streams_events_framework_deadletter_queue_size{monitored_resource='k8s_container' , cluster_name=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{exported_namespace}}:streams:deadletter_queue:{{usecaseName}}",
@@ -1230,8 +1230,8 @@
       {
         "current": {
           "selected": true,
-          "text": "QASetup-ManagedPrometheus",
-          "value": "QASetup-ManagedPrometheus"
+          "text": "ProdSetup-ManagedPrometheus",
+          "value": "ProdSetup-ManagedPrometheus"
         },
         "hide": 0,
         "includeAll": false,
@@ -1249,14 +1249,14 @@
       {
         "current": {
           "selected": false,
-          "text": "qa-private",
-          "value": "qa-private"
+          "text": "prod-private-uswest1-primary",
+          "value": "prod-private-uswest1-primary"
         },
         "datasource": {
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values({__name__=\"redis_streams_events_framework_deadletter_queue_size\"}, cluster)",
+        "definition": "label_values(custom_googleapis_com:opencensus_redis_streams_memory_usage{monitored_resource='k8s_container'}, cluster_name)",
         "hide": 0,
         "includeAll": false,
         "label": "Cluster",
@@ -1264,7 +1264,7 @@
         "name": "cluster",
         "options": [],
         "query": {
-          "query": "label_values({__name__=\"redis_streams_events_framework_deadletter_queue_size\"}, cluster)",
+          "query": "label_values(custom_googleapis_com:opencensus_redis_streams_memory_usage{monitored_resource='k8s_container'}, cluster_name)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -1283,7 +1283,7 @@
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values({__name__=\"redis_streams_events_framework_deadletter_queue_size\"}, environment)",
+        "definition": "label_values(custom_googleapis_com:opencensus_redis_streams_memory_usage{monitored_resource='k8s_container'}, environment)",
         "hide": 0,
         "includeAll": false,
         "label": "Env",
@@ -1291,34 +1291,7 @@
         "name": "env",
         "options": [],
         "query": {
-          "query": "label_values({__name__=\"redis_streams_events_framework_deadletter_queue_size\"}, environment)",
-          "refId": "StandardVariableQuery"
-        },
-        "refresh": 2,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "current": {
-          "selected": true,
-          "text": "entity_crud",
-          "value": "entity_crud"
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
-        },
-        "definition": "label_values({__name__=\"redis_streams_events_framework_deadletter_queue_size\"}, usecaseName)",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Usecase",
-        "multi": false,
-        "name": "usecase",
-        "options": [],
-        "query": {
-          "query": "label_values({__name__=\"redis_streams_events_framework_deadletter_queue_size\"}, usecaseName)",
+          "query": "label_values(custom_googleapis_com:opencensus_redis_streams_memory_usage{monitored_resource='k8s_container'}, environment)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 2,
@@ -1330,14 +1303,41 @@
       {
         "current": {
           "selected": false,
-          "text": "qa",
-          "value": "qa"
+          "text": "setup_usage",
+          "value": "setup_usage"
         },
         "datasource": {
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values({__name__=\"redis_streams_events_framework_deadletter_queue_size\"}, exported_namespace)",
+        "definition": "label_values(custom_googleapis_com:opencensus_redis_streams_memory_usage{monitored_resource='k8s_container'}, usecaseName)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Usecase",
+        "multi": false,
+        "name": "usecase",
+        "options": [],
+        "query": {
+          "query": "label_values(custom_googleapis_com:opencensus_redis_streams_memory_usage{monitored_resource='k8s_container'}, usecaseName)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "prod",
+          "value": "prod"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${dataSource}"
+        },
+        "definition": "label_values(custom_googleapis_com:opencensus_redis_streams_memory_usage{monitored_resource='k8s_container'}, namespace)",
         "hide": 0,
         "includeAll": false,
         "label": "Namespace",
@@ -1345,7 +1345,7 @@
         "name": "namespace",
         "options": [],
         "query": {
-          "query": "label_values({__name__=\"redis_streams_events_framework_deadletter_queue_size\"}, exported_namespace)",
+          "query": "label_values(custom_googleapis_com:opencensus_redis_streams_memory_usage{monitored_resource='k8s_container'}, namespace)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -1364,6 +1364,6 @@
   "timezone": "",
   "title": "Redis Streams Monitor",
   "uid": "auMXlQ3Vk",
-  "version": 4,
+  "version": 11,
   "weekStart": ""
 }
