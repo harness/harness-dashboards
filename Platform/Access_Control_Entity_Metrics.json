@@ -436,7 +436,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_pending_count{cluster=\"$cluster\", exported_namespace=\"$environment\", consumergroupName=\"$serviceId\"})",
+          "expr": "avg by(usecaseName, consumergroupName) (custom_googleapis_com:opencensus_redis_streams_consumer_group_pending_count{monitored_resource=\"k8s_container\" , cluster_name=\"$cluster\", namespace=\"$environment\", consumergroupName=\"$serviceId\"})",
           "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
           "range": true,
           "refId": "A"
