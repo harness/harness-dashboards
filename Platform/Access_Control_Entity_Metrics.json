@@ -553,6 +553,38 @@
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "prod",
+          "value": "prod"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "redis_namespace",
+        "multi": false,
+        "name": "redis_namespace",
+        "options": [
+          {
+            "selected": true,
+            "text": "prod",
+            "value": "prod"
+          },
+          {
+            "selected": false,
+            "text": "freemium",
+            "value": "freemium"
+          },
+          {
+            "selected": false,
+            "text": "compliance",
+            "value": "compliance"
+          }
+        ],
+        "query": "prod , freemium , compliance",
+        "skipUrlSync": false,
+        "type": "custom"
       }
     ]
   },
