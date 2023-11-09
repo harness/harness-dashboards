@@ -23,7 +23,7 @@ build_bazel_module() {
 # Building per module may not be needed currently as each module just has file groups for now.
 # Having this in place if more bazel targets are added in the modules.
 build_bazel_module CCM
-build_bazel_module CD-CORE
+build_bazel_module CD-Core
 build_bazel_module CIE
 build_bazel_module Chaos
 build_bazel_module Cloud_Monitoring_SaaS_Only
