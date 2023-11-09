@@ -12,3 +12,4 @@ bazelrc.cache
 bazelrc.gcp
 harness-dashboards
 .DS_Store
+.idea/

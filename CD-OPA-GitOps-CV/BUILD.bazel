@@ -12,7 +12,7 @@ pkg_tar(
 	":dashboards",
     ],
     mode = "0600",
-    package_dir = "/harness-dashboards/Gitops/",
+    package_dir = "/harness-dashboards/CD-OPA-GitOps-CV/",
     tags = [
         "manual",
         "no-cache",
