@@ -86,8 +86,8 @@
             "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "editorMode": "builder",
-          "expr": "heartbeat_received{cluster=\"$cluster\", environment=\"$env\"}",
+          "editorMode": "code",
+          "expr": "heartbeat_received{cluster=\"$cluster\", environment=\"$env\", accountId=~\"$account_id\"}",
           "format": "table",
           "legendFormat": "__auto",
           "range": true,
@@ -263,8 +263,8 @@
             "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "editorMode": "builder",
-          "expr": "heartbeat_received",
+          "editorMode": "code",
+          "expr": "heartbeat_received{cluster=\"$cluster\", environment=\"$env\", accountId=~\"$account_id\"}",
           "format": "table",
           "legendFormat": "__auto",
           "range": true,
@@ -435,6 +435,37 @@
         "options": [],
         "query": {
           "query": "label_values({__name__=\"heartbeat_received\"}, cluster)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "wFHXHD0RRQWoO8tIZT5YVw"
+          ],
+          "value": [
+            "wFHXHD0RRQWoO8tIZT5YVw"
+          ]
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${dataSource}"
+        },
+        "definition": "label_values({__name__=\"heartbeat_received\"}, accountId)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "AcccountID",
+        "multi": true,
+        "name": "account_id",
+        "options": [],
+        "query": {
+          "query": "label_values({__name__=\"heartbeat_received\"}, accountId)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
