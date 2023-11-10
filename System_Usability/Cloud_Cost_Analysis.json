@@ -255,7 +255,7 @@
           "refId": "A"
         }
       ],
-      "title": "Prod Log Usage",
+      "title": "$cluster: Log Usage",
       "type": "stat"
     },
     {
@@ -321,7 +321,7 @@
           "refId": "A"
         }
       ],
-      "title": "Prod Dollar Cost",
+      "title": "$cluster: Dollar Cost",
       "type": "stat"
     },
     {
@@ -535,9 +535,9 @@
     "list": [
       {
         "current": {
-          "selected": false,
-          "text": "ProdSetup-ManagedPrometheus",
-          "value": "ProdSetup-ManagedPrometheus"
+          "selected": true,
+          "text": "QASetup-ManagedPrometheus",
+          "value": "QASetup-ManagedPrometheus"
         },
         "hide": 0,
         "includeAll": false,
@@ -554,9 +554,9 @@
       },
       {
         "current": {
-          "selected": true,
-          "text": "prod-private-uswest1-primary",
-          "value": "prod-private-uswest1-primary"
+          "selected": false,
+          "text": "qa-private",
+          "value": "qa-private"
         },
         "datasource": {
           "type": "prometheus",
@@ -673,6 +673,6 @@
   "timezone": "",
   "title": "Cloud Cost Analysis",
   "uid": "Id6ia_4Sk",
-  "version": 28,
+  "version": 29,
   "weekStart": ""
 }
