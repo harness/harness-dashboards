@@ -654,7 +654,7 @@
           {
             "selected": false,
             "text": "PL",
-            "value": "platform-service|accesscontrol-service|gateway|genai-service|manager-iterator|ng-dashboard-aggregator|audit-event-streaming|ng-auth-ui"
+            "value": "platform-service|accesscontrol-service|gateway|genai-service|manager-iterator|ng-dashboard-aggregator|audit-event-streaming|ng-auth-ui|redis-streams-monitor|chatbot-service|weaviate"
           },
           {
             "selected": false,
@@ -712,7 +712,7 @@
             "value": "gitness|gitrpc"
           }
         ],
-        "query": "CD : manager|ng-manager|pipeline-service|template-service|debezium-service|queue-service|migrator-prod|migrator-free|gitops-service|policy-mgmt|verification-svc|cv-nextgen|command-library-svc, PL : platform-service|accesscontrol-service|gateway|genai-service|manager-iterator|ng-dashboard-aggregator|audit-event-streaming|ng-auth-ui, FF : ff-admin-server|ff-auth-server|ff-client-server|ff-metrics-server|ff-proxy|pushpin-pushpin|pushpin-worker|iacm-manager|iac-serveriac-server-sprox, CIE : ci-manager|log-service|ti-service|scm, CET : error-tracking|et-collector|et-receiver-agent|et-receiver-decompile|et-receiver-hit|et-receiver-sql, CDB : dashboard, CHAOS : service-discovery-manager|chaos-k8s-ifs|chaos-linux-ifc|chaos-manager|blackbox-exporter|chaos-sandbox-manager|chaos-web|node-exporter|subscriber-metrics, CCM : batch-processing|faktory|lwd|lwd-autocud|worker|anomaly-detection|ccm-worker|ccm-dkron|ng-ce-ui|event-service|datadog-ui|telescopes|cloud-info|ce-nextgen, UI : ui|next-gen-ui, IDP : idp-service|idp-admin-ui, STO : sto-manager|sto-core|ticket-service, SRM : le-nextgen-cv|le-nextgen-srm, SCM : gitness|gitrpc",
+        "query": "CD : manager|ng-manager|pipeline-service|template-service|debezium-service|queue-service|migrator-prod|migrator-free|gitops-service|policy-mgmt|verification-svc|cv-nextgen|command-library-svc, PL : platform-service|accesscontrol-service|gateway|genai-service|manager-iterator|ng-dashboard-aggregator|audit-event-streaming|ng-auth-ui|redis-streams-monitor|chatbot-service|weaviate, FF : ff-admin-server|ff-auth-server|ff-client-server|ff-metrics-server|ff-proxy|pushpin-pushpin|pushpin-worker|iacm-manager|iac-serveriac-server-sprox, CIE : ci-manager|log-service|ti-service|scm, CET : error-tracking|et-collector|et-receiver-agent|et-receiver-decompile|et-receiver-hit|et-receiver-sql, CDB : dashboard, CHAOS : service-discovery-manager|chaos-k8s-ifs|chaos-linux-ifc|chaos-manager|blackbox-exporter|chaos-sandbox-manager|chaos-web|node-exporter|subscriber-metrics, CCM : batch-processing|faktory|lwd|lwd-autocud|worker|anomaly-detection|ccm-worker|ccm-dkron|ng-ce-ui|event-service|datadog-ui|telescopes|cloud-info|ce-nextgen, UI : ui|next-gen-ui, IDP : idp-service|idp-admin-ui, STO : sto-manager|sto-core|ticket-service, SRM : le-nextgen-cv|le-nextgen-srm, SCM : gitness|gitrpc",
         "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"
@@ -727,6 +727,6 @@
   "timezone": "",
   "title": "Cloud Cost Analysis",
   "uid": "Id6ia_4Sk",
-  "version": 34,
+  "version": 35,
   "weekStart": ""
 }
