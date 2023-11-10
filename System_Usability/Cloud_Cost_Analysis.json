@@ -46,7 +46,7 @@
             }
           },
           "mappings": [],
-          "unit": "decbytes"
+          "unit": "bytes"
         },
         "overrides": []
       },
@@ -137,7 +137,7 @@
               "mode": "none"
             },
             "thresholdsStyle": {
-              "mode": "off"
+              "mode": "dashed"
             }
           },
           "decimals": 0,
@@ -148,10 +148,14 @@
               {
                 "color": "green",
                 "value": null
+              },
+              {
+                "color": "red",
+                "value": 214748364800
               }
             ]
           },
-          "unit": "decbytes"
+          "unit": "bytes"
         },
         "overrides": []
       },
@@ -189,7 +193,7 @@
           "refId": "A"
         }
       ],
-      "title": "${containers:text}: Log Bytes Used (GB)",
+      "title": "${containers:text}: Log Bytes Used",
       "type": "timeseries"
     },
     {
@@ -221,7 +225,7 @@
               }
             ]
           },
-          "unit": "decbytes"
+          "unit": "bytes"
         },
         "overrides": []
       },
@@ -259,7 +263,7 @@
           "refId": "A"
         }
       ],
-      "title": "${containers:text}: Total Log Bytes Used (GB)",
+      "title": "${containers:text}: Total Log Bytes Used",
       "type": "gauge"
     },
     {
@@ -333,7 +337,7 @@
               }
             ]
           },
-          "unit": "decbytes"
+          "unit": "bytes"
         },
         "overrides": []
       },
@@ -435,7 +439,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\"}[$__range])) * 0.50 / 1000 / 1000 / 1000",
+          "expr": "sum(increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\"}[$__range])) * 0.50 / 1024 / 1024 / 1024",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -465,7 +469,7 @@
               }
             ]
           },
-          "unit": "decbytes"
+          "unit": "bytes"
         },
         "overrides": []
       },
@@ -567,7 +571,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", container_name=~\"$containers\"}[$__range])) * 0.50 / 1000 / 1000 / 1000",
+          "expr": "sum(increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", container_name=~\"$containers\"}[$__range])) * 0.50 / 1024 / 1024 / 1024",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -631,7 +635,7 @@
       },
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "CD",
           "value": "manager|ng-manager|pipeline-service|template-service|debezium-service|queue-service|migrator-prod|migrator-free|gitops-service|policy-mgmt|verification-svc|cv-nextgen|command-library-svc"
         },
@@ -723,6 +727,6 @@
   "timezone": "",
   "title": "Cloud Cost Analysis",
   "uid": "Id6ia_4Sk",
-  "version": 32,
+  "version": 34,
   "weekStart": ""
 }
