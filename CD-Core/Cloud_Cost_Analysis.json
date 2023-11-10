@@ -101,6 +101,7 @@
         "type": "prometheus",
         "uid": "${dataSource}"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -182,13 +183,13 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(container_name) (increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", container_name=~\"ng-manager|pipeline-service|template-service|debezium-service|queue-service|migrator-prod|migrator-free|gitops-service|policy-mgmt|verification-svc|cv-nextgen|command-library-svc|manager\", cluster_name=\"$cluster\"}[24h]))",
+          "expr": "sum by(container_name) (increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", container_name=~\"$containers\", cluster_name=\"$cluster\"}[24h]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "CD Log Bytes Used (GB)",
+      "title": "${containers:text} Log Bytes Used (GB)",
       "type": "timeseries"
     },
     {
@@ -384,13 +385,13 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(container_name) (increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\",  container_name=~\"ng-manager|pipeline-service|template-service|debezium-service|queue-service|migrator-prod|migrator-free|gitops-service|policy-mgmt|verification-svc|cv-nextgen|command-library-svc|manager\"}[$__range]))",
+          "expr": "sum by(container_name) (increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\",  container_name=~\"$containers\"}[$__range]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "CD Log Bytes Used (GB)",
+      "title": "${containers:text} Log Bytes Used (GB)",
       "type": "gauge"
     },
     {
@@ -450,13 +451,13 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", container_name=~\"manager|ng-manager|pipeline-service|template-service|debezium-service|queue-service|migrator-prod|migrator-free|gitops-service|policy-mgmt|verification-svc|cv-nextgen|command-library-svc\"}[$__range]))",
+          "expr": "sum(increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", container_name=~\"$containers\"}[$__range]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "CD Log Usage",
+      "title": "${containers:text} Log Usage",
       "type": "stat"
     },
     {
@@ -516,13 +517,13 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", container_name=~\"manager|ng-manager|pipeline-service|template-service|debezium-service|queue-service|migrator-prod|migrator-free|gitops-service|policy-mgmt|verification-svc|cv-nextgen|command-library-svc\"}[$__range])) * 0.50 / 1000 / 1000 / 1000",
+          "expr": "sum(increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", container_name=~\"$containers\"}[$__range])) * 0.50 / 1000 / 1000 / 1000",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "CD Dollar Cost",
+      "title": "${containers:text} Dollar Cost",
       "type": "stat"
     }
   ],
@@ -534,7 +535,7 @@
     "list": [
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "ProdSetup-ManagedPrometheus",
           "value": "ProdSetup-ManagedPrometheus"
         },
@@ -577,6 +578,90 @@
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "CD",
+          "value": "manager|ng-manager|pipeline-service|template-service|debezium-service|queue-service|migrator-prod|migrator-free|gitops-service|policy-mgmt|verification-svc|cv-nextgen|command-library-svc"
+        },
+        "description": "",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Module",
+        "multi": false,
+        "name": "containers",
+        "options": [
+          {
+            "selected": true,
+            "text": "CD",
+            "value": "manager|ng-manager|pipeline-service|template-service|debezium-service|queue-service|migrator-prod|migrator-free|gitops-service|policy-mgmt|verification-svc|cv-nextgen|command-library-svc"
+          },
+          {
+            "selected": false,
+            "text": "PL",
+            "value": "platform-service|accesscontrol-service|gateway|genai-service|manager-iterator|ng-dashboard-aggregator|audit-event-streaming|ng-auth-ui"
+          },
+          {
+            "selected": false,
+            "text": "FF",
+            "value": "ff-admin-server|ff-auth-server|ff-client-server|ff-metrics-server|ff-proxy|pushpin-pushpin|pushpin-worker|iacm-manager|iac-serveriac-server-sprox"
+          },
+          {
+            "selected": false,
+            "text": "CIE",
+            "value": "ci-manager|log-service|ti-service|scm"
+          },
+          {
+            "selected": false,
+            "text": "CET",
+            "value": "error-tracking|et-collector|et-receiver-agent|et-receiver-decompile|et-receiver-hit|et-receiver-sql"
+          },
+          {
+            "selected": false,
+            "text": "CDB",
+            "value": "dashboard"
+          },
+          {
+            "selected": false,
+            "text": "CHAOS",
+            "value": "service-discovery-manager|chaos-k8s-ifs|chaos-linux-ifc|chaos-manager|blackbox-exporter|chaos-sandbox-manager|chaos-web|node-exporter|subscriber-metrics"
+          },
+          {
+            "selected": false,
+            "text": "CCM",
+            "value": "batch-processing|faktory|lwd|lwd-autocud|worker|anomaly-detection|ccm-worker|ccm-dkron|ng-ce-ui|event-service|datadog-ui|telescopes|cloud-info|ce-nextgen"
+          },
+          {
+            "selected": false,
+            "text": "UI",
+            "value": "ui|next-gen-ui"
+          },
+          {
+            "selected": false,
+            "text": "IDP",
+            "value": "idp-service|idp-admin-ui"
+          },
+          {
+            "selected": false,
+            "text": "STO",
+            "value": "sto-manager|sto-core|ticket-service"
+          },
+          {
+            "selected": false,
+            "text": "SRM",
+            "value": "le-nextgen-cv|le-nextgen-srm"
+          },
+          {
+            "selected": false,
+            "text": "SCM",
+            "value": "gitness|gitrpc"
+          }
+        ],
+        "query": "CD : manager|ng-manager|pipeline-service|template-service|debezium-service|queue-service|migrator-prod|migrator-free|gitops-service|policy-mgmt|verification-svc|cv-nextgen|command-library-svc, PL : platform-service|accesscontrol-service|gateway|genai-service|manager-iterator|ng-dashboard-aggregator|audit-event-streaming|ng-auth-ui, FF : ff-admin-server|ff-auth-server|ff-client-server|ff-metrics-server|ff-proxy|pushpin-pushpin|pushpin-worker|iacm-manager|iac-serveriac-server-sprox, CIE : ci-manager|log-service|ti-service|scm, CET : error-tracking|et-collector|et-receiver-agent|et-receiver-decompile|et-receiver-hit|et-receiver-sql, CDB : dashboard, CHAOS : service-discovery-manager|chaos-k8s-ifs|chaos-linux-ifc|chaos-manager|blackbox-exporter|chaos-sandbox-manager|chaos-web|node-exporter|subscriber-metrics, CCM : batch-processing|faktory|lwd|lwd-autocud|worker|anomaly-detection|ccm-worker|ccm-dkron|ng-ce-ui|event-service|datadog-ui|telescopes|cloud-info|ce-nextgen, UI : ui|next-gen-ui, IDP : idp-service|idp-admin-ui, STO : sto-manager|sto-core|ticket-service, SRM : le-nextgen-cv|le-nextgen-srm, SCM : gitness|gitrpc",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
       }
     ]
   },
@@ -588,6 +673,6 @@
   "timezone": "",
   "title": "Cloud Cost Analysis",
   "uid": "Id6ia_4Sk",
-  "version": 20,
+  "version": 28,
   "weekStart": ""
 }
