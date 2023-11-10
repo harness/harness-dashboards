@@ -84,7 +84,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by (container_name)(increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\"}[$__range]))",
+          "expr": "sum by (container_name)(increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\"}[$__range]))",
           "interval": "",
           "legendFormat": "__auto",
           "range": true,
@@ -181,8 +181,8 @@
             "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "editorMode": "builder",
-          "expr": "sum by(container_name) (increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", container_name=~\"ng-manager|pipeline-service|template-service|debezium-service|queue-service|migrator-prod|migrator-free|gitops-service|policy-mgmt|verification-svc|cv-nextgen|command-library-svc|manager\"}[24h]))",
+          "editorMode": "code",
+          "expr": "sum by(container_name) (increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", container_name=~\"ng-manager|pipeline-service|template-service|debezium-service|queue-service|migrator-prod|migrator-free|gitops-service|policy-mgmt|verification-svc|cv-nextgen|command-library-svc|manager\", cluster_name=\"$cluster\"}[24h]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -248,7 +248,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\"}[$__range]))",
+          "expr": "sum(increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\"}[$__range]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -314,7 +314,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\"}[$__range])) * 0.50 / 1000 / 1000 / 1000",
+          "expr": "sum(increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\"}[$__range])) * 0.50 / 1000 / 1000 / 1000",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -383,8 +383,8 @@
             "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "editorMode": "builder",
-          "expr": "sum by(container_name) (increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", container_name=~\"ng-manager|pipeline-service|template-service|debezium-service|queue-service|migrator-prod|migrator-free|gitops-service|policy-mgmt|verification-svc|cv-nextgen|command-library-svc|manager\"}[$__range]))",
+          "editorMode": "code",
+          "expr": "sum by(container_name) (increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\",  container_name=~\"ng-manager|pipeline-service|template-service|debezium-service|queue-service|migrator-prod|migrator-free|gitops-service|policy-mgmt|verification-svc|cv-nextgen|command-library-svc|manager\"}[$__range]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -450,7 +450,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\",container_name=~\"manager|ng-manager|pipeline-service|template-service|debezium-service|queue-service|migrator-prod|migrator-free|gitops-service|policy-mgmt|verification-svc|cv-nextgen|command-library-svc\"}[$__range]))",
+          "expr": "sum(increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", container_name=~\"manager|ng-manager|pipeline-service|template-service|debezium-service|queue-service|migrator-prod|migrator-free|gitops-service|policy-mgmt|verification-svc|cv-nextgen|command-library-svc\"}[$__range]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -516,7 +516,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\",container_name=~\"manager|ng-manager|pipeline-service|template-service|debezium-service|queue-service|migrator-prod|migrator-free|gitops-service|policy-mgmt|verification-svc|cv-nextgen|command-library-svc\"}[$__range])) * 0.50 / 1000 / 1000 / 1000",
+          "expr": "sum(increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", container_name=~\"manager|ng-manager|pipeline-service|template-service|debezium-service|queue-service|migrator-prod|migrator-free|gitops-service|policy-mgmt|verification-svc|cv-nextgen|command-library-svc\"}[$__range])) * 0.50 / 1000 / 1000 / 1000",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -534,7 +534,7 @@
     "list": [
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "ProdSetup-ManagedPrometheus",
           "value": "ProdSetup-ManagedPrometheus"
         },
@@ -547,9 +547,36 @@
         "query": "prometheus",
         "queryValue": "",
         "refresh": 1,
-        "regex": "/Prometheus/",
+        "regex": "/ManagedPrometheus/",
         "skipUrlSync": false,
         "type": "datasource"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "prod-private-uswest1-primary",
+          "value": "prod-private-uswest1-primary"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${dataSource}"
+        },
+        "definition": "label_values({__name__=\"kubernetes_io:container_uptime\"}, cluster_name)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Cluster",
+        "multi": false,
+        "name": "cluster",
+        "options": [],
+        "query": {
+          "query": "label_values({__name__=\"kubernetes_io:container_uptime\"}, cluster_name)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
       }
     ]
   },
@@ -561,6 +588,6 @@
   "timezone": "",
   "title": "Cloud Cost Analysis",
   "uid": "Id6ia_4Sk",
-  "version": 18,
+  "version": 20,
   "weekStart": ""
 }
