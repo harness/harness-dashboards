@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 53,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -773,9 +772,9 @@
     "list": [
       {
         "current": {
-          "selected": false,
-          "text": "QASetup-ManagedPrometheus",
-          "value": "QASetup-ManagedPrometheus"
+          "selected": true,
+          "text": "ProdSetup-ManagedPrometheus",
+          "value": "ProdSetup-ManagedPrometheus"
         },
         "hide": 0,
         "includeAll": false,
@@ -793,8 +792,8 @@
       {
         "current": {
           "selected": false,
-          "text": "qa-private",
-          "value": "qa-private"
+          "text": "prod-private-uswest1-primary",
+          "value": "prod-private-uswest1-primary"
         },
         "datasource": {
           "type": "prometheus",
@@ -821,8 +820,8 @@
       {
         "current": {
           "selected": false,
-          "text": "qa",
-          "value": "qa"
+          "text": "free",
+          "value": "free"
         },
         "datasource": {
           "type": "prometheus",
@@ -847,7 +846,7 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "accessControlService",
           "value": "accessControlService"
         },
@@ -882,6 +881,6 @@
   "timezone": "",
   "title": "Outbox Metrics",
   "uid": "UnfVMoqVk",
-  "version": 5,
+  "version": 10,
   "weekStart": ""
 }
