@@ -24,10 +24,512 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 63,
   "links": [],
   "liveNow": false,
   "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 12,
+      "panels": [],
+      "title": "Visibility Services",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P395BF20BBBA74F0A"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "#627ea8",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 12,
+        "x": 0,
+        "y": 1
+      },
+      "id": 14,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "/^Total_Error_Rate$/",
+          "values": false
+        },
+        "text": {},
+        "textMode": "value"
+      },
+      "pluginVersion": "9.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by(job) (io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{namespace=~\"$cluster\", serviceName=\"ce-nextgen-application\"})",
+          "legendFormat": "4xx_Count",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by(job) (io_dropwizard_jetty_MutableServletContextHandler_5xx_responses_count{namespace=~\"$cluster\", serviceName=\"ce-nextgen-application\"})",
+          "hide": false,
+          "legendFormat": "5xx_Count",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by(job) (io_dropwizard_jetty_MutableServletContextHandler_requests_count{namespace=~\"$cluster\", serviceName=\"ce-nextgen-application\"})",
+          "hide": false,
+          "legendFormat": "Total_Count",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Mean Error Rate",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total_Error_Count",
+            "binary": {
+              "left": "4xx_Count",
+              "reducer": "sum",
+              "right": "5xx_Count"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total_Error_Rate",
+            "binary": {
+              "left": "Total_Error_Count",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Total_Count"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Error_Rate_Transform_1",
+            "binary": {
+              "left": "Total_Error_Rate",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "10000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "Error_Rate_Transform_1",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "150"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P395BF20BBBA74F0A"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "#627ea8",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "id": 18,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "/^99\\.9%$/",
+          "values": false
+        },
+        "text": {},
+        "textMode": "value"
+      },
+      "pluginVersion": "9.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "expr": "sum by(environment) (io_dropwizard_jetty_MutableServletContextHandler_requests_snapshot_95thPercentile{serviceName=\"ce-nextgen-application\", namespace=~\"$cluster\"})",
+          "legendFormat": "99.9%",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Mean Response Time (95%)",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P395BF20BBBA74F0A"
+      },
+      "description": "( 4xx + 5xx ) / total requests",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "orange",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "^(?!.*Total Error Rate).*$"
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": true,
+                  "tooltip": true,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 3
+      },
+      "id": 16,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "asc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{serviceName=\"ce-nextgen-application\", namespace=~\"$cluster\"}[5m]))",
+          "hide": false,
+          "legendFormat": "4xx Count",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_5xx_responses_count{serviceName=\"ce-nextgen-application\", namespace=~\"$cluster\"}[5m]))",
+          "hide": false,
+          "legendFormat": "5xx Count",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "expr": "sum by(environment) (delta(io_dropwizard_jetty_MutableServletContextHandler_requests_count{serviceName=\"ce-nextgen-application\", namespace=~\"$cluster\"}[5m]))",
+          "hide": false,
+          "legendFormat": "Total Count",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "HTTP Error Rate",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total_Error_Count",
+            "binary": {
+              "left": "4xx Count",
+              "reducer": "sum",
+              "right": "5xx Count"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total Error Rate",
+            "binary": {
+              "left": "Total_Error_Count",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Total Count"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P395BF20BBBA74F0A"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "red",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 3
+      },
+      "id": 20,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "builder",
+          "expr": "sum by(environment) (io_dropwizard_jetty_MutableServletContextHandler_requests_snapshot_95thPercentile{serviceName=\"ce-nextgen-application\", namespace=~\"$cluster\"})",
+          "legendFormat": "95th percentile snapshot",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "HTTP Response 95th percentile",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "id": 10,
+      "panels": [],
+      "title": "Optimization Services",
+      "type": "row"
+    },
     {
       "datasource": {
         "type": "prometheus",
@@ -89,7 +591,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 0
+        "y": 13
       },
       "id": 4,
       "options": {
@@ -181,7 +683,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 0
+        "y": 13
       },
       "id": 5,
       "options": {
@@ -277,7 +779,7 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 8
+        "y": 21
       },
       "id": 2,
       "options": {
@@ -369,7 +871,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 8
+        "y": 21
       },
       "id": 6,
       "options": {
@@ -461,7 +963,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 16
+        "y": 29
       },
       "id": 8,
       "options": {
@@ -553,7 +1055,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 17
+        "y": 30
       },
       "id": 7,
       "options": {
@@ -628,6 +1130,6 @@
   "timezone": "",
   "title": "Operational Dashboard",
   "uid": "ryNBabgIz",
-  "version": 15,
+  "version": 1,
   "weekStart": ""
 }
