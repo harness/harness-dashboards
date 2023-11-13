@@ -310,7 +310,7 @@
         "mode": "markdown"
       },
       "pluginVersion": "9.3.1",
-      "title": "Dollar Cost",
+      "title": "Cost (in Dollars)",
       "type": "text"
     },
     {
@@ -716,6 +716,6 @@
   "timezone": "",
   "title": "Cloud Cost Analysis",
   "uid": "Id6ia_4Sk",
-  "version": 37,
+  "version": 38,
   "weekStart": ""
 }
