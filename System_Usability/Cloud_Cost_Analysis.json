@@ -185,7 +185,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(container_name) (increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", container_name=~\"$containers\", cluster_name=\"$cluster\"}[24h]))",
+          "expr": "sum by(container_name) (increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", pod_name=~\"^($containers)-([a-z0-9]{9,10}-[a-z0-9]{5}|[a-z0-9]{5}|[0-9]{0,3})$\"}[24h]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -253,8 +253,8 @@
             "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "editorMode": "builder",
-          "expr": "sum by(container_name) (increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", container_name=~\"$containers\"}[$__range]))",
+          "editorMode": "code",
+          "expr": "sum by(container_name) (increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", pod_name=~\"^($containers)-([a-z0-9]{9,10}-[a-z0-9]{5}|[a-z0-9]{5}|[0-9]{0,3})$\"}[$__range]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -496,7 +496,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", container_name=~\"$containers\"}[$__range]))",
+          "expr": "sum(increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", pod_name=~\"^($containers)-([a-z0-9]{9,10}-[a-z0-9]{5}|[a-z0-9]{5}|[0-9]{0,3})$\"}[$__range]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -560,7 +560,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", container_name=~\"$containers\"}[$__range])) * 0.50 / 1024 / 1024 / 1024",
+          "expr": "sum(increase(logging_googleapis_com:byte_count{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\", pod_name=~\"^($containers)-([a-z0-9]{9,10}-[a-z0-9]{5}|[a-z0-9]{5}|[0-9]{0,3})$\"}[$__range])) * 0.50 / (1024 * 1024 * 1024)",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -624,9 +624,9 @@
       },
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "CD",
-          "value": "manager|ng-manager|pipeline-service|template-service|debezium-service|queue-service|migrator-prod|migrator-free|gitops-service|policy-mgmt|verification-svc|cv-nextgen|command-library-svc"
+          "value": "manager|ng-manager|pipeline-service|template-service|debezium-service|queue-service|migrator(-free|-prod)?|gitops-service|policy-mgmt-deployment|verification-svc|cv-nextgen|command-library-svc"
         },
         "description": "",
         "hide": 0,
@@ -638,17 +638,17 @@
           {
             "selected": true,
             "text": "CD",
-            "value": "manager|ng-manager|pipeline-service|template-service|debezium-service|queue-service|migrator-prod|migrator-free|gitops-service|policy-mgmt|verification-svc|cv-nextgen|command-library-svc"
+            "value": "manager|ng-manager|pipeline-service|template-service|debezium-service|queue-service|migrator(-free|-prod)?|gitops-service|policy-mgmt-deployment|verification-svc|cv-nextgen|command-library-svc"
           },
           {
             "selected": false,
             "text": "PL",
-            "value": "platform-service|accesscontrol-service|gateway|genai-service|manager-iterator|ng-dashboard-aggregator|audit-event-streaming|ng-auth-ui|redis-streams-monitor|chatbot-service|weaviate"
+            "value": "platform-service|accesscontrol-service|gateway|genai-service|manager-iterator|ng-dashboard-aggregator|audit-event-streaming|ng-auth-ui|redis-streams-monitor-deployment|chatbot-service|weaviate"
           },
           {
             "selected": false,
             "text": "FF",
-            "value": "ff-admin-server|ff-auth-server|ff-client-server|ff-metrics-server|ff-proxy|pushpin-pushpin|pushpin-worker|iacm-manager|iac-serveriac-server-sprox"
+            "value": "ff-admin-server|ff-auth-server|ff-client-server|ff-metrics-server|ff-proxy|pushpin(-pushpin|-worker)?|iacm-manager|iac-server"
           },
           {
             "selected": false,
@@ -668,12 +668,12 @@
           {
             "selected": false,
             "text": "CHAOS",
-            "value": "service-discovery-manager|chaos-k8s-ifs|chaos-linux-ifc|chaos-manager|blackbox-exporter|chaos-sandbox-manager|chaos-web|node-exporter|subscriber-metrics"
+            "value": "service-discovery-manager|chaos-k8s-ifs|chaos-linux-ifc|chaos-manager|chaos-prometheus-blackbox-exporter|chaos-sandbox-manager|chaos-web|node-exporter|subscriber-metrics"
           },
           {
             "selected": false,
             "text": "CCM",
-            "value": "batch-processing|faktory|lwd|lwd-autocud|worker|anomaly-detection|ccm-worker|ccm-dkron|ng-ce-ui|event-service|datadog-ui|telescopes|cloud-info|ce-nextgen"
+            "value": "batch-processing|faktory|lwd|lwd-autocud|worker|anomaly-detection-deployment|ccm-worker|ccm-dkron|ng-ce-ui|event-service|datadog-ui|telescopes|cloud-info-deployment|ce-nextgen"
           },
           {
             "selected": false,
@@ -698,10 +698,10 @@
           {
             "selected": false,
             "text": "SCM",
-            "value": "gitness|gitrpc"
+            "value": "code-api|code-gitrpc"
           }
         ],
-        "query": "CD : manager|ng-manager|pipeline-service|template-service|debezium-service|queue-service|migrator-prod|migrator-free|gitops-service|policy-mgmt|verification-svc|cv-nextgen|command-library-svc, PL : platform-service|accesscontrol-service|gateway|genai-service|manager-iterator|ng-dashboard-aggregator|audit-event-streaming|ng-auth-ui|redis-streams-monitor|chatbot-service|weaviate, FF : ff-admin-server|ff-auth-server|ff-client-server|ff-metrics-server|ff-proxy|pushpin-pushpin|pushpin-worker|iacm-manager|iac-serveriac-server-sprox, CIE : ci-manager|log-service|ti-service|scm, CET : error-tracking|et-collector|et-receiver-agent|et-receiver-decompile|et-receiver-hit|et-receiver-sql, CDB : dashboard, CHAOS : service-discovery-manager|chaos-k8s-ifs|chaos-linux-ifc|chaos-manager|blackbox-exporter|chaos-sandbox-manager|chaos-web|node-exporter|subscriber-metrics, CCM : batch-processing|faktory|lwd|lwd-autocud|worker|anomaly-detection|ccm-worker|ccm-dkron|ng-ce-ui|event-service|datadog-ui|telescopes|cloud-info|ce-nextgen, UI : ui|next-gen-ui, IDP : idp-service|idp-admin-ui, STO : sto-manager|sto-core|ticket-service, SRM : le-nextgen-cv|le-nextgen-srm, SCM : gitness|gitrpc",
+        "query": "CD : manager|ng-manager|pipeline-service|template-service|debezium-service|queue-service|migrator(-free|-prod)?|gitops-service|policy-mgmt-deployment|verification-svc|cv-nextgen|command-library-svc, PL : platform-service|accesscontrol-service|gateway|genai-service|manager-iterator|ng-dashboard-aggregator|audit-event-streaming|ng-auth-ui|redis-streams-monitor-deployment|chatbot-service|weaviate, FF : ff-admin-server|ff-auth-server|ff-client-server|ff-metrics-server|ff-proxy|pushpin(-pushpin|-worker)?|iacm-manager|iac-server, CIE : ci-manager|log-service|ti-service|scm, CET : error-tracking|et-collector|et-receiver-agent|et-receiver-decompile|et-receiver-hit|et-receiver-sql, CDB : dashboard, CHAOS : service-discovery-manager|chaos-k8s-ifs|chaos-linux-ifc|chaos-manager|chaos-prometheus-blackbox-exporter|chaos-sandbox-manager|chaos-web|node-exporter|subscriber-metrics, CCM : batch-processing|faktory|lwd|lwd-autocud|worker|anomaly-detection-deployment|ccm-worker|ccm-dkron|ng-ce-ui|event-service|datadog-ui|telescopes|cloud-info-deployment|ce-nextgen, UI : ui|next-gen-ui, IDP : idp-service|idp-admin-ui, STO : sto-manager|sto-core|ticket-service, SRM : le-nextgen-cv|le-nextgen-srm, SCM : code-api|code-gitrpc",
         "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"
@@ -716,6 +716,6 @@
   "timezone": "",
   "title": "Cloud Cost Analysis",
   "uid": "Id6ia_4Sk",
-  "version": 38,
+  "version": 49,
   "weekStart": ""
 }
