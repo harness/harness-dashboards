@@ -81,6 +81,182 @@
         "x": 0,
         "y": 0
       },
+      "id": 11,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "9.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${data_source}"
+          },
+          "editorMode": "code",
+          "expr": "heartbeat_received{cluster=\"$cluster\", environment=\"$env\", accountId=~\"$account_id\"}",
+          "format": "table",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Ring information",
+      "transformations": [
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Value": {
+                "aggregations": []
+              },
+              "accountId": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "accountName": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "cluster": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "companyName": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "delegateImageTag": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "delegateJREVersion": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "delegateVersion": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "ringName": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "groupby"
+              },
+              "upgraderImageTag": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "watcherJREVersion": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "watcherVersion": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Value": true
+            },
+            "indexByName": {
+              "accountId": 0,
+              "accountName (last)": 1,
+              "ringName": 2
+            },
+            "renameByName": {
+              "accountName (last)": "accountName",
+              "cluster (last)": "cluster",
+              "companyName (last)": "companyName",
+              "delegateImageTag (last)": "",
+              "ringName (last)": "ring"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${data_source}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "orange",
+            "mode": "fixed"
+          },
+          "custom": {
+            "align": "center",
+            "displayMode": "auto",
+            "filterable": true,
+            "inspect": true
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ringName"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 191
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
       "id": 5,
       "options": {
         "footer": {
@@ -276,7 +452,7 @@
         "h": 8,
         "w": 24,
         "x": 0,
-        "y": 8
+        "y": 16
       },
       "id": 9,
       "options": {
@@ -364,7 +540,7 @@
               },
               "Value": {
                 "aggregations": [
-                  "last"
+                  "max"
                 ],
                 "operation": "aggregate"
               },
@@ -546,6 +722,7 @@
             "renameByName": {
               "Value": "Heart_Beat",
               "Value (last)": "Last HeartBeat (PST)",
+              "Value (max)": "lastHeartbeatTime",
               "accountId (last)": "accountId",
               "accountName (last)": "accountName",
               "cluster (last)": "cluster",
@@ -556,8 +733,8 @@
               "delegateId (last)": "delegateId",
               "delegateImageTag (last)": "delegate_Image_Tag",
               "delegateJREVersion (last)": "delegate_JRE_Version",
-              "delegateName (last)": "delegate_Name",
-              "delegateVersion (last)": "delegate_Version",
+              "delegateName (last)": "delegateName",
+              "delegateVersion (last)": "delegateVersion",
               "environment (last)": "environment",
               "instance (last)": "instance",
               "isImmutable (last)": "isImmutable",
@@ -583,7 +760,7 @@
             "conversions": [
               {
                 "destinationType": "time",
-                "targetField": "Value (last)"
+                "targetField": "Value (max)"
               }
             ],
             "fields": {}
@@ -690,7 +867,7 @@
         "h": 7,
         "w": 24,
         "x": 0,
-        "y": 16
+        "y": 24
       },
       "id": 10,
       "options": {
@@ -948,7 +1125,7 @@
         "h": 6,
         "w": 24,
         "x": 0,
-        "y": 23
+        "y": 31
       },
       "id": 6,
       "options": {
@@ -1171,10 +1348,10 @@
         "current": {
           "selected": true,
           "text": [
-            "wFHXHD0RRQWoO8tIZT5YVw"
+            "BdsgiWzwT7CQFeJl9XkQ3A"
           ],
           "value": [
-            "wFHXHD0RRQWoO8tIZT5YVw"
+            "BdsgiWzwT7CQFeJl9XkQ3A"
           ]
         },
         "datasource": {
@@ -1212,13 +1389,13 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Delegate Admin Board",
   "uid": "8Lj9eFZIk",
-  "version": 77,
+  "version": 81,
   "weekStart": ""
 }
