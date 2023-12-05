@@ -1,0 +1,1032 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 208,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 5,
+      "panels": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "axisSoftMax": 0.02,
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "area"
+                }
+              },
+              "mappings": [],
+              "noValue": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "dark-red",
+                    "value": 0.01
+                  }
+                ]
+              },
+              "unit": "percentunit"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 12,
+            "x": 0,
+            "y": 1
+          },
+          "id": 2,
+          "options": {
+            "legend": {
+              "calcs": [
+                "mean",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "v10.1.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "ProdSetup-ManagedPrometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"500\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"501\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"502\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"503\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"504\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"400\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"401\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"402\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"403\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"404\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"405\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"406\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"407\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"408\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"409\"}[5m]) OR\n  up * 0\n)\n",
+              "legendFormat": "Errors",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "ProdSetup-ManagedPrometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\"}[5m]) OR\n  up * 0\n)\n",
+              "legendFormat": "all",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "API's Error rate: iac-server",
+          "transformations": [
+            {
+              "id": "calculateField",
+              "options": {
+                "binary": {
+                  "left": "Errors",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "all"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "include": [],
+                  "reducer": "allValues"
+                },
+                "replaceFields": true
+              }
+            }
+          ],
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "axisSoftMax": 0.02,
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "area"
+                }
+              },
+              "mappings": [],
+              "noValue": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "dark-red",
+                    "value": 0.01
+                  }
+                ]
+              },
+              "unit": "percentunit"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 12,
+            "x": 12,
+            "y": 1
+          },
+          "id": 18,
+          "options": {
+            "legend": {
+              "calcs": [
+                "mean",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "v10.1.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "ProdSetup-ManagedPrometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"500\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"501\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"502\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"503\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"504\"}[5m]) OR\n  up * 0\n)\n",
+              "legendFormat": "5xx",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "ProdSetup-ManagedPrometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\"}[5m]) OR\n  up * 0\n)\n",
+              "legendFormat": "all",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "Rate of 5xx errors: iac-server",
+          "transformations": [
+            {
+              "id": "calculateField",
+              "options": {
+                "binary": {
+                  "left": "5xx",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "all"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "include": [],
+                  "reducer": "allValues"
+                },
+                "replaceFields": true
+              }
+            }
+          ],
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "noValue": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unit": "string"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 12,
+            "x": 0,
+            "y": 6
+          },
+          "id": 19,
+          "options": {
+            "legend": {
+              "calcs": [
+                "mean",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "v10.1.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "ProdSetup-ManagedPrometheus"
+              },
+              "editorMode": "code",
+              "expr": "up{job=\"iac-server-sprox\", namespace=\"iac-server\"}",
+              "legendFormat": "{{job}}",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "ProdSetup-ManagedPrometheus"
+              },
+              "editorMode": "code",
+              "expr": "up{job=\"iacm-manager\", namespace=\"harness-nextgen\"}",
+              "hide": false,
+              "legendFormat": "{{job}}",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "Uptime: iac-server",
+          "transformations": [
+            {
+              "id": "calculateField",
+              "options": {
+                "binary": {
+                  "left": "5xx",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "all"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "include": [],
+                  "reducer": "allValues"
+                },
+                "replaceFields": true
+              }
+            }
+          ],
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "axisSoftMax": 1500,
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "area"
+                }
+              },
+              "mappings": [],
+              "noValue": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "dark-red",
+                    "value": 1000
+                  }
+                ]
+              },
+              "unit": "ms"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 12,
+            "x": 12,
+            "y": 6
+          },
+          "id": 11,
+          "options": {
+            "legend": {
+              "calcs": [
+                "mean",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "v10.1.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "ProdSetup-ManagedPrometheus"
+              },
+              "editorMode": "code",
+              "expr": "histogram_quantile(0.95, sum by (job, le)\n(rate(\n  iac_http_requests_duration_bucket{\n    job=\"iac-server-sprox\",\n    namespace=\"iac-server\"\n  }[5m])\n))\n",
+              "legendFormat": "{{job}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Requests latency 95th percentile: iac-server",
+          "type": "timeseries"
+        }
+      ],
+      "title": "Prod1",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 7,
+      "panels": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "axisSoftMax": 0.02,
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "area"
+                }
+              },
+              "mappings": [],
+              "noValue": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "dark-red",
+                    "value": 0.01
+                  }
+                ]
+              },
+              "unit": "percentunit"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 12,
+            "x": 0,
+            "y": 12
+          },
+          "id": 20,
+          "options": {
+            "legend": {
+              "calcs": [
+                "mean",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "v10.1.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "ProdSetup-ManagedPrometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"500\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"501\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"502\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"503\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"504\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"400\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"401\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"402\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"403\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"404\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"405\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"406\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"407\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"408\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"409\"}[5m]) OR\n  up * 0\n)\n",
+              "legendFormat": "Errors",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "ProdSetup-ManagedPrometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\"}[5m]) OR\n  up * 0\n)\n",
+              "legendFormat": "all",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "API's Error rate: iac-server",
+          "transformations": [
+            {
+              "id": "calculateField",
+              "options": {
+                "binary": {
+                  "left": "Errors",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "all"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "include": [],
+                  "reducer": "allValues"
+                },
+                "replaceFields": true
+              }
+            }
+          ],
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "axisSoftMax": 0.02,
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "area"
+                }
+              },
+              "mappings": [],
+              "noValue": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "dark-red",
+                    "value": 0.01
+                  }
+                ]
+              },
+              "unit": "percentunit"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 12,
+            "x": 12,
+            "y": 12
+          },
+          "id": 21,
+          "options": {
+            "legend": {
+              "calcs": [
+                "mean",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "v10.1.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "ProdSetup-ManagedPrometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"500\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"501\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"502\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"503\"}[5m]) OR\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\", status=\"504\"}[5m]) OR\n  up * 0\n)\n",
+              "legendFormat": "5xx",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "ProdSetup-ManagedPrometheus"
+              },
+              "editorMode": "code",
+              "expr": "sum(\n  count_over_time(logging_googleapis_com:user_iac_server_lb_requests{log=\"requests\", monitored_resource=\"l7_lb_rule\"}[5m]) OR\n  up * 0\n)\n",
+              "legendFormat": "all",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "Rate of 5xx errors: iac-server",
+          "transformations": [
+            {
+              "id": "calculateField",
+              "options": {
+                "binary": {
+                  "left": "5xx",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "all"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "include": [],
+                  "reducer": "allValues"
+                },
+                "replaceFields": true
+              }
+            }
+          ],
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "noValue": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unit": "string"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 12,
+            "x": 0,
+            "y": 17
+          },
+          "id": 24,
+          "options": {
+            "legend": {
+              "calcs": [
+                "mean",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "v10.1.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "ProdSetup-ManagedPrometheus"
+              },
+              "editorMode": "code",
+              "expr": "up{job=\"iac-server-sprox\", namespace=\"iac-server-free\"}",
+              "legendFormat": "{{job}}",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "ProdSetup-ManagedPrometheus"
+              },
+              "editorMode": "code",
+              "expr": "up{job=\"iacm-manager\", namespace=\"harness-nextgen\"}",
+              "hide": false,
+              "legendFormat": "{{job}}",
+              "range": true,
+              "refId": "B"
+            }
+          ],
+          "title": "Uptime: iac-server",
+          "transformations": [
+            {
+              "id": "calculateField",
+              "options": {
+                "binary": {
+                  "left": "5xx",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "all"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "include": [],
+                  "reducer": "allValues"
+                },
+                "replaceFields": true
+              }
+            }
+          ],
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "axisSoftMax": 1500,
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "area"
+                }
+              },
+              "mappings": [],
+              "noValue": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "dark-red",
+                    "value": 1000
+                  }
+                ]
+              },
+              "unit": "ms"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 12,
+            "x": 12,
+            "y": 17
+          },
+          "id": 23,
+          "options": {
+            "legend": {
+              "calcs": [
+                "mean",
+                "max"
+              ],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "v10.1.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "ProdSetup-ManagedPrometheus"
+              },
+              "editorMode": "code",
+              "expr": "histogram_quantile(0.95, sum by (job, le)\n(rate(\n  iac_http_requests_duration_bucket{\n    job=\"iac-server-sprox\",\n    namespace=\"iac-server\"\n  }[5m])\n))\n",
+              "legendFormat": "{{job}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Requests latency 95th percentile: iac-server",
+          "type": "timeseries"
+        }
+      ],
+      "title": "Prod2",
+      "type": "row"
+    }
+  ],
+  "schemaVersion": 37,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "SLIs",
+  "uid": "iac_slis",
+  "version": 12,
+  "weekStart": ""
+}
