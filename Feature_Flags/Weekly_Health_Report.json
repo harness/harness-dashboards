@@ -409,5 +409,7 @@
    },
    "timezone": "utc",
    "title": "Weekly Health Report",
-   "uid": "ff_weekly_health"
+   "uid": "ff_weekly_health",
+   "version": 1,
+   "weekStart": ""
 }
