@@ -302,7 +302,7 @@
                         "type": "prometheus",
                         "uid": "ProdSetup-ManagedPrometheus"
                      },
-                     "expr": "histogram_quantile(0.95, sum by (job, le)\n(rate(\n  ff_http_requests_content_length_histogram_bucket{\n    job=\"ff-admin-server\",\n    namespace=\"harness-nextgen\"\n  }[5m])\n))\n",
+                     "expr": "histogram_quantile(0.95, sum by (job, le)\n(rate(\n  ff_http_requests_duration_bucket{\n    job=\"ff-admin-server\",\n    namespace=\"harness-nextgen\"\n  }[5m])\n))\n",
                      "legendFormat": "{{job}}"
                   }
                ],
@@ -851,7 +851,7 @@
                         "type": "prometheus",
                         "uid": "ProdSetup-ManagedPrometheus"
                      },
-                     "expr": "histogram_quantile(0.95, sum by (job, le)\n(rate(\n  ff_http_requests_content_length_histogram_bucket{\n    job=\"ff-admin-server\",\n    namespace=\"harness-nextgen-free\"\n  }[5m])\n))\n",
+                     "expr": "histogram_quantile(0.95, sum by (job, le)\n(rate(\n  ff_http_requests_duration_bucket{\n    job=\"ff-admin-server\",\n    namespace=\"harness-nextgen-free\"\n  }[5m])\n))\n",
                      "legendFormat": "{{job}}"
                   }
                ],
@@ -1400,7 +1400,7 @@
                         "type": "prometheus",
                         "uid": "ProdSetup-ManagedPrometheus"
                      },
-                     "expr": "histogram_quantile(0.95, sum by (job, le)\n(rate(\n  ff_http_requests_content_length_histogram_bucket{\n    job=\"ff-admin-server\",\n    namespace=\"harness-nextgen-compliance\"\n  }[5m])\n))\n",
+                     "expr": "histogram_quantile(0.95, sum by (job, le)\n(rate(\n  ff_http_requests_duration_bucket{\n    job=\"ff-admin-server\",\n    namespace=\"harness-nextgen-compliance\"\n  }[5m])\n))\n",
                      "legendFormat": "{{job}}"
                   }
                ],
@@ -2098,7 +2098,7 @@
                         "type": "prometheus",
                         "uid": "QASetup-ManagedPrometheus"
                      },
-                     "expr": "histogram_quantile(0.95, sum by (job, le)\n(rate(\n  ff_http_requests_content_length_histogram_bucket{\n    cluster=\"qa-private\",\n    job=\"ff-admin-server\",\n    namespace=\"harness-nextgen\"\n  }[5m])\n))\n",
+                     "expr": "histogram_quantile(0.95, sum by (job, le)\n(rate(\n  ff_http_requests_duration_bucket{\n    cluster=\"qa-private\",\n    job=\"ff-admin-server\",\n    namespace=\"harness-nextgen\"\n  }[5m])\n))\n",
                      "legendFormat": "{{job}}"
                   }
                ],
@@ -2796,7 +2796,7 @@
                         "type": "prometheus",
                         "uid": "UATSetup-ManagedPrometheus"
                      },
-                     "expr": "histogram_quantile(0.95, sum by (job, le)\n(rate(\n  ff_http_requests_content_length_histogram_bucket{\n    job=\"ff-admin-server\",\n    namespace=\"harness-nextgen\"\n  }[5m])\n))\n",
+                     "expr": "histogram_quantile(0.95, sum by (job, le)\n(rate(\n  ff_http_requests_duration_bucket{\n    job=\"ff-admin-server\",\n    namespace=\"harness-nextgen\"\n  }[5m])\n))\n",
                      "legendFormat": "{{job}}"
                   }
                ],
@@ -3195,11 +3195,15 @@
       }
    ],
    "schemaVersion": 36,
-   "time": {
-      "from": "now-3h",
-      "to": "now"
-   },
-   "timezone": "utc",
-   "title": "SLIs",
-   "uid": "ff_slis"
+
+  "time": {
+    "from": "now-3h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "SLIs",
+  "uid": "ff_slis",
+  "version": 1,
+  "weekStart": ""
 }
