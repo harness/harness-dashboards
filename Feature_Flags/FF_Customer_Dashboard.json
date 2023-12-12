@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 12,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -404,8 +403,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1188,13 +1186,9 @@
     "list": [
       {
         "current": {
-          "selected": true,
-          "text": [
-            "BcoZcDQQUS37ccH4lViQQ"
-          ],
-          "value": [
-            "BcoZcDQQUS37ccH4lViQQ"
-          ]
+          "selected": false,
+          "text": "All",
+          "value": ".*"
         },
         "hide": 0,
         "includeAll": false,
@@ -1219,23 +1213,13 @@
           },
           {
             "selected": false,
-            "text": "cust2 ===X4qbpncMSyKP3yDfAEqHzw",
-            "value": "cust2 ===X4qbpncMSyKP3yDfAEqHzw"
-          },
-          {
-            "selected": false,
             "text": "ZeroFlucs",
             "value": "rvvu5i6TQ3yTomFmk_NR0g"
           },
           {
             "selected": false,
-            "text": "26TRmCAhRRKVB3UUD_q11g",
+            "text": "Dkatalis",
             "value": "26TRmCAhRRKVB3UUD_q11g"
-          },
-          {
-            "selected": false,
-            "text": "0imfjG07TR2hVBcS5AZpCQ",
-            "value": "0imfjG07TR2hVBcS5AZpCQ"
           },
           {
             "selected": false,
@@ -1249,18 +1233,18 @@
           },
           {
             "selected": false,
-            "text": "Harness-FF-Prod1 : \nk4e8Jrt5THWe0Owle0Gr-Q",
-            "value": "Harness-FF-Prod1 : \nk4e8Jrt5THWe0Owle0Gr-Q"
+            "text": "Harness-FF-Prod1",
+            "value": "k4e8Jrt5THWe0Owle0Gr-Q"
           },
           {
             "selected": false,
-            "text": "Harness-FF-Prod2 : \n31bhHXSHSRKo9Ud8U4-1VQ",
-            "value": "Harness-FF-Prod2 : \n31bhHXSHSRKo9Ud8U4-1VQ"
+            "text": "Harness-FF-Prod2",
+            "value": "31bhHXSHSRKo9Ud8U4-1VQ"
           },
           {
             "selected": false,
-            "text": "Harness-FF-Prod3 : \nWki8Hz1eRRqJJvLlJAYZOw",
-            "value": "Harness-FF-Prod3 : \nWki8Hz1eRRqJJvLlJAYZOw"
+            "text": "Harness-FF-Prod3",
+            "value": "Wki8Hz1eRRqJJvLlJAYZOw"
           },
           {
             "selected": false,
@@ -1269,12 +1253,12 @@
           },
           {
             "selected": false,
-            "text": "BigThree:nh1pCWJXSReBDf3Ibh0kQg|-ITnAA2Sg6fPowwXWzlxg|bzykiJh8S0SHReAeHJr4QQ",
-            "value": "BigThree:nh1pCWJXSReBDf3Ibh0kQg|-ITnAA2Sg6fPowwXWzlxg|bzykiJh8S0SHReAeHJr4QQ"
+            "text": "BigThree",
+            "value": "nh1pCWJXSReBDf3Ibh0kQg|-ITnAA2Sg6fPowwXWzlxg|bzykiJh8S0SHReAeHJr4QQ"
           },
           {
             "selected": false,
-            "text": "QbXF1VIZTIC2-ueN1uTWHQ",
+            "text": "Dfin",
             "value": "QbXF1VIZTIC2-ueN1uTWHQ"
           },
           {
@@ -1284,7 +1268,7 @@
           },
           {
             "selected": false,
-            "text": "X4qbpncMSyKP3yDfAEqHzw",
+            "text": "Montu",
             "value": "X4qbpncMSyKP3yDfAEqHzw"
           },
           {
@@ -1294,11 +1278,16 @@
           },
           {
             "selected": false,
-            "text": "LDS:BoRV8ufsTfym0JlNGyeqcA",
-            "value": "LDS:BoRV8ufsTfym0JlNGyeqcA"
+            "text": "LDS",
+            "value": "BoRV8ufsTfym0JlNGyeqcA"
+          },
+          {
+            "selected": false,
+            "text": "Experian",
+            "value": "89jpOP9RQu22FwOOh_Zpmg"
           }
         ],
-        "query": "All : .*, Simpplr : nh1pCWJXSReBDf3Ibh0kQg, SCB : _-ITnAA2Sg6fPowwXWzlxg ,  cust2 ===X4qbpncMSyKP3yDfAEqHzw, ZeroFlucs : rvvu5i6TQ3yTomFmk_NR0g, 26TRmCAhRRKVB3UUD_q11g : 26TRmCAhRRKVB3UUD_q11g, 0imfjG07TR2hVBcS5AZpCQ : 0imfjG07TR2hVBcS5AZpCQ, Yum Brands : LBcoZcDQQUS37ccH4lViQQ, The Real Real : bzykiJh8S0SHReAeHJr4QQ, Harness-FF-Prod1 : \nk4e8Jrt5THWe0Owle0Gr-Q, Harness-FF-Prod2 : \n31bhHXSHSRKo9Ud8U4-1VQ, Harness-FF-Prod3 : \nWki8Hz1eRRqJJvLlJAYZOw, Goldcast : F6yB5uRTQ5Cod6MWQoQXdg,BigThree:nh1pCWJXSReBDf3Ibh0kQg|-ITnAA2Sg6fPowwXWzlxg|bzykiJh8S0SHReAeHJr4QQ, QbXF1VIZTIC2-ueN1uTWHQ : QbXF1VIZTIC2-ueN1uTWHQ, Tessian : NtP2d9KbQGmdlL8LEkN-rA, X4qbpncMSyKP3yDfAEqHzw : X4qbpncMSyKP3yDfAEqHzw, Spotana :  _lnNBBJbQUaiITdI9niH_A,LDS:BoRV8ufsTfym0JlNGyeqcA",
+        "query": "All : .*, Simpplr : nh1pCWJXSReBDf3Ibh0kQg, SCB : _-ITnAA2Sg6fPowwXWzlxg, ZeroFlucs : rvvu5i6TQ3yTomFmk_NR0g, Dkatalis : 26TRmCAhRRKVB3UUD_q11g, Yum Brands : LBcoZcDQQUS37ccH4lViQQ, The Real Real : bzykiJh8S0SHReAeHJr4QQ, Harness-FF-Prod1 : k4e8Jrt5THWe0Owle0Gr-Q, Harness-FF-Prod2 : 31bhHXSHSRKo9Ud8U4-1VQ, Harness-FF-Prod3 : Wki8Hz1eRRqJJvLlJAYZOw, Goldcast : F6yB5uRTQ5Cod6MWQoQXdg, BigThree : nh1pCWJXSReBDf3Ibh0kQg|-ITnAA2Sg6fPowwXWzlxg|bzykiJh8S0SHReAeHJr4QQ, Dfin : QbXF1VIZTIC2-ueN1uTWHQ, Tessian : NtP2d9KbQGmdlL8LEkN-rA, Montu : X4qbpncMSyKP3yDfAEqHzw, Spotana :  _lnNBBJbQUaiITdI9niH_A, LDS : BoRV8ufsTfym0JlNGyeqcA, Experian : 89jpOP9RQu22FwOOh_Zpmg ",
         "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"
@@ -1373,6 +1362,6 @@
   "timezone": "",
   "title": "FF Customer Dashboard",
   "uid": "fdhqFEbVz",
-  "version": 30,
+  "version": 31,
   "weekStart": ""
 }
