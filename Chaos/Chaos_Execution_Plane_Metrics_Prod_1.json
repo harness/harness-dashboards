@@ -1,0 +1,401 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 16,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "P395BF20BBBA74F0A"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "P395BF20BBBA74F0A"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "chaos_infra_availability{infra_id=\"$infra_id\"}",
+          "format": "time_series",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Number of Infra Connected",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {},
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 4,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "9.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "7vj5KsKVk"
+          },
+          "editorMode": "code",
+          "expr": "chaos_experiment_runs{infr_id=\"$infra_id\"}",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Number of Experiment Running",
+      "type": "gauge"
+    },
+    {
+      "datasource": {},
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "id": 6,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "9.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "7vj5KsKVk"
+          },
+          "editorMode": "code",
+          "expr": "chaos_experiment_total_runs{infr_id=\"$infra_id\"}",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Total Number of Experiment Runs",
+      "type": "gauge"
+    }
+  ],
+  "schemaVersion": 37,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "6_vVHzo9Qeu9fXvj-AcbCQ",
+          "value": "6_vVHzo9Qeu9fXvj-AcbCQ"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "P395BF20BBBA74F0A"
+        },
+        "definition": "label_values(chaos_infra_availability{namespace=\"chaos-prod1\"},acc_id)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "",
+        "multi": false,
+        "name": "account_id",
+        "options": [],
+        "query": {
+          "query": "label_values(chaos_infra_availability{namespace=\"chaos-prod1\"},acc_id)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "fb63e4d6-48ee-43ce-9ada-cb50a485ffa2",
+          "value": "fb63e4d6-48ee-43ce-9ada-cb50a485ffa2"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "P395BF20BBBA74F0A"
+        },
+        "definition": "label_values(chaos_infra_availability{infra_name=\"$infra_name\"},infra_id)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "infra_id",
+        "multi": false,
+        "name": "infra_id",
+        "options": [],
+        "query": {
+          "query": "label_values(chaos_infra_availability{infra_name=\"$infra_name\"},infra_id)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "asdf",
+          "value": "asdf"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "P395BF20BBBA74F0A"
+        },
+        "definition": "label_values(chaos_infra_availability{exported_project_id=\"$project_id\"},infra_name)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "infra_name",
+        "multi": false,
+        "name": "infra_name",
+        "options": [],
+        "query": {
+          "query": "label_values(chaos_infra_availability{exported_project_id=\"$project_id\"},infra_name)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "SE_Sandbox",
+          "value": "SE_Sandbox"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "P395BF20BBBA74F0A"
+        },
+        "definition": "label_values(chaos_infra_availability{acc_id=\"$account_id\"},org_id)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "org_id",
+        "multi": false,
+        "name": "org_id",
+        "options": [],
+        "query": {
+          "query": "label_values(chaos_infra_availability{acc_id=\"$account_id\"},org_id)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "Kouhsari",
+          "value": "Kouhsari"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "P395BF20BBBA74F0A"
+        },
+        "definition": "label_values(chaos_infra_availability{org_id=\"$org_id\",acc_id=\"$account_id\"},exported_project_id)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "project_id",
+        "multi": false,
+        "name": "project_id",
+        "options": [],
+        "query": {
+          "query": "label_values(chaos_infra_availability{org_id=\"$org_id\",acc_id=\"$account_id\"},exported_project_id)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Chaos_Execution_Plane_Metrics_Prod_1",
+  "uid": "iJVmI_cVl",
+  "version": 1,
+  "weekStart": ""
+}
