@@ -1,0 +1,1262 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 2,
+    "id": 378,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${dataSource}"
+        },
+        "description": "(4xx + 5xx) / (total requests)",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 25,
+              "gradientMode": "hue",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineStyle": {
+                "fill": "solid"
+              },
+              "lineWidth": 1,
+              "pointSize": 0,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": true,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "dashed+area"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 16,
+          "x": 0,
+          "y": 0
+        },
+        "id": 2,
+        "links": [],
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull",
+              "max",
+              "min",
+              "mean"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${dataSource}"
+            },
+            "editorMode": "code",
+            "expr": "100 * sum(rate(http_server_requests_seconds_count{job=\"sei-api\", namespace=\"$namespace\", status=~\"4..|5..\"}[5m])) / (sum(rate(http_server_requests_seconds_count{job=\"sei-api\", namespace=\"$namespace\"}[5m])) + on() vector(1))",
+            "instant": false,
+            "legendFormat": "API Error Rate",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "API Error Rate (sei-api)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${dataSource}"
+        },
+        "description": "More than 1% over 5 min rolling window",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 8,
+          "x": 16,
+          "y": 0
+        },
+        "id": 4,
+        "links": [],
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "/.*/",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {
+            "titleSize": 25,
+            "valueSize": 22
+          },
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.0.10",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${dataSource}"
+            },
+            "editorMode": "code",
+            "expr": "100 * sum(rate(http_server_requests_seconds_count{job=\"sei-api\", namespace=\"$namespace\", status=~\"4..|5..\"}[5m])) / (sum(rate(http_server_requests_seconds_count{job=\"sei-api\", namespace=\"$namespace\"}[5m])) + on() vector(1))",
+            "instant": false,
+            "legendFormat": "API Error Rate",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "API Error Rate (sei-api)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${dataSource}"
+        },
+        "description": "API Response Time for sei-api [95th percentile: > 1s over 5 min rolling window]",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 25,
+              "gradientMode": "hue",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineStyle": {
+                "fill": "solid"
+              },
+              "lineWidth": 1,
+              "pointSize": 2,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": true,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "dashed+area"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 16,
+          "x": 0,
+          "y": 9
+        },
+        "id": 12,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull",
+              "max",
+              "min",
+              "mean"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "10.0.10",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${dataSource}"
+            },
+            "editorMode": "code",
+            "expr": "histogram_quantile(0.95,sum(rate(http_server_requests_seconds_bucket{job=\"sei-api\",namespace=\"$namespace\"}[5m])) by (le))",
+            "instant": false,
+            "legendFormat": "95th percentile Response Time",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "95th percentlie ART (sei-api)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${dataSource}"
+        },
+        "description": "API Response Time for sei-api [95th percentile: > 1s over 5 min rolling window]",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 8,
+          "x": 16,
+          "y": 9
+        },
+        "id": 14,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.0.10",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${dataSource}"
+            },
+            "editorMode": "code",
+            "expr": "histogram_quantile(0.95, sum(rate(http_server_requests_seconds_bucket{job=\"sei-api\", le=\"1\"}[5m])) by (le))",
+            "instant": false,
+            "legendFormat": "95th percentile Response Time",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "95th percentlie ART (sei-api)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${dataSource}"
+        },
+        "description": "Response time (95th) for the request made for /v1/integrations/list",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 25,
+              "gradientMode": "hue",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineStyle": {
+                "fill": "solid"
+              },
+              "lineWidth": 1,
+              "pointSize": 2,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": true,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "dashed+area"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 30
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 24,
+          "x": 0,
+          "y": 18
+        },
+        "id": 23,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull",
+              "max",
+              "min",
+              "mean"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "10.0.10",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${dataSource}"
+            },
+            "editorMode": "code",
+            "expr": "histogram_quantile(0.95,sum(rate(http_server_requests_seconds_bucket{job=\"sei-api\", uri=\"/v1/integrations/list\",namespace=\"$namespace\"}[$__interval])) by (le, pod))",
+            "instant": false,
+            "legendFormat": "{{pod}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Integrations List Response Time",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${dataSource}"
+        },
+        "description": "RPS for 2xx/4xx/5xx Responses at /v1/integrations/list",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 25,
+              "gradientMode": "hue",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineStyle": {
+                "fill": "solid"
+              },
+              "lineWidth": 1,
+              "pointSize": 1,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": true,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "dashed+area"
+              }
+            },
+            "mappings": [],
+            "min": 0,
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 15,
+          "x": 0,
+          "y": 28
+        },
+        "id": 3,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "10.0.10",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${dataSource}"
+            },
+            "editorMode": "code",
+            "expr": "sum(rate(http_server_requests_seconds_count{status=~\"2..\",uri=\"/v1/integrations/list\", namespace=\"$namespace\"}[5m])) by (status)",
+            "instant": false,
+            "interval": "",
+            "legendFormat": "Rate of {{status}}",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${dataSource}"
+            },
+            "editorMode": "code",
+            "expr": "sum(rate(http_server_requests_seconds_count{status=~\"4..\", uri=\"/v1/integrations/list\", namespace=\"$namespace\"}[5m])) by (status)",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Rate of {{status}}",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${dataSource}"
+            },
+            "editorMode": "code",
+            "expr": "sum(rate(http_server_requests_seconds_count{status=~\"5..\", uri=\"/v1/integrations/list\", namespace=\"$namespace\"}[5m])) by (status)",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Rate of {{status}}",
+            "range": true,
+            "refId": "C"
+          }
+        ],
+        "title": "Integrations list API Health Status",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${dataSource}"
+        },
+        "description": "RPS for 2xx/4xx/5xx Responses at /v1/integrations/list",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 9,
+          "x": 15,
+          "y": 28
+        },
+        "id": 18,
+        "options": {
+          "displayMode": "lcd",
+          "maxVizHeight": 300,
+          "minVizHeight": 10,
+          "minVizWidth": 0,
+          "namePlacement": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "/.*/",
+            "values": false
+          },
+          "showUnfilled": true,
+          "sizing": "auto",
+          "valueMode": "color"
+        },
+        "pluginVersion": "10.0.10",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${dataSource}"
+            },
+            "editorMode": "code",
+            "expr": "sum(rate(http_server_requests_seconds_count{status=~\"2..\",uri=\"/v1/integrations/list\", namespace=\"$namespace\"}[5m])) by (status)",
+            "instant": false,
+            "interval": "",
+            "legendFormat": "Rate of {{status}}",
+            "range": true,
+            "refId": "A"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${dataSource}"
+            },
+            "editorMode": "code",
+            "expr": "sum(rate(http_server_requests_seconds_count{status=~\"4..\", uri=\"/v1/integrations/list\", namespace=\"$namespace\"}[5m])) by (status)",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Rate of {{status}}",
+            "range": true,
+            "refId": "B"
+          },
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${dataSource}"
+            },
+            "editorMode": "code",
+            "expr": "sum(rate(http_server_requests_seconds_count{status=~\"5..\", uri=\"/v1/integrations/list\", namespace=\"$namespace\"}[5m])) by (status)",
+            "hide": false,
+            "instant": false,
+            "legendFormat": "Rate of {{status}}",
+            "range": true,
+            "refId": "C"
+          }
+        ],
+        "title": "Integrations list API Health Status",
+        "type": "bargauge"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${dataSource}"
+        },
+        "description": "(4xx+5xx) / total requests",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 2,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineStyle": {
+                "fill": "solid"
+              },
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "dashed+area"
+              }
+            },
+            "mappings": [],
+            "noValue": "No Errors Encountered",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 15,
+          "x": 0,
+          "y": 37
+        },
+        "id": 1,
+        "links": [],
+        "options": {
+          "legend": {
+            "calcs": [
+              "last",
+              "max",
+              "min",
+              "mean"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${dataSource}"
+            },
+            "editorMode": "code",
+            "expr": "100 * sum(rate(http_server_requests_seconds_count{job=\"sei-internal-api\",namespace=\"$namespace\",status=~\"4..|5..\"}[5m])) / sum(rate(http_server_requests_seconds_count{job=\"sei-internal-api\",namespace=\"$namespace\"}[5m]))",
+            "instant": false,
+            "interval": "",
+            "legendFormat": "API Error Rate",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "API Error Rate (sei-internal-api)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${dataSource}"
+        },
+        "description": "(4xx+5xx) / total requests",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "mappings": [],
+            "noValue": "No Errors Encountered",
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 9,
+          "x": 15,
+          "y": 37
+        },
+        "id": 5,
+        "links": [],
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "/.*/",
+            "values": false
+          },
+          "showPercentChange": false,
+          "text": {
+            "titleSize": 25,
+            "valueSize": 18
+          },
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.0.10",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${dataSource}"
+            },
+            "editorMode": "code",
+            "expr": "100 * sum(rate(http_server_requests_seconds_count{job=\"sei-internal-api\",namespace=\"$namespace\",status=~\"4..|5..\"}[5m])) / sum(rate(http_server_requests_seconds_count{job=\"sei-internal-api\", namespace=\"$namespace\"}[5m]))",
+            "instant": false,
+            "legendFormat": "API Error Rate",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "API Error Rate (sei-internal-api)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${dataSource}"
+        },
+        "description": "API Response Time for sei-internal-api [95th percentile: > 1s over 5 min rolling window]",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 25,
+              "gradientMode": "hue",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineStyle": {
+                "fill": "solid"
+              },
+              "lineWidth": 1,
+              "pointSize": 2,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": true,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "dashed+area"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 15,
+          "x": 0,
+          "y": 47
+        },
+        "id": 9,
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull",
+              "max",
+              "min",
+              "mean"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "pluginVersion": "10.0.10",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${dataSource}"
+            },
+            "editorMode": "code",
+            "expr": "histogram_quantile(0.95, sum(rate(http_server_requests_seconds_bucket{job=\"sei-internal-api\", namespace=\"$namespace\"}[5m])) by (le))",
+            "instant": false,
+            "legendFormat": "95th percentile Response Time",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "95th percentlie ART (sei-internal-api)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${dataSource}"
+        },
+        "description": "API Response Time for sei-internal-api [95th percentile: > 1s over 5 min rolling window]",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1
+                }
+              ]
+            },
+            "unit": "s"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 9,
+          "x": 15,
+          "y": 47
+        },
+        "id": 13,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showPercentChange": false,
+          "textMode": "auto",
+          "wideLayout": true
+        },
+        "pluginVersion": "10.0.10",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${dataSource}"
+            },
+            "editorMode": "code",
+            "expr": "histogram_quantile(0.95, sum(rate(http_server_requests_seconds_bucket{job=\"sei-internal-api\", le=\"1\", namespace=\"$namespace\"}[5m])) by (le))",
+            "instant": false,
+            "legendFormat": "95th percentile Response Time",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "95th percentlie ART (sei-internal-api)",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${dataSource}"
+        },
+        "description": "DB Load for SEI",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 20,
+              "gradientMode": "opacity",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "lineInterpolation": "linear",
+              "lineStyle": {
+                "fill": "solid"
+              },
+              "lineWidth": 1,
+              "pointSize": 0,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": true,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "dashed+area"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 95
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 18,
+          "w": 24,
+          "x": 0,
+          "y": 57
+        },
+        "id": 21,
+        "links": [],
+        "options": {
+          "legend": {
+            "calcs": [
+              "lastNotNull",
+              "max",
+              "min",
+              "mean"
+            ],
+            "displayMode": "table",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "${dataSource}"
+            },
+            "editorMode": "code",
+            "expr": "label_replace(cloudsql_googleapis_com:database_cpu_utilization{monitored_resource=\"cloudsql_database\", database_id=~\"$database_id\"},\"database_name\", \"$1\", \"database_id\", \"prod-setup-205416:(.*)\") * 100",
+            "instant": false,
+            "legendFormat": "{{database_name}}",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "SEI DB Load",
+        "type": "timeseries"
+      }
+    ],
+    "refresh": "",
+    "schemaVersion": 38,
+    "style": "dark",
+    "tags": [
+      "sli",
+      "sei"
+    ],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "selected": false,
+            "text": "ProdSetup-ManagedPrometheus",
+            "value": "ProdSetup-ManagedPrometheus"
+          },
+          "hide": 0,
+          "includeAll": true,
+          "label": "DataSource",
+          "multi": false,
+          "name": "dataSource",
+          "options": [],
+          "query": "prometheus",
+          "queryValue": "PRod",
+          "refresh": 1,
+          "regex": "/ManagedPrometheus/",
+          "skipUrlSync": false,
+          "type": "datasource"
+        },
+        {
+          "current": {
+            "selected": true,
+            "text": [
+              "sei-free"
+            ],
+            "value": [
+              "sei-free"
+            ]
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "definition": "label_values(http_server_requests_seconds_count{namespace=~\".*sei.*\"},namespace)",
+          "hide": 0,
+          "includeAll": false,
+          "label": "Namespace",
+          "multi": true,
+          "name": "namespace",
+          "options": [],
+          "query": {
+            "query": "label_values(http_server_requests_seconds_count{namespace=~\".*sei.*\"},namespace)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "current": {
+            "selected": true,
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+          },
+          "definition": "label_values(cloudsql_googleapis_com:database_uptime{monitored_resource=\"cloudsql_database\" , database_id=~\".*sei.*\"},database_id)",
+          "hide": 0,
+          "includeAll": true,
+          "label": "Database ID",
+          "multi": true,
+          "name": "database_id",
+          "options": [],
+          "query": {
+            "query": "label_values(cloudsql_googleapis_com:database_uptime{monitored_resource=\"cloudsql_database\" , database_id=~\".*sei.*\"},database_id)",
+            "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "SEI SLIs",
+    "uid": "fb64efac-b76d-466b-9a5a-9f73058d9876",
+    "version": 34,
+    "weekStart": ""
+  }
