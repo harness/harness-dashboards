@@ -1792,7 +1792,6 @@
         "query": "prometheus",
         "queryValue": "",
         "refresh": 1,
-        "regex": "/Prometheus/",
         "skipUrlSync": false,
         "type": "datasource"
       },
