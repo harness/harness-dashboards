@@ -32,13 +32,13 @@
         "type": "prometheus",
         "uid": "${dataSource}"
       },
-      "description": "number of perpetual tasks",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -52,6 +52,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -111,13 +112,13 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(max by(accountId) (perpetual_tasks_num{cluster=\"$cluster\", environment=\"$env\"}))",
+          "expr": "max(delta(active_delegate_task{cluster=\"$cluster\", environment=\"$env\"}[5m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "pepetual_tasks_number",
+      "title": "active_delegate_task",
       "type": "timeseries"
     },
     {
@@ -125,13 +126,13 @@
         "type": "prometheus",
         "uid": "${dataSource}"
       },
-      "description": "number of perpetual tasks",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -145,6 +146,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -184,7 +186,7 @@
         "x": 12,
         "y": 0
       },
-      "id": 3,
+      "id": 8,
       "options": {
         "legend": {
           "calcs": [],
@@ -204,13 +206,13 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(max by(accountId) (perpetual_tasks_assigned_num{cluster=\"$cluster\", environment=\"$env\"}))",
+          "expr": "sum(delta(delegate_task_creation_total{cluster=\"$cluster\", environment=\"$env\"}[10m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "perpetual_tasks_assigned_num",
+      "title": "delegate_task_creation",
       "type": "timeseries"
     },
     {
@@ -218,13 +220,13 @@
         "type": "prometheus",
         "uid": "${dataSource}"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -238,6 +240,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -276,472 +279,6 @@
         "w": 12,
         "x": 0,
         "y": 9
-      },
-      "id": 4,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "code",
-          "expr": "sum(max by(accountId) (perpetual_tasks_unassigned_num{cluster=\"$cluster\", environment=\"$env\"}))",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "perpetual_tasks_unassigned_num",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 9
-      },
-      "id": 5,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "code",
-          "expr": "sum(max by(accountId) (perpetual_invalid_tasks{cluster=\"$cluster\", environment=\"$env\"}))",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "perpetual_invalid_tasks",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 18
-      },
-      "id": 6,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "code",
-          "expr": "sum(max by(accountId) (perpetual_tasks_non_assignable_num{cluster=\"$cluster\", environment=\"$env\"}))",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "perpetual_tasks_non_assignable_num",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "ns"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 18
-      },
-      "id": 7,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "code",
-          "expr": "avg by() (delta(iterator_delay_sum{cluster=\"$cluster\", environment=\"$env\", iteratorName=\"PerpetualTaskAssignment\"}[5m]))",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "perpetual_task_assign_delay",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 27
-      },
-      "id": 10,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "code",
-          "expr": "sum(delta(perpetual_task_create_total{cluster=\"$cluster\", environment=\"$env\"}[10m]))",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "perpetual_tasks_created",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 27
       },
       "id": 9,
       "options": {
@@ -763,13 +300,13 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(delta(perpetual_task_assigned_total{cluster=\"$cluster\", environment=\"$env\"}[10m]))",
+          "expr": "sum by(taskType) (delta(delegate_task_creation_by_type_total{cluster=\"$cluster\", environment=\"$env\"}[10m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "perpetual_tasks_assigned",
+      "title": "delegate_task_creation_by_type",
       "type": "timeseries"
     },
     {
@@ -777,7 +314,288 @@
         "type": "prometheus",
         "uid": "${dataSource}"
       },
-      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 9
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "sum(delta(delegate_task_acquire_total{cluster=\"$cluster\", environment=\"$env\"}[10m]))",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "delegate_task_acquire",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 18
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(delegate_response_total{cluster=\"$cluster\", environment=\"$env\"}[10m]))",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "delegate_response",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 18
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "sum(delta(delegate_task_rebroadcast_total{cluster=\"$cluster\", environment=\"$env\"}[10m]))",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "delegate_task_rebroadcast",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -833,9 +651,9 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 36
+        "y": 27
       },
-      "id": 8,
+      "id": 6,
       "options": {
         "legend": {
           "calcs": [],
@@ -855,19 +673,109 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(max by(accountId) (perpetual_tasks_paused_num{cluster=\"$cluster\", environment=\"$env\"}))",
+          "expr": "sum(delta(delegate_task_expired_total{cluster=\"$cluster\", environment=\"$env\"}[10m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "perpetual_tasks_paused_num",
+      "title": "delegate_task_expired",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 27
+      },
+      "id": 7,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(delegate_task_no_eligible_delegates_total{cluster=\"$cluster\", environment=\"$env\"}[10m]))",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "delegate_task_no_eligible_delegates",
       "type": "timeseries"
     }
   ],
   "refresh": "",
-  "schemaVersion": 38,
-  "style": "dark",
+  "schemaVersion": 39,
   "tags": [
     "0compatible"
   ],
@@ -875,9 +783,9 @@
     "list": [
       {
         "current": {
-          "selected": false,
+          "selected": true,
           "text": "ProdSetup-ManagedPrometheus",
-          "value": "ProdSetup-ManagedPrometheus"
+          "value": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
         },
         "hide": 0,
         "includeAll": false,
@@ -901,7 +809,7 @@
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values({__name__=\"perpetual_tasks_num\"}, environment)",
+        "definition": "label_values({__name__=\"active_delegate_count\"},environment)",
         "hide": 0,
         "includeAll": false,
         "label": "Env",
@@ -909,8 +817,8 @@
         "name": "env",
         "options": [],
         "query": {
-          "query": "label_values({__name__=\"perpetual_tasks_num\"}, environment)",
-          "refId": "StandardVariableQuery"
+          "query": "label_values({__name__=\"active_delegate_count\"},environment)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
         "regex": "",
@@ -928,7 +836,7 @@
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values({__name__=\"perpetual_tasks_num\"}, cluster)",
+        "definition": "label_values({__name__=\"active_delegate_count\"},cluster)",
         "hide": 0,
         "includeAll": false,
         "label": "Cluster",
@@ -936,8 +844,8 @@
         "name": "cluster",
         "options": [],
         "query": {
-          "query": "label_values({__name__=\"perpetual_tasks_num\"}, cluster)",
-          "refId": "StandardVariableQuery"
+          "query": "label_values({__name__=\"active_delegate_count\"},cluster)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
         "regex": "",
@@ -948,13 +856,10 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Perpetual Tasks",
-  "uid": "n5w7gA94k",
-  "version": 18,
-  "weekStart": ""
+  "title": "Delegate tasks"
 }

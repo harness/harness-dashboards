@@ -11,23 +11,28 @@
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
         "type": "dashboard"
       }
     ]
   },
-  "description": "",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 373,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "${dataSource}"
       },
+      "description": "number of perpetual tasks",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -38,7 +43,6 @@
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
-            "axisSoftMax": 5,
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 0,
@@ -64,18 +68,7 @@
               "mode": "off"
             }
           },
-          "mappings": [
-            {
-              "options": {
-                "match": "null+nan",
-                "result": {
-                  "index": 0,
-                  "text": "0.00%"
-                }
-              },
-              "type": "special"
-            }
-          ],
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -88,8 +81,7 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "reqps"
+          }
         },
         "overrides": []
       },
@@ -99,13 +91,11 @@
         "x": 0,
         "y": 0
       },
-      "id": 6,
+      "id": 2,
       "options": {
         "legend": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "displayMode": "table",
+          "calcs": [],
+          "displayMode": "list",
           "placement": "bottom",
           "showLegend": true
         },
@@ -118,24 +108,24 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(serviceName , namespace) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", namespace=\"$namespace\", serviceName=\"platform-service\"}[5m]))",
-          "instant": false,
-          "legendFormat": "{{serviceName}} [{{namespace}}]",
+          "expr": "sum(max by(accountId) (perpetual_tasks_num{cluster=\"$cluster\", environment=\"$env\"}))",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "All APIs Request Rate [ Service Load ]",
+      "title": "pepetual_tasks_number",
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+        "uid": "${dataSource}"
       },
+      "description": "number of perpetual tasks",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -194,15 +184,11 @@
         "x": 12,
         "y": 0
       },
-      "id": 4,
+      "id": 3,
       "options": {
         "legend": {
-          "calcs": [
-            "mean",
-            "max",
-            "lastNotNull"
-          ],
-          "displayMode": "table",
+          "calcs": [],
+          "displayMode": "list",
           "placement": "bottom",
           "showLegend": true
         },
@@ -215,24 +201,24 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+            "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "max by(method, resource) (io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", namespace=\"$namespace\", serviceName=\"platform-service\"}) > 1",
-          "instant": false,
-          "legendFormat": "{{resource}} [{{method}}]",
+          "expr": "sum(max by(accountId) (perpetual_tasks_assigned_num{cluster=\"$cluster\", environment=\"$env\"}))",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Top Slowest APIs > 1s",
+      "title": "perpetual_tasks_assigned_num",
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "${dataSource}"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -243,7 +229,6 @@
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
-            "axisSoftMax": 5,
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 0,
@@ -269,18 +254,7 @@
               "mode": "off"
             }
           },
-          "mappings": [
-            {
-              "options": {
-                "match": "null+nan",
-                "result": {
-                  "index": 0,
-                  "text": "0.00%"
-                }
-              },
-              "type": "special"
-            }
-          ],
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -293,25 +267,21 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "percent"
+          }
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 12,
-        "w": 6,
+        "h": 9,
+        "w": 12,
         "x": 0,
         "y": 9
       },
-      "id": 1,
+      "id": 4,
       "options": {
         "legend": {
-          "calcs": [
-            "lastNotNull",
-            "max"
-          ],
-          "displayMode": "table",
+          "calcs": [],
+          "displayMode": "list",
           "placement": "bottom",
           "showLegend": true
         },
@@ -324,24 +294,24 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "(sum by(method) \n(rate(io_harness_resources_responses_count{cluster='$cluster',serviceName='platform-service' , resource=\"$resource\" , namespace='$namespace' , statusCode='$statusCode'}[5m]))*100) \n/ \n(sum by(method) \n(rate(io_harness_resources_responses_count{cluster='$cluster',serviceName='platform-service' , resource=\"$resource\" , namespace='$namespace'}[5m])))",
-          "instant": false,
-          "legendFormat": "{{method}}",
+          "expr": "sum(max by(accountId) (perpetual_tasks_unassigned_num{cluster=\"$cluster\", environment=\"$env\"}))",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "$resource API $statusCode Rate",
+      "title": "perpetual_tasks_unassigned_num",
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "${dataSource}"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -352,7 +322,6 @@
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
-            "axisSoftMax": 5,
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 0,
@@ -378,18 +347,7 @@
               "mode": "off"
             }
           },
-          "mappings": [
-            {
-              "options": {
-                "match": "null+nan",
-                "result": {
-                  "index": 0,
-                  "text": "0.00%"
-                }
-              },
-              "type": "special"
-            }
-          ],
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -402,24 +360,21 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "reqps"
+          }
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 12,
-        "w": 6,
-        "x": 6,
+        "h": 9,
+        "w": 12,
+        "x": 12,
         "y": 9
       },
       "id": 5,
       "options": {
         "legend": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "displayMode": "table",
+          "calcs": [],
+          "displayMode": "list",
           "placement": "bottom",
           "showLegend": true
         },
@@ -432,24 +387,117 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(resource , namespace) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", namespace=\"$namespace\", serviceName=\"platform-service\" , resource=\"$resource\"}[5m]))",
-          "instant": false,
-          "legendFormat": "{{resource}} [{{namespace}}]",
+          "expr": "sum(max by(accountId) (perpetual_invalid_tasks{cluster=\"$cluster\", environment=\"$env\"}))",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "$resource APIs Request Rate [ API Load ]",
+      "title": "perpetual_invalid_tasks",
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "${dataSource}"
       },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 18
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "sum(max by(accountId) (perpetual_tasks_non_assignable_num{cluster=\"$cluster\", environment=\"$env\"}))",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "perpetual_tasks_non_assignable_num",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -499,23 +547,21 @@
               }
             ]
           },
-          "unit": "s"
+          "unit": "ns"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 12,
-        "w": 6,
+        "h": 9,
+        "w": 12,
         "x": 12,
-        "y": 9
+        "y": 18
       },
-      "id": 2,
+      "id": 7,
       "options": {
         "legend": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "displayMode": "table",
+          "calcs": [],
+          "displayMode": "list",
           "placement": "bottom",
           "showLegend": true
         },
@@ -528,24 +574,24 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "max by (method)(io_harness_resources_responses_latency_snapshot_95thPercentile{cluster='$cluster',resource=\"$resource\" , namespace='$namespace'})",
-          "instant": false,
-          "legendFormat": "{{method}}",
+          "expr": "avg by() (delta(iterator_delay_sum{cluster=\"$cluster\", environment=\"$env\", iteratorName=\"PerpetualTaskAssignment\"}[5m]))",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "$resource P95 ART",
+      "title": "perpetual_task_assign_delay",
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "${dataSource}"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -594,24 +640,21 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "s"
+          }
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 12,
-        "w": 6,
-        "x": 18,
-        "y": 9
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 27
       },
-      "id": 3,
+      "id": 10,
       "options": {
         "legend": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "displayMode": "table",
+          "calcs": [],
+          "displayMode": "list",
           "placement": "bottom",
           "showLegend": true
         },
@@ -624,24 +667,210 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "max by (method)(io_harness_resources_responses_latency_snapshot_99thPercentile{cluster='$cluster',resource=\"$resource\" , namespace='$namespace'})",
-          "instant": false,
-          "legendFormat": "{{method}}",
+          "expr": "sum(delta(perpetual_task_create_total{cluster=\"$cluster\", environment=\"$env\"}[10m]))",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "$resource P99 ART",
+      "title": "perpetual_tasks_created",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 27
+      },
+      "id": 9,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "sum(delta(perpetual_task_assigned_total{cluster=\"$cluster\", environment=\"$env\"}[10m]))",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "perpetual_tasks_assigned",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 36
+      },
+      "id": 8,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "sum(max by(accountId) (perpetual_tasks_paused_num{cluster=\"$cluster\", environment=\"$env\"}))",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "perpetual_tasks_paused_num",
       "type": "timeseries"
     }
   ],
   "refresh": "",
   "schemaVersion": 38,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "0compatible"
+  ],
   "templating": {
     "list": [
       {
@@ -652,16 +881,42 @@
         },
         "hide": 0,
         "includeAll": false,
-        "label": "datasource",
+        "label": "DataSource",
         "multi": false,
-        "name": "datasource",
+        "name": "dataSource",
         "options": [],
         "query": "prometheus",
         "queryValue": "",
         "refresh": 1,
-        "regex": "",
         "skipUrlSync": false,
         "type": "datasource"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "free",
+          "value": "free"
+        },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${dataSource}"
+        },
+        "definition": "label_values({__name__=\"perpetual_tasks_num\"}, environment)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Env",
+        "multi": false,
+        "name": "env",
+        "options": [],
+        "query": {
+          "query": "label_values({__name__=\"perpetual_tasks_num\"}, environment)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
       },
       {
         "current": {
@@ -671,132 +926,33 @@
         },
         "datasource": {
           "type": "prometheus",
-          "uid": "${datasource}"
+          "uid": "${dataSource}"
         },
-        "definition": "label_values(kubernetes_io:container_uptime{container_name=~\"platform-service.*\"},cluster_name)",
+        "definition": "label_values({__name__=\"perpetual_tasks_num\"}, cluster)",
         "hide": 0,
         "includeAll": false,
-        "label": "cluster",
+        "label": "Cluster",
         "multi": false,
         "name": "cluster",
         "options": [],
         "query": {
-          "query": "label_values(kubernetes_io:container_uptime{container_name=~\"platform-service.*\"},cluster_name)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          "query": "label_values({__name__=\"perpetual_tasks_num\"}, cluster)",
+          "refId": "StandardVariableQuery"
         },
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
-      },
-      {
-        "current": {
-          "selected": false,
-          "text": "harness-nextgen",
-          "value": "harness-nextgen"
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${datasource}"
-        },
-        "definition": "label_values(kubernetes_io:container_uptime{container_name=~\"platform-service.*\" , cluster_name=\"$cluster\"},namespace_name)",
-        "hide": 0,
-        "includeAll": false,
-        "label": "namespace",
-        "multi": false,
-        "name": "namespace",
-        "options": [],
-        "query": {
-          "query": "label_values(kubernetes_io:container_uptime{container_name=~\"platform-service.*\" , cluster_name=\"$cluster\"},namespace_name)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "current": {
-          "selected": true,
-          "text": "NotificationResource",
-          "value": "NotificationResource"
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${datasource}"
-        },
-        "definition": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\", serviceName=\"platform-service\"},resource)",
-        "hide": 0,
-        "includeAll": false,
-        "label": "resource",
-        "multi": false,
-        "name": "resource",
-        "options": [],
-        "query": {
-          "query": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\", serviceName=\"platform-service\"},resource)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "current": {
-          "selected": true,
-          "text": "2xx",
-          "value": "2xx"
-        },
-        "hide": 0,
-        "includeAll": false,
-        "label": "statusCode",
-        "multi": false,
-        "name": "statusCode",
-        "options": [
-          {
-            "selected": false,
-            "text": "1xx",
-            "value": "1xx"
-          },
-          {
-            "selected": true,
-            "text": "2xx",
-            "value": "2xx"
-          },
-          {
-            "selected": false,
-            "text": "3xx",
-            "value": "3xx"
-          },
-          {
-            "selected": false,
-            "text": "4xx",
-            "value": "4xx"
-          },
-          {
-            "selected": false,
-            "text": "5xx",
-            "value": "5xx"
-          }
-        ],
-        "query": "1xx , 2xx , 3xx , 4xx , 5xx",
-        "queryValue": "",
-        "skipUrlSync": false,
-        "type": "custom"
       }
     ]
   },
   "time": {
-    "from": "now-12h",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Platform Service HTTP Metrics",
-  "uid": "f86f2bd6-af60-4a57-95a1-a180410446b0",
-  "version": 2,
+  "title": "Perpetual Tasks",
   "weekStart": ""
 }

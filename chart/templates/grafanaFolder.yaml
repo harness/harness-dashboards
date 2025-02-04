@@ -1,1 +1,1 @@
-{{- include "harnesscommon.generateGrafanaFoldersCR" (dict "ctx" . "dashboardDirectoryPath" "Unified Dashboards/**.json") }}
+{{- include "harnesscommon.generateGrafanaFoldersCR" (dict "ctx" . "dashboardDirectoryPath" "Harness/**.json") }}
