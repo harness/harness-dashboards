@@ -24,14 +24,13 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 427,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+        "uid": "${dataSource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -39,21 +38,19 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
-            "axisColorMode": "text",
+            "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -85,15 +82,40 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "entity_crud [ accessControlService ]"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
-        "h": 9,
+        "h": 8,
         "w": 12,
         "x": 0,
         "y": 0
       },
-      "id": 2,
+      "id": 6,
       "options": {
         "legend": {
           "calcs": [],
@@ -110,19 +132,16 @@
         {
           "datasource": {
             "type": "prometheus",
+            "uid": "${dataSource}"
           },
-          "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "(sum by(method) \n(rate(software_wings_resources_responses_count{resource=\"DelegateAgentResource\", cluster=\"$cluster\", environment=\"$env\", statusCode='$status'}[5m]))*100) \n/ \n(sum by(method) \n(rate(software_wings_resources_responses_count{resource=\"DelegateAgentResource\", cluster=\"$cluster\", environment=\"$env\"}[5m])))",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "legendFormat": "__auto",
+          "expr": "avg by(usecaseName, consumergroupName) (custom_googleapis_com:opencensus_redis_streams_consumer_group_behind_by_count{monitored_resource=\"k8s_container\",cluster_name=\"$cluster\", namespace=\"$redis_namespace\", consumergroupName=\"accessControlService\"})",
+          "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
           "range": true,
-          "refId": "A",
-          "useBackend": false
+          "refId": "A"
         }
       ],
-      "title": "rate_by_status_code (%)",
+      "title": "Redis Consumer Group Behind from Stream",
       "type": "timeseries"
     },
     {
@@ -136,21 +155,136 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
-            "axisColorMode": "text",
+            "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "entity_crud [ accessControlService ]"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 7,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "avg by(usecaseName, consumergroupName) (custom_googleapis_com:opencensus_redis_streams_consumer_group_pending_count{monitored_resource=\"k8s_container\" , cluster_name=\"$cluster\", namespace=\"$redis_namespace\", consumergroupName=\"accessControlService\"})",
+          "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Consumer Group Pending Count for Stream",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -185,18 +319,23 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
+        "h": 8,
         "w": 12,
-        "x": 12,
-        "y": 0
+        "x": 0,
+        "y": 8
       },
       "id": 8,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "sortBy": "Mean",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "single",
@@ -210,13 +349,14 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(method) \n(rate(software_wings_resources_responses_count{resource=\"DelegateAgentResource\", cluster=\"$cluster\", environment=\"$env\"}[5m]))",
-          "legendFormat": "__auto",
+          "expr": "avg by(eventType,environment) (rate(outbox_event_processing_time_sum{ serviceId=\"accessControlService\",environment=~\"$environment\"}[1m]))",
+          "interval": "",
+          "legendFormat": "{{eventType}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "api_calls_sum",
+      "title": "outbox_entries_processing_time_by_event_type (ms)",
       "type": "timeseries"
     },
     {
@@ -230,21 +370,19 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
-            "axisColorMode": "text",
+            "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -279,17 +417,20 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
+        "h": 8,
         "w": 12,
-        "x": 0,
-        "y": 9
+        "x": 12,
+        "y": 8
       },
       "id": 9,
       "options": {
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
           "showLegend": true
         },
         "tooltip": {
@@ -304,121 +445,26 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "avg by (method) (software_wings_resources_responses_latency_snapshot_95thPercentile{resource=\"DelegateAgentResource\", cluster=\"$cluster\", environment=\"$env\"})\n",
-          "legendFormat": "__auto",
+          "expr": "avg by(resourceType,environment) (rate(outbox_event_waiting_time_sum{serviceId=\"accessControlService\",environment=~\"$environment\"}[1m]))",
+          "interval": "",
+          "legendFormat": "{{resourceType}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Api P95 ART",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 9
-      },
-      "id": 10,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "code",
-          "expr": "max by (method) (software_wings_resources_responses_latency_snapshot_95thPercentile{resource=\"DelegateAgentResource\", cluster=\"$cluster\", environment=\"$env\"} > 5)\n",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "P95 more than 5 sec",
+      "title": "outbox_entries_delay_by_resource_type (ms)",
       "type": "timeseries"
     }
   ],
   "refresh": "",
-  "schemaVersion": 39,
-  "tags": [],
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [
+    "0compatible"
+  ],
   "templating": {
     "list": [
       {
-        "current": {
-          "selected": false,
-          "text": "ProdSetup-ManagedPrometheus",
-          "value": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
-        },
         "hide": 0,
         "includeAll": false,
         "label": "DataSource",
@@ -432,43 +478,12 @@
         "type": "datasource"
       },
       {
-        "current": {
-          "selected": true,
-          "text": "free",
-          "value": "free"
-        },
         "datasource": {
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values({__name__=\"active_delegate_count\"},environment)",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Env",
-        "multi": false,
-        "name": "env",
-        "options": [],
-        "query": {
-          "query": "label_values({__name__=\"active_delegate_count\"},environment)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "current": {
-          "selected": false,
-          "text": "prod-private-uswest1-primary",
-          "value": "prod-private-uswest1-primary"
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
-        },
-        "definition": "label_values({__name__=\"active_delegate_count\"},cluster)",
+        "definition": "label_values(outbox_event_processing_time_sum,cluster)",
+        "description": "",
         "hide": 0,
         "includeAll": false,
         "label": "Cluster",
@@ -476,54 +491,59 @@
         "name": "cluster",
         "options": [],
         "query": {
-          "query": "label_values({__name__=\"active_delegate_count\"},cluster)",
+          "query": "label_values(outbox_event_processing_time_sum,cluster)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": "",
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
       },
       {
-        "current": {
-          "selected": true,
-          "text": "4xx",
-          "value": "4xx"
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${dataSource}"
         },
+        "definition": "label_values(outbox_event_processing_time_sum,environment)",
         "hide": 0,
         "includeAll": false,
-        "label": "Status",
+        "label": "Environment",
         "multi": false,
-        "name": "status",
+        "name": "environment",
+        "options": [],
+        "query": {
+          "query": "label_values(outbox_event_processing_time_sum,environment)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "hide": 0,
+        "includeAll": false,
+        "label": "redis_namespace",
+        "multi": false,
+        "name": "redis_namespace",
         "options": [
           {
-            "selected": false,
-            "text": "1xx",
-            "value": "1xx"
-          },
-          {
-            "selected": false,
-            "text": "2xx",
-            "value": "2xx"
-          },
-          {
-            "selected": false,
-            "text": "3xx",
-            "value": "3xx"
-          },
-          {
             "selected": true,
-            "text": "4xx",
-            "value": "4xx"
+            "text": "prod",
+            "value": "prod"
           },
           {
             "selected": false,
-            "text": "5xx",
-            "value": "5xx"
+            "text": "freemium",
+            "value": "freemium"
+          },
+          {
+            "selected": false,
+            "text": "compliance",
+            "value": "compliance"
           }
         ],
-        "query": "1xx , 2xx , 3xx , 4xx , 5xx",
+        "query": "prod , freemium , compliance",
         "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"
@@ -531,11 +551,8 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-1h",
     "to": "now"
   },
-  "timepicker": {},
-  "timezone": "",
-  "title": "Delegate Agent Resource calls",
-  "weekStart": ""
+  "title": "Access Control Entity Metrics"
 }

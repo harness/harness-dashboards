@@ -1,0 +1,453 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "${dataSource}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.01
+              },
+              {
+                "color": "red",
+                "value": 0.05
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value_and_name",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.7",
+      "repeat": "project",
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "${dataSource}"
+          },
+          "promQLQuery": {
+            "expr": "sum by (cluster, namespace) (rate(http_requests_total{container=\"$containerName\",code=~\"400|401|403|404\"}[5m])) / ignoring(code) group_left sum by (cluster, namespace) (rate(http_requests_total{container=\"$containerName\"}[5m]))",
+            "projectName": "$project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": ""
+          }
+        }
+      ],
+      "title": "API 4xx Error Rate - ${project:raw}",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/.*cluster=\"([^\"]*)\".*namespace=\"([^\"]*)\".*/",
+            "renamePattern": "$1: $2"
+          }
+        },
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "pattern": ".*prod.*"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "${dataSource}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.01
+              },
+              {
+                "color": "red",
+                "value": 0.05
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 8,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value_and_name",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.2.7",
+      "repeat": "project",
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "${dataSource}"
+          },
+          "promQLQuery": {
+            "expr": "sum by (cluster, namespace) (rate(http_requests_total{container=\"$containerName\",code=~\"5..\"}[5m])) / ignoring(code) group_left sum by (cluster, namespace) (rate(http_requests_total{container=\"$containerName\"}[5m]))",
+            "projectName": "$project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": ""
+          }
+        }
+      ],
+      "title": "API 5xx Error Rate - ${project:raw}",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/.*cluster=\"([^\"]*)\".*namespace=\"([^\"]*)\".*/",
+            "renamePattern": "$1: $2"
+          }
+        },
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "byVariable": false,
+            "include": {
+              "pattern": ".*prod.*"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.5
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 8,
+        "x": 16,
+        "y": 0
+      },
+      "id": 5,
+      "options": {
+        "displayMode": "lcd",
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "text": {
+          "titleSize": 15
+        },
+        "valueMode": "color"
+      },
+      "pluginVersion": "10.2.7",
+      "repeat": "project",
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "histogram_quantile(0.95, sum (rate(http_request_duration_seconds_bucket{container=\"$containerName\"}[5m])) by (le, cluster, namespace))",
+            "projectName": "$project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-prod-363017"
+          }
+        }
+      ],
+      "title": "API Latency p95 [5m] - ${project:raw}",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/.*cluster=\"([^\"]*)\".*namespace=\"([^\"]*)\".*/",
+            "renamePattern": "$1: $2"
+          }
+        },
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "pattern": ".*prod.*"
+            }
+          }
+        }
+      ],
+      "type": "bargauge"
+    }
+  ],
+  "refresh": "5m",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "hide": 0,
+        "includeAll": false,
+        "label": "Data Source",
+        "multi": false,
+        "name": "dataSource",
+        "options": [],
+        "query": "stackdriver",
+        "queryValue": "",
+        "refresh": 1,
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "datasource": {
+          "type": "stackdriver",
+          "uid": "${dataSource}"
+        },
+        "definition": "",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Project",
+        "multi": true,
+        "name": "project",
+        "options": [],
+        "query": {
+          "labelKey": "",
+          "loading": false,
+          "projectName": "monitoring-prod-363017",
+          "projects": [
+            {
+              "label": "shared-services",
+              "value": "harness-zero-shared-1248"
+            },
+            {
+              "label": "shared-services",
+              "value": "qa-shared-2bcf"
+            },
+            {
+              "label": "shared-services",
+              "value": "prod-shared-3921"
+            },
+            {
+              "label": "shared-services",
+              "value": "ie-woojae-shared-22b5"
+            },
+            {
+              "label": "monitoring-prod-363017",
+              "value": "monitoring-prod-363017"
+            }
+          ],
+          "refId": "CloudMonitoringVariableQueryEditor-VariableQuery",
+          "selectedMetricType": "actions.googleapis.com/smarthome_action/camerastream/first_frame_latencies",
+          "selectedQueryType": "projects",
+          "selectedSLOService": "",
+          "selectedService": "actions.googleapis.com",
+          "sloServices": [
+            {
+              "label": "istio-ingressgateway",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-istio-system-istio-ingressgateway"
+            },
+            {
+              "label": "grafana-alerting",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-alerting"
+            },
+            {
+              "label": "grafana-operator-monitoring-play-metrics-service",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-operator-monitoring-play-metrics-service"
+            },
+            {
+              "label": "grafana-service",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-service"
+            },
+            {
+              "label": "prometheus-monitoring-play-kube-state-metrics",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-prometheus-monitoring-play-kube-state-metrics"
+            },
+            {
+              "label": "prometheus-monitoring-play-server",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-prometheus-monitoring-play-server"
+            }
+          ]
+        },
+        "refresh": 1,
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "hide": 0,
+        "includeAll": false,
+        "label": "Container Name",
+        "multi": false,
+        "name": "containerName",
+        "options": [
+          {
+            "selected": true,
+            "text": "sto-core",
+            "value": "sto-core"
+          },
+          {
+            "selected": false,
+            "text": "ticket-service",
+            "value": "ticket-service"
+          }
+        ],
+        "query": "sto-core,ticket-service",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "title": "STO SLIs"
+}

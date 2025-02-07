@@ -11,150 +11,50 @@
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
         "type": "dashboard"
       }
     ]
   },
-  "description": "",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 373,
+  "id": 302,
   "links": [],
   "liveNow": false,
   "panels": [
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "${dataSource}"
       },
       "fieldConfig": {
         "defaults": {
           "color": {
+            "fixedColor": "red",
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
-            "axisColorMode": "text",
+            "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
-            "axisSoftMax": 5,
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [
-            {
-              "options": {
-                "match": "null+nan",
-                "result": {
-                  "index": 0,
-                  "text": "0.00%"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "reqps"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 0
-      },
-      "id": 6,
-      "options": {
-        "legend": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "expr": "sum by(serviceName , namespace) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", namespace=\"$namespace\", serviceName=\"platform-service\"}[5m]))",
-          "instant": false,
-          "legendFormat": "{{serviceName}} [{{namespace}}]",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "All APIs Request Rate [ Service Load ]",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -178,81 +78,97 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
-          }
+          },
+          "unit": "s"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 9,
-        "w": 12,
-        "x": 12,
+        "w": 24,
+        "x": 0,
         "y": 0
       },
-      "id": 4,
+      "id": 52,
       "options": {
         "legend": {
           "calcs": [
             "mean",
-            "max",
-            "lastNotNull"
+            "max"
           ],
           "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
+          "placement": "right",
+          "showLegend": true,
+          "sortBy": "Max",
+          "sortDesc": true
         },
         "tooltip": {
-          "mode": "single",
-          "sort": "none"
+          "mode": "multi",
+          "sort": "asc"
         }
       },
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+            "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "max by(method, resource) (io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", namespace=\"$namespace\", serviceName=\"platform-service\"}) > 1",
-          "instant": false,
+          "expr": "max by(method, resource) (io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource!~\".*Trigger.*\"}) > ${latency_in_secs:value}",
           "legendFormat": "{{resource}} [{{method}}]",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Top Slowest APIs > 1s",
+      "title": "Top Slowest APIs (>${latency_in_secs})",
       "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 63,
+      "panels": [],
+      "repeat": "resource",
+      "repeatDirection": "h",
+      "title": "$resource",
+      "type": "row"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "${dataSource}"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
+            "fixedColor": "orange",
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
-            "axisColorMode": "text",
+            "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
-            "axisSoftMax": 5,
+            "axisSoftMax": 0.05,
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -266,21 +182,11 @@
               "mode": "none"
             },
             "thresholdsStyle": {
-              "mode": "off"
+              "mode": "line+area"
             }
           },
-          "mappings": [
-            {
-              "options": {
-                "match": "null+nan",
-                "result": {
-                  "index": 0,
-                  "text": "0.00%"
-                }
-              },
-              "type": "special"
-            }
-          ],
+          "decimals": 2,
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -290,78 +196,81 @@
               },
               {
                 "color": "red",
-                "value": 80
+                "value": 0.01
               }
             ]
           },
-          "unit": "percent"
+          "unit": "percentunit"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 12,
-        "w": 6,
+        "h": 9,
+        "w": 12,
         "x": 0,
-        "y": 9
+        "y": 10
       },
-      "id": 1,
+      "id": 42,
       "options": {
         "legend": {
           "calcs": [
-            "lastNotNull",
             "max"
           ],
           "displayMode": "table",
-          "placement": "bottom",
+          "placement": "right",
           "showLegend": true
         },
         "tooltip": {
-          "mode": "single",
-          "sort": "none"
+          "mode": "multi",
+          "sort": "asc"
         }
       },
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "(sum by(method) \n(rate(io_harness_resources_responses_count{cluster='$cluster',serviceName='platform-service' , resource=\"$resource\" , namespace='$namespace' , statusCode='$statusCode'}[5m]))*100) \n/ \n(sum by(method) \n(rate(io_harness_resources_responses_count{cluster='$cluster',serviceName='platform-service' , resource=\"$resource\" , namespace='$namespace'}[5m])))",
-          "instant": false,
-          "legendFormat": "{{method}}",
+          "expr": "sum by(method) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"$resource\", statusCode=~\"${status_code:pipe}\"}[5m]))\n/ \nsum by(method) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"$resource\"}[5m]))",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "$resource API $statusCode Rate",
+      "title": "Error Rate (%) - $status_code [5m]",
+      "transformations": [],
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "${dataSource}"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "palette-classic"
+            "fixedColor": "orange",
+            "mode": "palette-classic",
+            "seriesBy": "last"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
-            "axisColorMode": "text",
+            "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
-            "axisSoftMax": 5,
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -378,28 +287,14 @@
               "mode": "off"
             }
           },
-          "mappings": [
-            {
-              "options": {
-                "match": "null+nan",
-                "result": {
-                  "index": 0,
-                  "text": "0.00%"
-                }
-              },
-              "type": "special"
-            }
-          ],
+          "decimals": 2,
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
@@ -408,163 +303,175 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 12,
-        "w": 6,
-        "x": 6,
-        "y": 9
-      },
-      "id": 5,
-      "options": {
-        "legend": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "expr": "sum by(resource , namespace) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", namespace=\"$namespace\", serviceName=\"platform-service\" , resource=\"$resource\"}[5m]))",
-          "instant": false,
-          "legendFormat": "{{resource}} [{{namespace}}]",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "$resource APIs Request Rate [ API Load ]",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "s"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 12,
-        "w": 6,
+        "h": 9,
+        "w": 12,
         "x": 12,
-        "y": 9
+        "y": 10
       },
-      "id": 2,
+      "id": 22,
       "options": {
         "legend": {
           "calcs": [
-            "lastNotNull"
+            "max"
           ],
           "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
+          "placement": "right",
+          "showLegend": true,
+          "sortBy": "Max",
+          "sortDesc": true
         },
         "tooltip": {
-          "mode": "single",
-          "sort": "none"
+          "mode": "multi",
+          "sort": "asc"
         }
       },
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "max by (method)(io_harness_resources_responses_latency_snapshot_95thPercentile{cluster='$cluster',resource=\"$resource\" , namespace='$namespace'})",
-          "instant": false,
-          "legendFormat": "{{method}}",
+          "expr": "sum by(method) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"$resource\", statusCode=~\"${status_code:pipe}\"}[5m]))",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "$resource P95 ART",
+      "title": "Error Rate (req/s) - $status_code [5m]",
+      "transformations": [],
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "${dataSource}"
       },
       "fieldConfig": {
         "defaults": {
           "color": {
+            "fixedColor": "red",
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
-            "axisColorMode": "text",
+            "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
+            "axisSoftMax": 2,
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 19
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "sortBy": "Max",
+          "sortDesc": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "asc"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "max by(method) (io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"$resource\"})",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Latency (P95) Response Time",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "orange",
+            "mode": "palette-classic",
+            "seriesBy": "last"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -581,6 +488,7 @@
               "mode": "off"
             }
           },
+          "decimals": 2,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -588,201 +496,218 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
-          "unit": "s"
+          "unit": "reqps"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 12,
-        "w": 6,
-        "x": 18,
-        "y": 9
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 19
       },
-      "id": 3,
+      "id": 27,
       "options": {
         "legend": {
           "calcs": [
-            "lastNotNull"
+            "max"
           ],
-          "displayMode": "table",
-          "placement": "bottom",
+          "displayMode": "list",
+          "placement": "right",
           "showLegend": true
         },
         "tooltip": {
-          "mode": "single",
-          "sort": "none"
+          "mode": "multi",
+          "sort": "asc"
         }
       },
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "max by (method)(io_harness_resources_responses_latency_snapshot_99thPercentile{cluster='$cluster',resource=\"$resource\" , namespace='$namespace'})",
-          "instant": false,
-          "legendFormat": "{{method}}",
+          "expr": "sum by(method) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"$resource\"}[5m]))",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "$resource P99 ART",
+      "title": "Incoming APIs (req/s) [5m]",
+      "transformations": [],
       "type": "timeseries"
     }
   ],
-  "refresh": "",
-  "schemaVersion": 38,
-  "style": "dark",
-  "tags": [],
+  "refresh": "1m",
+  "schemaVersion": 39,
+  "tags": [
+    "cd",
+    "pipeline",
+    "http",
+    "0compatible"
+  ],
   "templating": {
     "list": [
       {
-        "current": {
-          "selected": false,
-          "text": "ProdSetup-ManagedPrometheus",
-          "value": "ProdSetup-ManagedPrometheus"
-        },
         "hide": 0,
         "includeAll": false,
-        "label": "datasource",
+        "label": "DataSource",
         "multi": false,
-        "name": "datasource",
+        "name": "dataSource",
         "options": [],
         "query": "prometheus",
         "queryValue": "",
         "refresh": 1,
-        "regex": "",
         "skipUrlSync": false,
         "type": "datasource"
       },
       {
-        "current": {
-          "selected": false,
-          "text": "prod-private-uswest1-primary",
-          "value": "prod-private-uswest1-primary"
-        },
         "datasource": {
           "type": "prometheus",
-          "uid": "${datasource}"
+          "uid": "${dataSource}"
         },
-        "definition": "label_values(kubernetes_io:container_uptime{container_name=~\"platform-service.*\"},cluster_name)",
+        "definition": "label_values(io_harness_resources_responses_count,cluster)",
         "hide": 0,
         "includeAll": false,
-        "label": "cluster",
+        "label": "Cluster Name",
         "multi": false,
         "name": "cluster",
         "options": [],
         "query": {
-          "query": "label_values(kubernetes_io:container_uptime{container_name=~\"platform-service.*\"},cluster_name)",
+          "query": "label_values(io_harness_resources_responses_count,cluster)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": "",
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
       },
       {
-        "current": {
-          "selected": false,
-          "text": "harness-nextgen",
-          "value": "harness-nextgen"
-        },
         "datasource": {
           "type": "prometheus",
-          "uid": "${datasource}"
+          "uid": "${dataSource}"
         },
-        "definition": "label_values(kubernetes_io:container_uptime{container_name=~\"platform-service.*\" , cluster_name=\"$cluster\"},namespace_name)",
+        "definition": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\"},environment)",
         "hide": 0,
         "includeAll": false,
-        "label": "namespace",
+        "label": "Env",
         "multi": false,
-        "name": "namespace",
+        "name": "env",
         "options": [],
         "query": {
-          "query": "label_values(kubernetes_io:container_uptime{container_name=~\"platform-service.*\" , cluster_name=\"$cluster\"},namespace_name)",
+          "query": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\"},environment)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": "",
         "skipUrlSync": false,
-        "sort": 0,
+        "sort": 2,
         "type": "query"
       },
       {
-        "current": {
-          "selected": true,
-          "text": "NotificationResource",
-          "value": "NotificationResource"
-        },
         "datasource": {
           "type": "prometheus",
-          "uid": "${datasource}"
+          "uid": "${dataSource}"
         },
-        "definition": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\", serviceName=\"platform-service\"},resource)",
+        "definition": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource!~\".*Trigger.*\"},resource)",
         "hide": 0,
-        "includeAll": false,
-        "label": "resource",
-        "multi": false,
+        "includeAll": true,
+        "label": "Resource",
+        "multi": true,
         "name": "resource",
         "options": [],
         "query": {
-          "query": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\", serviceName=\"platform-service\"},resource)",
+          "query": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource!~\".*Trigger.*\"},resource)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": "",
         "skipUrlSync": false,
-        "sort": 0,
+        "sort": 1,
         "type": "query"
       },
       {
-        "current": {
-          "selected": true,
-          "text": "2xx",
-          "value": "2xx"
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${dataSource}"
         },
+        "definition": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\"},statusCode)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Status Code",
+        "multi": true,
+        "name": "status_code",
+        "options": [],
+        "query": {
+          "query": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\"},statusCode)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "skipUrlSync": false,
+        "sort": 2,
+        "type": "query"
+      },
+      {
         "hide": 0,
         "includeAll": false,
-        "label": "statusCode",
+        "label": "Latency",
         "multi": false,
-        "name": "statusCode",
+        "name": "latency_in_secs",
         "options": [
           {
-            "selected": false,
-            "text": "1xx",
-            "value": "1xx"
-          },
-          {
             "selected": true,
-            "text": "2xx",
-            "value": "2xx"
+            "text": "1s",
+            "value": "1"
           },
           {
             "selected": false,
-            "text": "3xx",
-            "value": "3xx"
+            "text": "2s",
+            "value": "2"
           },
           {
             "selected": false,
-            "text": "4xx",
-            "value": "4xx"
+            "text": "3s",
+            "value": "3"
           },
           {
             "selected": false,
-            "text": "5xx",
-            "value": "5xx"
+            "text": "4s",
+            "value": "4"
+          },
+          {
+            "selected": false,
+            "text": "5s",
+            "value": "5"
+          },
+          {
+            "selected": false,
+            "text": "7s",
+            "value": "7"
+          },
+          {
+            "selected": false,
+            "text": "10s",
+            "value": "10"
+          },
+          {
+            "selected": false,
+            "text": "15s",
+            "value": "15"
+          },
+          {
+            "selected": false,
+            "text": "20s",
+            "value": "20"
+          },
+          {
+            "selected": false,
+            "text": "30s",
+            "value": "30"
           }
         ],
-        "query": "1xx , 2xx , 3xx , 4xx , 5xx",
+        "query": "1s : 1,2s : 2,3s : 3,4s : 4,5s : 5,7s : 7,10s : 10,15s : 15,20s : 20,30s : 30",
         "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"
@@ -790,11 +715,8 @@
     ]
   },
   "time": {
-    "from": "now-12h",
+    "from": "now-6h",
     "to": "now"
   },
-  "timepicker": {},
-  "timezone": "",
-  "title": "Platform Service HTTP Metrics",
-  "weekStart": ""
+  "title": "Pipeline-Service - HTTP Resources"
 }

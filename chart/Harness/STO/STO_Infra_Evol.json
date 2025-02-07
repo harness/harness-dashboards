@@ -1,0 +1,2184 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 374,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "${dataSource}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "CPU",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
+          },
+          "decimals": 3,
+          "links": [],
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 70
+              },
+              {
+                "color": "red",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "limits"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 3
+              },
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "dash": [
+                    10,
+                    10
+                  ],
+                  "fill": "dash"
+                }
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "requests"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 3
+              },
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "dash": [
+                    10,
+                    10
+                  ],
+                  "fill": "dash"
+                }
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 5,
+      "interval": "5m",
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max",
+            "mean",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.2.7",
+      "repeat": "podname",
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "${dataSource}"
+          },
+          "promQLQuery": {
+            "expr": "sum by(pod) (rate(container_cpu_usage_seconds_total{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[5m]))",
+            "projectName": "$project",
+            "step": "$__interval"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [
+              "resource.label.namespace",
+              "=",
+              "$namespace",
+              "AND",
+              "metric.label.resource",
+              "=",
+              "cpu",
+              "AND",
+              "metric.type",
+              "=",
+              "prometheus.googleapis.com/kube_pod_container_resource_requests/gauge"
+            ],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "preprocessor": "none",
+            "projectName": "$project"
+          }
+        },
+        {
+          "aliasBy": "requests",
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "${dataSource}"
+          },
+          "hide": false,
+          "queryType": "timeSeriesList",
+          "refId": "B",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_MEAN",
+            "filters": [
+              "resource.label.namespace",
+              "=",
+              "$namespace",
+              "AND",
+              "metric.label.resource",
+              "=",
+              "cpu",
+              "AND",
+              "resource.label.cluster",
+              "=",
+              "$cluster",
+              "AND",
+              "metric.label.container",
+              "=",
+              "$containerName",
+              "AND",
+              "metric.type",
+              "=",
+              "prometheus.googleapis.com/kube_pod_container_resource_requests/gauge"
+            ],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "preprocessor": "none",
+            "projectName": "$project"
+          }
+        },
+        {
+          "aliasBy": "limits",
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "${dataSource}"
+          },
+          "hide": false,
+          "queryType": "timeSeriesList",
+          "refId": "C",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_MEAN",
+            "filters": [
+              "resource.label.namespace",
+              "=",
+              "$namespace",
+              "AND",
+              "metric.label.resource",
+              "=",
+              "cpu",
+              "AND",
+              "resource.label.cluster",
+              "=",
+              "$cluster",
+              "AND",
+              "metric.label.container",
+              "=",
+              "$containerName",
+              "AND",
+              "metric.type",
+              "=",
+              "prometheus.googleapis.com/kube_pod_container_resource_limits/gauge"
+            ],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "preprocessor": "none",
+            "projectName": "$project"
+          }
+        }
+      ],
+      "title": "CPU usage, requests and limits",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "(.*)",
+            "renamePattern": "$1"
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMin": 0.02,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "log": 10,
+              "type": "log"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
+          },
+          "mappings": [],
+          "min": 0.02,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.5
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "q=0.5"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "q=0.95"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "q=0.99"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#883f0e",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "aliasBy": "q=0.99",
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "${dataSource}"
+          },
+          "hide": false,
+          "promQLQuery": {
+            "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{namespace=\"$namespace\"}[5m])) by (le))",
+            "projectName": "$project",
+            "step": "10s"
+          },
+          "queryType": "timeSeriesList",
+          "refId": "B",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_PERCENTILE_99",
+            "filters": [
+              "resource.label.namespace",
+              "=",
+              "$namespace",
+              "AND",
+              "resource.label.cluster",
+              "=",
+              "$cluster",
+              "AND",
+              "metric.label.container",
+              "=",
+              "$containerName",
+              "AND",
+              "metric.type",
+              "=",
+              "prometheus.googleapis.com/http_request_duration_seconds/histogram"
+            ],
+            "groupBys": [
+              "resource.label.namespace"
+            ],
+            "perSeriesAligner": "ALIGN_DELTA",
+            "preprocessor": "none",
+            "projectName": "$project"
+          }
+        },
+        {
+          "aliasBy": "q=0.95",
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "${dataSource}"
+          },
+          "promQLQuery": {
+            "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{namespace=\"$namespace\"}[5m])) by (le))",
+            "projectName": "$project",
+            "step": "10s"
+          },
+          "queryType": "timeSeriesList",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_PERCENTILE_95",
+            "filters": [
+              "resource.label.namespace",
+              "=",
+              "$namespace",
+              "AND",
+              "resource.label.cluster",
+              "=",
+              "$cluster",
+              "AND",
+              "metric.label.container",
+              "=",
+              "$containerName",
+              "AND",
+              "metric.type",
+              "=",
+              "prometheus.googleapis.com/http_request_duration_seconds/histogram"
+            ],
+            "groupBys": [
+              "resource.label.namespace"
+            ],
+            "perSeriesAligner": "ALIGN_DELTA",
+            "preprocessor": "none",
+            "projectName": "$project"
+          }
+        },
+        {
+          "aliasBy": "q=0.5",
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "${dataSource}"
+          },
+          "hide": false,
+          "promQLQuery": {
+            "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{namespace=\"$namespace\"}[5m])) by (le))",
+            "projectName": "$project",
+            "step": "10s"
+          },
+          "queryType": "timeSeriesList",
+          "refId": "D",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_PERCENTILE_50",
+            "filters": [
+              "resource.label.namespace",
+              "=",
+              "$namespace",
+              "AND",
+              "resource.label.cluster",
+              "=",
+              "$cluster",
+              "AND",
+              "metric.label.container",
+              "=",
+              "$containerName",
+              "AND",
+              "metric.type",
+              "=",
+              "prometheus.googleapis.com/http_request_duration_seconds/histogram"
+            ],
+            "groupBys": [
+              "resource.label.namespace"
+            ],
+            "perSeriesAligner": "ALIGN_DELTA",
+            "preprocessor": "none",
+            "projectName": "$project"
+          }
+        }
+      ],
+      "title": "Response Latency",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "reqps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "500"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "204"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "400"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "404"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "403"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "401"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 12,
+        "y": 7
+      },
+      "id": 9,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "${dataSource}"
+          },
+          "promQLQuery": {
+            "expr": "sum by (namespace) (rate(http_requests_total{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[5m]))",
+            "projectName": "$project",
+            "step": "$__interval"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "$project"
+          }
+        }
+      ],
+      "title": "Total Requests",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "${dataSource}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
+          },
+          "decimals": 1,
+          "links": [],
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 70
+              },
+              {
+                "color": "red",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Limits"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "limits"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 3
+              },
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "dash": [
+                    10,
+                    10
+                  ],
+                  "fill": "dash"
+                }
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "requests"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.lineWidth",
+                "value": 3
+              },
+              {
+                "id": "custom.lineStyle",
+                "value": {
+                  "dash": [
+                    10,
+                    10
+                  ],
+                  "fill": "dash"
+                }
+              },
+              {
+                "id": "custom.fillOpacity",
+                "value": 0
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 9
+      },
+      "id": 16,
+      "interval": "5m",
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max",
+            "mean",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.2.7",
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "${dataSource}"
+          },
+          "promQLQuery": {
+            "expr": "sum by (pod) (container_memory_usage_bytes{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"})",
+            "projectName": "$project",
+            "step": "$__interval"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [
+              "resource.label.namespace",
+              "=",
+              "$namespace",
+              "AND",
+              "metric.label.resource",
+              "=",
+              "cpu",
+              "AND",
+              "metric.type",
+              "=",
+              "prometheus.googleapis.com/kube_pod_container_resource_requests/gauge"
+            ],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "preprocessor": "none",
+            "projectName": "$project"
+          }
+        },
+        {
+          "aliasBy": "requests",
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "${dataSource}"
+          },
+          "hide": false,
+          "queryType": "timeSeriesList",
+          "refId": "B",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_MEAN",
+            "filters": [
+              "resource.label.namespace",
+              "=",
+              "$namespace",
+              "AND",
+              "metric.label.resource",
+              "=",
+              "memory",
+              "AND",
+              "resource.label.cluster",
+              "=",
+              "$cluster",
+              "AND",
+              "metric.label.container",
+              "=",
+              "$containerName",
+              "AND",
+              "metric.type",
+              "=",
+              "prometheus.googleapis.com/kube_pod_container_resource_limits/gauge"
+            ],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "preprocessor": "none",
+            "projectName": "$project"
+          }
+        },
+        {
+          "aliasBy": "limits",
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "${dataSource}"
+          },
+          "hide": false,
+          "queryType": "timeSeriesList",
+          "refId": "C",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_MEAN",
+            "filters": [
+              "resource.label.namespace",
+              "=",
+              "$namespace",
+              "AND",
+              "metric.label.resource",
+              "=",
+              "memory",
+              "AND",
+              "resource.label.cluster",
+              "=",
+              "$cluster",
+              "AND",
+              "metric.label.container",
+              "=",
+              "$containerName",
+              "AND",
+              "metric.type",
+              "=",
+              "prometheus.googleapis.com/kube_pod_container_resource_limits/gauge"
+            ],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_INTERPOLATE",
+            "preprocessor": "none",
+            "projectName": "$project"
+          }
+        }
+      ],
+      "title": "Memory usage, requests and limits",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {}
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 0.025,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 0.01
+              },
+              {
+                "color": "red",
+                "value": 0.05
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "500"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "204"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "400"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "404"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "403"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "401"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 12
+      },
+      "id": 17,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "${dataSource}"
+          },
+          "promQLQuery": {
+            "expr": "sum by (namespace, code) (rate(http_requests_total{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\", code=~\"[45]..\"}[15m])) / ignoring(code) group_left sum by (namespace) (rate(http_requests_total{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[15m]))",
+            "projectName": "$project",
+            "step": "$__interval"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "$project"
+          }
+        }
+      ],
+      "title": "Error Rate by Status Code",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/.*code=\"([^\"]*)\".*/",
+            "renamePattern": "$1"
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 100
+              },
+              {
+                "color": "red",
+                "value": 150
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 18
+      },
+      "id": 11,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "${dataSource}"
+          },
+          "promQLQuery": {
+            "expr": "go_goroutines{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}",
+            "projectName": "$project",
+            "step": "$__interval"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "Go Routines",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/.*pod=\"([^\"]*)\".*/",
+            "renamePattern": "$1"
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "reqps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "get"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "delete"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "patch"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "post"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "put"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 19
+      },
+      "id": 8,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "${dataSource}"
+          },
+          "promQLQuery": {
+            "expr": "sum by (method) (rate(http_requests_total{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[5m]))",
+            "projectName": "$project",
+            "step": "$__interval"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "Requests by Method",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 0.1,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 26
+      },
+      "id": 13,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "${dataSource}"
+          },
+          "promQLQuery": {
+            "expr": "max by (quantile) (go_gc_duration_seconds{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"})",
+            "projectName": "$project",
+            "step": "$__interval"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "Garbage Collection Time",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "(.*)",
+            "renamePattern": "q=$1"
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 27
+      },
+      "id": 14,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "${dataSource}"
+          },
+          "promQLQuery": {
+            "expr": "sum by (method) (rate(http_request_size_bytes_sum{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[5m])) / sum by (method) (rate(http_request_size_bytes_count{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[5m]))",
+            "projectName": "$project",
+            "step": "$__interval"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "Request Size by Method",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 34
+      },
+      "id": 15,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "${dataSource}"
+          },
+          "promQLQuery": {
+            "expr": "sum by (method) (rate(http_response_size_bytes_sum{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[5m])) / sum by (method) (rate(http_response_size_bytes_count{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[5m]))",
+            "projectName": "$project",
+            "step": "$__interval"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "Response Size by Method",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "hide": 0,
+        "includeAll": false,
+        "label": "Data Source",
+        "multi": false,
+        "name": "dataSource",
+        "options": [],
+        "query": "stackdriver",
+        "refresh": 1,
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "datasource": {
+          "type": "stackdriver",
+          "uid": "${dataSource}"
+        },
+        "definition": "",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Project",
+        "multi": false,
+        "name": "project",
+        "options": [],
+        "query": {
+          "labelKey": "",
+          "loading": false,
+          "projectName": "monitoring-play",
+          "projects": [
+            {
+              "label": "shared-services",
+              "value": "harness-zero-shared-1248"
+            },
+            {
+              "label": "shared-services",
+              "value": "qa-shared-2bcf"
+            },
+            {
+              "label": "shared-services",
+              "value": "prod-shared-3921"
+            },
+            {
+              "label": "shared-services",
+              "value": "ie-woojae-shared-22b5"
+            },
+            {
+              "label": "monitoring-play",
+              "value": "monitoring-play"
+            }
+          ],
+          "refId": "CloudMonitoringVariableQueryEditor-VariableQuery",
+          "selectedMetricType": "actions.googleapis.com/smarthome_action/camerastream/first_frame_latencies",
+          "selectedQueryType": "projects",
+          "selectedSLOService": "",
+          "selectedService": "actions.googleapis.com",
+          "sloServices": [
+            {
+              "label": "istio-ingressgateway",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-istio-system-istio-ingressgateway"
+            },
+            {
+              "label": "grafana-alerting",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-alerting"
+            },
+            {
+              "label": "grafana-operator-monitoring-play-metrics-service",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-operator-monitoring-play-metrics-service"
+            },
+            {
+              "label": "grafana-service",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-service"
+            },
+            {
+              "label": "prometheus-monitoring-play-kube-state-metrics",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-prometheus-monitoring-play-kube-state-metrics"
+            },
+            {
+              "label": "prometheus-monitoring-play-server",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-prometheus-monitoring-play-server"
+            }
+          ]
+        },
+        "refresh": 1,
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "datasource": {
+          "type": "stackdriver",
+          "uid": "${dataSource}"
+        },
+        "definition": "",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Cluster",
+        "multi": false,
+        "name": "cluster",
+        "options": [],
+        "query": {
+          "labelKey": "resource.label.cluster",
+          "loading": false,
+          "projectName": "$project",
+          "projects": [
+            {
+              "label": "shared-services",
+              "value": "harness-zero-shared-1248"
+            },
+            {
+              "label": "shared-services",
+              "value": "qa-shared-2bcf"
+            },
+            {
+              "label": "shared-services",
+              "value": "prod-shared-3921"
+            },
+            {
+              "label": "shared-services",
+              "value": "ie-woojae-shared-22b5"
+            },
+            {
+              "label": "monitoring-play",
+              "value": "monitoring-play"
+            }
+          ],
+          "refId": "CloudMonitoringVariableQueryEditor-VariableQuery",
+          "selectedMetricType": "prometheus.googleapis.com/http_request_duration_seconds/histogram",
+          "selectedQueryType": "labelValues",
+          "selectedSLOService": "",
+          "selectedService": "prometheus.googleapis.com",
+          "sloServices": [
+            {
+              "label": "istio-ingressgateway",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-istio-system-istio-ingressgateway"
+            },
+            {
+              "label": "grafana-alerting",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-alerting"
+            },
+            {
+              "label": "grafana-operator-monitoring-play-metrics-service",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-operator-monitoring-play-metrics-service"
+            },
+            {
+              "label": "grafana-service",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-service"
+            },
+            {
+              "label": "prometheus-monitoring-play-kube-state-metrics",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-prometheus-monitoring-play-kube-state-metrics"
+            },
+            {
+              "label": "prometheus-monitoring-play-server",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-prometheus-monitoring-play-server"
+            }
+          ]
+        },
+        "refresh": 1,
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "datasource": {
+          "type": "stackdriver",
+          "uid": "${dataSource}"
+        },
+        "definition": "",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Namespace",
+        "multi": false,
+        "name": "namespace",
+        "options": [],
+        "query": {
+          "labelKey": "resource.label.namespace",
+          "loading": false,
+          "projectName": "$project",
+          "projects": [
+            {
+              "label": "shared-services",
+              "value": "harness-zero-shared-1248"
+            },
+            {
+              "label": "shared-services",
+              "value": "qa-shared-2bcf"
+            },
+            {
+              "label": "shared-services",
+              "value": "prod-shared-3921"
+            },
+            {
+              "label": "shared-services",
+              "value": "ie-woojae-shared-22b5"
+            },
+            {
+              "label": "monitoring-play",
+              "value": "monitoring-play"
+            }
+          ],
+          "refId": "CloudMonitoringVariableQueryEditor-VariableQuery",
+          "selectedMetricType": "prometheus.googleapis.com/http_request_duration_seconds/histogram",
+          "selectedQueryType": "labelValues",
+          "selectedSLOService": "",
+          "selectedService": "prometheus.googleapis.com",
+          "sloServices": [
+            {
+              "label": "istio-ingressgateway",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-istio-system-istio-ingressgateway"
+            },
+            {
+              "label": "grafana-alerting",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-alerting"
+            },
+            {
+              "label": "grafana-operator-monitoring-play-metrics-service",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-operator-monitoring-play-metrics-service"
+            },
+            {
+              "label": "grafana-service",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-service"
+            },
+            {
+              "label": "prometheus-monitoring-play-kube-state-metrics",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-prometheus-monitoring-play-kube-state-metrics"
+            },
+            {
+              "label": "prometheus-monitoring-play-server",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-prometheus-monitoring-play-server"
+            }
+          ]
+        },
+        "refresh": 1,
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "hide": 0,
+        "includeAll": false,
+        "label": "Container Name",
+        "multi": false,
+        "name": "containerName",
+        "options": [
+          {
+            "selected": true,
+            "text": "sto-core",
+            "value": "sto-core"
+          },
+          {
+            "selected": false,
+            "text": "ticket-service",
+            "value": "ticket-service"
+          }
+        ],
+        "query": "sto-core,ticket-service",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "title": "STO Core and Ticket Service - IE Clusters"
+}

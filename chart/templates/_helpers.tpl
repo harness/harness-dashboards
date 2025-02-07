@@ -122,6 +122,10 @@ spec:
   parentFolderRef: '{{ $parentFolder }}'
   {{- end }}
   resyncPeriod: '{{ default "30s" $.Values.resyncPeriod }}'
-  title: {{ $rootFolderName | replace "-" " " | quote }}
+  title: {{- if ne $parentFolder "" }}
+    {{ printf "%s-Module" ($rootFolderName | replace "-" " ") | quote }}
+  {{- else }}
+    {{ ($rootFolderName | replace "-" " ") | quote }}
+  {{- end }}
 {{- end }}
 {{- end }}

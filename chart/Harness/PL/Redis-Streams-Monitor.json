@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 495,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -39,7 +38,6 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "Total Redis Memory Usage",
@@ -53,7 +51,6 @@
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineStyle": {
               "fill": "solid"
@@ -126,7 +123,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_memory_usage{cluster=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName) (custom_googleapis_com:opencensus_redis_streams_memory_usage{monitored_resource='k8s_container', cluster_name=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "__auto",
@@ -148,7 +145,6 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
@@ -162,7 +158,6 @@
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -224,7 +219,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_memory_usage{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName) (custom_googleapis_com:opencensus_redis_streams_memory_usage{monitored_resource='k8s_container' , cluster_name=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "__auto",
@@ -246,7 +241,6 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "Total Redis Streams Length",
@@ -260,7 +254,6 @@
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineStyle": {
               "fill": "solid"
@@ -329,7 +322,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_length{cluster=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName) (custom_googleapis_com:opencensus_redis_streams_length{monitored_resource='k8s_container' , cluster_name=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "__auto",
@@ -351,7 +344,6 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
@@ -365,7 +357,6 @@
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -427,7 +418,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_length{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName) (custom_googleapis_com:opencensus_redis_streams_length{monitored_resource='k8s_container' , cluster_name=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "__auto",
@@ -449,7 +440,6 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "Total Redis Memory Usage",
@@ -463,7 +453,6 @@
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineStyle": {
               "fill": "solid"
@@ -532,7 +521,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_average_message_size{cluster=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName) (custom_googleapis_com:opencensus_redis_streams_average_message_size{monitored_resource='k8s_container' , cluster_name=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "__auto",
@@ -554,7 +543,6 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
@@ -568,7 +556,6 @@
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -630,7 +617,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_average_message_size{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName) (custom_googleapis_com:opencensus_redis_streams_average_message_size{monitored_resource='k8s_container' , cluster_name=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "__auto",
@@ -652,7 +639,6 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "Total Redis Memory Usage",
@@ -666,7 +652,6 @@
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineStyle": {
               "fill": "solid"
@@ -691,8 +676,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -735,7 +719,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_behind_by_count{cluster=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName, consumergroupName) (custom_googleapis_com:opencensus_redis_streams_consumer_group_behind_by_count{monitored_resource='k8s_container' , cluster_name=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
@@ -757,7 +741,6 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
@@ -771,7 +754,6 @@
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -793,8 +775,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -833,7 +814,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_behind_by_count{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName, consumergroupName) (custom_googleapis_com:opencensus_redis_streams_consumer_group_behind_by_count{monitored_resource='k8s_container' , cluster_name=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
@@ -855,7 +836,6 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "Total Redis Memory Usage",
@@ -869,7 +849,6 @@
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineStyle": {
               "fill": "solid"
@@ -894,8 +873,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -938,7 +916,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_pending_count{cluster=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName, consumergroupName) (custom_googleapis_com:opencensus_redis_streams_consumer_group_pending_count{monitored_resource='k8s_container' , cluster_name=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
@@ -960,7 +938,6 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
@@ -974,7 +951,6 @@
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -996,8 +972,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1036,7 +1011,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_pending_count{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName, consumergroupName) (custom_googleapis_com:opencensus_redis_streams_consumer_group_pending_count{monitored_resource='k8s_container' , cluster_name=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
@@ -1058,7 +1033,6 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "Total Redis Memory Usage",
@@ -1072,7 +1046,6 @@
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineStyle": {
               "fill": "solid"
@@ -1097,8 +1070,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1141,7 +1113,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(exported_namespace, usecaseName) (redis_streams_events_framework_deadletter_queue_size{cluster=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
+          "expr": "avg by(exported_namespace, usecaseName) (custom_googleapis_com:opencensus_redis_streams_events_framework_deadletter_queue_size{monitored_resource='k8s_container' , cluster_name=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{exported_namespace}}:streams:deadletter_queue:{{usecaseName}}",
@@ -1163,7 +1135,6 @@
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
@@ -1177,7 +1148,6 @@
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -1199,8 +1169,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1239,7 +1208,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(exported_namespace, usecaseName) (redis_streams_events_framework_deadletter_queue_size{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
+          "expr": "avg by(exported_namespace, usecaseName) (custom_googleapis_com:opencensus_redis_streams_events_framework_deadletter_queue_size{monitored_resource='k8s_container' , cluster_name=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{exported_namespace}}:streams:deadletter_queue:{{usecaseName}}",
@@ -1252,7 +1221,8 @@
     }
   ],
   "refresh": "",
-  "schemaVersion": 39,
+  "schemaVersion": 38,
+  "style": "dark",
   "tags": [],
   "templating": {
     "list": [
@@ -1274,7 +1244,7 @@
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(redis_streams_memory_usage,cluster)",
+        "definition": "label_values(custom_googleapis_com:opencensus_redis_streams_memory_usage{monitored_resource='k8s_container'}, cluster_name)",
         "hide": 0,
         "includeAll": false,
         "label": "Cluster",
@@ -1282,9 +1252,8 @@
         "name": "cluster",
         "options": [],
         "query": {
-          "qryType": 1,
-          "query": "label_values(redis_streams_memory_usage,cluster)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          "query": "label_values(custom_googleapis_com:opencensus_redis_streams_memory_usage{monitored_resource='k8s_container'}, cluster_name)",
+          "refId": "StandardVariableQuery"
         },
         "refresh": 1,
         "skipUrlSync": false,
@@ -1296,7 +1265,7 @@
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(redis_streams_memory_usage,environment)",
+        "definition": "label_values(custom_googleapis_com:opencensus_redis_streams_memory_usage{monitored_resource='k8s_container'}, environment)",
         "hide": 0,
         "includeAll": false,
         "label": "Env",
@@ -1304,9 +1273,8 @@
         "name": "env",
         "options": [],
         "query": {
-          "qryType": 1,
-          "query": "label_values(redis_streams_memory_usage,environment)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          "query": "label_values(custom_googleapis_com:opencensus_redis_streams_memory_usage{monitored_resource='k8s_container'}, environment)",
+          "refId": "StandardVariableQuery"
         },
         "refresh": 2,
         "skipUrlSync": false,
@@ -1318,7 +1286,7 @@
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(redis_streams_memory_usage,usecaseName)",
+        "definition": "label_values(custom_googleapis_com:opencensus_redis_streams_memory_usage{monitored_resource='k8s_container'}, usecaseName)",
         "hide": 0,
         "includeAll": false,
         "label": "Usecase",
@@ -1326,9 +1294,8 @@
         "name": "usecase",
         "options": [],
         "query": {
-          "qryType": 1,
-          "query": "label_values(redis_streams_memory_usage,usecaseName)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          "query": "label_values(custom_googleapis_com:opencensus_redis_streams_memory_usage{monitored_resource='k8s_container'}, usecaseName)",
+          "refId": "StandardVariableQuery"
         },
         "refresh": 2,
         "skipUrlSync": false,
@@ -1336,26 +1303,42 @@
         "type": "query"
       },
       {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
-        },
-        "definition": "label_values(redis_streams_memory_usage,namespace)",
         "hide": 0,
         "includeAll": false,
         "label": "Namespace",
         "multi": false,
         "name": "namespace",
-        "options": [],
-        "query": {
-          "qryType": 1,
-          "query": "label_values(redis_streams_memory_usage,namespace)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
+        "options": [
+          {
+            "selected": true,
+            "text": "prod",
+            "value": "prod"
+          },
+          {
+            "selected": false,
+            "text": "freemium",
+            "value": "freemium"
+          },
+          {
+            "selected": false,
+            "text": "compliance",
+            "value": "compliance"
+          },
+          {
+            "selected": false,
+            "text": "qa-free",
+            "value": "qa-free"
+          },
+          {
+            "selected": false,
+            "text": "qa",
+            "value": "qa"
+          }
+        ],
+        "query": "prod , freemium , compliance , qa-free , qa",
+        "queryValue": "",
         "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
+        "type": "custom"
       }
     ]
   },
@@ -1363,5 +1346,5 @@
     "from": "now-15m",
     "to": "now"
   },
-  "title": "Redis Streams Monitor(New)"
+  "title": "Redis Streams Monitor"
 }

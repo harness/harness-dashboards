@@ -24,381 +24,29 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 113,
   "links": [],
   "liveNow": false,
   "panels": [
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
+      "collapsed": false,
       "gridPos": {
-        "h": 9,
-        "w": 12,
+        "h": 1,
+        "w": 24,
         "x": 0,
         "y": 0
-      },
-      "id": 3,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "code",
-          "expr": "sum(delta(delegate_registration_total{cluster=\"$cluster\", environment=\"$env\"}[10m]))",
-          "legendFormat": "Delegate Registrations",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "delegate_registration",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 0
-      },
-      "id": 4,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "code",
-          "expr": "sum(delta(delegate_registration_failed_total{cluster=\"$cluster\", environment=\"$env\"}[10m]))",
-          "legendFormat": "Delegate Failed Registrations",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "delegate_registration_failed",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 9
-      },
-      "id": 2,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "code",
-          "expr": "sum(delta(delegate_restarted_total{cluster=\"$cluster\", environment=\"$env\"}[10m]))",
-          "legendFormat": "Delegate Restarts",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "delegate_restarted",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 9
       },
       "id": 5,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "code",
-          "expr": "max(active_delegate_count{cluster=\"$cluster\", environment=\"$env\"})",
-          "legendFormat": "Active Delegate Count",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "active_delegate_count",
-      "type": "timeseries"
+      "panels": [],
+      "repeat": "namespace",
+      "repeatDirection": "h",
+      "title": "$namespace",
+      "type": "row"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${dataSource}"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -436,6 +84,7 @@
             }
           },
           "mappings": [],
+          "noValue": "0",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -453,17 +102,639 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
+        "h": 6,
         "w": 12,
         "x": 0,
-        "y": 18
+        "y": 1
+      },
+      "id": 40,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "GCP Logs",
+          "url": "https://console.cloud.google.com/logs/query;query=resource.type%3D%22k8s_container%22%0Aseverity%3DERROR%0Aresource.labels.container_name%3D%22ff-admin-server%22%20OR%0Aresource.labels.container_name%3D%22ff-auth-server%22%20OR%0Aresource.labels.container_name%3D%22ff-client-server%22%20OR%0Aresource.labels.container_name%3D%22ff-metrics-server%22%20OR%0Aresource.labels.container_name%3D%22ff-proxy%22%20OR%0Aresource.labels.container_name%3D%22pushpin-puhspin%22%20OR%0Aresource.labels.container_name%3D%22pushpin-worker%22;cursorTimestamp=2023-08-15T14:26:29.498043795Z;duration=PT1H?project=prod-setup-205416"
+        }
+      ],
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "width": 200
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by(container_name, namespace_name) (label_replace(increase(logging_googleapis_com:log_entry_count{monitored_resource=\"k8s_container\", cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", severity=~\"ERROR|CRITICAL\", pod_name=~\"$container\", severity=~\"ERROR|CRITICAL\"}[$__interval]), \"container_name\", \"$1\", \"pod_name\", \"^(ti-service|log-service)\"))",
+          "legendFormat": "{{container_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Errors by service ($namespace)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "id": 3,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "GCP Logs",
+          "url": "https://console.cloud.google.com/logs/query;query=resource.type%3D%22k8s_container%22%0Aseverity%3DERROR%0Aresource.labels.container_name%3D%22ff-admin-server%22%20OR%0Aresource.labels.container_name%3D%22ff-auth-server%22%20OR%0Aresource.labels.container_name%3D%22ff-client-server%22%20OR%0Aresource.labels.container_name%3D%22ff-metrics-server%22%20OR%0Aresource.labels.container_name%3D%22ff-proxy%22%20OR%0Aresource.labels.container_name%3D%22pushpin-puhspin%22%20OR%0Aresource.labels.container_name%3D%22pushpin-worker%22;cursorTimestamp=2023-08-15T14:26:29.498043795Z;duration=PT1H?project=prod-setup-205416"
+        }
+      ],
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "width": 200
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by(namespace_name) (increase(logging_googleapis_com:log_entry_count{monitored_resource=\"k8s_container\", cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", severity=~\"ERROR|CRITICAL\", pod_name=~\"$container\", severity=~\"ERROR|CRITICAL\"}[$__interval]))",
+          "legendFormat": "Total",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Total errors ($namespace)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 7
+      },
+      "id": 22,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "GCP Logs",
+          "url": "https://console.cloud.google.com/logs/query;query=resource.type%3D%22k8s_container%22%0Aseverity%3DERROR%0Aresource.labels.container_name%3D%22ff-admin-server%22%20OR%0Aresource.labels.container_name%3D%22ff-auth-server%22%20OR%0Aresource.labels.container_name%3D%22ff-client-server%22%20OR%0Aresource.labels.container_name%3D%22ff-metrics-server%22%20OR%0Aresource.labels.container_name%3D%22ff-proxy%22%20OR%0Aresource.labels.container_name%3D%22pushpin-puhspin%22%20OR%0Aresource.labels.container_name%3D%22pushpin-worker%22;cursorTimestamp=2023-08-15T14:26:29.498043795Z;duration=PT1H?project=prod-setup-205416"
+        }
+      ],
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "width": 200
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by(container_name, namespace_name) (label_replace(increase(logging_googleapis_com:log_entry_count{monitored_resource=\"k8s_container\", cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", severity=~\"ERROR|CRITICAL\", pod_name=~\"$container\", severity=~\"ERROR|CRITICAL\"}[$__interval] offset 1w), \"container_name\", \"$1\", \"pod_name\", \"^(ff-[a-z]-server|pushpin)\"))",
+          "legendFormat": "{{container_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Last week errors by service ($namespace)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 7
+      },
+      "id": 23,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "GCP Logs",
+          "url": "https://console.cloud.google.com/logs/query;query=resource.type%3D%22k8s_container%22%0Aseverity%3DERROR%0Aresource.labels.container_name%3D%22ff-admin-server%22%20OR%0Aresource.labels.container_name%3D%22ff-auth-server%22%20OR%0Aresource.labels.container_name%3D%22ff-client-server%22%20OR%0Aresource.labels.container_name%3D%22ff-metrics-server%22%20OR%0Aresource.labels.container_name%3D%22ff-proxy%22%20OR%0Aresource.labels.container_name%3D%22pushpin-puhspin%22%20OR%0Aresource.labels.container_name%3D%22pushpin-worker%22;cursorTimestamp=2023-08-15T14:26:29.498043795Z;duration=PT1H?project=prod-setup-205416"
+        }
+      ],
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "width": 200
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by(namespace_name) (increase(logging_googleapis_com:log_entry_count{monitored_resource=\"k8s_container\", cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", severity=~\"ERROR|CRITICAL\", pod_name=~\"$container\", severity=~\"ERROR|CRITICAL\"}[$__interval] offset 1w))",
+          "legendFormat": "Total",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Last week total errors ($namespace)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 13
+      },
+      "id": 8,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "GCP Logs",
+          "url": "https://console.cloud.google.com/logs/query;query=resource.type%3D%22k8s_container%22%0Aseverity%3DERROR%0Aresource.labels.container_name%3D%22ff-admin-server%22%20OR%0Aresource.labels.container_name%3D%22ff-auth-server%22%20OR%0Aresource.labels.container_name%3D%22ff-client-server%22%20OR%0Aresource.labels.container_name%3D%22ff-metrics-server%22%20OR%0Aresource.labels.container_name%3D%22ff-proxy%22%20OR%0Aresource.labels.container_name%3D%22pushpin-puhspin%22%20OR%0Aresource.labels.container_name%3D%22pushpin-worker%22;cursorTimestamp=2023-08-15T14:26:29.498043795Z;duration=PT1H?project=prod-setup-205416"
+        }
+      ],
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "width": 200
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by(container_name, namespace_name) (label_replace(increase(logging_googleapis_com:log_entry_count{monitored_resource=\"k8s_container\", cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", severity=~\"ERROR|CRITICAL\", pod_name=~\"$container\", severity=~\"ERROR|CRITICAL\"}[$__interval]), \"container_name\", \"$1\", \"pod_name\", \"^(ff-[a-z]-server|pushpin)\")) - sum by(container_name, namespace_name) (label_replace(increase(logging_googleapis_com:log_entry_count{monitored_resource=\"k8s_container\", cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", severity=~\"ERROR|CRITICAL\", pod_name=~\"$container\", severity=~\"ERROR|CRITICAL\"}[$__interval] offset 1w), \"container_name\", \"$1\", \"pod_name\", \"^(ff-[a-z]-server|pushpin)\"))",
+          "legendFormat": "{{container_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Comparison to last week ($namespace)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${datasource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 13
+      },
+      "id": 9,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "GCP Logs",
+          "url": "https://console.cloud.google.com/logs/query;query=resource.type%3D%22k8s_container%22%0Aseverity%3DERROR%0Aresource.labels.container_name%3D%22ff-admin-server%22%20OR%0Aresource.labels.container_name%3D%22ff-auth-server%22%20OR%0Aresource.labels.container_name%3D%22ff-client-server%22%20OR%0Aresource.labels.container_name%3D%22ff-metrics-server%22%20OR%0Aresource.labels.container_name%3D%22ff-proxy%22%20OR%0Aresource.labels.container_name%3D%22pushpin-puhspin%22%20OR%0Aresource.labels.container_name%3D%22pushpin-worker%22;cursorTimestamp=2023-08-15T14:26:29.498043795Z;duration=PT1H?project=prod-setup-205416"
+        }
+      ],
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "width": 200
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by(namespace_name) (increase(logging_googleapis_com:log_entry_count{monitored_resource=\"k8s_container\", cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", severity=~\"ERROR|CRITICAL\", pod_name=~\"$container\", severity=~\"ERROR|CRITICAL\"}[$__interval])) - sum by(namespace_name) (increase(logging_googleapis_com:log_entry_count{monitored_resource=\"k8s_container\", cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", severity=~\"ERROR|CRITICAL\", pod_name=~\"$container\", severity=~\"ERROR|CRITICAL\"}[$__interval] offset 1w))",
+          "legendFormat": "Total",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Comparison total errors ($namespace)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 1,
+            "axisSoftMin": 0,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "normal"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 19
       },
       "id": 7,
       "options": {
         "legend": {
           "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
+          "displayMode": "table",
+          "placement": "right",
           "showLegend": true
         },
         "tooltip": {
@@ -471,495 +742,40 @@
           "sort": "none"
         }
       },
+      "pluginVersion": "9.3.1",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${dataSource}"
+            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
           },
           "editorMode": "code",
-          "expr": "sum(delta(delegate_disconnected_total{cluster=\"$cluster\", environment=\"$env\"}[10m]))",
-          "legendFormat": "Delegate Disconnected",
+          "expr": "sum by (namespace, container, image_spec) (kube_pod_container_info{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"$container\"}) * 0 + 1",
+          "format": "time_series",
+          "legendFormat": "{{container}}/{{image_spec}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "delegate_disconnected_rate (avg of all accounts)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 18
-      },
-      "id": 11,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "code",
-          "expr": "max by(environment) (delta(delegate_disconnected_total{cluster=\"$cluster\", environment=\"$env\", accountId=\"$accountId\"}[10m]))",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "delegate_disconnected_rate (per account)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 27
-      },
-      "id": 9,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "code",
-          "expr": "count by(container_name) (websocket_connections_count{cluster=\"$cluster\", environment=\"$env\"})",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "websocket_connections_count",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 27
-      },
-      "id": 6,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "code",
-          "expr": "max(immutable_delegate{cluster=\"$cluster\", environment=\"$env\"})",
-          "legendFormat": "Immutable Delegate Count",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "immutable_delegate_count",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 35
-      },
-      "id": 10,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "code",
-          "expr": "count by(container_name) (active_delegate_process_count{cluster=\"$cluster\", environment=\"$env\"})",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "active_delegate_process_count",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 35
-      },
-      "id": 12,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "code",
-          "expr": "max(active_delegate_task{cluster=\"$cluster\", environment=\"$env\"})",
-          "legendFormat": "Active Delegate Tasks",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Active Delegate Tasks Count",
+      "title": "Releases",
       "type": "timeseries"
     }
   ],
-  "refresh": "",
-  "schemaVersion": 38,
+  "refresh": false,
+  "schemaVersion": 37,
   "style": "dark",
   "tags": [
-    "0compatible"
+    "CIE"
   ],
   "templating": {
     "list": [
       {
+        "allValue": "(ProdSetup|QASetup)-.*",
         "hide": 0,
-        "includeAll": false,
-        "label": "DataSource",
-        "multi": false,
-        "name": "dataSource",
+        "includeAll": true,
+        "label": "Datasource",
+        "multi": true,
+        "name": "datasource",
         "options": [],
         "query": "prometheus",
         "queryValue": "",
@@ -968,20 +784,86 @@
         "type": "datasource"
       },
       {
+        "allValue": ".*",
         "datasource": {
           "type": "prometheus",
-          "uid": "${dataSource}"
+          "uid": "${datasource}"
         },
-        "definition": "label_values(active_delegate_count,cluster)",
+        "definition": "kubernetes_io:container_uptime{container_name=~\"ci-.*\"}",
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "Cluster",
-        "multi": false,
+        "multi": true,
         "name": "cluster",
         "options": [],
         "query": {
-          "query": "label_values(active_delegate_count,cluster)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          "query": "kubernetes_io:container_uptime{container_name=~\"ci-.*\"}",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "allValue": ".*",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "kubernetes_io:container_uptime{cluster_name=~\"$cluster\", container_name=~\"ci.*\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Namespace",
+        "multi": true,
+        "name": "namespace",
+        "options": [],
+        "query": {
+          "query": "kubernetes_io:container_uptime{cluster_name=~\"$cluster\", container_name=~\"ci.*\"}",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "allValue": "ci.*|ti.*|log.*|scm",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${datasource}"
+        },
+        "definition": "kubernetes_io:container_uptime{cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", container_name=~\"$service\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Container",
+        "multi": true,
+        "name": "container",
+        "options": [],
+        "query": {
+          "query": "kubernetes_io:container_uptime{cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", container_name=~\"$service\"}",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "allValue": "ci.*|ti.*|log.*",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+        },
+        "definition": "kubernetes_io:container_uptime{cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", container_name=~\"$container\", pod_name=~\"$service\"}",
+        "hide": 0,
+        "includeAll": true,
+        "multi": true,
+        "name": "pod",
+        "options": [],
+        "query": {
+          "query": "kubernetes_io:container_uptime{cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", container_name=~\"$container\", pod_name=~\"$service\"}",
+          "refId": "StandardVariableQuery"
         },
         "refresh": 1,
         "skipUrlSync": false,
@@ -989,46 +871,21 @@
         "type": "query"
       },
       {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
-        },
-        "definition": "label_values(active_delegate_count,environment)",
         "hide": 0,
         "includeAll": false,
-        "label": "Env",
+        "label": "service",
         "multi": false,
-        "name": "env",
-        "options": [],
-        "query": {
-          "query": "label_values(active_delegate_count,environment)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
+        "name": "service",
+        "options": [
+          {
+            "selected": true,
+            "text": "ci-.*|ti-.*|log-.*|scm.*",
+            "value": "ci-.*|ti-.*|log-.*|scm.*"
+          }
+        ],
+        "query": "ci-.*|ti-.*|log-.*|scm.*",
         "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
-        },
-        "definition": "label_values(delegate_registration_total{cluster=\"$cluster\", environment=\"$env\"},accountId)",
-        "hide": 0,
-        "includeAll": false,
-        "label": "AccountId",
-        "multi": false,
-        "name": "accountId",
-        "options": [],
-        "query": {
-          "query": "label_values(delegate_registration_total{cluster=\"$cluster\", environment=\"$env\"},accountId)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
+        "type": "custom"
       }
     ]
   },
@@ -1036,5 +893,5 @@
     "from": "now-1h",
     "to": "now"
   },
-  "title": "Delegates Summary"
+  "title": "Weekly Health Report"
 }

@@ -1,0 +1,3089 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "CD SLIs",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 3,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 60,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Developer Hub",
+          "url": "https://developer.harness.io/docs/harness-cloud-operations/computing-uptime/#cdng"
+        }
+      ],
+      "options": {
+        "code": {
+          "language": "html",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<h1>\n<p style=\"text-align: center\">CDNG</p>\n</h1>",
+        "mode": "html"
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "absent_over_time(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\"}[1m])",
+          "hide": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": " ",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "description": "",
+      "gridPos": {
+        "h": 3,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 61,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Developer Hub",
+          "url": "https://developer.harness.io/docs/harness-cloud-operations/computing-uptime/#pipelines"
+        }
+      ],
+      "options": {
+        "code": {
+          "language": "html",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<h1>\n<p style=\"text-align: center\">PIPELINE</p>\n</h1>",
+        "mode": "html"
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "absent_over_time(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\"}[1m])",
+          "hide": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": " ",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "description": "Error rate is the percentage of transactions that result in HTTP 5xx response.",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 3
+      },
+      "id": 63,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# ERROR RATE [5m]",
+        "mode": "markdown"
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "absent_over_time(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\"}[1m])",
+          "hide": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": " ",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "description": "Latency P95 means that 95 percent of the requests have a response time of less than the P95 value.",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 3
+      },
+      "id": 62,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# LATENCY (P95) [5m]",
+        "mode": "markdown"
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "absent_over_time(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\"}[1m])",
+          "hide": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": " ",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "description": "Error rate is the percentage of transactions that result in HTTP 5xx response.",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 12,
+        "y": 3
+      },
+      "id": 45,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# ERROR RATE (%) [5m]",
+        "mode": "markdown"
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "absent_over_time(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\"}[1m])",
+          "hide": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": " ",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "description": "Latency P95 means that 95 percent of the requests have a response time of less than the P95 value.",
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 3
+      },
+      "id": 11,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# LATENCY (P95) [5m]",
+        "mode": "markdown"
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "absent_over_time(custom_googleapis_com:opencensus_pipeline_execution_end_count{monitored_resource=\"k8s_container\"}[1m])",
+          "hide": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": " ",
+      "type": "text"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "id": 170,
+      "panels": [],
+      "repeat": "monitoring_project",
+      "repeatDirection": "h",
+      "title": "${monitoring_project}",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0
+                },
+                "to": 0.01
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 0.0101,
+                "result": {
+                  "color": "orange",
+                  "index": 1
+                },
+                "to": 0.05
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 0.0501,
+                "result": {
+                  "color": "red",
+                  "index": 2
+                },
+                "to": 1
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "match": "nan",
+                "result": {
+                  "index": 3,
+                  "text": "0.00%"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 7
+      },
+      "id": 188,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "value_and_name",
+        "wideLayout": false
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "(sum by(cluster) (rate(io_harness_resources_responses_count{serviceName=\"pipeline-service\", resource=\"PipelineResource\", statusCode=~\"5xx\"}[5m])) OR on() vector(0))\n/\n(sum by(cluster) (rate(io_harness_resources_responses_count{serviceName=\"pipeline-service\", resource=\"PipelineResource\"}[5m])) OR on() vector(0))",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "GitOps - CRUD APIs",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0
+                },
+                "to": 1
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 1.01,
+                "result": {
+                  "color": "orange",
+                  "index": 1
+                },
+                "to": 5
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 5.01,
+                "result": {
+                  "color": "red",
+                  "index": 2
+                },
+                "to": 100000
+              },
+              "type": "range"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Http Resource Dashboard",
+                    "url": "/d/3mQ_KQSIk/ng-manager-http-resources?orgId=1&refresh=1m&var-dataSource=${dataSource}&var-env=prod&var-resource=EnvironmentResourceV2&var-status_code=5xx&viewPanel=6"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 7
+      },
+      "id": 183,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Fetch a Pipeline",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipeline"
+        },
+        {
+          "targetBlank": true,
+          "title": "List Pipelines",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipelineList"
+        },
+        {
+          "targetBlank": true,
+          "title": "Fetch Pipeline Summary",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipelineSummary"
+        }
+      ],
+      "options": {
+        "displayMode": "lcd",
+        "maxVizHeight": 300,
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "histogram_quantile(0.95, sum by (job, le) (rate(grpc_server_handling_seconds_bucket{job=\"gitops-service\", grpc_service!~\"gitops.service.v1.AgentApplicationService|tasks.TaskServiceV2\", grpc_method!~\"PodLogs|Watch|WatchResourceTree|Next|PushResponse\"}[5m])))\n\navg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{serviceName=\"ng-manager\", resource=\"ServiceResourceV2\"}[5m])) by (cluster)",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "GitOps - CRUD APIs",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0
+                },
+                "to": 0.01
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 0.0101,
+                "result": {
+                  "color": "orange",
+                  "index": 1
+                },
+                "to": 0.05
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 0.0501,
+                "result": {
+                  "color": "red",
+                  "index": 2
+                },
+                "to": 1
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "match": "nan",
+                "result": {
+                  "index": 3,
+                  "text": "0.00%"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 12,
+        "y": 7
+      },
+      "id": 172,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "value_and_name",
+        "wideLayout": false
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "(sum by(cluster) (rate(io_harness_resources_responses_count{serviceName=\"pipeline-service\", resource=\"PipelineResource\", statusCode=~\"5xx\"}[5m])) OR on() vector(0))\n/\n(sum by(cluster) (rate(io_harness_resources_responses_count{serviceName=\"pipeline-service\", resource=\"PipelineResource\"}[5m])) OR on() vector(0))",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "Pipeline - CRUD APIs",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0
+                },
+                "to": 1
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 1.01,
+                "result": {
+                  "color": "orange",
+                  "index": 1
+                },
+                "to": 5
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 5.01,
+                "result": {
+                  "color": "red",
+                  "index": 2
+                },
+                "to": 100000
+              },
+              "type": "range"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Http Resource Dashboard",
+                    "url": "/d/B42-bJq4k3/pipeline-service-http-resources?orgId=1&refresh=1m&var-dataSource=${dataSource}&var-env=prod&var-resource=PipelineResource&var-status_code=5xx&viewPanel=6"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 7
+      },
+      "id": 174,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Fetch a Pipeline",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipeline"
+        },
+        {
+          "targetBlank": true,
+          "title": "List Pipelines",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipelineList"
+        },
+        {
+          "targetBlank": true,
+          "title": "Fetch Pipeline Summary",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipelineSummary"
+        }
+      ],
+      "options": {
+        "displayMode": "lcd",
+        "maxVizHeight": 300,
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{serviceName=\"pipeline-service\", resource=\"PipelineResource\", method=~\"getListOfPipelines|getPipelineSummary|getPipelineByIdentifier\"}[5m])) by (cluster)",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "Pipeline - GET / LIST APIs",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0
+                },
+                "to": 0.01
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 0.0101,
+                "result": {
+                  "color": "orange",
+                  "index": 1
+                },
+                "to": 0.05
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 0.0501,
+                "result": {
+                  "color": "red",
+                  "index": 2
+                },
+                "to": 1
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "match": "nan",
+                "result": {
+                  "index": 3,
+                  "text": "0.00%"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 10
+      },
+      "id": 189,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "value_and_name",
+        "wideLayout": false
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "(sum by(cluster) (rate(io_harness_resources_responses_count{serviceName=\"pipeline-service\", resource=\"PipelineResource\", statusCode=~\"5xx\"}[5m])) OR on() vector(0))\n/\n(sum by(cluster) (rate(io_harness_resources_responses_count{serviceName=\"pipeline-service\", resource=\"PipelineResource\"}[5m])) OR on() vector(0))",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "Service - CRUD APIs",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0
+                },
+                "to": 1
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 1.01,
+                "result": {
+                  "color": "orange",
+                  "index": 1
+                },
+                "to": 5
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 5.01,
+                "result": {
+                  "color": "red",
+                  "index": 2
+                },
+                "to": 100000
+              },
+              "type": "range"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Http Resource Dashboard",
+                    "url": "/d/3mQ_KQSIk/ng-manager-http-resources?orgId=1&refresh=1m&var-dataSource=${dataSource}&var-env=prod&var-resource=ServiceResourceV2&var-status_code=5xx&viewPanel=6"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 10
+      },
+      "id": 181,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Fetch a Pipeline",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipeline"
+        },
+        {
+          "targetBlank": true,
+          "title": "List Pipelines",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipelineList"
+        },
+        {
+          "targetBlank": true,
+          "title": "Fetch Pipeline Summary",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipelineSummary"
+        }
+      ],
+      "options": {
+        "displayMode": "lcd",
+        "maxVizHeight": 300,
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{serviceName=\"ng-manager\", resource=\"ServiceResourceV2\"}[5m])) by (cluster)",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "Service - CRUD APIs",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0
+                },
+                "to": 0.01
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 0.0101,
+                "result": {
+                  "color": "orange",
+                  "index": 1
+                },
+                "to": 0.05
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 0.0501,
+                "result": {
+                  "color": "red",
+                  "index": 2
+                },
+                "to": 1
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "match": "nan",
+                "result": {
+                  "index": 3,
+                  "text": "0.00%"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 12,
+        "y": 10
+      },
+      "id": 184,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "value_and_name",
+        "wideLayout": false
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "(sum by(cluster) (rate(io_harness_resources_responses_count{serviceName=\"pipeline-service\", resource=~\"ExecutionDetailsResource|PlanExecutionResource\", statusCode=~\"5xx\"}[5m])) OR on() vector(0))\n/\n(sum by(cluster) (rate(io_harness_resources_responses_count{serviceName=\"pipeline-service\", resource=~\"ExecutionDetailsResource|PlanExecutionResource\"}[5m])) OR on() vector(0))",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "Input Set - CRUD APIs",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0
+                },
+                "to": 1
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 1.01,
+                "result": {
+                  "color": "orange",
+                  "index": 1
+                },
+                "to": 5
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 5.01,
+                "result": {
+                  "color": "red",
+                  "index": 2
+                },
+                "to": 100000
+              },
+              "type": "range"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Http Resource Dashboard",
+                    "url": "/d/B42-bJq4k3/pipeline-service-http-resources?orgId=1&refresh=1m&var-dataSource=${dataSource}&var-env=prod&var-resource=PipelineResource&var-status_code=5xx&viewPanel=6"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 10
+      },
+      "id": 185,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Fetch a Pipeline",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipeline"
+        },
+        {
+          "targetBlank": true,
+          "title": "List Pipelines",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipelineList"
+        },
+        {
+          "targetBlank": true,
+          "title": "Fetch Pipeline Summary",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipelineSummary"
+        }
+      ],
+      "options": {
+        "displayMode": "lcd",
+        "maxVizHeight": 300,
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{serviceName=\"pipeline-service\", resource=\"InputSetResourcePMS\", method=~\"getInputSet|listInputSetsForPipeline\"}[5m])) by (cluster)",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "Input Set - GET / LIST APIs",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0
+                },
+                "to": 0.01
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 0.0101,
+                "result": {
+                  "color": "orange",
+                  "index": 1
+                },
+                "to": 0.05
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 0.0501,
+                "result": {
+                  "color": "red",
+                  "index": 2
+                },
+                "to": 1
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "match": "nan",
+                "result": {
+                  "index": 3,
+                  "text": "0.00%"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 13
+      },
+      "id": 182,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value_and_name",
+        "wideLayout": false
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "(sum by(cluster) (rate(io_harness_resources_responses_count{serviceName=\"ng-manager\", resource=\"EnvironmentResourceV2\", statusCode=~\"5xx\"}[5m])) OR on() vector(0))\n/\n(sum by(cluster) (rate(io_harness_resources_responses_count{serviceName=\"ng-manager\", resource=\"EnvironmentResourceV2\"}[5m])) OR on() vector(0))",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "Environment - CRUD APIs",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0
+                },
+                "to": 1
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 1.01,
+                "result": {
+                  "color": "orange",
+                  "index": 1
+                },
+                "to": 5
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 5.01,
+                "result": {
+                  "color": "red",
+                  "index": 2
+                },
+                "to": 100000
+              },
+              "type": "range"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Http Resource Dashboard",
+                    "url": "/d/3mQ_KQSIk/ng-manager-http-resources?orgId=1&refresh=1m&var-dataSource=${dataSource}&var-env=prod&var-resource=EnvironmentResourceV2&var-status_code=5xx&viewPanel=6"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 13
+      },
+      "id": 171,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Fetch a Pipeline",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipeline"
+        },
+        {
+          "targetBlank": true,
+          "title": "List Pipelines",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipelineList"
+        },
+        {
+          "targetBlank": true,
+          "title": "Fetch Pipeline Summary",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipelineSummary"
+        }
+      ],
+      "options": {
+        "displayMode": "lcd",
+        "maxVizHeight": 300,
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{serviceName=\"ng-manager\", resource=\"EnvironmentResourceV2\"}[5m])) by (cluster)",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "Environment - CRUD APIs",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0
+                },
+                "to": 0.01
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 0.0101,
+                "result": {
+                  "color": "orange",
+                  "index": 1
+                },
+                "to": 0.05
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 0.0501,
+                "result": {
+                  "color": "red",
+                  "index": 2
+                },
+                "to": 1
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "match": "nan",
+                "result": {
+                  "index": 3,
+                  "text": "0.00%"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 12,
+        "y": 13
+      },
+      "id": 186,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "value_and_name",
+        "wideLayout": false
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "(sum by(cluster) (rate(io_harness_resources_responses_count{serviceName=\"pipeline-service\", resource=~\"ExecutionDetailsResource|PlanExecutionResource\", statusCode=~\"5xx\"}[5m])) OR on() vector(0))\n/\n(sum by(cluster) (rate(io_harness_resources_responses_count{serviceName=\"pipeline-service\", resource=~\"ExecutionDetailsResource|PlanExecutionResource\"}[5m])) OR on() vector(0))",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "Pipeline Execution - GET / LIST APIs",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0
+                },
+                "to": 1
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 1.01,
+                "result": {
+                  "color": "orange",
+                  "index": 1
+                },
+                "to": 5
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 5.01,
+                "result": {
+                  "color": "red",
+                  "index": 2
+                },
+                "to": 100000
+              },
+              "type": "range"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Http Resource Dashboard",
+                    "url": "/d/B42-bJq4k3/pipeline-service-http-resources?orgId=1&refresh=1m&var-dataSource=${dataSource}&var-env=prod&var-resource=PipelineResource&var-status_code=5xx&viewPanel=6"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 13
+      },
+      "id": 187,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Fetch a Pipeline",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipeline"
+        },
+        {
+          "targetBlank": true,
+          "title": "List Pipelines",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipelineList"
+        },
+        {
+          "targetBlank": true,
+          "title": "Fetch Pipeline Summary",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipelineSummary"
+        }
+      ],
+      "options": {
+        "displayMode": "lcd",
+        "maxVizHeight": 300,
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{serviceName=\"pipeline-service\", resource=\"ExecutionDetailsResource\"}[5m])) by (cluster)",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "Pipeline Execution - GET / LIST APIs",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0
+                },
+                "to": 0.01
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 0.0101,
+                "result": {
+                  "color": "orange",
+                  "index": 1
+                },
+                "to": 0.05
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 0.0501,
+                "result": {
+                  "color": "red",
+                  "index": 2
+                },
+                "to": 1
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "match": "nan",
+                "result": {
+                  "index": 3,
+                  "text": "0.00%"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 16
+      },
+      "id": 190,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value_and_name",
+        "wideLayout": false
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "(sum by(cluster) (rate(io_harness_resources_responses_count{serviceName=\"ng-manager\", resource=\"EnvironmentResourceV2\", statusCode=~\"5xx\"}[5m])) OR on() vector(0))\n/\n(sum by(cluster) (rate(io_harness_resources_responses_count{serviceName=\"ng-manager\", resource=\"EnvironmentResourceV2\"}[5m])) OR on() vector(0))",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "FileStore - CRUD APIs",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0
+                },
+                "to": 1
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 1.01,
+                "result": {
+                  "color": "orange",
+                  "index": 1
+                },
+                "to": 5
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 5.01,
+                "result": {
+                  "color": "red",
+                  "index": 2
+                },
+                "to": 100000
+              },
+              "type": "range"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Http Resource Dashboard",
+                    "url": "/d/B42-bJq4k3/pipeline-service-http-resources?orgId=1&refresh=1m&var-dataSource=${dataSource}&var-env=prod&var-resource=PipelineResource&var-status_code=5xx&viewPanel=6"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 16
+      },
+      "id": 193,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Fetch a Pipeline",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipeline"
+        },
+        {
+          "targetBlank": true,
+          "title": "List Pipelines",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipelineList"
+        },
+        {
+          "targetBlank": true,
+          "title": "Fetch Pipeline Summary",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipelineSummary"
+        }
+      ],
+      "options": {
+        "displayMode": "lcd",
+        "maxVizHeight": 300,
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{serviceName=\"pipeline-service\", resource=\"ExecutionDetailsResource\"}[5m])) by (cluster)",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "FileStore - CRUD APIs",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0
+                },
+                "to": 0.01
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 0.0101,
+                "result": {
+                  "color": "orange",
+                  "index": 1
+                },
+                "to": 0.05
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 0.0501,
+                "result": {
+                  "color": "red",
+                  "index": 2
+                },
+                "to": 1
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "match": "nan",
+                "result": {
+                  "index": 3,
+                  "text": "0.00%"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 12,
+        "y": 16
+      },
+      "id": 195,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "value_and_name",
+        "wideLayout": false
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "(sum by(cluster) (rate(io_harness_resources_responses_count{serviceName=\"pipeline-service\", resource=~\"ExecutionDetailsResource|PlanExecutionResource\", statusCode=~\"5xx\"}[5m])) OR on() vector(0))\n/\n(sum by(cluster) (rate(io_harness_resources_responses_count{serviceName=\"pipeline-service\", resource=~\"ExecutionDetailsResource|PlanExecutionResource\"}[5m])) OR on() vector(0))",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "Triggers - CRUD APIs",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0
+                },
+                "to": 1
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 1.01,
+                "result": {
+                  "color": "orange",
+                  "index": 1
+                },
+                "to": 5
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 5.01,
+                "result": {
+                  "color": "red",
+                  "index": 2
+                },
+                "to": 100000
+              },
+              "type": "range"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Http Resource Dashboard",
+                    "url": "/d/3mQ_KQSIk/ng-manager-http-resources?orgId=1&refresh=1m&var-dataSource=${dataSource}&var-env=prod&var-resource=EnvironmentResourceV2&var-status_code=5xx&viewPanel=6"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 16
+      },
+      "id": 194,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Fetch a Pipeline",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipeline"
+        },
+        {
+          "targetBlank": true,
+          "title": "List Pipelines",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipelineList"
+        },
+        {
+          "targetBlank": true,
+          "title": "Fetch Pipeline Summary",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipelineSummary"
+        }
+      ],
+      "options": {
+        "displayMode": "lcd",
+        "maxVizHeight": 300,
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{serviceName=\"ng-manager\", resource=\"EnvironmentResourceV2\"}[5m])) by (cluster)",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "Triggers - CRUD APIs",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0
+                },
+                "to": 0.01
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 0.0101,
+                "result": {
+                  "color": "orange",
+                  "index": 1
+                },
+                "to": 0.05
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 0.0501,
+                "result": {
+                  "color": "red",
+                  "index": 2
+                },
+                "to": 1
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "match": "nan",
+                "result": {
+                  "index": 3,
+                  "text": "0.00%"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 19
+      },
+      "id": 191,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "value_and_name",
+        "wideLayout": false
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "(sum by(cluster) (rate(io_harness_resources_responses_count{serviceName=\"pipeline-service\", resource=\"PipelineResource\", statusCode=~\"5xx\"}[5m])) OR on() vector(0))\n/\n(sum by(cluster) (rate(io_harness_resources_responses_count{serviceName=\"pipeline-service\", resource=\"PipelineResource\"}[5m])) OR on() vector(0))",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "CVNG - MonitoredServiceResource CRUD APIs",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0
+                },
+                "to": 1
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 1.01,
+                "result": {
+                  "color": "orange",
+                  "index": 1
+                },
+                "to": 5
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 5.01,
+                "result": {
+                  "color": "red",
+                  "index": 2
+                },
+                "to": 100000
+              },
+              "type": "range"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Http Resource Dashboard",
+                    "url": "/d/B42-bJq4k3/pipeline-service-http-resources?orgId=1&refresh=1m&var-dataSource=${dataSource}&var-env=prod&var-resource=PipelineResource&var-status_code=5xx&viewPanel=6"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 19
+      },
+      "id": 192,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Fetch a Pipeline",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipeline"
+        },
+        {
+          "targetBlank": true,
+          "title": "List Pipelines",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipelineList"
+        },
+        {
+          "targetBlank": true,
+          "title": "Fetch Pipeline Summary",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipelineSummary"
+        }
+      ],
+      "options": {
+        "displayMode": "lcd",
+        "maxVizHeight": 300,
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{serviceName=\"pipeline-service\", resource=\"InputSetResourcePMS\", method=~\"getInputSet|listInputSetsForPipeline\"}[5m])) by (cluster)",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "CVNG - MonitoredServiceResource CRUD APIs",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0
+                },
+                "to": 0.01
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 0.0101,
+                "result": {
+                  "color": "orange",
+                  "index": 1
+                },
+                "to": 0.05
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 0.0501,
+                "result": {
+                  "color": "red",
+                  "index": 2
+                },
+                "to": 1
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "match": "nan",
+                "result": {
+                  "index": 3,
+                  "text": "0.00%"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 12,
+        "y": 19
+      },
+      "id": 197,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "value_and_name",
+        "wideLayout": false
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "(sum by(cluster) (rate(io_harness_resources_responses_count{serviceName=\"pipeline-service\", resource=~\"ExecutionDetailsResource|PlanExecutionResource\", statusCode=~\"5xx\"}[5m])) OR on() vector(0))\n/\n(sum by(cluster) (rate(io_harness_resources_responses_count{serviceName=\"pipeline-service\", resource=~\"ExecutionDetailsResource|PlanExecutionResource\"}[5m])) OR on() vector(0))",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "Templates - CRUD APIs",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "from": 0,
+                "result": {
+                  "color": "green",
+                  "index": 0
+                },
+                "to": 1
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 1.01,
+                "result": {
+                  "color": "orange",
+                  "index": 1
+                },
+                "to": 5
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 5.01,
+                "result": {
+                  "color": "red",
+                  "index": 2
+                },
+                "to": 100000
+              },
+              "type": "range"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Http Resource Dashboard",
+                    "url": "/d/B42-bJq4k3/pipeline-service-http-resources?orgId=1&refresh=1m&var-dataSource=${dataSource}&var-env=prod&var-resource=PipelineResource&var-status_code=5xx&viewPanel=6"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 19
+      },
+      "id": 196,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Fetch a Pipeline",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipeline"
+        },
+        {
+          "targetBlank": true,
+          "title": "List Pipelines",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipelineList"
+        },
+        {
+          "targetBlank": true,
+          "title": "Fetch Pipeline Summary",
+          "url": "https://apidocs.harness.io/tag/Pipeline#operation/getPipelineSummary"
+        }
+      ],
+      "options": {
+        "displayMode": "lcd",
+        "maxVizHeight": 300,
+        "minVizHeight": 10,
+        "minVizWidth": 0,
+        "namePlacement": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "10.2.7",
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{serviceName=\"pipeline-service\", resource=\"ExecutionDetailsResource\"}[5m])) by (cluster)",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "Templates - GET / LIST APIs",
+      "type": "bargauge"
+    }
+  ],
+  "refresh": "1m",
+  "schemaVersion": 39,
+  "tags": [
+    "cd",
+    "sli"
+  ],
+  "templating": {
+    "list": [
+      {
+        "datasource": {
+          "type": "stackdriver",
+          "uid": "stackdriver"
+        },
+        "definition": "",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Monitoring Project",
+        "multi": false,
+        "name": "monitoring_project",
+        "options": [],
+        "query": {
+          "labelKey": "",
+          "loading": false,
+          "projectName": "monitoring-play",
+          "projects": [
+            {
+              "label": "shared-services",
+              "value": "harness-zero-shared-1248"
+            },
+            {
+              "label": "shared-services",
+              "value": "qa-shared-2bcf"
+            },
+            {
+              "label": "shared-services",
+              "value": "prod-shared-3921"
+            },
+            {
+              "label": "shared-services",
+              "value": "ie-woojae-shared-22b5"
+            },
+            {
+              "label": "monitoring-play",
+              "value": "monitoring-play"
+            }
+          ],
+          "refId": "CloudMonitoringVariableQueryEditor-VariableQuery",
+          "selectedMetricType": "actions.googleapis.com/smarthome_action/camerastream/first_frame_latencies",
+          "selectedQueryType": "projects",
+          "selectedSLOService": "",
+          "selectedService": "actions.googleapis.com",
+          "sloServices": [
+            {
+              "label": "istio-ingressgateway",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-istio-system-istio-ingressgateway"
+            },
+            {
+              "label": "grafana-alerting",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-alerting"
+            },
+            {
+              "label": "grafana-operator-monitoring-play-metrics-service",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-operator-monitoring-play-metrics-service"
+            },
+            {
+              "label": "grafana-service",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-service"
+            },
+            {
+              "label": "prometheus-monitoring-play-kube-state-metrics",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-prometheus-monitoring-play-kube-state-metrics"
+            },
+            {
+              "label": "prometheus-monitoring-play-server",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-prometheus-monitoring-play-server"
+            }
+          ]
+        },
+        "refresh": 1,
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "title": "CD SLIs - IE"
+}
