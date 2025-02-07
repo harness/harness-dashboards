@@ -69,7 +69,7 @@ Create the name of the service account to use
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
-  name: {{ regexReplaceAll "\\W+" ($path | trunc -63 | replace $ext "")  "-"  | trimPrefix "-" | lower }}
+  name: {{ regexReplaceAll "\\W+" ($path | trunc -63 | replace $ext "") "_" | replace "_" "-" | trimPrefix "-" | lower }}
   namespace: '{{ $.Release.Namespace }}'
 spec:
   resyncPeriod: '{{ default "30s" $.Values.resyncPeriod }}'
@@ -78,7 +78,7 @@ spec:
     {{- if $.Values.matchLabels }}
     {{- include "harnesscommon.tplvalues.render" ( dict "value" $.Values.matchLabels "context" $ ) | nindent 6 }}
     {{- end }}
-  folderRef: '{{ regexReplaceAll "\\W+" (dir $path | trunc -63) "-" |  trimPrefix "-" | lower }}'
+  folderRef: '{{ regexReplaceAll "\\W+" (dir $path | trunc -63) "_" | replace "_" "-" |  trimPrefix "-" | lower }}'
   json: |-
   {{- $.Files.Get $path | fromJson | toPrettyJson | nindent 4}}
 ---
@@ -103,9 +103,9 @@ spec:
 {{- end }}
 {{- $dirs = $dirs | uniq }}
 {{- range $folderName:= $dirs }}
-    {{- $parentFolder := regexReplaceAll "\\W+" (dir $folderName | trunc -63) "-" | trimPrefix "-" | lower}}
-    {{- $currentFolder := regexReplaceAll "\\W+" ($folderName | trunc -63) "-" | trimPrefix "-" | lower }}
-    {{- $rootFolderName := regexReplaceAll "\\W+" (base $folderName | trunc -63) "-" | trimPrefix "-" }}
+    {{- $parentFolder := regexReplaceAll "\\W+" (dir $folderName | trunc -63) "_" | replace "_" "-" | trimPrefix "-" | lower}}
+    {{- $currentFolder := regexReplaceAll "\\W+" ($folderName | trunc -63) "_" | replace "_" "-" | trimPrefix "-" | lower }}
+    {{- $rootFolderName := regexReplaceAll "\\W+" (base $folderName | trunc -63) "_" | replace "_" "-" | trimPrefix "-" }}
 ---
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaFolder
