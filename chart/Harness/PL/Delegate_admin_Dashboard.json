@@ -1,0 +1,1225 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${data_source}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "orange",
+            "mode": "fixed"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": true
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ringName"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 191
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 11,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "10.0.10",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${data_source}"
+          },
+          "editorMode": "code",
+          "expr": "heartbeat_received{cluster=\"$cluster\", environment=\"$env\", accountId=~\"$account_id\"}",
+          "format": "table",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Ring information",
+      "transformations": [
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Value": {
+                "aggregations": []
+              },
+              "accountId": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "groupby"
+              },
+              "accountName": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "cluster": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "companyName": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "delegateImageTag": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "delegateJREVersion": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "delegateVersion": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "ringName": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "groupby"
+              },
+              "upgraderImageTag": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "watcherJREVersion": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "watcherVersion": {
+                "aggregations": [
+                  "last"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Value": true
+            },
+            "indexByName": {
+              "accountId": 0,
+              "accountName (last)": 1,
+              "ringName": 2
+            },
+            "renameByName": {
+              "accountName (last)": "accountName",
+              "cluster (last)": "cluster",
+              "companyName (last)": "companyName",
+              "delegateImageTag (last)": "",
+              "ringName (last)": "ring"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${data_source}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": true
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "watcherVersion (last)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 166
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "delegateId (last)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 230
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "accountId"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 217
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "delegateId"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 231
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 9,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "10.0.10",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${data_source}"
+          },
+          "editorMode": "code",
+          "expr": "heartbeat_received{delegateConnectionStatus=\"CONNECTED\", environment=\"$env\", accountId=~\"$account_id\"}",
+          "format": "table",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Active Delegates List",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "Value"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "accountId",
+                "accountName",
+                "cluster",
+                "companyName",
+                "delegateEventType",
+                "delegateId",
+                "delegateImageTag",
+                "delegateJREVersion",
+                "delegateName",
+                "delegateVersion",
+                "environment",
+                "instance",
+                "isImmutable",
+                "isNg",
+                "job",
+                "location",
+                "namespace",
+                "pod",
+                "project_id",
+                "ringName",
+                "upgraderImageTag",
+                "watcherJREVersion",
+                "watcherVersion",
+                "orgId",
+                "projectId",
+                "Value"
+              ]
+            }
+          }
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Time": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value": {
+                "aggregations": [
+                  "max"
+                ],
+                "operation": "aggregate"
+              },
+              "__name__": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "accountId": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "accountName": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "cluster": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "companyName": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "delegateConnectionStatus": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "groupby"
+              },
+              "delegateEventType": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "delegateId": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "groupby"
+              },
+              "delegateImageTag": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "delegateJREVersion": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "delegateName": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "delegateVersion": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "environment": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "instance": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "isImmutable": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "isNg": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "job": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "location": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "namespace": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "orgId": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "pod": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "projectId": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "project_id": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "ringName": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "time": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "upgraderImageTag": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "watcherJREVersion": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "watcherVersion": {
+                "aggregations": [
+                  "last"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "orgId (last)": false,
+              "projectId (last)": false,
+              "time (last)": true
+            },
+            "indexByName": {
+              "Value (last)": 3,
+              "accountId (last)": 1,
+              "accountName (last)": 0,
+              "delegateId": 2,
+              "delegateName (last)": 4,
+              "delegateVersion (last)": 5,
+              "isImmutable (last)": 6,
+              "isNg (last)": 7,
+              "orgId (last)": 9,
+              "projectId (last)": 10,
+              "ringName (last)": 8
+            },
+            "renameByName": {
+              "Value": "Heart_Beat",
+              "Value (last)": "Last HeartBeat (PST)",
+              "Value (max)": "lastHeartbeatTime",
+              "accountId (last)": "accountId",
+              "accountName (last)": "accountName",
+              "cluster (last)": "cluster",
+              "companyName (last)": "companyName",
+              "delegateConnectionStatus": "",
+              "delegateConnectionStatus (last)": "delegate_connection_status",
+              "delegateEventType (last)": "delegate_event_type",
+              "delegateId (last)": "delegateId",
+              "delegateImageTag (last)": "delegate_Image_Tag",
+              "delegateJREVersion (last)": "delegate_JRE_Version",
+              "delegateName (last)": "delegateName",
+              "delegateVersion (last)": "delegateVersion",
+              "environment (last)": "environment",
+              "instance (last)": "instance",
+              "isImmutable (last)": "isImmutable",
+              "isNg (last)": "isNg",
+              "job (last)": "Job",
+              "location (last)": "location",
+              "namespace (last)": "namespace",
+              "orgId (last)": "orgId",
+              "pod (last)": "pod",
+              "projectId (last)": "projectId",
+              "project_id (last)": "project_id",
+              "ringName (last)": "ring_name",
+              "time (last)": "time",
+              "upgraderImageTag (last)": "upgrader_Image_Tag",
+              "watcherJREVersion (last)": "watcher_JRE_Version",
+              "watcherVersion (last)": "watcher_Version"
+            }
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "Value (max)"
+              }
+            ],
+            "fields": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${data_source}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": true
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ringName"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 191
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time (last)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 181
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "time"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 199
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "delegateImageTag (last)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 277
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "accountId"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 228
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 10,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "time"
+          }
+        ]
+      },
+      "pluginVersion": "10.0.10",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${data_source}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "heartbeat_received{accountId=~\"$account_id\", environment=\"$env\", cluster=\"$cluster\"}",
+          "format": "table",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Delegate Event",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "Value"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Time": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "Value": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "groupby"
+              },
+              "accountId": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "delegateConnectionStatus": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "delegateEventType": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "delegateId": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "delegateImageTag": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "delegateJREVersion": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "delegateName": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "delegateVersion": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "isImmutable": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "isNg": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "time": {
+                "aggregations": [],
+                "operation": "groupby"
+              }
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": false,
+              "Value": false,
+              "__name__": true,
+              "accountId (last)": false,
+              "accountName": true,
+              "cluster": true,
+              "companyName": true,
+              "delegateConnectionStatus (last)": false,
+              "delegateEventType (last)": false,
+              "delegateId": false,
+              "delegateImageTag": true,
+              "delegateJREVersion": true,
+              "delegateName": true,
+              "delegateVersion": true,
+              "environment": true,
+              "instance": true,
+              "isImmutable (last)": false,
+              "isNg (last)": false,
+              "job": true,
+              "location": true,
+              "namespace": true,
+              "orgId": true,
+              "pod": true,
+              "projectId": true,
+              "project_id": true,
+              "ringName": true,
+              "upgraderImageTag": true,
+              "watcherJREVersion": true,
+              "watcherVersion": true
+            },
+            "indexByName": {
+              "Value": 6,
+              "accountId (last)": 0,
+              "delegateConnectionStatus (last)": 3,
+              "delegateEventType (last)": 2,
+              "delegateId": 1,
+              "isImmutable (last)": 4,
+              "isNg (last)": 5
+            },
+            "renameByName": {
+              "Value": "time",
+              "Value (last)": "time",
+              "accountId (last)": "accountId",
+              "accountName (last)": "accountName",
+              "cluster (last)": "cluster",
+              "companyName (last)": "companyName",
+              "ringName (last)": "ring"
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "desc": true,
+                "field": "time"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${data_source}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": true
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ringName"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 191
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "accountId (last)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 340
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 23
+      },
+      "id": 6,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "time"
+          }
+        ]
+      },
+      "pluginVersion": "10.0.10",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${data_source}"
+          },
+          "editorMode": "code",
+          "expr": "heartbeat_received{accountId=~\"$account_id\", environment=\"$env\", cluster=\"$cluster\"}",
+          "format": "table",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Delegate Upgrade History",
+      "transformations": [
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Value": {
+                "aggregations": [
+                  "first"
+                ],
+                "operation": "aggregate"
+              },
+              "accountId": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "accountName": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "cluster": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "companyName": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "delegateId": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "delegateName": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "delegateVersion": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "groupby"
+              },
+              "ringName": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "upgraderImageTag": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "watcherJREVersion": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "watcherVersion": {
+                "aggregations": [
+                  "last"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Value": true
+            },
+            "indexByName": {
+              "Value (first)": 2,
+              "accountId (last)": 3,
+              "accountName (last)": 4,
+              "delegateId (last)": 5,
+              "delegateName": 0,
+              "delegateVersion": 1
+            },
+            "renameByName": {
+              "Value (first)": "time",
+              "accountName (last)": "accountName",
+              "cluster (last)": "cluster",
+              "companyName (last)": "companyName",
+              "ringName (last)": "ring"
+            }
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "time"
+              }
+            ],
+            "fields": {}
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "hide": 0,
+        "includeAll": false,
+        "label": "DataSource",
+        "multi": false,
+        "name": "data_source",
+        "options": [],
+        "query": "prometheus",
+        "queryValue": "",
+        "refresh": 1,
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${data_source}"
+        },
+        "definition": "label_values(heartbeat_received,environment)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Env",
+        "multi": false,
+        "name": "env",
+        "options": [],
+        "query": {
+          "query": "label_values(heartbeat_received,environment)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 2,
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${data_source}"
+        },
+        "definition": "label_values(heartbeat_received,cluster)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Cluster",
+        "multi": false,
+        "name": "cluster",
+        "options": [],
+        "query": {
+          "query": "label_values(heartbeat_received,cluster)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${data_source}"
+        },
+        "definition": "label_values(heartbeat_received{environment=\"$env\", cluster=\"$cluster\"},accountId)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "AcccountID",
+        "multi": true,
+        "name": "account_id",
+        "options": [],
+        "query": {
+          "query": "label_values(heartbeat_received{environment=\"$env\", cluster=\"$cluster\"},accountId)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${data_source}"
+        },
+        "filters": [],
+        "hide": 0,
+        "name": "Filters",
+        "skipUrlSync": false,
+        "type": "adhoc"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "title": "Delegate Admin Board"
+}

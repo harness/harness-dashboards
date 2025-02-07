@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 495,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -33,32 +32,28 @@
         "type": "prometheus",
         "uid": "${dataSource}"
       },
+      "description": "number of perpetual tasks",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
-            "axisColorMode": "series",
-            "axisLabel": "Total Redis Memory Usage",
+            "axisColorMode": "text",
+            "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 75,
-            "gradientMode": "opacity",
+            "fillOpacity": 0,
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
             "lineInterpolation": "linear",
-            "lineStyle": {
-              "fill": "solid"
-            },
-            "lineWidth": 2,
+            "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -67,7 +62,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "normal"
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -86,8 +81,7 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "decbytes"
+          }
         },
         "overrides": []
       },
@@ -100,19 +94,11 @@
       "id": 2,
       "options": {
         "legend": {
-          "calcs": [
-            "max"
-          ],
-          "displayMode": "table",
+          "calcs": [],
+          "displayMode": "list",
           "placement": "bottom",
-          "showLegend": true,
-          "sortBy": "Max",
-          "sortDesc": true
+          "showLegend": true
         },
-        "timezone": [
-          "",
-          ""
-        ],
         "tooltip": {
           "mode": "single",
           "sort": "none"
@@ -125,16 +111,13 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_memory_usage{cluster=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
-          "format": "time_series",
-          "instant": false,
+          "expr": "sum(max by(accountId) (perpetual_tasks_num{cluster=\"$cluster\", environment=\"$env\"}))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Redis Streams Memory Usage (All Streams)",
+      "title": "pepetual_tasks_number",
       "type": "timeseries"
     },
     {
@@ -142,27 +125,26 @@
         "type": "prometheus",
         "uid": "${dataSource}"
       },
+      "description": "number of perpetual tasks",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
-            "axisColorMode": "series",
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 100,
-            "gradientMode": "opacity",
+            "fillOpacity": 0,
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -173,7 +155,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "normal"
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -192,8 +174,7 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "decbytes"
+          }
         },
         "overrides": []
       },
@@ -223,16 +204,13 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_memory_usage{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
-          "format": "time_series",
-          "instant": false,
+          "expr": "sum(max by(accountId) (perpetual_tasks_assigned_num{cluster=\"$cluster\", environment=\"$env\"}))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Redis Streams Memory Usage (Per Stream Selection)",
+      "title": "perpetual_tasks_assigned_num",
       "type": "timeseries"
     },
     {
@@ -240,32 +218,28 @@
         "type": "prometheus",
         "uid": "${dataSource}"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
-            "axisColorMode": "series",
-            "axisLabel": "Total Redis Streams Length",
+            "axisColorMode": "text",
+            "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 75,
-            "gradientMode": "opacity",
+            "fillOpacity": 0,
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
             "lineInterpolation": "linear",
-            "lineStyle": {
-              "fill": "solid"
-            },
-            "lineWidth": 2,
+            "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -274,7 +248,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "normal"
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -293,8 +267,7 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "none"
+          }
         },
         "overrides": []
       },
@@ -312,10 +285,6 @@
           "placement": "bottom",
           "showLegend": true
         },
-        "timezone": [
-          "",
-          ""
-        ],
         "tooltip": {
           "mode": "single",
           "sort": "none"
@@ -328,16 +297,13 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_length{cluster=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
-          "format": "time_series",
-          "instant": false,
+          "expr": "sum(max by(accountId) (perpetual_tasks_unassigned_num{cluster=\"$cluster\", environment=\"$env\"}))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Redis Streams Length (All Streams)",
+      "title": "perpetual_tasks_unassigned_num",
       "type": "timeseries"
     },
     {
@@ -345,27 +311,26 @@
         "type": "prometheus",
         "uid": "${dataSource}"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
-            "axisColorMode": "series",
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 100,
-            "gradientMode": "opacity",
+            "fillOpacity": 0,
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -376,7 +341,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "normal"
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -395,8 +360,7 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "none"
+          }
         },
         "overrides": []
       },
@@ -426,16 +390,13 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_length{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
-          "format": "time_series",
-          "instant": false,
+          "expr": "sum(max by(accountId) (perpetual_invalid_tasks{cluster=\"$cluster\", environment=\"$env\"}))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Redis Streams Length (Per Stream Selection)",
+      "title": "perpetual_invalid_tasks",
       "type": "timeseries"
     },
     {
@@ -443,32 +404,28 @@
         "type": "prometheus",
         "uid": "${dataSource}"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
-            "axisColorMode": "series",
-            "axisLabel": "Total Redis Memory Usage",
+            "axisColorMode": "text",
+            "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 75,
-            "gradientMode": "opacity",
+            "fillOpacity": 0,
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
             "lineInterpolation": "linear",
-            "lineStyle": {
-              "fill": "solid"
-            },
-            "lineWidth": 2,
+            "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -477,7 +434,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "normal"
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -496,8 +453,7 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "decbytes"
+          }
         },
         "overrides": []
       },
@@ -515,10 +471,6 @@
           "placement": "bottom",
           "showLegend": true
         },
-        "timezone": [
-          "",
-          ""
-        ],
         "tooltip": {
           "mode": "single",
           "sort": "none"
@@ -531,16 +483,13 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_average_message_size{cluster=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
-          "format": "time_series",
-          "instant": false,
+          "expr": "sum(max by(accountId) (perpetual_tasks_non_assignable_num{cluster=\"$cluster\", environment=\"$env\"}))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Redis Streams Avg Message Size (All Streams)",
+      "title": "perpetual_tasks_non_assignable_num",
       "type": "timeseries"
     },
     {
@@ -548,27 +497,26 @@
         "type": "prometheus",
         "uid": "${dataSource}"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
-            "axisColorMode": "series",
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 100,
-            "gradientMode": "opacity",
+            "fillOpacity": 0,
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -579,7 +527,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "normal"
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -599,7 +547,7 @@
               }
             ]
           },
-          "unit": "decbytes"
+          "unit": "ns"
         },
         "overrides": []
       },
@@ -629,16 +577,13 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_average_message_size{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
-          "format": "time_series",
-          "instant": false,
+          "expr": "avg by() (delta(iterator_delay_sum{cluster=\"$cluster\", environment=\"$env\", iteratorName=\"PerpetualTaskAssignment\"}[5m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Redis Streams Avg Message Size (Per Stream Selection)",
+      "title": "perpetual_task_assign_delay",
       "type": "timeseries"
     },
     {
@@ -646,32 +591,28 @@
         "type": "prometheus",
         "uid": "${dataSource}"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
-            "axisColorMode": "series",
-            "axisLabel": "Total Redis Memory Usage",
+            "axisColorMode": "text",
+            "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 75,
-            "gradientMode": "opacity",
+            "fillOpacity": 0,
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
             "lineInterpolation": "linear",
-            "lineStyle": {
-              "fill": "solid"
-            },
-            "lineWidth": 2,
+            "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
@@ -680,7 +621,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "normal"
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -699,8 +640,7 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "none"
+          }
         },
         "overrides": []
       },
@@ -710,7 +650,7 @@
         "x": 0,
         "y": 27
       },
-      "id": 8,
+      "id": 10,
       "options": {
         "legend": {
           "calcs": [],
@@ -718,10 +658,6 @@
           "placement": "bottom",
           "showLegend": true
         },
-        "timezone": [
-          "",
-          ""
-        ],
         "tooltip": {
           "mode": "single",
           "sort": "none"
@@ -734,16 +670,13 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "exemplar": false,
-          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_behind_by_count{cluster=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
-          "format": "time_series",
-          "instant": false,
-          "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
+          "expr": "sum(delta(perpetual_task_create_total{cluster=\"$cluster\", environment=\"$env\"}[10m]))",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Consumer Group Behind From Stream (All Streams)",
+      "title": "perpetual_tasks_created",
       "type": "timeseries"
     },
     {
@@ -751,27 +684,26 @@
         "type": "prometheus",
         "uid": "${dataSource}"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
-            "axisColorMode": "series",
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 100,
-            "gradientMode": "opacity",
+            "fillOpacity": 0,
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -782,7 +714,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "normal"
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -801,8 +733,7 @@
                 "value": 80
               }
             ]
-          },
-          "unit": "none"
+          }
         },
         "overrides": []
       },
@@ -832,16 +763,13 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "exemplar": false,
-          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_behind_by_count{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
-          "format": "time_series",
-          "instant": false,
-          "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
+          "expr": "sum(delta(perpetual_task_assigned_total{cluster=\"$cluster\", environment=\"$env\"}[10m]))",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Consumer Group Behind From Stream (Per Stream Selection)",
+      "title": "perpetual_tasks_assigned",
       "type": "timeseries"
     },
     {
@@ -849,132 +777,26 @@
         "type": "prometheus",
         "uid": "${dataSource}"
       },
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "palette-classic"
           },
           "custom": {
-            "axisBorderShow": false,
             "axisCenteredZero": false,
-            "axisColorMode": "series",
-            "axisLabel": "Total Redis Memory Usage",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 75,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineStyle": {
-              "fill": "solid"
-            },
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "normal"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 36
-      },
-      "id": 10,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "timezone": [
-          "",
-          ""
-        ],
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_pending_count{cluster=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
-          "format": "time_series",
-          "instant": false,
-          "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Consumer Group Pending Count (All Streams)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "series",
+            "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
-            "fillOpacity": 100,
-            "gradientMode": "opacity",
+            "fillOpacity": 0,
+            "gradientMode": "none",
             "hideFrom": {
               "legend": false,
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -985,7 +807,7 @@
             "spanNulls": false,
             "stacking": {
               "group": "A",
-              "mode": "normal"
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -996,117 +818,14 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
                 "value": 80
               }
             ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 36
-      },
-      "id": 11,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_pending_count{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
-          "format": "time_series",
-          "instant": false,
-          "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Consumer Group Pending Count (Per Stream Selection)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "series",
-            "axisLabel": "Total Redis Memory Usage",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 75,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineStyle": {
-              "fill": "solid"
-            },
-            "lineWidth": 2,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "normal"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "none"
+          }
         },
         "overrides": []
       },
@@ -1114,111 +833,9 @@
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 45
+        "y": 36
       },
-      "id": 12,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "timezone": [
-          "",
-          ""
-        ],
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "avg by(exported_namespace, usecaseName) (redis_streams_events_framework_deadletter_queue_size{cluster=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
-          "format": "time_series",
-          "instant": false,
-          "legendFormat": "{{exported_namespace}}:streams:deadletter_queue:{{usecaseName}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Dead Letter Queue Size (All Streams)",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "series",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 100,
-            "gradientMode": "opacity",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "normal"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 45
-      },
-      "id": 13,
+      "id": 8,
       "options": {
         "legend": {
           "calcs": [],
@@ -1238,22 +855,22 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "exemplar": false,
-          "expr": "avg by(exported_namespace, usecaseName) (redis_streams_events_framework_deadletter_queue_size{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
-          "format": "time_series",
-          "instant": false,
-          "legendFormat": "{{exported_namespace}}:streams:deadletter_queue:{{usecaseName}}",
+          "expr": "sum(max by(accountId) (perpetual_tasks_paused_num{cluster=\"$cluster\", environment=\"$env\"}))",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Dead Letter Queue Size (Per Stream Selection)",
+      "title": "perpetual_tasks_paused_num",
       "type": "timeseries"
     }
   ],
   "refresh": "",
-  "schemaVersion": 39,
-  "tags": [],
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [
+    "0compatible"
+  ],
   "templating": {
     "list": [
       {
@@ -1274,17 +891,16 @@
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(redis_streams_memory_usage,cluster)",
+        "definition": "label_values({__name__=\"perpetual_tasks_num\"}, environment)",
         "hide": 0,
         "includeAll": false,
-        "label": "Cluster",
+        "label": "Env",
         "multi": false,
-        "name": "cluster",
+        "name": "env",
         "options": [],
         "query": {
-          "qryType": 1,
-          "query": "label_values(redis_streams_memory_usage,cluster)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          "query": "label_values({__name__=\"perpetual_tasks_num\"}, environment)",
+          "refId": "StandardVariableQuery"
         },
         "refresh": 1,
         "skipUrlSync": false,
@@ -1296,61 +912,16 @@
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(redis_streams_memory_usage,environment)",
+        "definition": "label_values({__name__=\"perpetual_tasks_num\"}, cluster)",
         "hide": 0,
         "includeAll": false,
-        "label": "Env",
+        "label": "Cluster",
         "multi": false,
-        "name": "env",
+        "name": "cluster",
         "options": [],
         "query": {
-          "qryType": 1,
-          "query": "label_values(redis_streams_memory_usage,environment)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 2,
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
-        },
-        "definition": "label_values(redis_streams_memory_usage,usecaseName)",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Usecase",
-        "multi": false,
-        "name": "usecase",
-        "options": [],
-        "query": {
-          "qryType": 1,
-          "query": "label_values(redis_streams_memory_usage,usecaseName)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 2,
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
-        },
-        "definition": "label_values(redis_streams_memory_usage,namespace)",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Namespace",
-        "multi": false,
-        "name": "namespace",
-        "options": [],
-        "query": {
-          "qryType": 1,
-          "query": "label_values(redis_streams_memory_usage,namespace)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+          "query": "label_values({__name__=\"perpetual_tasks_num\"}, cluster)",
+          "refId": "StandardVariableQuery"
         },
         "refresh": 1,
         "skipUrlSync": false,
@@ -1360,8 +931,8 @@
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-5m",
     "to": "now"
   },
-  "title": "Redis Streams Monitor(New)"
+  "title": "Perpetual Tasks"
 }

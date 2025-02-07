@@ -18,13 +18,27 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 391,
   "links": [],
-  "liveNow": false,
   "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "panels": [],
+      "repeat": "iteratorName",
+      "title": "$iteratorName",
+      "type": "row"
+    },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "${dataSource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -32,13 +46,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
-            "axisSoftMax": 6.4,
-            "axisSoftMin": 0,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -47,6 +61,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -63,20 +78,7 @@
               "mode": "off"
             }
           },
-          "decimals": 2,
-          "mappings": [
-            {
-              "options": {
-                "match": "null+nan",
-                "result": {
-                  "index": 0,
-                  "text": "0.00%"
-                }
-              },
-              "type": "special"
-            }
-          ],
-          "noValue": "0",
+          "mappings": [],
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -85,22 +87,22 @@
                 "value": null
               }
             ]
-          },
-          "unit": "percent"
+          }
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
-        "w": 24,
+        "h": 8,
+        "w": 12,
         "x": 0,
-        "y": 0
+        "y": 1
       },
       "id": 2,
       "options": {
         "legend": {
           "calcs": [
-            "mean"
+            "mean",
+            "last"
           ],
           "displayMode": "table",
           "placement": "right",
@@ -111,27 +113,28 @@
           "sort": "none"
         }
       },
+      "pluginVersion": "11.3.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "(sum by(method) \n(rate(io_harness_resources_responses_count{cluster='$cluster',serviceName='ng-manager' , resource=\"ScopeInfoResource\" , namespace='$namespace' , statusCode='$statusCode'}[5m]))*100) \n/ \n(sum by(method) \n(rate(io_harness_resources_responses_count{cluster='$cluster',serviceName='ng-manager' , resource=\"ScopeInfoResource\" , namespace='$namespace'}[5m])))",
+          "expr": "sum by(environment) (rate(iterator_working_on_entity_total{cluster=\"$cluster\", environment=\"$env\", iteratorName=~\"${iteratorName:pipe}\"}[3h]))",
           "instant": false,
-          "legendFormat": "{{method}}",
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "ScopeInfoResource API $statusCode Rate",
+      "title": "Working on Entity Rate",
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "${dataSource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -139,13 +142,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
-            "axisSoftMax": -0.6,
-            "axisSoftMin": 0,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -154,6 +157,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -170,7 +174,6 @@
               "mode": "off"
             }
           },
-          "decimals": 2,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -181,21 +184,21 @@
               }
             ]
           },
-          "unit": "s"
+          "unit": "ms"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
+        "h": 8,
         "w": 12,
-        "x": 0,
-        "y": 7
+        "x": 12,
+        "y": 1
       },
       "id": 3,
       "options": {
         "legend": {
           "calcs": [
-            "mean",
+            "last",
             "max"
           ],
           "displayMode": "table",
@@ -207,27 +210,28 @@
           "sort": "none"
         }
       },
+      "pluginVersion": "11.3.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "max by (method)(io_harness_resources_responses_latency_snapshot_95thPercentile{cluster='$cluster',resource=\"ScopeInfoResource\" , namespace='$namespace'})",
+          "expr": "sum by(environment) (delta(iterator_delay_sum{cluster=\"$cluster\", environment=\"$env\", iteratorName=\"$iteratorName\"}[5m]))\n/\nsum by(environment) (delta(iterator_delay_count{cluster=\"$cluster\", environment=\"$env\", iteratorName=\"$iteratorName\"}[5m]))",
           "instant": false,
           "legendFormat": "{{environment}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "ScopeInfoResource API P95",
+      "title": "Iterator Delay",
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "${datasource}"
+        "uid": "${dataSource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -235,13 +239,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
-            "axisSoftMax": -0.6,
-            "axisSoftMin": 0,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -250,6 +254,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -266,7 +271,6 @@
               "mode": "off"
             }
           },
-          "decimals": 2,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -277,21 +281,21 @@
               }
             ]
           },
-          "unit": "s"
+          "unit": "ms"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 9,
+        "h": 8,
         "w": 12,
-        "x": 12,
-        "y": 7
+        "x": 0,
+        "y": 9
       },
       "id": 4,
       "options": {
         "legend": {
           "calcs": [
-            "mean",
+            "last",
             "max"
           ],
           "displayMode": "table",
@@ -303,154 +307,207 @@
           "sort": "none"
         }
       },
+      "pluginVersion": "11.3.0",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "${datasource}"
+            "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "max by (method)(io_harness_resources_responses_latency_snapshot_99thPercentile{cluster='$cluster',resource=\"ScopeInfoResource\" , namespace='$namespace'})",
+          "expr": "avg by(environment) (delta(iterator_processing_time_bucket{cluster=\"$cluster\", environment=\"$env\", iteratorName=\"$iteratorName\"}[5m]))",
           "instant": false,
           "legendFormat": "{{environment}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "ScopeInfoResource API P99",
+      "title": "Iterator Processing Time",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 9
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "last"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "sum by(iteratorName) (iterator_error_total{cluster=\"$cluster\", environment=\"$env\", iteratorName=\"$iteratorName\"})",
+          "instant": false,
+          "legendFormat": "{{iteratorName}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Iterator Error",
       "type": "timeseries"
     }
   ],
-  "refresh": "10s",
-  "schemaVersion": 38,
-  "style": "dark",
+  "preload": false,
+  "refresh": "",
+  "schemaVersion": 40,
   "tags": [
+    "cd",
+    "ng-manager",
+    "cg-manager",
+    "pipeline",
+    "iterators",
+    "custom",
     "0compatible"
   ],
   "templating": {
     "list": [
       {
-        "current": {
-          "selected": false,
-          "text": "ProdSetup-ManagedPrometheus",
-          "value": "ProdSetup-ManagedPrometheus"
-        },
-        "hide": 0,
         "includeAll": false,
-        "multi": false,
-        "name": "datasource",
+        "label": "DataSource",
+        "name": "dataSource",
         "options": [],
         "query": "prometheus",
-        "queryValue": "",
         "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
         "type": "datasource"
       },
       {
-        "current": {
-          "selected": false,
-          "text": "prod-private-uswest1-primary",
-          "value": "prod-private-uswest1-primary"
-        },
         "datasource": {
           "type": "prometheus",
-          "uid": "${datasource}"
+          "uid": "${dataSource}"
         },
-        "definition": "label_values(kubernetes_io:container_uptime{container_name=~\"ng-manager.*\"},cluster_name)",
-        "hide": 0,
+        "definition": "label_values(iterator_working_on_entity_total,cluster)",
         "includeAll": false,
-        "label": "cluster",
-        "multi": false,
+        "label": "Cluster",
         "name": "cluster",
         "options": [],
         "query": {
-          "query": "label_values(kubernetes_io:container_uptime{container_name=~\"ng-manager.*\"},cluster_name)",
+          "query": "label_values(iterator_working_on_entity_total,cluster)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       },
       {
-        "current": {
-          "selected": false,
-          "text": "harness-nextgen",
-          "value": "harness-nextgen"
-        },
         "datasource": {
           "type": "prometheus",
-          "uid": "${datasource}"
+          "uid": "${dataSource}"
         },
-        "definition": "label_values(io_harness_resources_responses_count{resource=\"ScopeInfoResource\"},namespace)",
-        "hide": 0,
+        "definition": "label_values(iterator_working_on_entity_total{cluster=\"$cluster\"},environment)",
         "includeAll": false,
-        "label": "namespace",
-        "multi": false,
-        "name": "namespace",
+        "label": "Env",
+        "name": "env",
         "options": [],
         "query": {
-          "query": "label_values(io_harness_resources_responses_count{resource=\"ScopeInfoResource\"},namespace)",
+          "query": "label_values(iterator_working_on_entity_total{cluster=\"$cluster\"},environment)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
+        "sort": 2,
         "type": "query"
       },
       {
-        "current": {
-          "selected": true,
-          "text": "2xx",
-          "value": "2xx"
+        "datasource": {
+          "type": "prometheus",
+          "uid": "${dataSource}"
         },
-        "hide": 0,
-        "includeAll": false,
-        "multi": false,
-        "name": "statusCode",
-        "options": [
-          {
-            "selected": false,
-            "text": "1xx",
-            "value": "1xx"
-          },
-          {
-            "selected": true,
-            "text": "2xx",
-            "value": "2xx"
-          },
-          {
-            "selected": false,
-            "text": "3xx",
-            "value": "3xx"
-          },
-          {
-            "selected": false,
-            "text": "4xx",
-            "value": "4xx"
-          },
-          {
-            "selected": false,
-            "text": "5xx",
-            "value": "5xx"
-          }
-        ],
-        "query": "1xx , 2xx , 3xx , 4xx , 5xx",
-        "queryValue": "",
-        "skipUrlSync": false,
-        "type": "custom"
+        "definition": "label_values(iterator_working_on_entity_total{cluster=\"$cluster\"},iteratorName)",
+        "includeAll": true,
+        "label": "Iterator Name",
+        "multi": true,
+        "name": "iteratorName",
+        "options": [],
+        "query": {
+          "query": "label_values(iterator_working_on_entity_total{cluster=\"$cluster\"},iteratorName)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 1,
+        "sort": 1,
+        "type": "query"
       }
     ]
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-3h",
     "to": "now"
   },
-  "timepicker": {},
-  "timezone": "",
-  "title": "ScopeInfo Resource HTTP",
-  "weekStart": ""
+  "title": "Custom Metrics: Iterators"
 }

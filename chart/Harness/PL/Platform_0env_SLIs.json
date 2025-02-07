@@ -1,0 +1,1433 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 369,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 14,
+      "panels": [],
+      "repeat": "monitoring_project",
+      "repeatDirection": "h",
+      "title": "${monitoring_project}",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 0.013,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 13,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": null
+              },
+              {
+                "color": "dark-red",
+                "value": 0.01
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 1
+      },
+      "id": 17,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Platform 0env SLIs",
+          "url": "https://developer.harness.io/docs/harness-cloud-operations/computing-uptime/#platform"
+        }
+      ],
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "(\n  sum by (cluster, namespace) (delta(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{serviceName=\"ng-manager\"}[5m])) + \n  sum by (cluster, namespace)  (delta(io_dropwizard_jetty_MutableServletContextHandler_5xx_responses_count{serviceName=\"ng-manager\"}[5m]))\n) / sum by (cluster, namespace) (delta(io_dropwizard_jetty_MutableServletContextHandler_requests_count{serviceName=\"ng-manager\"}[5m]))",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "Error Rate (ng-manager) All APIs",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"prod-private-uswest1-primary\", namespace=\"harness-nextgen\"}/",
+            "renamePattern": "prod1"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "{cluster=\"prod-private-uswest1-primary\", namespace=\"harness-nextgen-compliance\"}",
+            "renamePattern": "prod3"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"prod-private-uswest1-primary\", namespace=\"harness-nextgen-free\"}/",
+            "renamePattern": "prod2"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"qa-private\", namespace=\"harness-nextgen\"}/",
+            "renamePattern": "QA"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"/",
+            "renamePattern": ""
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/\", namespace=\"/",
+            "renamePattern": " | "
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/\"}/",
+            "renamePattern": ""
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 1.2,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-blue",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "id": 18,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "sum by(cluster, namespace) (io_dropwizard_jetty_MutableServletContextHandler_requests_snapshot_95thPercentile{serviceName=\"ng-manager\"})",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "API Response Time( 95th Percentile)(ng-manager)",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"prod-private-uswest1-primary\", namespace=\"harness-nextgen\"}/",
+            "renamePattern": "prod1"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "{cluster=\"prod-private-uswest1-primary\", namespace=\"harness-nextgen-compliance\"}",
+            "renamePattern": "prod3"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"prod-private-uswest1-primary\", namespace=\"harness-nextgen-free\"}/",
+            "renamePattern": "prod2"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"qa-private\", namespace=\"harness-nextgen\"}/",
+            "renamePattern": "QA"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"/",
+            "renamePattern": ""
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/\", namespace=\"/",
+            "renamePattern": " | "
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/\"}/",
+            "renamePattern": ""
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 0.013,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 13,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": null
+              },
+              {
+                "color": "dark-red",
+                "value": 0.01
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 19,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "(\n  sum by (cluster, namespace) (delta(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{serviceName=\"cg-manager\"}[5m])) + \n  sum by (cluster, namespace)  (delta(io_dropwizard_jetty_MutableServletContextHandler_5xx_responses_count{serviceName=\"cg-manager\"}[5m]))\n) / sum by (cluster, namespace) (delta(io_dropwizard_jetty_MutableServletContextHandler_requests_count{serviceName=\"cg-manager\"}[5m]))",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "Error Rate (cg-manager) All APIs",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"prod-private-uswest1-primary\", namespace=\"harness-nextgen\"}/",
+            "renamePattern": "prod1"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "{cluster=\"prod-private-uswest1-primary\", namespace=\"harness-nextgen-compliance\"}",
+            "renamePattern": "prod3"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"prod-private-uswest1-primary\", namespace=\"harness-nextgen-free\"}/",
+            "renamePattern": "prod2"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"qa-private\", namespace=\"harness-nextgen\"}/",
+            "renamePattern": "QA"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"/",
+            "renamePattern": ""
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/\", namespace=\"/",
+            "renamePattern": " | "
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/\"}/",
+            "renamePattern": ""
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 1.2,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-blue",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "id": 20,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "sum by(cluster, namespace) (io_dropwizard_jetty_MutableServletContextHandler_requests_snapshot_95thPercentile{serviceName=\"cg-manager\"})",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "API Response Time( 95th Percentile)(cg-manager)",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"prod-private-uswest1-primary\", namespace=\"harness-nextgen\"}/",
+            "renamePattern": "prod1"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "{cluster=\"prod-private-uswest1-primary\", namespace=\"harness-nextgen-compliance\"}",
+            "renamePattern": "prod3"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"prod-private-uswest1-primary\", namespace=\"harness-nextgen-free\"}/",
+            "renamePattern": "prod2"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"qa-private\", namespace=\"harness-nextgen\"}/",
+            "renamePattern": "QA"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"/",
+            "renamePattern": ""
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/\", namespace=\"/",
+            "renamePattern": " | "
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/\"}/",
+            "renamePattern": ""
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 0.013,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 13,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": null
+              },
+              {
+                "color": "dark-red",
+                "value": 0.01
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 15
+      },
+      "id": 21,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "(\n  sum by (cluster, namespace) (delta(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{serviceName=\"access-control\"}[5m])) + \n  sum by (cluster, namespace)  (delta(io_dropwizard_jetty_MutableServletContextHandler_5xx_responses_count{serviceName=\"access-control\"}[5m]))\n) / sum by (cluster, namespace) (delta(io_dropwizard_jetty_MutableServletContextHandler_requests_count{serviceName=\"access-control\"}[5m]))",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "Error Rate (access-control) All APIs",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"prod-private-uswest1-primary\", namespace=\"harness-nextgen\"}/",
+            "renamePattern": "prod1"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "{cluster=\"prod-private-uswest1-primary\", namespace=\"harness-nextgen-compliance\"}",
+            "renamePattern": "prod3"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"prod-private-uswest1-primary\", namespace=\"harness-nextgen-free\"}/",
+            "renamePattern": "prod2"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"qa-private\", namespace=\"harness-nextgen\"}/",
+            "renamePattern": "QA"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"/",
+            "renamePattern": ""
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/\", namespace=\"/",
+            "renamePattern": " | "
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/\"}/",
+            "renamePattern": ""
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 1.2,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-blue",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 15
+      },
+      "id": 22,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "sum by(cluster, namespace) (io_dropwizard_jetty_MutableServletContextHandler_requests_snapshot_95thPercentile{serviceName=\"access-control\"})",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "API Response Time( 95th Percentile)(access-control)",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"prod-private-uswest1-primary\", namespace=\"harness-nextgen\"}/",
+            "renamePattern": "prod1"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "{cluster=\"prod-private-uswest1-primary\", namespace=\"harness-nextgen-compliance\"}",
+            "renamePattern": "prod3"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"prod-private-uswest1-primary\", namespace=\"harness-nextgen-free\"}/",
+            "renamePattern": "prod2"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"qa-private\", namespace=\"harness-nextgen\"}/",
+            "renamePattern": "QA"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"/",
+            "renamePattern": ""
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/\", namespace=\"/",
+            "renamePattern": " | "
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/\"}/",
+            "renamePattern": ""
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 0.013,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 13,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 2,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": null
+              },
+              {
+                "color": "dark-red",
+                "value": 0.01
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 22
+      },
+      "id": 23,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "(\n  sum by (cluster, namespace) (delta(io_dropwizard_jetty_MutableServletContextHandler_4xx_responses_count{serviceName=\"platform-service\"}[5m])) + \n  sum by (cluster, namespace)  (delta(io_dropwizard_jetty_MutableServletContextHandler_5xx_responses_count{serviceName=\"platform-service\"}[5m]))\n) / sum by (cluster, namespace) (delta(io_dropwizard_jetty_MutableServletContextHandler_requests_count{serviceName=\"platform-service\"}[5m]))",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "Error Rate (platform-service) All APIs",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"prod-private-uswest1-primary\", namespace=\"harness-nextgen\"}/",
+            "renamePattern": "prod1"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "{cluster=\"prod-private-uswest1-primary\", namespace=\"harness-nextgen-compliance\"}",
+            "renamePattern": "prod3"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"prod-private-uswest1-primary\", namespace=\"harness-nextgen-free\"}/",
+            "renamePattern": "prod2"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"qa-private\", namespace=\"harness-nextgen\"}/",
+            "renamePattern": "QA"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"/",
+            "renamePattern": ""
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/\", namespace=\"/",
+            "renamePattern": " | "
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/\"}/",
+            "renamePattern": ""
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "stackdriver",
+        "uid": "stackdriver"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 1.2,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-blue",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 22
+      },
+      "id": 24,
+      "options": {
+        "legend": {
+          "calcs": [
+            "min",
+            "max",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "stackdriver",
+            "uid": "stackdriver"
+          },
+          "promQLQuery": {
+            "expr": "sum by(cluster, namespace) (io_dropwizard_jetty_MutableServletContextHandler_requests_snapshot_95thPercentile{serviceName=\"platform-service\"})",
+            "projectName": "$monitoring_project",
+            "step": "10s"
+          },
+          "queryType": "promQL",
+          "refId": "A",
+          "timeSeriesList": {
+            "alignmentPeriod": "cloud-monitoring-auto",
+            "crossSeriesReducer": "REDUCE_NONE",
+            "filters": [],
+            "groupBys": [],
+            "perSeriesAligner": "ALIGN_MEAN",
+            "projectName": "monitoring-play"
+          }
+        }
+      ],
+      "title": "API Response Time( 95th Percentile)(platform-service)",
+      "transformations": [
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"prod-private-uswest1-primary\", namespace=\"harness-nextgen\"}/",
+            "renamePattern": "prod1"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "{cluster=\"prod-private-uswest1-primary\", namespace=\"harness-nextgen-compliance\"}",
+            "renamePattern": "prod3"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"prod-private-uswest1-primary\", namespace=\"harness-nextgen-free\"}/",
+            "renamePattern": "prod2"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"qa-private\", namespace=\"harness-nextgen\"}/",
+            "renamePattern": "QA"
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/{cluster=\"/",
+            "renamePattern": ""
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/\", namespace=\"/",
+            "renamePattern": " | "
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "/\"}/",
+            "renamePattern": ""
+          }
+        }
+      ],
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "datasource": {
+          "type": "stackdriver",
+          "uid": "stackdriver"
+        },
+        "definition": "",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Monitoring Project",
+        "multi": false,
+        "name": "monitoring_project",
+        "options": [],
+        "query": {
+          "labelKey": "",
+          "loading": false,
+          "projectName": "monitoring-play",
+          "projects": [
+            {
+              "label": "shared-services",
+              "value": "harness-zero-shared-1248"
+            },
+            {
+              "label": "shared-services",
+              "value": "qa-shared-2bcf"
+            },
+            {
+              "label": "shared-services",
+              "value": "prod-shared-3921"
+            },
+            {
+              "label": "shared-services",
+              "value": "ie-woojae-shared-22b5"
+            },
+            {
+              "label": "monitoring-play",
+              "value": "monitoring-play"
+            }
+          ],
+          "refId": "CloudMonitoringVariableQueryEditor-VariableQuery",
+          "selectedMetricType": "actions.googleapis.com/smarthome_action/camerastream/first_frame_latencies",
+          "selectedQueryType": "projects",
+          "selectedSLOService": "",
+          "selectedService": "actions.googleapis.com",
+          "sloServices": [
+            {
+              "label": "istio-ingressgateway",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-istio-system-istio-ingressgateway"
+            },
+            {
+              "label": "grafana-alerting",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-alerting"
+            },
+            {
+              "label": "grafana-operator-monitoring-play-metrics-service",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-operator-monitoring-play-metrics-service"
+            },
+            {
+              "label": "grafana-service",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-service"
+            },
+            {
+              "label": "prometheus-monitoring-play-kube-state-metrics",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-prometheus-monitoring-play-kube-state-metrics"
+            },
+            {
+              "label": "prometheus-monitoring-play-server",
+              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-prometheus-monitoring-play-server"
+            }
+          ]
+        },
+        "refresh": 1,
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "title": "PL SLIs (TEMP)"
+}

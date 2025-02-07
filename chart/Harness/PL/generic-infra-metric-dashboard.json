@@ -634,11 +634,6 @@
   "templating": {
     "list": [
       {
-        "current": {
-          "selected": true,
-          "text": "ProdSetup-ManagedPrometheus",
-          "value": "ProdSetup-ManagedPrometheus"
-        },
         "hide": 0,
         "includeAll": false,
         "label": "Datasource",
@@ -648,16 +643,10 @@
         "query": "prometheus",
         "queryValue": "",
         "refresh": 1,
-        "regex": "",
         "skipUrlSync": false,
         "type": "datasource"
       },
       {
-        "current": {
-          "selected": true,
-          "text": "access-control",
-          "value": "access-control"
-        },
         "hide": 0,
         "includeAll": false,
         "label": "Container",
@@ -666,8 +655,8 @@
         "options": [
           {
             "selected": true,
-            "text": "access-control",
-            "value": "access-control"
+            "text": "accesscontrol-service",
+            "value": "accesscontrol-service"
           },
           {
             "selected": false,
@@ -730,17 +719,12 @@
             "value": "agent-gateway"
           }
         ],
-        "query": "access-control , platform-service , manager-iterator , manager , ng-manager , gateway , ng-dashboard-aggregator , audit-event-streaming , chatbot-service , redis-streams-monitor , ng-auth-ui , genai-service , agent-gateway",
+        "query": "accesscontrol-service , platform-service , manager-iterator , manager , ng-manager , gateway , ng-dashboard-aggregator , audit-event-streaming , chatbot-service , redis-streams-monitor , ng-auth-ui , genai-service , agent-gateway",
         "queryValue": "",
         "skipUrlSync": false,
         "type": "custom"
       },
       {
-        "current": {
-          "selected": false,
-          "text": "prod-private-uswest1-primary",
-          "value": "prod-private-uswest1-primary"
-        },
         "datasource": {
           "type": "prometheus",
           "uid": "${datasource}"
@@ -757,17 +741,11 @@
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
-        "regex": ".*cluster_name=\\\"([\\d\\w\\-]+)\\\".*",
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
       },
       {
-        "current": {
-          "selected": false,
-          "text": "harness-nextgen",
-          "value": "harness-nextgen"
-        },
         "datasource": {
           "type": "prometheus",
           "uid": "${datasource}"
@@ -784,21 +762,11 @@
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
-        "regex": "",
         "skipUrlSync": false,
         "sort": 1,
         "type": "query"
       },
       {
-        "current": {
-          "selected": true,
-          "text": [
-            "All"
-          ],
-          "value": [
-            "$__all"
-          ]
-        },
         "datasource": {
           "type": "prometheus",
           "uid": "${datasource}"
@@ -815,7 +783,6 @@
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
-        "regex": "",
         "skipUrlSync": false,
         "sort": 0,
         "type": "query"
@@ -826,8 +793,5 @@
     "from": "now-24h",
     "to": "now"
   },
-  "timepicker": {},
-  "timezone": "",
-  "title": "Generic Infra Monitoring Dashboard",
-  "weekStart": ""
+  "title": "Generic Infra Monitoring Dashboard"
 }
