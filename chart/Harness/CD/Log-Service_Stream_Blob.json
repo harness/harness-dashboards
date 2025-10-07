@@ -24,9 +24,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 422,
+  "id": 478,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "collapsed": false,
@@ -59,6 +58,7 @@
             "axisPlacement": "auto",
             "axisSoftMax": 0.05,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -69,10 +69,14 @@
             },
             "insertNulls": false,
             "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
-              "type": "linear"
+              "log": 2,
+              "type": "log"
             },
             "showPoints": "auto",
             "spanNulls": false,
@@ -91,16 +95,43 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 0.01
               }
             ]
           },
-          "unit": "percentunit"
+          "unit": "none"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Write Rate"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Error Rate"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 9,
@@ -124,6 +155,7 @@
           "sort": "none"
         }
       },
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -131,10 +163,11 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(rate(log_service_stream_write_error_count{cluster=\"$cluster\", namespace=\"$namespace\"}[5m]))",
+          "exemplar": false,
+          "expr": "sum(rate(log_service_stream_write_error_count{namespace=\"$namespace\"}[1m]))",
           "hide": false,
           "instant": false,
-          "legendFormat": "Error",
+          "legendFormat": "Error Rate",
           "range": true,
           "refId": "Write Stream Error"
         },
@@ -144,32 +177,14 @@
             "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
           },
           "editorMode": "code",
-          "expr": "sum(rate(log_service_stream_write_count{cluster=\"$cluster\", namespace=\"$namespace\"}[5m])) > 0",
+          "expr": "sum(rate(log_service_stream_write_count{namespace=\"$namespace\"}[1m]))",
           "instant": false,
-          "legendFormat": "Total",
+          "legendFormat": "Write Rate",
           "range": true,
           "refId": "Write Stream Total"
         }
       ],
-      "title": "Write Stream Error Rate (%) [5m]",
-      "transformations": [
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Error Percent",
-            "binary": {
-              "left": "Error",
-              "operator": "/",
-              "right": "Total"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            },
-            "replaceFields": true
-          }
-        }
-      ],
+      "title": "Stream Write Rate",
       "type": "timeseries"
     },
     {
@@ -191,8 +206,9 @@
             "axisPlacement": "auto",
             "axisSoftMax": 5000,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 10,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -204,10 +220,11 @@
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
-              "type": "linear"
+              "log": 2,
+              "type": "log"
             },
             "showPoints": "auto",
-            "spanNulls": false,
+            "spanNulls": true,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -226,7 +243,7 @@
               },
               {
                 "color": "red",
-                "value": 1000
+                "value": 500
               }
             ]
           },
@@ -256,6 +273,7 @@
           "sort": "none"
         }
       },
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -263,14 +281,41 @@
             "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.95, sum by(le) (rate(log_service_stream_write_latency_bucket{cluster=\"$cluster\", namespace=\"$namespace\"}[5m])))",
+          "expr": "histogram_quantile(0.95, sum by(le) (rate(log_service_stream_write_latency_bucket{namespace=\"$namespace\"}[5m])))",
           "instant": false,
           "legendFormat": "P95",
           "range": true,
           "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.75, sum by(le) (rate(log_service_stream_write_latency_bucket{namespace=\"$namespace\"}[5m])))",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "P75",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.50, sum by(le) (rate(log_service_stream_write_latency_bucket{namespace=\"$namespace\"}[5m])))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "P50",
+          "range": true,
+          "refId": "C"
         }
       ],
-      "title": "Write Stream Latency (P95) Response Time",
+      "title": "Stream Write Latency",
       "type": "timeseries"
     },
     {
@@ -291,6 +336,7 @@
             "axisPlacement": "auto",
             "axisSoftMax": 0.05,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -301,10 +347,14 @@
             },
             "insertNulls": false,
             "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
-              "type": "linear"
+              "log": 2,
+              "type": "log"
             },
             "showPoints": "auto",
             "spanNulls": false,
@@ -323,16 +373,43 @@
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 0.01
               }
             ]
           },
-          "unit": "percentunit"
+          "unit": "none"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Close Rate"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Error Rate"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 9,
@@ -340,7 +417,7 @@
         "x": 0,
         "y": 10
       },
-      "id": 5,
+      "id": 15,
       "options": {
         "legend": {
           "calcs": [
@@ -352,10 +429,129 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "single",
+          "mode": "multi",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.3.6+security-01",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(rate(log_service_stream_close_error_count{namespace=\"$namespace\"}[1m]))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Error Rate",
+          "range": true,
+          "refId": "Stream Close Error"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(log_service_stream_close_count{namespace=\"$namespace\", account_id=~\"$account_id\"}[1m]))",
+          "instant": false,
+          "legendFormat": "Close Rate",
+          "range": true,
+          "refId": "Stream Write Rate"
+        }
+      ],
+      "title": "Stream Close Rate",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 5000,
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "log": 2,
+              "type": "log"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 500
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 10
+      },
+      "id": 13,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -363,11 +559,11 @@
             "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
           },
           "editorMode": "code",
-          "expr": "sum(rate(log_service_stream_tail_error_count{cluster=\"$cluster\", namespace=\"$namespace\"}[5m]))",
+          "expr": "histogram_quantile(0.95, sum by(le) (rate(log_service_stream_close_latency_bucket{namespace=\"$namespace\"}[5m])))",
           "instant": false,
-          "legendFormat": "Error",
+          "legendFormat": "P95",
           "range": true,
-          "refId": "Tail Error"
+          "refId": "A"
         },
         {
           "datasource": {
@@ -375,33 +571,1517 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(rate(log_service_stream_tail_count{cluster=\"$cluster\", namespace=\"$namespace\"}[5m])) > 0",
+          "expr": "histogram_quantile(0.75, sum by(le) (rate(log_service_stream_close_latency_bucket{namespace=\"$namespace\"}[5m])))",
           "hide": false,
           "instant": false,
-          "legendFormat": "Total",
+          "interval": "",
+          "legendFormat": "P75",
           "range": true,
-          "refId": "Tail Total"
-        }
-      ],
-      "title": "Tail Error Rate (%) [5m]",
-      "transformations": [
+          "refId": "B"
+        },
         {
-          "id": "calculateField",
-          "options": {
-            "alias": "Error Percent",
-            "binary": {
-              "left": "Error",
-              "operator": "/",
-              "right": "Total"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            },
-            "replaceFields": true
-          }
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.50, sum by(le) (rate(log_service_stream_close_latency_bucket{namespace=\"$namespace\"}[5m])))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "P50",
+          "range": true,
+          "refId": "C"
         }
       ],
+      "title": "Stream Close Latency",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 0.05,
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "log": 2,
+              "type": "log"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Close Rate"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Error Rate"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Open Rate"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 19
+      },
+      "id": 17,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.3.6+security-01",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(rate(log_service_stream_open_error_count{namespace=\"$namespace\"}[1m]))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Error Rate",
+          "range": true,
+          "refId": "Stream Open Error"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(log_service_stream_open_count{namespace=\"$namespace\", account_id=~\"$account_id\"}[1m]))",
+          "instant": false,
+          "legendFormat": "Open Rate",
+          "range": true,
+          "refId": "Stream Open Rate"
+        }
+      ],
+      "title": "Stream Open Rate",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 5000,
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "log": 2,
+              "type": "log"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 500
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 19
+      },
+      "id": 14,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.3.6+security-01",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.95, sum by(le) (rate(log_service_stream_open_latency_bucket{namespace=\"$namespace\"}[5m])))",
+          "instant": false,
+          "legendFormat": "P95",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.75, sum by(le) (rate(log_service_stream_open_latency_bucket{namespace=\"$namespace\"}[5m])))",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "P75",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.50, sum by(le) (rate(log_service_stream_open_latency_bucket{namespace=\"$namespace\"}[5m])))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "P50",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Stream Open Latency",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 0.05,
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "log": 2,
+              "type": "log"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Write Rate"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Error Rate"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Tail Rate"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 28
+      },
+      "id": 16,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.3.6+security-01",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(rate(log_service_stream_tail_error_count{namespace=\"$namespace\"}[1m]))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Error Rate",
+          "range": true,
+          "refId": "Write Stream Error"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(log_service_stream_tail_count{namespace=\"$namespace\"}[1m]))",
+          "instant": false,
+          "legendFormat": "Tail Rate",
+          "range": true,
+          "refId": "Write Stream Total"
+        }
+      ],
+      "title": "Stream Tail Rate",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 5000,
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "log": 2,
+              "type": "log"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "deckbytes"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "P95"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "P75"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "P50"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 28
+      },
+      "id": 19,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.3.6+security-01",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.95, sum(rate(log_service_stream_key_memory_usage_bucket[5m])) by (le))",
+          "instant": false,
+          "legendFormat": "P95",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.75, sum(rate(log_service_stream_key_memory_usage_bucket[5m])) by (le))",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "P75",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.50, sum(rate(log_service_stream_key_memory_usage_bucket[5m])) by (le))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "P50",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Stream Memory Usage",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 5000,
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "log": 2,
+              "type": "log"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "P95"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "P75"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "P50"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 37
+      },
+      "id": 18,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.95, sum(rate(log_service_stream_key_duration_bucket[5m])) by (le))",
+          "instant": false,
+          "legendFormat": "P95",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.75, sum(rate(log_service_stream_key_duration_bucket[5m])) by (le))",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "P75",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.50, sum(rate(log_service_stream_key_duration_bucket[5m])) by (le))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "P50",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Stream Duration",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "description": "This represents the size of a message in Redis, this is useful to tell what's the average size of a batch.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 5000,
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "log": 2,
+              "type": "log"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "P95"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "P75"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "P50"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 37
+      },
+      "id": 23,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.95, sum(rate(log_service_stream_message_size_bucket[5m])) by (le))",
+          "instant": false,
+          "legendFormat": "P95",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.75, sum(rate(log_service_stream_message_size_bucket[5m])) by (le))",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "P75",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.50, sum(rate(log_service_stream_message_size_bucket[5m])) by (le))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "P50",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Stream Message Size",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "description": "This represents individually the length of a log line.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 5000,
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "log": 2,
+              "type": "log"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "P95"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "P75"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "P50"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 46
+      },
+      "id": 24,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.95, sum(rate(log_service_stream_log_line_size_bucket{namespace=\"$namespace\"}[5m])) by (le))\n",
+          "instant": false,
+          "legendFormat": "P95",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.75, sum(rate(log_service_stream_log_line_size_bucket{namespace=\"$namespace\"}[5m])) by (le))",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "P75",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.50, sum(rate(log_service_stream_log_line_size_bucket{namespace=\"$namespace\"}[5m])) by (le))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "P50",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Stream Log Line Length",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 5000,
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "log": 2,
+              "type": "log"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "P95"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "P75"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "P50"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 46
+      },
+      "id": 25,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.95, sum(rate(log_service_stream_messages_bucket{namespace=\"$namespace\"}[5m])) by (le))",
+          "instant": false,
+          "legendFormat": "P95",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.75, sum(rate(log_service_stream_messages_bucket{namespace=\"$namespace\"}[5m])) by (le))",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "P75",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.50, sum(rate(log_service_stream_messages_bucket{namespace=\"$namespace\"}[5m])) by (le))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "P50",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Stream Message Count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 5000,
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "log": 2,
+              "type": "log"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "P95"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "P75"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "P50"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 55
+      },
+      "id": 26,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.95, sum(rate(log_service_stream_log_lines_count_bucket{namespace=\"$namespace\"}[5m])) by (le))",
+          "instant": false,
+          "legendFormat": "P95",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.75, sum(rate(log_service_stream_log_lines_count_bucket{namespace=\"$namespace\"}[5m])) by (le))",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "P75",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.50, sum(rate(log_service_stream_log_lines_count_bucket{namespace=\"$namespace\"}[5m])) by (le))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "P50",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Stream Log Line Count",
       "type": "timeseries"
     },
     {
@@ -410,7 +2090,353 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 19
+        "y": 64
+      },
+      "id": 20,
+      "panels": [],
+      "title": "Stream Grouped By Account",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "description": "Active streams means how many streams were not closed yet. This metric can be useful to understand how many streams are getting closed correctly or how many streams are active.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 0.05,
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "log": 2,
+              "type": "log"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Close Rate"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Stream Active Rate - PWpZeML6SF-MkeLm_F6M4g"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 65
+      },
+      "id": 21,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+          },
+          "editorMode": "code",
+          "expr": "topk(5, sum(rate(log_service_stream_open_count{namespace=\"$namespace\", account_id=~\"$account_id\"}[1m])) by (account_id))",
+          "instant": false,
+          "legendFormat": "Open Rate - {{account_id}}",
+          "range": true,
+          "refId": "Stream Open Rate"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "topk(5, sum(rate(log_service_stream_open_count{namespace=\"$namespace\", account_id=~\"$account_id\"}[1m])) by (account_id) - sum(rate(log_service_stream_close_count{namespace=\"$namespace\", account_id=~\"$account_id\"}[1m])) by (account_id))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Active Stream Rate - {{account_id}}",
+          "range": true,
+          "refId": "Active Streams"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+          },
+          "editorMode": "code",
+          "expr": "topk(5, sum(rate(log_service_stream_close_count{namespace=\"$namespace\", account_id=~\"$account_id\"}[1m])) by (account_id))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Close Rate - {{account_id}}",
+          "range": true,
+          "refId": "Close Rate"
+        }
+      ],
+      "title": "Stream Active / Opened / Closed by Account ID",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 5000,
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "log": 2,
+              "type": "log"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "deckbytes"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "P95"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "P75"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "P50"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 65
+      },
+      "id": 22,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true,
+          "sortBy": "Max",
+          "sortDesc": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.3.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+          },
+          "editorMode": "code",
+          "expr": "topk(5, histogram_quantile(0.95, sum(rate(log_service_stream_key_memory_usage_bucket{namespace=\"$namespace\", account_id=~\"$account_id\"}[5m])) by (account_id, le)))",
+          "instant": false,
+          "legendFormat": "P95 - {{account_id}}",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "topk(5, histogram_quantile(0.75, sum(rate(log_service_stream_key_memory_usage_bucket{namespace=\"$namespace\", account_id=~\"$account_id\"}[5m])) by (account_id, le)))",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "P75 - {{account_id}}",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "topk(5, histogram_quantile(0.50, sum(rate(log_service_stream_key_memory_usage_bucket{namespace=\"$namespace\", account_id=~\"$account_id\"}[5m])) by (account_id, le)))",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "P50 - {{account_id}}",
+          "range": true,
+          "refId": "C"
+        }
+      ],
+      "title": "Stream Memory Usage by Account ID",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 74
       },
       "id": 6,
       "panels": [],
@@ -435,6 +2461,7 @@
             "axisPlacement": "auto",
             "axisSoftMax": 0.05,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -465,8 +2492,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -474,246 +2500,31 @@
               }
             ]
           },
-          "unit": "percentunit"
+          "unit": "none"
         },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 20
-      },
-      "id": 7,
-      "options": {
-        "legend": {
-          "calcs": [
-            "mean",
-            "max"
-          ],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
-          },
-          "editorMode": "code",
-          "expr": "sum(rate(log_service_blob_download_error_count{cluster=\"$cluster\", namespace=\"$namespace\"}[5m]))",
-          "instant": false,
-          "legendFormat": "Error",
-          "range": true,
-          "refId": "Download Error"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "code",
-          "expr": "sum(rate(log_service_blob_download_count{cluster=\"$cluster\", namespace=\"$namespace\"}[5m])) > 0",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "Total",
-          "range": true,
-          "refId": "Download Total"
-        }
-      ],
-      "title": "Download Error Rate (%) [5m]",
-      "transformations": [
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Error Percent",
-            "binary": {
-              "left": "Error",
-              "operator": "/",
-              "right": "Total"
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Total"
             },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            },
-            "replaceFields": true
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
-        }
-      ],
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "axisSoftMax": 5000,
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line+area"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 1000
-              }
-            ]
-          },
-          "unit": "ms"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 20
-      },
-      "id": 8,
-      "options": {
-        "legend": {
-          "calcs": [
-            "mean",
-            "max"
-          ],
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
-          },
-          "editorMode": "code",
-          "expr": "histogram_quantile(0.95, sum by(le) (rate(log_service_blob_download_latency_bucket{cluster=\"$cluster\", namespace=\"$namespace\"}[5m])))",
-          "instant": false,
-          "legendFormat": "P95",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Download Latency (P95) Response Time",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "axisSoftMax": 0.05,
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "line+area"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 0.01
-              }
-            ]
-          },
-          "unit": "percentunit"
-        },
-        "overrides": []
+        ]
       },
       "gridPos": {
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 29
+        "y": 75
       },
       "id": 9,
       "options": {
@@ -731,6 +2542,7 @@
           "sort": "none"
         }
       },
+      "pluginVersion": "11.3.3",
       "targets": [
         {
           "datasource": {
@@ -738,7 +2550,7 @@
             "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
           },
           "editorMode": "code",
-          "expr": "sum(rate(log_service_blob_upload_error_count{cluster=\"$cluster\", namespace=\"$namespace\"}[5m]))",
+          "expr": "sum(rate(log_service_blob_upload_error_count{namespace=\"$namespace\"}[5m]))",
           "instant": false,
           "legendFormat": "Error",
           "range": true,
@@ -750,7 +2562,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(rate(log_service_blob_upload_count{cluster=\"$cluster\", namespace=\"$namespace\"}[5m])) > 0",
+          "expr": "sum(rate(log_service_blob_upload_count{namespace=\"$namespace\"}[5m])) > 0",
           "hide": false,
           "instant": false,
           "legendFormat": "Total",
@@ -758,25 +2570,7 @@
           "refId": "Upload Total"
         }
       ],
-      "title": "Upload Error Rate (%) [5m]",
-      "transformations": [
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Error Percent",
-            "binary": {
-              "left": "Error",
-              "operator": "/",
-              "right": "Total"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            },
-            "replaceFields": true
-          }
-        }
-      ],
+      "title": "Upload Rate (%) [5m]",
       "type": "timeseries"
     },
     {
@@ -797,6 +2591,7 @@
             "axisPlacement": "auto",
             "axisSoftMax": 5000,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -827,8 +2622,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -844,7 +2638,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 29
+        "y": 75
       },
       "id": 10,
       "options": {
@@ -862,6 +2656,7 @@
           "sort": "none"
         }
       },
+      "pluginVersion": "11.3.3",
       "targets": [
         {
           "datasource": {
@@ -869,7 +2664,7 @@
             "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.95, sum by(le) (rate(log_service_blob_upload_latency_bucket{cluster=\"$cluster\", namespace=\"$namespace\"}[5m])))",
+          "expr": "histogram_quantile(0.95, sum by(le) (rate(log_service_blob_upload_latency_bucket{namespace=\"$namespace\"}[5m])))",
           "instant": false,
           "legendFormat": "P95",
           "range": true,
@@ -898,6 +2693,7 @@
             "axisPlacement": "auto",
             "axisSoftMax": 0.05,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -929,24 +2725,50 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 0.01
+                "color": "green"
               }
             ]
           },
-          "unit": "percentunit"
+          "unit": "none"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Error"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Total"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 9,
         "w": 12,
         "x": 0,
-        "y": 38
+        "y": 84
       },
       "id": 11,
       "options": {
@@ -964,6 +2786,7 @@
           "sort": "none"
         }
       },
+      "pluginVersion": "11.3.3",
       "targets": [
         {
           "datasource": {
@@ -971,7 +2794,7 @@
             "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
           },
           "editorMode": "code",
-          "expr": "sum(rate(log_service_blob_zip_downlods_error_count{cluster=\"$cluster\", namespace=\"$namespace\"}[5m]))",
+          "expr": "sum(rate(log_service_blob_zip_downlods_error_count{namespace=\"$namespace\"}[5m])) > 0",
           "instant": false,
           "legendFormat": "Error",
           "range": true,
@@ -983,7 +2806,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(rate(log_service_blob_zip_downloads{cluster=\"$cluster\", namespace=\"$namespace\"}[5m])) > 0",
+          "expr": "sum(rate(log_service_blob_zip_downloads{namespace=\"$namespace\"}[5m])) > 0",
           "hide": false,
           "instant": false,
           "legendFormat": "Total",
@@ -991,25 +2814,7 @@
           "refId": "Zip Download Total"
         }
       ],
-      "title": "Zip Download Error Rate (%) [5m]",
-      "transformations": [
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Error Percent",
-            "binary": {
-              "left": "Error",
-              "operator": "/",
-              "right": "Total"
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            },
-            "replaceFields": true
-          }
-        }
-      ],
+      "title": "Download Pipeline/Step Zip Rate  [5m]",
       "type": "timeseries"
     },
     {
@@ -1030,6 +2835,7 @@
             "axisPlacement": "auto",
             "axisSoftMax": 5000,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -1060,8 +2866,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1077,7 +2882,7 @@
         "h": 9,
         "w": 12,
         "x": 12,
-        "y": 38
+        "y": 84
       },
       "id": 12,
       "options": {
@@ -1095,6 +2900,7 @@
           "sort": "none"
         }
       },
+      "pluginVersion": "11.3.3",
       "targets": [
         {
           "datasource": {
@@ -1102,7 +2908,7 @@
             "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.95, sum by(le) (rate(log_service_blob_zip_download_latency_bucket{cluster=\"$cluster\", namespace=\"$namespace\"}[5m])))",
+          "expr": "histogram_quantile(0.95, sum by(le) (rate(log_service_blob_zip_download_latency_bucket{namespace=\"$namespace\"}[5m])))",
           "instant": false,
           "legendFormat": "P95",
           "range": true,
@@ -1111,28 +2917,266 @@
       ],
       "title": "Zip Download Latency (P95) Response Time",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 0.05,
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Error"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Total"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 93
+      },
+      "id": 7,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(log_service_blob_download_error_count{namespace=\"$namespace\"}[5m])) > 0",
+          "instant": false,
+          "legendFormat": "Error",
+          "range": true,
+          "refId": "Download Error"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "expr": "sum(rate(log_service_blob_download_count{namespace=\"$namespace\"}[5m])) > 0",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "Total",
+          "range": true,
+          "refId": "Download Total"
+        }
+      ],
+      "title": "Download Rate  [5m]",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "axisSoftMax": 5000,
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 1000
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 93
+      },
+      "id": 8,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.3.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+          },
+          "editorMode": "code",
+          "expr": "histogram_quantile(0.95, sum by(le) (rate(log_service_blob_download_latency_bucket{namespace=\"$namespace\"}[5m])))",
+          "instant": false,
+          "legendFormat": "P95",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Download Latency (P95) Response Time",
+      "type": "timeseries"
     }
   ],
+  "preload": false,
   "refresh": "1m",
-  "schemaVersion": 39,
+  "schemaVersion": 40,
   "tags": [
     "cd",
-    "0compatible",
     "log-service"
   ],
   "templating": {
     "list": [
       {
-        "hide": 0,
         "includeAll": false,
         "label": "DataSource",
-        "multi": false,
         "name": "dataSource",
         "options": [],
         "query": "prometheus",
-        "queryValue": "",
         "refresh": 1,
-        "skipUrlSync": false,
         "type": "datasource"
       },
       {
@@ -1140,21 +3184,17 @@
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(log_service_stream_write_count,cluster)",
-        "hide": 0,
+        "definition": "label_values(log_service_stream_write_count,namespace)",
         "includeAll": false,
-        "label": "Cluster",
-        "multi": false,
-        "name": "cluster",
+        "label": "Namespace",
+        "name": "namespace",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(log_service_stream_write_count,cluster)",
+          "query": "label_values(log_service_stream_write_count,namespace)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       },
       {
@@ -1162,28 +3202,29 @@
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(log_service_stream_write_count{cluster=\"$cluster\"},namespace)",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Namespace",
-        "multi": false,
-        "name": "namespace",
+        "definition": "label_values(log_service_stream_open_count,account_id)",
+        "includeAll": true,
+        "label": "account_id",
+        "multi": true,
+        "name": "account_id",
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(log_service_stream_write_count{cluster=\"$cluster\"},namespace)",
+          "query": "label_values(log_service_stream_open_count,account_id)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
+        "regex": "",
         "type": "query"
       }
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-12h",
     "to": "now"
   },
-  "title": "Log-Service - Stream / Blob"
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Log-Service - Stream/Blob V2",
+  "weekStart": ""
 }

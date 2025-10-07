@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 307,
+  "id": 603,
   "links": [],
   "panels": [
     {
@@ -76,7 +76,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -201,7 +201,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -316,7 +316,7 @@
           "sort": "asc"
         }
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -471,7 +471,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -596,7 +596,7 @@
           "sort": "asc"
         }
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -755,7 +755,7 @@
           "sort": "asc"
         }
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -862,7 +862,7 @@
           "sort": "asc"
         }
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -973,7 +973,7 @@
           "sort": "asc"
         }
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -1072,7 +1072,7 @@
           "sort": "asc"
         }
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -1171,7 +1171,7 @@
           "sort": "asc"
         }
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -1194,8 +1194,7 @@
   "schemaVersion": 40,
   "tags": [
     "cd",
-    "webserver",
-    "0compatible"
+    "webserver"
   ],
   "templating": {
     "list": [
@@ -1301,5 +1300,8 @@
     "from": "now-6h",
     "to": "now"
   },
-  "title": "WebServer Observability"
+  "timepicker": {},
+  "timezone": "",
+  "title": "WebServer Observability",
+  "weekStart": ""
 }

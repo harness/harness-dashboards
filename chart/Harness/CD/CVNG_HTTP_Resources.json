@@ -24,9 +24,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 277,
+  "id": 340,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "collapsed": false,
@@ -39,7 +38,6 @@
       "id": 63,
       "panels": [],
       "repeat": "resource",
-      "repeatDirection": "h",
       "title": "$resource",
       "type": "row"
     },
@@ -56,12 +54,14 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "axisSoftMax": 0.075,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -70,6 +70,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -126,6 +127,7 @@
           "sort": "asc"
         }
       },
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -140,7 +142,6 @@
         }
       ],
       "title": "Error Rate (%) - $status_code [5m]",
-      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -157,11 +158,13 @@
             "seriesBy": "last"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -170,6 +173,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -224,6 +228,7 @@
           "sort": "asc"
         }
       },
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -238,7 +243,6 @@
         }
       ],
       "title": "Error Rate (req/s) - $status_code [5m]",
-      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -253,12 +257,14 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "axisSoftMax": 1.4,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -267,6 +273,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -324,6 +331,7 @@
           "sort": "asc"
         }
       },
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -354,11 +362,13 @@
             "seriesBy": "last"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -367,6 +377,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -419,6 +430,7 @@
           "sort": "asc"
         }
       },
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -433,13 +445,12 @@
         }
       ],
       "title": "Incoming APIs (req/s) [5m]",
-      "transformations": [],
       "type": "timeseries"
     }
   ],
+  "preload": false,
   "refresh": "1m",
-  "schemaVersion": 38,
-  "style": "dark",
+  "schemaVersion": 40,
   "tags": [
     "cd",
     "cvng",
@@ -448,16 +459,12 @@
   "templating": {
     "list": [
       {
-        "hide": 0,
         "includeAll": false,
         "label": "DataSource",
-        "multi": false,
         "name": "dataSource",
         "options": [],
         "query": "prometheus",
-        "queryValue": "",
         "refresh": 1,
-        "skipUrlSync": false,
         "type": "datasource"
       },
       {
@@ -466,10 +473,8 @@
           "uid": "${dataSource}"
         },
         "definition": "label_values(io_harness_cvng_resources_responses_total,cluster)",
-        "hide": 0,
         "includeAll": false,
         "label": "Cluster Name",
-        "multi": false,
         "name": "cluster",
         "options": [],
         "query": {
@@ -477,8 +482,6 @@
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       },
       {
@@ -487,10 +490,8 @@
           "uid": "${dataSource}"
         },
         "definition": "label_values(io_harness_cvng_resources_responses_total{cluster=\"$cluster\"},namespace)",
-        "hide": 0,
         "includeAll": false,
         "label": "Namespace",
-        "multi": false,
         "name": "namespace",
         "options": [],
         "query": {
@@ -498,8 +499,6 @@
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       },
       {
@@ -508,10 +507,8 @@
           "uid": "${dataSource}"
         },
         "definition": "label_values(io_harness_cvng_resources_responses_total{cluster=\"$cluster\", namespace=\"$namespace\"},resource)",
-        "hide": 0,
         "includeAll": false,
         "label": "Resource",
-        "multi": false,
         "name": "resource",
         "options": [],
         "query": {
@@ -519,7 +516,6 @@
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
         "sort": 1,
         "type": "query"
       },
@@ -529,7 +525,6 @@
           "uid": "${dataSource}"
         },
         "definition": "label_values(io_harness_cvng_resources_responses_total{cluster=\"$cluster\", namespace=\"$namespace\"},statusCode)",
-        "hide": 0,
         "includeAll": true,
         "label": "Status Code",
         "multi": true,
@@ -540,7 +535,7 @@
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
+        "regex": "",
         "sort": 2,
         "type": "query"
       }
@@ -550,5 +545,8 @@
     "from": "now-6h",
     "to": "now"
   },
-  "title": "CVNG - HTTP Resources"
+  "timepicker": {},
+  "timezone": "",
+  "title": "CVNG - HTTP Resources",
+  "weekStart": ""
 }
