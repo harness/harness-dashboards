@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 355,
   "links": [],
   "panels": [
     {
@@ -125,7 +124,6 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.0",
       "targets": [
         {
           "datasource": {
@@ -134,7 +132,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_memory_usage{cluster=\"$cluster\", usecaseName=~\"${usecase:pipe}\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName) (redis_streams_memory_usage{usecaseName=~\"${usecase:pipe}\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "__auto",
@@ -225,7 +223,6 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.0",
       "targets": [
         {
           "datasource": {
@@ -234,7 +231,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_length{cluster=\"$cluster\", usecaseName=~\"${usecase:pipe}\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName) (redis_streams_length{usecaseName=~\"${usecase:pipe}\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "__auto",
@@ -329,7 +326,6 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.0",
       "targets": [
         {
           "datasource": {
@@ -338,7 +334,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_average_message_size{cluster=\"$cluster\", usecaseName=~\"${usecase:pipe}\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName) (redis_streams_average_message_size{usecaseName=~\"${usecase:pipe}\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "__auto",
@@ -410,8 +406,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -442,7 +437,6 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.0",
       "targets": [
         {
           "datasource": {
@@ -451,7 +445,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_behind_by_count{cluster=\"$cluster\", usecaseName=~\"${usecase:pipe}\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_behind_by_count{usecaseName=~\"${usecase:pipe}\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
@@ -510,8 +504,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -543,7 +536,6 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.0",
       "targets": [
         {
           "datasource": {
@@ -552,7 +544,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_pending_count{cluster=\"$cluster\", usecaseName=~\"${usecase:pipe}\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_pending_count{usecaseName=~\"${usecase:pipe}\", namespace=\"$namespace\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
@@ -624,8 +616,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -656,7 +647,6 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.0",
       "targets": [
         {
           "datasource": {
@@ -666,7 +656,7 @@
           "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(exported_namespace, usecaseName) (rate(redis_streams_events_framework_deadletter_queue_size{cluster=\"$cluster\", namespace=\"$namespace\", usecaseName=~\"${usecase:pipe}\"}[5m]))",
+          "expr": "avg by(exported_namespace, usecaseName) (rate(redis_streams_events_framework_deadletter_queue_size{namespace=\"$namespace\", usecaseName=~\"${usecase:pipe}\"}[5m]))",
           "format": "time_series",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -728,8 +718,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -760,7 +749,6 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.0",
       "targets": [
         {
           "datasource": {
@@ -770,7 +758,7 @@
           "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(exported_namespace, usecaseName) (rate(redis_streams_events_framework_deadletter_queue_size{cluster=\"$cluster\", namespace=\"$namespace\", usecaseName=~\"pipeline_initiate_node|pipeline_interrupt|pipeline_node_advise|pipeline_node_start|pipeline_node_progress|pipeline_node_resume|pms_orchestration_notify_event|pipeline_orchestration|pipeline_sdk_response|pipeline_sdk_spawn|pipeline_sdk_step_response\"}[5m]))",
+          "expr": "avg by(exported_namespace, usecaseName) (rate(redis_streams_events_framework_deadletter_queue_size{namespace=\"$namespace\", usecaseName=~\"pipeline_initiate_node|pipeline_interrupt|pipeline_node_advise|pipeline_node_start|pipeline_node_progress|pipeline_node_resume|pms_orchestration_notify_event|pipeline_orchestration|pipeline_sdk_response|pipeline_sdk_spawn|pipeline_sdk_step_response\"}[5m]))",
           "format": "time_series",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -796,6 +784,15 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "selected": false,
+          "text": "prometheus",
+          "value": "prometheus"
+        },
+        "hide": 0,
+        "multi": false,
+        "queryValue": "",
+        "skipUrlSync": false,
         "includeAll": false,
         "label": "DataSource",
         "name": "dataSource",
@@ -805,24 +802,10 @@
         "type": "datasource"
       },
       {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
+        "current": {
+          "text": "All",
+          "value": "$__all"
         },
-        "definition": "label_values(redis_streams_memory_usage,cluster)",
-        "includeAll": false,
-        "label": "Cluster",
-        "name": "cluster",
-        "options": [],
-        "query": {
-          "qryType": 1,
-          "query": "label_values(redis_streams_memory_usage,cluster)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "type": "query"
-      },
-      {
         "datasource": {
           "type": "prometheus",
           "uid": "${dataSource}"
@@ -839,10 +822,19 @@
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
+        "regex": "/(.*pipeline.*|.*orchestration_log.*|.*pms.*)/",
         "sort": 2,
         "type": "query"
       },
       {
+        "current": {
+          "selected": false,
+          "text": "",
+          "value": ""
+        },
+        "hide": 0,
+        "multi": false,
+        "skipUrlSync": false,
         "datasource": {
           "type": "prometheus",
           "uid": "${dataSource}"
@@ -858,6 +850,7 @@
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
+        "regex": "",
         "sort": 2,
         "type": "query"
       }
@@ -867,5 +860,8 @@
     "from": "now-1h",
     "to": "now"
   },
-  "title": "Redis Streams"
+  "timepicker": {},
+  "timezone": "",
+  "title": "Redis Streams",
+  "uid": ""
 }

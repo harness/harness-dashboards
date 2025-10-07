@@ -24,9 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 304,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "datasource": {
@@ -39,11 +37,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -52,6 +52,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -114,7 +115,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(enqueue_requests_per_module_success{cluster=\"$cluster\", namespace=\"$namespace\", topic=~\".*${topic:pipe}\"}[5m]))",
+          "expr": "sum(increase(enqueue_requests_per_module_success{namespace=\"$namespace\", topic=~\".*${topic:pipe}\"}[5m]))",
           "legendFormat": "enqueue_requests_per_module_success",
           "range": true,
           "refId": "A"
@@ -125,7 +126,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(dequeue_requests_per_module_success{cluster=\"$cluster\", namespace=\"$namespace\", topic=~\".*${topic:pipe}\"}[5m]))",
+          "expr": "sum(increase(dequeue_requests_per_module_success{namespace=\"$namespace\", topic=~\".*${topic:pipe}\"}[5m]))",
           "hide": false,
           "legendFormat": "dequeue_requests_per_module_success",
           "range": true,
@@ -137,7 +138,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(dequeue_requests_per_module_failure{cluster=\"$cluster\", namespace=\"$namespace\", topic=~\".*${topic:pipe}\"}[5m]))",
+          "expr": "sum(increase(dequeue_requests_per_module_failure{namespace=\"$namespace\", topic=~\".*${topic:pipe}\"}[5m]))",
           "hide": false,
           "legendFormat": "dequeue_requests_per_module_failure",
           "range": true,
@@ -149,7 +150,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(enqueue_requests_per_module_failure{cluster=\"$cluster\", namespace=\"$namespace\", topic=~\".*${topic:pipe}\"}[5m]))",
+          "expr": "sum(increase(enqueue_requests_per_module_failure{namespace=\"$namespace\", topic=~\".*${topic:pipe}\"}[5m]))",
           "hide": false,
           "legendFormat": "enqueue_requests_per_module_failure",
           "range": true,
@@ -160,6 +161,7 @@
       "type": "timeseries"
     },
     {
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -167,6 +169,7 @@
         "y": 8
       },
       "id": 11,
+      "panels": [],
       "title": "Ack / Queue / Dequeue requests",
       "type": "row"
     },
@@ -182,11 +185,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -195,6 +200,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -257,7 +263,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(echo_request_duration_seconds_bucket{cluster=\"$cluster\", namespace=\"$namespace\", url=\"/v1/ack\", le=\"+Inf\", code=\"200\"}[5m])) by(url)\n",
+          "expr": "sum(increase(echo_request_duration_seconds_bucket{namespace=\"$namespace\", url=\"/v1/ack\", le=\"+Inf\", code=\"200\"}[5m])) by(url)\n",
           "hide": false,
           "legendFormat": "__auto",
           "range": true,
@@ -269,7 +275,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(echo_request_duration_seconds_bucket{cluster=\"$cluster\", namespace=\"$namespace\", url=\"/v1/queue\", le=\"+Inf\", code=\"200\"}[5m])) by(url)\n",
+          "expr": "sum(increase(echo_request_duration_seconds_bucket{namespace=\"$namespace\", url=\"/v1/queue\", le=\"+Inf\", code=\"200\"}[5m])) by(url)\n",
           "hide": false,
           "legendFormat": "__auto",
           "range": true,
@@ -281,7 +287,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(echo_request_duration_seconds_bucket{cluster=\"$cluster\", namespace=\"$namespace\", url=\"/v1/dequeue\", le=\"+Inf\", code=\"200\"}[5m])) by(url)\n",
+          "expr": "sum(increase(echo_request_duration_seconds_bucket{namespace=\"$namespace\", url=\"/v1/dequeue\", le=\"+Inf\", code=\"200\"}[5m])) by(url)\n",
           "hide": false,
           "legendFormat": "__auto",
           "range": true,
@@ -303,11 +309,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -316,6 +324,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -378,7 +387,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(echo_request_duration_seconds_bucket{cluster=\"$cluster\", namespace=\"$namespace\", url=\"/v1/ack\", le=\"+Inf\", code=\"400\" }[5m])) by(url)",
+          "expr": "sum(increase(echo_request_duration_seconds_bucket{namespace=\"$namespace\", url=\"/v1/ack\", le=\"+Inf\", code=\"400\" }[5m])) by(url)",
           "hide": false,
           "legendFormat": "__auto",
           "range": true,
@@ -390,7 +399,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(echo_request_duration_seconds_bucket{cluster=\"$cluster\", namespace=\"$namespace\", url=\"/v1/queue\", le=\"+Inf\", code!=\"200\"}[5m])) by(url)",
+          "expr": "sum(increase(echo_request_duration_seconds_bucket{namespace=\"$namespace\", url=\"/v1/queue\", le=\"+Inf\", code!=\"200\"}[5m])) by(url)",
           "hide": false,
           "legendFormat": "__auto",
           "range": true,
@@ -402,7 +411,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(echo_request_duration_seconds_bucket{cluster=\"$cluster\", namespace=\"$namespace\", url=\"/v1/dequeue\", le=\"+Inf\", code=\"400\"}[5m])) by(url)",
+          "expr": "sum(increase(echo_request_duration_seconds_bucket{namespace=\"$namespace\", url=\"/v1/dequeue\", le=\"+Inf\", code=\"400\"}[5m])) by(url)",
           "hide": false,
           "legendFormat": "__auto",
           "range": true,
@@ -424,11 +433,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -437,6 +448,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -499,7 +511,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.95, sum(rate(echo_request_duration_seconds_bucket{cluster=\"$cluster\", namespace=\"$namespace\", url=\"/v1/ack\", code=\"200\"}[5m])) by (le, url))",
+          "expr": "histogram_quantile(0.95, sum(rate(echo_request_duration_seconds_bucket{namespace=\"$namespace\", url=\"/v1/ack\", code=\"200\"}[5m])) by (le, url))",
           "hide": false,
           "legendFormat": "__auto",
           "range": true,
@@ -511,7 +523,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.95, sum(rate(echo_request_duration_seconds_bucket{cluster=\"$cluster\", namespace=\"$namespace\", url=\"/v1/queue\", code=\"200\"}[5m])) by (le, url))",
+          "expr": "histogram_quantile(0.95, sum(rate(echo_request_duration_seconds_bucket{namespace=\"$namespace\", url=\"/v1/queue\", code=\"200\"}[5m])) by (le, url))",
           "hide": false,
           "legendFormat": "__auto",
           "range": true,
@@ -523,7 +535,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.95, sum(rate(echo_request_duration_seconds_bucket{cluster=\"$cluster\", namespace=\"$namespace\", url=\"/v1/dequeue\", code=\"200\"}[5m])) by (le, url))",
+          "expr": "histogram_quantile(0.95, sum(rate(echo_request_duration_seconds_bucket{namespace=\"$namespace\", url=\"/v1/dequeue\", code=\"200\"}[5m])) by (le, url))",
           "hide": false,
           "legendFormat": "__auto",
           "range": true,
@@ -545,11 +557,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -558,6 +572,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -620,7 +635,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(echo_request_duration_seconds_bucket{cluster=\"$cluster\", namespace=\"$namespace\", url=\"/v1/ack\", le=\"+Inf\", code=\"200\"}[5m])) by(url)",
+          "expr": "sum(increase(echo_request_duration_seconds_bucket{namespace=\"$namespace\", url=\"/v1/ack\", le=\"+Inf\", code=\"200\"}[5m])) by(url)",
           "hide": false,
           "legendFormat": "__auto",
           "range": true,
@@ -632,7 +647,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(echo_request_duration_seconds_bucket{cluster=\"$cluster\", namespace=\"$namespace\", url=\"/v1/queue\", le=\"+Inf\", code=\"200\"}[5m])) by(url)",
+          "expr": "sum(increase(echo_request_duration_seconds_bucket{namespace=\"$namespace\", url=\"/v1/queue\", le=\"+Inf\", code=\"200\"}[5m])) by(url)",
           "hide": false,
           "legendFormat": "__auto",
           "range": true,
@@ -644,7 +659,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(echo_request_duration_seconds_bucket{cluster=\"$cluster\", namespace=\"$namespace\", url=\"/v1/dequeue\", le=\"+Inf\", code=\"200\"}[5m])) by(url)",
+          "expr": "sum(increase(echo_request_duration_seconds_bucket{namespace=\"$namespace\", url=\"/v1/dequeue\", le=\"+Inf\", code=\"200\"}[5m])) by(url)",
           "hide": false,
           "legendFormat": "__auto",
           "range": true,
@@ -655,27 +670,22 @@
       "type": "timeseries"
     }
   ],
+  "preload": false,
   "refresh": "1m",
-  "schemaVersion": 38,
-  "style": "dark",
+  "schemaVersion": 40,
   "tags": [
     "cd",
-    "queue",
-    "0compatible"
+    "queue"
   ],
   "templating": {
     "list": [
       {
-        "hide": 0,
         "includeAll": false,
         "label": "DataSource",
-        "multi": false,
         "name": "dataSource",
         "options": [],
         "query": "prometheus",
-        "queryValue": "",
         "refresh": 1,
-        "skipUrlSync": false,
         "type": "datasource"
       },
       {
@@ -683,41 +693,17 @@
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(enqueue_requests_per_module_success,cluster)",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Cluster",
-        "multi": false,
-        "name": "cluster",
-        "options": [],
-        "query": {
-          "query": "label_values(enqueue_requests_per_module_success,cluster)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
-        },
-        "definition": "label_values(enqueue_requests_per_module_success{cluster=\"$cluster\"},namespace)",
-        "hide": 0,
+        "definition": "label_values(enqueue_requests_per_module_success,namespace)",
         "includeAll": false,
         "label": "Namespace",
-        "multi": false,
         "name": "namespace",
         "options": [],
         "query": {
-          "query": "label_values(enqueue_requests_per_module_success{cluster=\"$cluster\"},namespace)",
+          "query": "label_values(enqueue_requests_per_module_success,namespace)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
+        "regex": "",
         "type": "query"
       },
       {
@@ -725,20 +711,18 @@
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(enqueue_requests_per_module_success{cluster=\"$cluster\", namespace=\"$namespace\"},topic)",
-        "hide": 0,
+        "definition": "label_values(enqueue_requests_per_module_success{namespace=\"$namespace\"},topic)",
         "includeAll": true,
         "label": "Topic",
         "multi": true,
         "name": "topic",
         "options": [],
         "query": {
-          "query": "label_values(enqueue_requests_per_module_success{cluster=\"$cluster\", namespace=\"$namespace\"},topic)",
+          "query": "label_values(enqueue_requests_per_module_success{namespace=\"$namespace\"},topic)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
+        "regex": "/.*:.*:(.*)/",
         "type": "query"
       }
     ]
@@ -747,5 +731,8 @@
     "from": "now-6h",
     "to": "now"
   },
-  "title": "Queue-Service - Overview"
+  "timepicker": {},
+  "timezone": "",
+  "title": "Queue-Service - Overview",
+  "weekStart": ""
 }

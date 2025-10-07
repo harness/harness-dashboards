@@ -24,8 +24,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 336,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "datasource": {
@@ -44,6 +44,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -108,6 +109,7 @@
           "sort": "asc"
         }
       },
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -117,7 +119,7 @@
           "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "sum(max by(accountId, status) (last_over_time(pipeline_executions_gauge{cluster=\"$cluster\", environment=\"$env\", accountId=~\"${accountId:pipe}\", status!~\"QUEUED\"}[5m])))",
+          "expr": "sum(max by(accountId, status) (last_over_time(pipeline_executions_gauge{environment=\"$env\", accountId=~\"${accountId:pipe}\", status!~\"QUEUED\"}[5m])))",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "Running Executions",
@@ -127,7 +129,6 @@
         }
       ],
       "title": "Total Running Pipeline Executions",
-      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -147,6 +148,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -211,6 +213,7 @@
           "sort": "asc"
         }
       },
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -219,7 +222,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "sum(max by(accountId) (last_over_time(node_execution_active_count{cluster=\"$cluster\", environment=\"$env\", accountId=~\"${accountId:pipe}\"}[5m])))",
+          "expr": "sum(max by(accountId) (last_over_time(node_execution_active_count{environment=\"$env\", accountId=~\"${accountId:pipe}\"}[5m])))",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "interval": "",
@@ -233,27 +236,23 @@
       "type": "timeseries"
     }
   ],
+  "preload": false,
   "refresh": "1m",
-  "schemaVersion": 39,
+  "schemaVersion": 40,
   "tags": [
     "cd",
     "pipeline",
-    "perAccount",
-    "0compatible"
+    "perAccount"
   ],
   "templating": {
     "list": [
       {
-        "hide": 0,
         "includeAll": false,
         "label": "DataSource",
-        "multi": false,
         "name": "dataSource",
         "options": [],
         "query": "prometheus",
-        "queryValue": "",
         "refresh": 1,
-        "skipUrlSync": false,
         "type": "datasource"
       },
       {
@@ -261,51 +260,26 @@
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(pipeline_execution_end_count_total{},cluster)",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Cluster",
-        "multi": false,
-        "name": "cluster",
-        "options": [],
-        "query": {
-          "query": "label_values(pipeline_execution_end_count_total{},cluster)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 2,
-        "type": "query"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
-        },
-        "definition": "label_values(pipeline_execution_end_count_total{cluster=\"$cluster\"},environment)",
-        "hide": 0,
+        "definition": "label_values(pipeline_execution_end_count_total,environment)",
         "includeAll": false,
         "label": "Env",
-        "multi": false,
         "name": "env",
         "options": [],
         "query": {
-          "query": "label_values(pipeline_execution_end_count_total{cluster=\"$cluster\"},environment)",
+          "query": "label_values(pipeline_execution_end_count_total,environment)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
+        "regex": "",
         "sort": 2,
         "type": "query"
       },
       {
-        "allValue": "",
         "datasource": {
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(pipeline_executions_gauge{cluster=\"$cluster\", environment=\"$env\"},accountId)",
-        "hide": 0,
+        "definition": "label_values(pipeline_executions_gauge{environment=\"$env\"},accountId)",
         "includeAll": true,
         "label": "Account ID",
         "multi": true,
@@ -313,19 +287,21 @@
         "options": [],
         "query": {
           "qryType": 1,
-          "query": "label_values(pipeline_executions_gauge{cluster=\"$cluster\", environment=\"$env\"},accountId)",
+          "query": "label_values(pipeline_executions_gauge{environment=\"$env\"},accountId)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
+        "regex": "",
         "type": "query"
       }
     ]
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-1h",
     "to": "now"
   },
-  "title": "Pipeline-Service - Execution Metrics per Account"
+  "timepicker": {},
+  "timezone": "",
+  "title": "Pipeline-Service - Execution Metrics per Account",
+  "weekStart": ""
 }

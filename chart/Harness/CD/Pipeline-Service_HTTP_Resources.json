@@ -24,9 +24,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 302,
+  "id": 310,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "datasource": {
@@ -46,6 +45,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -116,7 +116,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "max by(method, resource) (io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource!~\".*Trigger.*\"}) > ${latency_in_secs:value}",
+          "expr": "max by(method, resource) (io_harness_resources_responses_latency_snapshot_95thPercentile{environment=\"$env\", serviceName=\"pipeline-service\", resource!~\".*Trigger.*\"}) > ${latency_in_secs:value}",
           "legendFormat": "{{resource}} [{{method}}]",
           "range": true,
           "refId": "A"
@@ -136,7 +136,6 @@
       "id": 63,
       "panels": [],
       "repeat": "resource",
-      "repeatDirection": "h",
       "title": "$resource",
       "type": "row"
     },
@@ -160,6 +159,7 @@
             "axisPlacement": "auto",
             "axisSoftMax": 0.05,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -232,14 +232,13 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(method) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"$resource\", statusCode=~\"${status_code:pipe}\"}[5m]))\n/ \nsum by(method) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"$resource\"}[5m]))",
+          "expr": "sum by(method) (rate(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"$resource\", statusCode=~\"${status_code:pipe}\"}[5m]))\n/ \nsum by(method) (rate(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"$resource\"}[5m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
       "title": "Error Rate (%) - $status_code [5m]",
-      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -262,6 +261,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -332,14 +332,13 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(method) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"$resource\", statusCode=~\"${status_code:pipe}\"}[5m]))",
+          "expr": "sum by(method) (rate(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"$resource\", statusCode=~\"${status_code:pipe}\"}[5m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
       "title": "Error Rate (req/s) - $status_code [5m]",
-      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -361,6 +360,7 @@
             "axisPlacement": "auto",
             "axisSoftMax": 2,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -434,7 +434,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "max by(method) (io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"$resource\"})",
+          "expr": "max by(method) (io_harness_resources_responses_latency_snapshot_95thPercentile{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"$resource\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -463,6 +463,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -531,38 +532,33 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(method) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"$resource\"}[5m]))",
+          "expr": "sum by(method) (rate(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"$resource\"}[5m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
       "title": "Incoming APIs (req/s) [5m]",
-      "transformations": [],
       "type": "timeseries"
     }
   ],
+  "preload": false,
   "refresh": "1m",
-  "schemaVersion": 39,
+  "schemaVersion": 40,
   "tags": [
     "cd",
     "pipeline",
-    "http",
-    "0compatible"
+    "http"
   ],
   "templating": {
     "list": [
       {
-        "hide": 0,
         "includeAll": false,
         "label": "DataSource",
-        "multi": false,
         "name": "dataSource",
         "options": [],
         "query": "prometheus",
-        "queryValue": "",
         "refresh": 1,
-        "skipUrlSync": false,
         "type": "datasource"
       },
       {
@@ -570,40 +566,17 @@
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(io_harness_resources_responses_count,cluster)",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Cluster Name",
-        "multi": false,
-        "name": "cluster",
-        "options": [],
-        "query": {
-          "query": "label_values(io_harness_resources_responses_count,cluster)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
-        },
-        "definition": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\"},environment)",
-        "hide": 0,
+        "definition": "label_values(io_harness_resources_responses_count,environment)",
         "includeAll": false,
         "label": "Env",
-        "multi": false,
         "name": "env",
         "options": [],
         "query": {
-          "query": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\"},environment)",
+          "query": "label_values(io_harness_resources_responses_count,environment)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
+        "regex": "/^(?!localhost).*/",
         "sort": 2,
         "type": "query"
       },
@@ -612,19 +585,18 @@
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource!~\".*Trigger.*\"},resource)",
-        "hide": 0,
+        "definition": "label_values(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"pipeline-service\", resource!~\".*Trigger.*\"},resource)",
         "includeAll": true,
         "label": "Resource",
         "multi": true,
         "name": "resource",
         "options": [],
         "query": {
-          "query": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource!~\".*Trigger.*\"},resource)",
+          "query": "label_values(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"pipeline-service\", resource!~\".*Trigger.*\"},resource)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
+        "regex": "",
         "sort": 1,
         "type": "query"
       },
@@ -633,27 +605,24 @@
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\"},statusCode)",
-        "hide": 0,
+        "definition": "label_values(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"pipeline-service\"},statusCode)",
         "includeAll": true,
         "label": "Status Code",
         "multi": true,
         "name": "status_code",
         "options": [],
         "query": {
-          "query": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\"},statusCode)",
+          "query": "label_values(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"pipeline-service\"},statusCode)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
+        "regex": "",
         "sort": 2,
         "type": "query"
       },
       {
-        "hide": 0,
         "includeAll": false,
         "label": "Latency",
-        "multi": false,
         "name": "latency_in_secs",
         "options": [
           {
@@ -708,8 +677,6 @@
           }
         ],
         "query": "1s : 1,2s : 2,3s : 3,4s : 4,5s : 5,7s : 7,10s : 10,15s : 15,20s : 20,30s : 30",
-        "queryValue": "",
-        "skipUrlSync": false,
         "type": "custom"
       }
     ]
@@ -718,5 +685,8 @@
     "from": "now-6h",
     "to": "now"
   },
-  "title": "Pipeline-Service - HTTP Resources"
+  "timepicker": {},
+  "timezone": "",
+  "title": "Pipeline-Service - HTTP Resources",
+  "weekStart": ""
 }

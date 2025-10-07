@@ -24,7 +24,6 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 298,
   "links": [],
   "panels": [
     {
@@ -120,7 +119,6 @@
           "sort": "desc"
         }
       },
-      "pluginVersion": "11.3.0",
       "targets": [
         {
           "datasource": {
@@ -128,7 +126,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(environment) (jvm_memory_total_max{cluster=\"$cluster\", environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "expr": "sum by(pod) (jvm_memory_total_max{serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
           "legendFormat": "Max",
           "range": true,
           "refId": "A"
@@ -139,7 +137,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(environment) (jvm_memory_total_committed{cluster=\"$cluster\", environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "expr": "sum by(pod) (jvm_memory_total_committed{serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
           "hide": false,
           "legendFormat": "Committed",
           "range": true,
@@ -151,7 +149,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(environment) (jvm_memory_total_used{cluster=\"$cluster\", environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "expr": "sum by(pod) (jvm_memory_total_used{serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
           "hide": false,
           "legendFormat": "Used",
           "range": true,
@@ -241,7 +239,6 @@
           "sort": "desc"
         }
       },
-      "pluginVersion": "11.3.0",
       "targets": [
         {
           "datasource": {
@@ -249,7 +246,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(environment) (jvm_memory_non_heap_used{cluster=\"$cluster\", environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "expr": "sum by(pod) (jvm_memory_non_heap_used{serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
           "legendFormat": "Used",
           "range": true,
           "refId": "A"
@@ -260,7 +257,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(environment) (jvm_memory_non_heap_committed{cluster=\"$cluster\", environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "expr": "sum by(pod) (jvm_memory_non_heap_committed{serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
           "hide": false,
           "legendFormat": "Committed",
           "range": true,
@@ -350,7 +347,6 @@
           "sort": "desc"
         }
       },
-      "pluginVersion": "11.3.0",
       "targets": [
         {
           "datasource": {
@@ -358,7 +354,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(environment) (jvm_memory_heap_max{cluster=\"$cluster\", environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "expr": "sum by(pod) (jvm_memory_heap_max{serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
           "legendFormat": "Max",
           "range": true,
           "refId": "A"
@@ -369,7 +365,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(environment) (jvm_memory_heap_committed{cluster=\"$cluster\", environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "expr": "sum by(pod) (jvm_memory_heap_committed{serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
           "hide": false,
           "legendFormat": "Committed",
           "range": true,
@@ -381,7 +377,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(environment) (jvm_memory_heap_used{cluster=\"$cluster\", environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "expr": "sum by(pod) (jvm_memory_heap_used{serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
           "hide": false,
           "legendFormat": "Used",
           "range": true,
@@ -471,7 +467,6 @@
           "sort": "desc"
         }
       },
-      "pluginVersion": "11.3.0",
       "targets": [
         {
           "datasource": {
@@ -479,7 +474,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(environment) (jvm_memory_pools_Metaspace_used{cluster=\"$cluster\", environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "expr": "sum by(pod) (jvm_memory_pools_Metaspace_used{serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
           "legendFormat": "Used",
           "range": true,
           "refId": "A"
@@ -490,7 +485,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(environment) (jvm_memory_pools_Metaspace_committed{cluster=\"$cluster\", environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "expr": "sum by(pod) (jvm_memory_pools_Metaspace_committed{serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
           "hide": false,
           "legendFormat": "Committed",
           "range": true,
@@ -593,7 +588,6 @@
           "sort": "desc"
         }
       },
-      "pluginVersion": "11.3.0",
       "targets": [
         {
           "datasource": {
@@ -601,7 +595,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(environment) (jvm_threads_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "expr": "sum by(pod) (jvm_threads_count{serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
           "legendFormat": "Threads count",
           "range": true,
           "refId": "A"
@@ -612,7 +606,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(environment) (jvm_threads_daemon_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "expr": "sum by(pod) (jvm_threads_terminated_count{serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
           "hide": false,
           "legendFormat": "Daemon Threads Count",
           "range": true,
@@ -624,7 +618,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(environment) (jvm_threads_peak_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "expr": "sum by(pod) (jvm_threads_new_count{serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
           "hide": false,
           "legendFormat": "Peak Threads Count",
           "range": true,
@@ -714,7 +708,6 @@
           "sort": "desc"
         }
       },
-      "pluginVersion": "11.3.0",
       "targets": [
         {
           "datasource": {
@@ -722,7 +715,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(environment) (jvm_threads_runnable_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "expr": "sum by(pod) (jvm_threads_runnable_count{serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
           "legendFormat": "Runnable",
           "range": true,
           "refId": "A"
@@ -733,7 +726,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(environment) (jvm_threads_timed_waiting_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "expr": "sum by(pod) (jvm_threads_timed_waiting_count{serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
           "hide": false,
           "legendFormat": "Timed Waiting",
           "range": true,
@@ -745,7 +738,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(environment) (jvm_threads_waiting_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "expr": "sum by(pod) (jvm_threads_waiting_count{serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
           "hide": false,
           "legendFormat": "Waiting",
           "range": true,
@@ -772,6 +765,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -802,7 +796,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -840,7 +835,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(environment) (jvm_threads_blocked_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "expr": "sum by(pod) (jvm_threads_blocked_count{serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
           "legendFormat": "Blocked",
           "range": true,
           "refId": "A"
@@ -891,6 +886,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -921,7 +917,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -959,7 +956,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(environment) (org_eclipse_jetty_util_thread_QueuedThreadPool_dw_size{cluster=\"$cluster\", environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "expr": "sum by(pod) (org_eclipse_jetty_util_thread_QueuedThreadPool_dw_size{serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
           "legendFormat": "Threads servicing requests",
           "range": true,
           "refId": "A"
@@ -985,6 +982,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -1015,7 +1013,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1053,7 +1052,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "avg by(environment) (org_eclipse_jetty_util_thread_QueuedThreadPool_dw_utilization{cluster=\"$cluster\", environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "expr": "avg by(pod) (org_eclipse_jetty_util_thread_QueuedThreadPool_dw_utilization{serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
           "legendFormat": "Thread Utilization %",
           "range": true,
           "refId": "A"
@@ -1079,6 +1078,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -1109,7 +1109,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1147,7 +1148,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(environment) (org_eclipse_jetty_util_thread_QueuedThreadPool_dw_jobs{cluster=\"$cluster\", environment=\"$env\", serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
+          "expr": "sum by(pod) (org_eclipse_jetty_util_thread_QueuedThreadPool_dw_jobs{serviceName=\"$service\", job=\"$job\", pod=~\"$pod\"})",
           "legendFormat": "Queued Jobs waiting for DW Thread",
           "range": true,
           "refId": "A"
@@ -1162,12 +1163,20 @@
   "schemaVersion": 40,
   "tags": [
     "cd",
-    "jvm",
-    "0compatible"
+    "jvm"
   ],
   "templating": {
     "list": [
       {
+        "current": {
+          "selected": false,
+          "text": "prometheus",
+          "value": "prometheus"
+        },
+        "hide": 0,
+        "multi": false,
+        "queryValue": "",
+        "skipUrlSync": false,
         "includeAll": false,
         "label": "DataSource",
         "name": "dataSource",
@@ -1177,41 +1186,10 @@
         "type": "datasource"
       },
       {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
+        "current": {
+          "text": "cg-manager",
+          "value": "cg-manager"
         },
-        "definition": "label_values(jvm_memory_total_max,cluster)",
-        "includeAll": false,
-        "label": "Cluster",
-        "name": "cluster",
-        "options": [],
-        "query": {
-          "query": "label_values(jvm_memory_total_max,cluster)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "type": "query"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
-        },
-        "definition": "label_values(jvm_memory_total_max,environment)",
-        "includeAll": false,
-        "label": "Env",
-        "name": "env",
-        "options": [],
-        "query": {
-          "query": "label_values(jvm_memory_total_max,environment)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "sort": 2,
-        "type": "query"
-      },
-      {
         "datasource": {
           "type": "prometheus",
           "uid": "${dataSource}"
@@ -1226,43 +1204,54 @@
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
+        "regex": "/(cg-manager|ng-manager|pipeline-service|template-service|debezium-service|cv-nextgen|migrator-service)/",
         "sort": 1,
         "type": "query"
       },
       {
+        "current": {
+          "text": "harness-manager-iterator",
+          "value": "harness-manager-iterator"
+        },
         "datasource": {
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(jvm_memory_total_max{cluster=\"${cluster}\", environment=\"$env\", serviceName=\"$service\"},job)",
+        "definition": "label_values(jvm_memory_total_max{serviceName=\"$service\"},job)",
         "includeAll": false,
         "label": "Job",
         "name": "job",
         "options": [],
         "query": {
-          "query": "label_values(jvm_memory_total_max{cluster=\"${cluster}\", environment=\"$env\", serviceName=\"$service\"},job)",
+          "query": "label_values(jvm_memory_total_max{serviceName=\"$service\"},job)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
+        "regex": "",
         "sort": 2,
         "type": "query"
       },
       {
+        "current": {
+          "text": "All",
+          "value": "$__all"
+        },
         "datasource": {
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(jvm_memory_total_max{cluster=\"${cluster}\", environment=\"$env\", serviceName=\"$service\", job=\"$job\"},pod)",
+        "definition": "label_values(jvm_memory_total_max{serviceName=\"$service\", job=\"$job\"},pod)",
         "includeAll": true,
         "label": "Pod",
         "multi": true,
         "name": "pod",
         "options": [],
         "query": {
-          "query": "label_values(jvm_memory_total_max{cluster=\"${cluster}\", environment=\"$env\", serviceName=\"$service\", job=\"$job\"},pod)",
+          "query": "label_values(jvm_memory_total_max{serviceName=\"$service\", job=\"$job\"},pod)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
+        "regex": "",
         "sort": 1,
         "type": "query"
       }
@@ -1272,5 +1261,8 @@
     "from": "now-6h",
     "to": "now"
   },
-  "title": "JVM Observability"
+  "timepicker": {},
+  "timezone": "",
+  "title": "JVM Observability",
+  "weekStart": ""
 }
