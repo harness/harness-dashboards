@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 476,
+  "id": 573,
   "links": [],
   "panels": [
     {
@@ -126,7 +126,7 @@
           "sort": "asc"
         }
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -135,7 +135,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "sum(max by(stepType, module) (last_over_time(node_execution_active_count_per_module_and_stepType{cluster=\"$cluster\", environment=\"$env\", stepType!~\"NG_SECTION|NG_SECTION_WITH_ROLLBACK_INFO|STAGES_STEP|PIPELINE_SECTION|APPROVAL_STAGE|NG_SECTION_STEP|NG_SPEC_STEP|DEPLOYMENT_STAGE_STEP|IntegrationStageStepPMS|CISPECPMS|NG_EXECUTION|NG_FORK|COMBINED_ROLLBACK_OPTIONAL_CHILD_CHAIN|ROLLBACK_OPTIONAL_CHILD_CHAIN|CUSTOM_STAGE|STEP_GROUP\"}[5m])))",
+          "expr": "sum(max by(stepType, module) (last_over_time(node_execution_active_count_per_module_and_stepType{environment=\"$env\", stepType!~\"NG_SECTION|NG_SECTION_WITH_ROLLBACK_INFO|STAGES_STEP|PIPELINE_SECTION|APPROVAL_STAGE|NG_SECTION_STEP|NG_SPEC_STEP|DEPLOYMENT_STAGE_STEP|IntegrationStageStepPMS|CISPECPMS|NG_EXECUTION|NG_FORK|COMBINED_ROLLBACK_OPTIONAL_CHILD_CHAIN|ROLLBACK_OPTIONAL_CHILD_CHAIN|CUSTOM_STAGE|STEP_GROUP\"}[5m])))",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "interval": "",
@@ -210,7 +210,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -220,7 +220,7 @@
           "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "delta(max(rate(pipeline_executions_gauge{cluster=\"$cluster\", environment=\"$env\"}[5m]))[15m:])",
+          "expr": "delta(max(rate(pipeline_executions_gauge{environment=\"$env\"}[5m]))[15m:])",
           "format": "time_series",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
@@ -282,7 +282,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -291,7 +291,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum(avg by(accountId) (last_over_time(pipeline_executions_gauge{cluster=\"$cluster\", environment=\"$env\"}[1m]))) OR on() vector(0)",
+          "expr": "sum(avg by(accountId) (last_over_time(pipeline_executions_gauge{environment=\"$env\"}[1m]))) OR on() vector(0)",
           "legendFormat": "Running Executions",
           "range": true,
           "refId": "A"
@@ -371,7 +371,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -381,7 +381,7 @@
           "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "sum(delta(stuck_node_executions_counter_total{cluster=\"$cluster\", namespace=\"harness-nextgen-free\"}[10m]))",
+          "expr": "sum(delta(stuck_node_executions_counter_total{namespace=\"harness-nextgen-free\"}[10m]))",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "Running Executions",
@@ -465,7 +465,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -474,7 +474,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "ceil(sum by(environment) (delta(pipeline_execution_end_count_total{cluster=\"$cluster\", environment=\"$env\", status=~\"SUCCEEDED|IGNORE_FAILED\", edition=\"ENTERPRISE\"}[10m]))) OR on() vector(0)",
+          "expr": "ceil(sum by(environment) (delta(pipeline_execution_end_count_total{environment=\"$env\", status=~\"SUCCEEDED|IGNORE_FAILED\", edition=\"ENTERPRISE\"}[10m]))) OR on() vector(0)",
           "legendFormat": "Success Executions",
           "range": true,
           "refId": "A"
@@ -486,7 +486,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "ceil(sum by(environment) (delta(pipeline_execution_end_count_total{cluster=\"$cluster\", environment=\"$env\", edition=\"ENTERPRISE\"}[10m]))) OR on() vector(0)",
+          "expr": "ceil(sum by(environment) (delta(pipeline_execution_end_count_total{environment=\"$env\", edition=\"ENTERPRISE\"}[10m]))) OR on() vector(0)",
           "hide": false,
           "legendFormat": "Total Executions",
           "range": true,
@@ -600,7 +600,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -610,7 +610,7 @@
           "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "ceil(sum by(environment) (delta(pipeline_execution_end_count_total{cluster=\"$cluster\", environment=\"$env\", status=~\"FAILED|EXPIRED|ABORTED\", edition=\"ENTERPRISE\"}[10m]))) OR on() vector(0)",
+          "expr": "ceil(sum by(environment) (delta(pipeline_execution_end_count_total{environment=\"$env\", status=~\"FAILED|EXPIRED|ABORTED\", edition=\"ENTERPRISE\"}[10m]))) OR on() vector(0)",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "Failed Executions",
@@ -625,7 +625,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "ceil(sum by(environment) (delta(pipeline_execution_end_count_total{cluster=\"$cluster\", environment=\"$env\", edition=\"ENTERPRISE\"}[10m]))) OR on() vector(0)",
+          "expr": "ceil(sum by(environment) (delta(pipeline_execution_end_count_total{environment=\"$env\", edition=\"ENTERPRISE\"}[10m]))) OR on() vector(0)",
           "hide": false,
           "legendFormat": "Total Executions",
           "range": true,
@@ -724,7 +724,7 @@
               }
             ]
           },
-          "unit": "s"
+          "unit": "none"
         },
         "overrides": [
           {
@@ -744,30 +744,6 @@
                 ]
               }
             ]
-          },
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "Average plan creation time"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
           }
         ]
       },
@@ -777,23 +753,25 @@
         "x": 0,
         "y": 9
       },
-      "id": 47,
+      "id": 82,
       "interval": "120",
       "options": {
         "legend": {
           "calcs": [
-            "max"
+            "lastNotNull"
           ],
           "displayMode": "table",
           "placement": "right",
-          "showLegend": true
+          "showLegend": true,
+          "sortBy": "Last *",
+          "sortDesc": true
         },
         "tooltip": {
           "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -801,13 +779,17 @@
             "uid": "${dataSource}"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "sum by(environment) (delta(plan_creation_time_sum{cluster=\"$cluster\", environment=\"$env\"}[10m])) / 1000",
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by(module) (delta(plan_creation_time_count{environment=\"$env\", status=\"FAILED\"}[10m]))",
+          "format": "time_series",
           "fullMetaSearch": false,
+          "hide": false,
           "includeNullMetadata": true,
-          "legendFormat": "Total plan creation time",
+          "instant": false,
+          "legendFormat": "{{module}}",
           "range": true,
-          "refId": "A",
+          "refId": "B",
           "useBackend": false
         },
         {
@@ -816,46 +798,22 @@
             "uid": "${dataSource}"
           },
           "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "sum by(environment) (delta(plan_creation_time_count{cluster=\"$cluster\", environment=\"$env\"}[10m]))",
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum by(environment) (delta(plan_creation_time_count{environment=\"$env\", status=\"FAILED\"}[10m]))",
+          "format": "time_series",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
-          "legendFormat": "Total plan creation requests",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "Total",
           "range": true,
-          "refId": "B",
+          "refId": "A",
           "useBackend": false
         }
       ],
-      "title": "Plan creation time",
-      "transformations": [
-        {
-          "id": "calculateField",
-          "options": {
-            "alias": "Average plan creation time",
-            "binary": {
-              "left": {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Total plan creation time"
-                }
-              },
-              "operator": "/",
-              "right": {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Total plan creation requests"
-                }
-              }
-            },
-            "mode": "binary",
-            "reduce": {
-              "reducer": "sum"
-            },
-            "replaceFields": true
-          }
-        }
-      ],
+      "title": "Failed Plan Creation Requests per module (last 10m)",
       "type": "timeseries"
     },
     {
@@ -972,7 +930,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -981,7 +939,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(serviceName) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=~\"ExecutionDetailsResource|PlanExecutionResource\", statusCode=~\"5xx\"}[5m])) OR on() vector(0)",
+          "expr": "sum by(serviceName) (rate(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"pipeline-service\", resource=~\"ExecutionDetailsResource|PlanExecutionResource\", statusCode=~\"5xx\"}[5m])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "5xx",
@@ -995,7 +953,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(serviceName) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=~\"ExecutionDetailsResource|PlanExecutionResource\"}[5m]))",
+          "expr": "sum by(serviceName) (rate(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"pipeline-service\", resource=~\"ExecutionDetailsResource|PlanExecutionResource\"}[5m]))",
           "hide": false,
           "instant": false,
           "legendFormat": "Total",
@@ -1162,7 +1120,7 @@
         "sizing": "auto",
         "valueMode": "color"
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -1171,7 +1129,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"ExecutionDetailsResource\"}[5m])) OR on() vector(0)",
+          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"ExecutionDetailsResource\"}[5m])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "5m",
@@ -1185,7 +1143,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"ExecutionDetailsResource\"}[30m])) OR on() vector(0)",
+          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"ExecutionDetailsResource\"}[30m])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "30m",
@@ -1199,7 +1157,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"ExecutionDetailsResource\"}[1h])) OR on() vector(0)",
+          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"ExecutionDetailsResource\"}[1h])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "1h",
@@ -1213,7 +1171,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"ExecutionDetailsResource\"}[3h])) OR on() vector(0)",
+          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"ExecutionDetailsResource\"}[3h])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "3h",
@@ -1227,7 +1185,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"ExecutionDetailsResource\"}[6h])) OR on() vector(0)",
+          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"ExecutionDetailsResource\"}[6h])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "6h",
@@ -1239,12 +1197,207 @@
       "type": "bargauge"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${dataSource}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line+area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 120
+              },
+              {
+                "color": "red",
+                "value": 240
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Execution metrics",
+                    "url": "d/iy-7pykSk/pipeline-service-execution-metrics?orgId=1&var-dataSource=${dataSource}&var-env=${env}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "Average plan creation time"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 17
+      },
+      "id": 47,
+      "interval": "120",
+      "options": {
+        "legend": {
+          "calcs": [
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.3.6+security-01",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "sum by(environment) (delta(plan_creation_time_sum{environment=\"$env\"}[10m])) / 1000",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "Total plan creation time",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "sum by(environment) (delta(plan_creation_time_count{environment=\"$env\"}[10m]))",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
+          "legendFormat": "Total plan creation requests",
+          "range": true,
+          "refId": "B",
+          "useBackend": false
+        }
+      ],
+      "title": "Plan creation time",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Average plan creation time",
+            "binary": {
+              "left": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Total plan creation time"
+                }
+              },
+              "operator": "/",
+              "right": {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Total plan creation requests"
+                }
+              }
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 17
+        "y": 25
       },
       "id": 10,
       "panels": [],
@@ -1346,7 +1499,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 18
+        "y": 26
       },
       "id": 2,
       "options": {
@@ -1366,7 +1519,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -1375,7 +1528,7 @@
           },
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "sum by(serviceName) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"PipelineResource\", statusCode=~\"5xx\"}[5m])) OR on() vector(0)",
+          "expr": "sum by(serviceName) (rate(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"PipelineResource\", statusCode=~\"5xx\"}[5m])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "5xx",
@@ -1389,7 +1542,7 @@
           },
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "sum by(serviceName) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"PipelineResource\"}[5m]))",
+          "expr": "sum by(serviceName) (rate(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"PipelineResource\"}[5m]))",
           "hide": false,
           "instant": false,
           "legendFormat": "Total",
@@ -1511,7 +1664,7 @@
         "h": 4,
         "w": 4,
         "x": 4,
-        "y": 18
+        "y": 26
       },
       "id": 6,
       "links": [
@@ -1555,7 +1708,7 @@
         "sizing": "auto",
         "valueMode": "color"
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -1564,7 +1717,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"PipelineResource\", method=~\"getListOfPipelines|getPipelineSummary|getPipelineByIdentifier\"}[5m])) OR on() vector(0)",
+          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"PipelineResource\", method=~\"getListOfPipelines|getPipelineSummary|getPipelineByIdentifier\"}[5m])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "5m",
@@ -1578,7 +1731,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"PipelineResource\", method=~\"getListOfPipelines|getPipelineSummary|getPipelineByIdentifier\"}[30m])) OR on() vector(0)",
+          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"PipelineResource\", method=~\"getListOfPipelines|getPipelineSummary|getPipelineByIdentifier\"}[30m])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "30m",
@@ -1592,7 +1745,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"PipelineResource\", method=~\"getListOfPipelines|getPipelineSummary|getPipelineByIdentifier\"}[1h])) OR on() vector(0)",
+          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"PipelineResource\", method=~\"getListOfPipelines|getPipelineSummary|getPipelineByIdentifier\"}[1h])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "1h",
@@ -1606,7 +1759,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"PipelineResource\", method=~\"getListOfPipelines|getPipelineSummary|getPipelineByIdentifier\"}[3h])) OR on() vector(0)",
+          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"PipelineResource\", method=~\"getListOfPipelines|getPipelineSummary|getPipelineByIdentifier\"}[3h])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "3h",
@@ -1620,7 +1773,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"PipelineResource\", method=~\"getListOfPipelines|getPipelineSummary|getPipelineByIdentifier\"}[6h])) OR on() vector(0)",
+          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"PipelineResource\", method=~\"getListOfPipelines|getPipelineSummary|getPipelineByIdentifier\"}[6h])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "6h",
@@ -1725,7 +1878,7 @@
         "h": 4,
         "w": 4,
         "x": 0,
-        "y": 22
+        "y": 30
       },
       "id": 3,
       "options": {
@@ -1745,7 +1898,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -1754,7 +1907,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(serviceName) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"InputSetResourcePMS\", statusCode=~\"5xx\"}[5m])) OR on() vector(0)",
+          "expr": "sum by(serviceName) (rate(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"InputSetResourcePMS\", statusCode=~\"5xx\"}[5m])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "5xx",
@@ -1768,7 +1921,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(serviceName) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"InputSetResourcePMS\"}[5m]))",
+          "expr": "sum by(serviceName) (rate(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"InputSetResourcePMS\"}[5m]))",
           "hide": false,
           "instant": false,
           "legendFormat": "Total",
@@ -1881,7 +2034,7 @@
         "h": 4,
         "w": 4,
         "x": 4,
-        "y": 22
+        "y": 30
       },
       "id": 44,
       "links": [
@@ -1920,7 +2073,7 @@
         "sizing": "auto",
         "valueMode": "color"
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -1929,7 +2082,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"InputSetResourcePMS\", method=~\"getInputSet|listInputSetsForPipeline\"}[5m])) OR on() vector(0)",
+          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"InputSetResourcePMS\", method=~\"getInputSet|listInputSetsForPipeline\"}[5m])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "5m",
@@ -1943,7 +2096,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"InputSetResourcePMS\", method=~\"getInputSet|listInputSetsForPipeline\"}[30m])) OR on() vector(0)",
+          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"InputSetResourcePMS\", method=~\"getInputSet|listInputSetsForPipeline\"}[30m])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "30m",
@@ -1957,7 +2110,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"InputSetResourcePMS\", method=~\"getInputSet|listInputSetsForPipeline\"}[1h])) OR on() vector(0)",
+          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"InputSetResourcePMS\", method=~\"getInputSet|listInputSetsForPipeline\"}[1h])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "1h",
@@ -1971,7 +2124,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"InputSetResourcePMS\", method=~\"getInputSet|listInputSetsForPipeline\"}[3h])) OR on() vector(0)",
+          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"InputSetResourcePMS\", method=~\"getInputSet|listInputSetsForPipeline\"}[3h])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "3h",
@@ -1985,7 +2138,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"InputSetResourcePMS\", method=~\"getInputSet|listInputSetsForPipeline\"}[6h])) OR on() vector(0)",
+          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"InputSetResourcePMS\", method=~\"getInputSet|listInputSetsForPipeline\"}[6h])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "6h",
@@ -2002,7 +2155,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 26
+        "y": 34
       },
       "id": 63,
       "panels": [],
@@ -2057,7 +2210,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -2073,7 +2227,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 27
+        "y": 35
       },
       "id": 66,
       "options": {
@@ -2090,7 +2244,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -2099,7 +2253,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum by(environment) (delta(iterator_delay_sum{cluster=\"$cluster\", environment=\"$env\", iteratorName=\"Custom-WebhookEventProcessor\"}[5m]))\n/\nsum by(environment) (delta(iterator_delay_count{cluster=\"$cluster\", environment=\"$env\", iteratorName=\"Custom-WebhookEventProcessor\"}[5m]))",
+          "expr": "sum by(environment) (delta(iterator_delay_sum{environment=\"$env\", iteratorName=\"Custom-WebhookEventProcessor\"}[5m]))\n/\nsum by(environment) (delta(iterator_delay_count{environment=\"$env\", iteratorName=\"Custom-WebhookEventProcessor\"}[5m]))",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "{{environment}}",
@@ -2172,7 +2326,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -2203,7 +2358,7 @@
         "h": 4,
         "w": 4,
         "x": 12,
-        "y": 27
+        "y": 35
       },
       "id": 58,
       "options": {
@@ -2223,7 +2378,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -2232,7 +2387,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(job) (rate(trigger_failure_count_total{job=\"pipeline-service-prod\", environment=\"prod\"}[5m])) OR on() vector(0)",
+          "expr": "sum by(container) (rate(trigger_failure_count_total{container=\"pipeline-service\", environment=\"$env\"}[5m])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "5xx",
@@ -2246,7 +2401,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(job) (rate(trigger_activation_count_total{job=\"pipeline-service-prod\", environment=\"prod\"}[5m]))",
+          "expr": "sum by(container) (rate(trigger_activation_count_total{container=\"pipeline-service\", environment=\"$env\"}[5m]))",
           "hide": false,
           "instant": false,
           "legendFormat": "ALL",
@@ -2327,7 +2482,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -2358,7 +2514,7 @@
         "h": 4,
         "w": 4,
         "x": 16,
-        "y": 27
+        "y": 35
       },
       "id": 49,
       "links": [
@@ -2392,7 +2548,7 @@
         "sizing": "auto",
         "valueMode": "color"
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -2401,7 +2557,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"NGTriggerResource\"}[5m])) OR on() vector(0)",
+          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"NGTriggerResource\"}[5m])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "5m",
@@ -2415,7 +2571,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"NGTriggerResource\"}[30m])) OR on() vector(0)",
+          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"NGTriggerResource\"}[30m])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "30m",
@@ -2429,7 +2585,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"NGTriggerResource\"}[1h])) OR on() vector(0)",
+          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"NGTriggerResource\"}[1h])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "1h",
@@ -2443,7 +2599,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"NGTriggerResource\"}[3h])) OR on() vector(0)",
+          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"NGTriggerResource\"}[3h])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "3h",
@@ -2457,7 +2613,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"NGTriggerResource\"}[6h])) OR on() vector(0)",
+          "expr": "avg(avg_over_time(io_harness_resources_responses_latency_snapshot_95thPercentile{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"NGTriggerResource\"}[6h])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "6h",
@@ -2530,7 +2686,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -2561,7 +2718,7 @@
         "h": 4,
         "w": 4,
         "x": 12,
-        "y": 31
+        "y": 39
       },
       "id": 51,
       "options": {
@@ -2581,7 +2738,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -2590,7 +2747,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(serviceName) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"NGTriggerResource\", statusCode=~\"5xx\"}[5m])) OR on() vector(0)",
+          "expr": "sum by(serviceName) (rate(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"NGTriggerResource\", statusCode=~\"5xx\"}[5m])) OR on() vector(0)",
           "hide": false,
           "instant": false,
           "legendFormat": "5xx",
@@ -2604,7 +2761,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(serviceName) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=\"NGTriggerResource\"}[5m]))",
+          "expr": "sum by(serviceName) (rate(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"pipeline-service\", resource=\"NGTriggerResource\"}[5m]))",
           "hide": false,
           "instant": false,
           "legendFormat": "Total",
@@ -2696,7 +2853,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -2727,7 +2885,7 @@
         "h": 4,
         "w": 4,
         "x": 16,
-        "y": 31
+        "y": 39
       },
       "id": 79,
       "options": {
@@ -2747,7 +2905,7 @@
         "textMode": "value",
         "wideLayout": true
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -2757,7 +2915,7 @@
           "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(serviceName) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"ng-manager\", resource=\"NgWebhookResource\", statusCode=~\"5xx\"}[5m])) OR vector(0)",
+          "expr": "sum by(serviceName) (rate(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"ng-manager\", resource=\"NgWebhookResource\", statusCode=~\"5xx\"}[5m])) OR vector(0)",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -2774,7 +2932,7 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "sum by(serviceName) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"ng-manager\", resource=\"NgWebhookResource\"}[5m]))",
+          "expr": "sum by(serviceName) (rate(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"ng-manager\", resource=\"NgWebhookResource\"}[5m]))",
           "hide": false,
           "instant": false,
           "legendFormat": "Total",
@@ -2852,7 +3010,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           }
@@ -2888,7 +3047,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 35
+        "y": 43
       },
       "id": 78,
       "options": {
@@ -2908,7 +3067,7 @@
           "sort": "desc"
         }
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -2918,7 +3077,7 @@
           "disableTextWrap": false,
           "editorMode": "builder",
           "exemplar": false,
-          "expr": "sum by(triggerType) (max by(triggerType, accountId) (last_over_time(pipeline_executions_gauge_per_trigger_type{cluster=\"$cluster\", environment=\"$env\"}[5m])))",
+          "expr": "sum by(triggerType) (max by(triggerType, accountId) (last_over_time(pipeline_executions_gauge_per_trigger_type{environment=\"$env\"}[5m])))",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -2936,7 +3095,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "sum(max by(accountId, triggerType) (last_over_time(pipeline_executions_gauge_per_trigger_type{cluster=\"$cluster\", environment=\"$env\"}[5m])))",
+          "expr": "sum(max by(accountId, triggerType) (last_over_time(pipeline_executions_gauge_per_trigger_type{environment=\"$env\"}[5m])))",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -2998,7 +3157,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3013,7 +3173,7 @@
         "h": 7,
         "w": 12,
         "x": 0,
-        "y": 43
+        "y": 51
       },
       "id": 65,
       "options": {
@@ -3030,7 +3190,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -3039,7 +3199,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum by(environment) (delta(iterator_delay_sum{cluster=\"$cluster\", environment=\"$env\", iteratorName=\"WebhookEventProcessor\"}[5m]))\n/\nsum by(environment) (delta(iterator_delay_count{cluster=\"$cluster\", environment=\"$env\", iteratorName=\"WebhookEventProcessor\"}[5m]))",
+          "expr": "sum by(environment) (delta(iterator_delay_sum{environment=\"$env\", iteratorName=\"WebhookEventProcessor\"}[5m]))\n/\nsum by(environment) (delta(iterator_delay_count{environment=\"$env\", iteratorName=\"WebhookEventProcessor\"}[5m]))",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "{{environment}}",
@@ -3057,7 +3217,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 50
+        "y": 58
       },
       "id": 68,
       "panels": [],
@@ -3112,7 +3272,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3128,7 +3289,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 51
+        "y": 59
       },
       "id": 69,
       "options": {
@@ -3145,7 +3306,7 @@
           "sort": "desc"
         }
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -3154,7 +3315,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "max by(environment) (jvm_threads_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "expr": "max by(environment) (jvm_threads_count{environment=\"$env\", serviceName=\"pipeline-service\"})",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "Threads count",
@@ -3169,7 +3330,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "max by(environment) (jvm_threads_daemon_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", job=\"pipeline-service\"})",
+          "expr": "max by(environment) (jvm_threads_daemon_count{environment=\"$env\", serviceName=\"pipeline-service\", container=\"pipeline-service\"})",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -3185,7 +3346,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "builder",
-          "expr": "max by(environment) (jvm_threads_peak_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", job=\"pipeline-service\"})",
+          "expr": "max by(environment) (jvm_threads_peak_count{environment=\"$env\", serviceName=\"pipeline-service\", container=\"pipeline-service\"})",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -3246,7 +3407,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -3262,7 +3424,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 51
+        "y": 59
       },
       "id": 70,
       "options": {
@@ -3281,7 +3443,7 @@
           "sort": "asc"
         }
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -3291,7 +3453,7 @@
           "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "max by (threadName) (tasks_queued_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\"})",
+          "expr": "max by (threadName) (tasks_queued_count{environment=\"$env\", serviceName=\"pipeline-service\"})",
           "fullMetaSearch": false,
           "hide": false,
           "includeNullMetadata": true,
@@ -3310,7 +3472,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 59
+        "y": 67
       },
       "id": 71,
       "panels": [],
@@ -3365,7 +3527,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "#EAB839",
@@ -3404,7 +3567,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 60
+        "y": 68
       },
       "id": 72,
       "options": {
@@ -3424,7 +3587,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -3433,7 +3596,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "(sum by(streamName) (rate(event_queued_time_sum{cluster=\"$cluster\", job=\"pipeline-service\", environment=\"$env\"}[10m])) / 1000)\n/\n(sum by(streamName) (rate(event_queued_time_count{cluster=\"$cluster\", job=\"pipeline-service\", environment=\"$env\"}[10m])))",
+          "expr": "(sum by(streamName) (rate(event_queued_time_sum{container=\"pipeline-service\", environment=\"$env\"}[10m])) / 1000)\n/\n(sum by(streamName) (rate(event_queued_time_count{container=\"pipeline-service\", environment=\"$env\"}[10m])))",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "interval": "",
@@ -3494,7 +3657,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -3525,7 +3689,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 60
+        "y": 68
       },
       "id": 73,
       "options": {
@@ -3543,7 +3707,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -3552,7 +3716,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "(max by(eventType) (rate(event_process_time_sum{cluster=\"$cluster\", job=\"pipeline-service\", environment=\"$env\"}[1m])) / 1000)\n/\n(max by(eventType) (rate(event_process_time_count{cluster=\"$cluster\", job=\"pipeline-service\", environment=\"$env\"}[1m])))",
+          "expr": "(max by(eventType) (rate(event_process_time_sum{container=\"pipeline-service\", environment=\"$env\"}[1m])) / 1000)\n/\n(max by(eventType) (rate(event_process_time_count{container=\"pipeline-service\", environment=\"$env\"}[1m])))",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "{{eventType}}",
@@ -3655,7 +3819,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -3667,7 +3832,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 68
+        "y": 76
       },
       "id": 80,
       "options": {
@@ -3687,7 +3852,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -3697,7 +3862,7 @@
           "disableTextWrap": false,
           "editorMode": "code",
           "exemplar": false,
-          "expr": "max by(usecaseName) (rate(redis_streams_events_framework_deadletter_queue_size{cluster=\"$cluster\", namespace=\"$namespace\", usecaseName=~\"pipeline_initiate_node|pipeline_interrupt|pipeline_node_advise|pipeline_node_start|pipeline_node_progress|pipeline_node_resume|pms_orchestration_notify_event|pipeline_orchestration|pipeline_sdk_response|pipeline_sdk_spawn|pipeline_sdk_step_response\"}[5m]))",
+          "expr": "max by(usecaseName) (rate(redis_streams_events_framework_deadletter_queue_size{namespace=\"$namespace\", usecaseName=~\"pipeline_initiate_node|pipeline_interrupt|pipeline_node_advise|pipeline_node_start|pipeline_node_progress|pipeline_node_resume|pms_orchestration_notify_event|pipeline_orchestration|pipeline_sdk_response|pipeline_sdk_spawn|pipeline_sdk_step_response\"}[5m]))",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "{{usecaseName}}",
@@ -3720,6 +3885,10 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "text": "ProdSetup-ManagedPrometheus",
+          "value": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+        },
         "includeAll": false,
         "label": "DataSource",
         "name": "dataSource",
@@ -3733,31 +3902,13 @@
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(pipeline_execution_end_count_total{},cluster)",
-        "includeAll": false,
-        "label": "Cluster",
-        "name": "cluster",
-        "options": [],
-        "query": {
-          "query": "label_values(pipeline_execution_end_count_total{},cluster)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "sort": 2,
-        "type": "query"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
-        },
-        "definition": "label_values(pipeline_execution_end_count_total{cluster=\"$cluster\"},environment)",
+        "definition": "label_values(pipeline_execution_end_count_total,environment)",
         "includeAll": false,
         "label": "Env",
         "name": "env",
         "options": [],
         "query": {
-          "query": "label_values(pipeline_execution_end_count_total{cluster=\"$cluster\"},environment)",
+          "query": "label_values(pipeline_execution_end_count_total,environment)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -3787,5 +3938,9 @@
     "from": "now-1h",
     "to": "now"
   },
-  "title": "Pipeline-Service - Overview V2"
+  "timepicker": {},
+  "timezone": "",
+  "title": "Pipeline-Service - Overview V2",
+  "version": 4,
+  "weekStart": ""
 }

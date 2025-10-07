@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 391,
+  "id": 341,
   "links": [],
   "panels": [
     {
@@ -113,7 +113,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -210,7 +210,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -307,7 +307,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -407,7 +407,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.3.0",
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -434,9 +434,7 @@
     "ng-manager",
     "cg-manager",
     "pipeline",
-    "iterators",
-    "custom",
-    "0compatible"
+    "iterators"
   ],
   "templating": {
     "list": [
@@ -481,6 +479,7 @@
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
+        "regex": "",
         "sort": 2,
         "type": "query"
       },
@@ -509,5 +508,8 @@
     "from": "now-3h",
     "to": "now"
   },
-  "title": "Custom Metrics: Iterators"
+  "timepicker": {},
+  "timezone": "",
+  "title": "Custom Metrics: Iterators",
+  "weekStart": ""
 }

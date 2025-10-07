@@ -25,7 +25,6 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "datasource": {
@@ -38,11 +37,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -51,6 +52,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -73,7 +75,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -99,6 +101,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -110,7 +113,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(delta(delegate_registration_total{cluster=\"$cluster\", environment=\"$env\"}[10m]))",
+          "expr": "sum(delta(delegate_registration_total[10m]))",
           "legendFormat": "Delegate Registrations",
           "range": true,
           "refId": "A"
@@ -130,11 +133,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -143,6 +148,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -165,7 +171,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -191,6 +197,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -202,7 +209,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(delta(delegate_registration_failed_total{cluster=\"$cluster\", environment=\"$env\"}[10m]))",
+          "expr": "sum(delta(delegate_registration_failed_total[10m]))",
           "legendFormat": "Delegate Failed Registrations",
           "range": true,
           "refId": "A"
@@ -222,11 +229,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -235,6 +244,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -257,7 +267,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -283,6 +293,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -294,7 +305,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(delta(delegate_restarted_total{cluster=\"$cluster\", environment=\"$env\"}[10m]))",
+          "expr": "sum(delta(delegate_restarted_total[10m]))",
           "legendFormat": "Delegate Restarts",
           "range": true,
           "refId": "A"
@@ -314,11 +325,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -327,6 +340,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -349,7 +363,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -375,6 +389,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -386,7 +401,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "max(active_delegate_count{cluster=\"$cluster\", environment=\"$env\"})",
+          "expr": "max(active_delegate_count)",
           "legendFormat": "Active Delegate Count",
           "range": true,
           "refId": "A"
@@ -406,11 +421,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -419,6 +436,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -441,7 +459,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -467,6 +485,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -478,7 +497,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum(delta(delegate_disconnected_total{cluster=\"$cluster\", environment=\"$env\"}[10m]))",
+          "expr": "sum(delta(delegate_disconnected_total[10m]))",
           "legendFormat": "Delegate Disconnected",
           "range": true,
           "refId": "A"
@@ -498,11 +517,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -511,6 +532,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -533,7 +555,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -559,6 +581,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -570,7 +593,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "max by(environment) (delta(delegate_disconnected_total{cluster=\"$cluster\", environment=\"$env\", accountId=\"$accountId\"}[10m]))",
+          "expr": "sum(delta(delegate_disconnected_total{accountId=\"$accountId\"}[10m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -590,11 +613,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -603,6 +628,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -625,7 +651,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -651,6 +677,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -662,7 +689,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "count by(container_name) (websocket_connections_count{cluster=\"$cluster\", environment=\"$env\"})",
+          "expr": "count by(container_name) (websocket_connections_count)",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -682,11 +709,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -695,6 +724,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -717,7 +747,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -743,6 +773,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -754,7 +785,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "max(immutable_delegate{cluster=\"$cluster\", environment=\"$env\"})",
+          "expr": "max(immutable_delegate)",
           "legendFormat": "Immutable Delegate Count",
           "range": true,
           "refId": "A"
@@ -774,11 +805,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -787,6 +820,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -808,7 +842,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -834,6 +869,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -845,7 +881,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "count by(container_name) (active_delegate_process_count{cluster=\"$cluster\", environment=\"$env\"})",
+          "expr": "count by(container_name) (active_delegate_process_count)",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -865,11 +901,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -878,6 +916,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -899,7 +938,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": 0
               },
               {
                 "color": "red",
@@ -925,6 +965,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -936,7 +977,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "max(active_delegate_task{cluster=\"$cluster\", environment=\"$env\"})",
+          "expr": "max(active_delegate_task)",
           "legendFormat": "Active Delegate Tasks",
           "range": true,
           "refId": "A"
@@ -946,88 +987,51 @@
       "type": "timeseries"
     }
   ],
+  "preload": false,
   "refresh": "",
-  "schemaVersion": 38,
-  "style": "dark",
+  "schemaVersion": 41,
   "tags": [
     "0compatible"
   ],
   "templating": {
     "list": [
       {
+        "current": {
+          "selected": false,
+          "text": "prometheus",
+          "value": "prometheus"
+        },
         "hide": 0,
+        "multi": false,
+        "queryValue": "",
+        "skipUrlSync": false,
         "includeAll": false,
         "label": "DataSource",
-        "multi": false,
         "name": "dataSource",
         "options": [],
         "query": "prometheus",
-        "queryValue": "",
         "refresh": 1,
-        "skipUrlSync": false,
         "type": "datasource"
       },
       {
+        "current": {
+          "text": "bxgHsGNgToawSwIxgdtHYA",
+          "value": "bxgHsGNgToawSwIxgdtHYA"
+        },
         "datasource": {
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(active_delegate_count,cluster)",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Cluster",
-        "multi": false,
-        "name": "cluster",
-        "options": [],
-        "query": {
-          "query": "label_values(active_delegate_count,cluster)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
-        },
-        "definition": "label_values(active_delegate_count,environment)",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Env",
-        "multi": false,
-        "name": "env",
-        "options": [],
-        "query": {
-          "query": "label_values(active_delegate_count,environment)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
-        },
-        "definition": "label_values(delegate_registration_total{cluster=\"$cluster\", environment=\"$env\"},accountId)",
-        "hide": 0,
+        "definition": "label_values(delegate_registration_total,accountId)",
         "includeAll": false,
         "label": "AccountId",
-        "multi": false,
         "name": "accountId",
         "options": [],
         "query": {
-          "query": "label_values(delegate_registration_total{cluster=\"$cluster\", environment=\"$env\"},accountId)",
+          "query": "label_values(delegate_registration_total,accountId)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       }
     ]
@@ -1036,5 +1040,8 @@
     "from": "now-1h",
     "to": "now"
   },
-  "title": "Delegates Summary"
+  "timepicker": {},
+  "timezone": "",
+  "title": "Delegates Summary",
+  "uid": ""
 }

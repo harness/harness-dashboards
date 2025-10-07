@@ -24,9 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 306,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "datasource": {
@@ -40,11 +38,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -53,6 +53,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -114,7 +115,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "max by(method, resource) (io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"template-service\"}) > ${latency_in_secs:value}",
+          "expr": "max by(method, resource) (io_harness_resources_responses_latency_snapshot_95thPercentile{environment=\"$env\", serviceName=\"template-service\"}) > ${latency_in_secs:value}",
           "legendFormat": "{{resource}} [{{method}}]",
           "range": true,
           "refId": "A"
@@ -134,7 +135,6 @@
       "id": 63,
       "panels": [],
       "repeat": "resource",
-      "repeatDirection": "h",
       "title": "$resource",
       "type": "row"
     },
@@ -151,12 +151,14 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "axisSoftMax": 0.05,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -165,6 +167,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -198,7 +201,32 @@
           },
           "unit": "percentunit"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "getTemplateInputsYaml"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 9,
@@ -228,14 +256,13 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(method) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"template-service\", statusCode=\"${status_code:pipe}\", resource=\"$resource\"}[5m]))\n/ \nsum by(method) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"template-service\", resource=\"$resource\"}[5m]))",
+          "expr": "sum by(method) (rate(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"template-service\", statusCode=\"${status_code:pipe}\", resource=\"$resource\"}[5m])) / sum by(method) (rate(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"template-service\", resource=\"$resource\"}[5m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
       "title": "Error Rate (%) - $status_code [5m]",
-      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -252,11 +279,13 @@
             "seriesBy": "last"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -265,6 +294,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -326,14 +356,13 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(method) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"template-service\", statusCode=~\"${status_code:pipe}\", resource=\"$resource\"}[5m]))",
+          "expr": "sum by(method) (rate(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"template-service\", statusCode=~\"${status_code:pipe}\", resource=\"$resource\"}[5m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
       "title": "Error Rate (req/s) - $status_code [5m]",
-      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -348,12 +377,14 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "axisSoftMax": 2,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -362,6 +393,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -426,7 +458,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "max by(method) (io_harness_resources_responses_latency_snapshot_95thPercentile{cluster=\"$cluster\", environment=\"$env\", serviceName=\"template-service\", resource=\"$resource\"})",
+          "expr": "max by(method) (io_harness_resources_responses_latency_snapshot_95thPercentile{environment=\"$env\", serviceName=\"template-service\", resource=\"$resource\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -449,11 +481,13 @@
             "seriesBy": "last"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -462,6 +496,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -521,130 +556,132 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(method) (rate(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"template-service\", resource=\"$resource\"}[5m]))",
+          "expr": "sum by(method) (rate(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"template-service\", resource=\"$resource\"}[5m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
       "title": "Incoming APIs (req/s) [5m]",
-      "transformations": [],
       "type": "timeseries"
     }
   ],
+  "preload": false,
   "refresh": "1m",
-  "schemaVersion": 38,
-  "style": "dark",
+  "schemaVersion": 40,
   "tags": [
     "cd",
     "template",
-    "http",
-    "0compatible"
+    "http"
   ],
   "templating": {
     "list": [
       {
+        "current": {
+          "selected": false,
+          "text": "prometheus",
+          "value": "prometheus"
+        },
         "hide": 0,
+        "multi": false,
+        "queryValue": "",
+        "skipUrlSync": false,
         "includeAll": false,
         "label": "DataSource",
-        "multi": false,
         "name": "dataSource",
         "options": [],
         "query": "prometheus",
-        "queryValue": "",
         "refresh": 1,
-        "skipUrlSync": false,
         "type": "datasource"
       },
       {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
+        "current": {
+          "selected": false,
+          "text": "",
+          "value": ""
         },
-        "definition": "label_values(io_harness_resources_responses_count{serviceName=\"template-service\"},cluster)",
         "hide": 0,
-        "includeAll": false,
-        "label": "Cluster",
         "multi": false,
-        "name": "cluster",
-        "options": [],
-        "query": {
-          "query": "label_values(io_harness_resources_responses_count{serviceName=\"template-service\"},cluster)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
         "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
         "datasource": {
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\", serviceName=\"template-service\"},environment)",
-        "hide": 0,
+        "definition": "label_values(io_harness_resources_responses_count{serviceName=\"template-service\"},environment)",
         "includeAll": false,
         "label": "Env",
-        "multi": false,
         "name": "env",
         "options": [],
         "query": {
-          "query": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\", serviceName=\"template-service\"},environment)",
+          "query": "label_values(io_harness_resources_responses_count{serviceName=\"template-service\"},environment)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
+        "regex": "",
         "sort": 2,
         "type": "query"
       },
       {
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
         "datasource": {
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"template-service\"},resource)",
-        "hide": 0,
+        "definition": "label_values(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"template-service\"},resource)",
         "includeAll": true,
         "label": "Resource",
         "multi": true,
         "name": "resource",
         "options": [],
         "query": {
-          "query": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"template-service\"},resource)",
+          "query": "label_values(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"template-service\"},resource)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
+        "regex": "",
         "sort": 1,
         "type": "query"
       },
       {
+        "current": {
+          "text": [
+            "5xx"
+          ],
+          "value": [
+            "5xx"
+          ]
+        },
         "datasource": {
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"template-service\"},statusCode)",
-        "hide": 0,
+        "definition": "label_values(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"template-service\"},statusCode)",
         "includeAll": true,
         "label": "Status Code",
         "multi": true,
         "name": "status_code",
         "options": [],
         "query": {
-          "query": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"template-service\"},statusCode)",
+          "query": "label_values(io_harness_resources_responses_count{environment=\"$env\", serviceName=\"template-service\"},statusCode)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
+        "regex": "",
         "sort": 2,
         "type": "query"
       },
       {
-        "hide": 0,
+        "current": {
+          "text": "1",
+          "value": "1"
+        },
         "includeAll": false,
         "label": "Latency",
-        "multi": false,
         "name": "latency_in_secs",
         "options": [
           {
@@ -699,8 +736,6 @@
           }
         ],
         "query": "1s : 1,2s : 2,3s : 3,4s : 4,5s : 5,7s : 7,10s : 10,15s : 15,20s : 20,30s : 30",
-        "queryValue": "",
-        "skipUrlSync": false,
         "type": "custom"
       }
     ]
@@ -709,5 +744,8 @@
     "from": "now-6h",
     "to": "now"
   },
-  "title": "Template-Service - HTTP Resources"
+  "timepicker": {},
+  "timezone": "",
+  "title": "Template-Service - HTTP Resources",
+  "uid": ""
 }

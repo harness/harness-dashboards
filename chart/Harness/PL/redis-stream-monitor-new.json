@@ -11,12 +11,6 @@
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
-        "target": {
-          "limit": 100,
-          "matchAny": false,
-          "tags": [],
-          "type": "dashboard"
-        },
         "type": "dashboard"
       }
     ]
@@ -24,13 +18,10 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 495,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "datasource": {
-        "type": "prometheus",
         "uid": "${dataSource}"
       },
       "fieldConfig": {
@@ -79,7 +70,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -97,7 +88,6 @@
         "x": 0,
         "y": 0
       },
-      "id": 2,
       "options": {
         "legend": {
           "calcs": [
@@ -109,10 +99,6 @@
           "sortBy": "Max",
           "sortDesc": true
         },
-        "timezone": [
-          "",
-          ""
-        ],
         "tooltip": {
           "mode": "single",
           "sort": "none"
@@ -121,12 +107,11 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
             "uid": "${dataSource}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_memory_usage{cluster=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName) (redis_streams_memory_usage{})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "__auto",
@@ -139,7 +124,6 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
         "uid": "${dataSource}"
       },
       "fieldConfig": {
@@ -185,7 +169,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -203,7 +187,6 @@
         "x": 12,
         "y": 0
       },
-      "id": 3,
       "options": {
         "legend": {
           "calcs": [],
@@ -219,12 +202,11 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
             "uid": "${dataSource}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_memory_usage{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName) (redis_streams_memory_usage{usecaseName=\"$usecase\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "__auto",
@@ -237,7 +219,6 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
         "uid": "${dataSource}"
       },
       "fieldConfig": {
@@ -286,7 +267,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -304,7 +285,6 @@
         "x": 0,
         "y": 9
       },
-      "id": 4,
       "options": {
         "legend": {
           "calcs": [],
@@ -312,10 +292,6 @@
           "placement": "bottom",
           "showLegend": true
         },
-        "timezone": [
-          "",
-          ""
-        ],
         "tooltip": {
           "mode": "single",
           "sort": "none"
@@ -324,12 +300,11 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
             "uid": "${dataSource}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_length{cluster=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName) (redis_streams_length{})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "__auto",
@@ -342,7 +317,6 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
         "uid": "${dataSource}"
       },
       "fieldConfig": {
@@ -388,7 +362,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -406,7 +380,6 @@
         "x": 12,
         "y": 9
       },
-      "id": 5,
       "options": {
         "legend": {
           "calcs": [],
@@ -422,12 +395,11 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
             "uid": "${dataSource}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_length{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName) (redis_streams_length{usecaseName=\"$usecase\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "__auto",
@@ -440,7 +412,6 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
         "uid": "${dataSource}"
       },
       "fieldConfig": {
@@ -489,7 +460,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -507,7 +478,6 @@
         "x": 0,
         "y": 18
       },
-      "id": 6,
       "options": {
         "legend": {
           "calcs": [],
@@ -515,10 +485,6 @@
           "placement": "bottom",
           "showLegend": true
         },
-        "timezone": [
-          "",
-          ""
-        ],
         "tooltip": {
           "mode": "single",
           "sort": "none"
@@ -527,12 +493,11 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
             "uid": "${dataSource}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_average_message_size{cluster=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName) (redis_streams_average_message_size{})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "__auto",
@@ -545,7 +510,6 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
         "uid": "${dataSource}"
       },
       "fieldConfig": {
@@ -591,7 +555,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -609,7 +573,6 @@
         "x": 12,
         "y": 18
       },
-      "id": 7,
       "options": {
         "legend": {
           "calcs": [],
@@ -625,12 +588,11 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
             "uid": "${dataSource}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName) (redis_streams_average_message_size{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName) (redis_streams_average_message_size{usecaseName=\"$usecase\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "__auto",
@@ -643,7 +605,6 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
         "uid": "${dataSource}"
       },
       "fieldConfig": {
@@ -692,7 +653,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -710,7 +671,6 @@
         "x": 0,
         "y": 27
       },
-      "id": 8,
       "options": {
         "legend": {
           "calcs": [],
@@ -718,10 +678,6 @@
           "placement": "bottom",
           "showLegend": true
         },
-        "timezone": [
-          "",
-          ""
-        ],
         "tooltip": {
           "mode": "single",
           "sort": "none"
@@ -730,12 +686,11 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
             "uid": "${dataSource}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_behind_by_count{cluster=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_behind_by_count{})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
@@ -748,7 +703,6 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
         "uid": "${dataSource}"
       },
       "fieldConfig": {
@@ -794,7 +748,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -812,7 +766,6 @@
         "x": 12,
         "y": 27
       },
-      "id": 9,
       "options": {
         "legend": {
           "calcs": [],
@@ -828,12 +781,11 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
             "uid": "${dataSource}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_behind_by_count{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_behind_by_count{usecaseName=\"$usecase\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
@@ -846,7 +798,6 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
         "uid": "${dataSource}"
       },
       "fieldConfig": {
@@ -895,7 +846,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -913,7 +864,6 @@
         "x": 0,
         "y": 36
       },
-      "id": 10,
       "options": {
         "legend": {
           "calcs": [],
@@ -921,10 +871,6 @@
           "placement": "bottom",
           "showLegend": true
         },
-        "timezone": [
-          "",
-          ""
-        ],
         "tooltip": {
           "mode": "single",
           "sort": "none"
@@ -933,12 +879,11 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
             "uid": "${dataSource}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_pending_count{cluster=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_pending_count{})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
@@ -951,7 +896,6 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
         "uid": "${dataSource}"
       },
       "fieldConfig": {
@@ -997,7 +941,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1015,7 +959,6 @@
         "x": 12,
         "y": 36
       },
-      "id": 11,
       "options": {
         "legend": {
           "calcs": [],
@@ -1031,12 +974,11 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
             "uid": "${dataSource}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_pending_count{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
+          "expr": "avg by(usecaseName, consumergroupName) (redis_streams_consumer_group_pending_count{usecaseName=\"$usecase\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{usecaseName}} [ {{consumergroupName}} ]",
@@ -1049,7 +991,6 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
         "uid": "${dataSource}"
       },
       "fieldConfig": {
@@ -1098,7 +1039,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1116,7 +1057,6 @@
         "x": 0,
         "y": 45
       },
-      "id": 12,
       "options": {
         "legend": {
           "calcs": [],
@@ -1124,10 +1064,6 @@
           "placement": "bottom",
           "showLegend": true
         },
-        "timezone": [
-          "",
-          ""
-        ],
         "tooltip": {
           "mode": "single",
           "sort": "none"
@@ -1136,12 +1072,11 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
             "uid": "${dataSource}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(exported_namespace, usecaseName) (redis_streams_events_framework_deadletter_queue_size{cluster=\"$cluster\", environment=\"$env\", namespace=\"$namespace\"})",
+          "expr": "avg by(exported_namespace, usecaseName) (redis_streams_events_framework_deadletter_queue_size{})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{exported_namespace}}:streams:deadletter_queue:{{usecaseName}}",
@@ -1154,7 +1089,6 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
         "uid": "${dataSource}"
       },
       "fieldConfig": {
@@ -1200,7 +1134,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1218,7 +1152,6 @@
         "x": 12,
         "y": 45
       },
-      "id": 13,
       "options": {
         "legend": {
           "calcs": [],
@@ -1234,12 +1167,11 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
             "uid": "${dataSource}"
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "avg by(exported_namespace, usecaseName) (redis_streams_events_framework_deadletter_queue_size{cluster=\"$cluster\", usecaseName=\"$usecase\", environment=\"$env\", namespace=\"$namespace\"})",
+          "expr": "avg by(exported_namespace, usecaseName) (redis_streams_events_framework_deadletter_queue_size{usecaseName=\"$usecase\"})",
           "format": "time_series",
           "instant": false,
           "legendFormat": "{{exported_namespace}}:streams:deadletter_queue:{{usecaseName}}",
@@ -1252,77 +1184,26 @@
     }
   ],
   "refresh": "",
-  "schemaVersion": 39,
+  "schemaVersion": 41,
   "tags": [],
   "templating": {
     "list": [
       {
-        "hide": 0,
         "includeAll": false,
         "label": "DataSource",
-        "multi": false,
         "name": "dataSource",
         "options": [],
         "query": "prometheus",
-        "queryValue": "",
         "refresh": 1,
-        "skipUrlSync": false,
         "type": "datasource"
       },
       {
         "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
-        },
-        "definition": "label_values(redis_streams_memory_usage,cluster)",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Cluster",
-        "multi": false,
-        "name": "cluster",
-        "options": [],
-        "query": {
-          "qryType": 1,
-          "query": "label_values(redis_streams_memory_usage,cluster)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
-        },
-        "definition": "label_values(redis_streams_memory_usage,environment)",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Env",
-        "multi": false,
-        "name": "env",
-        "options": [],
-        "query": {
-          "qryType": 1,
-          "query": "label_values(redis_streams_memory_usage,environment)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 2,
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
           "uid": "${dataSource}"
         },
         "definition": "label_values(redis_streams_memory_usage,usecaseName)",
-        "hide": 0,
         "includeAll": false,
         "label": "Usecase",
-        "multi": false,
         "name": "usecase",
         "options": [],
         "query": {
@@ -1331,30 +1212,6 @@
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 2,
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
-        },
-        "definition": "label_values(redis_streams_memory_usage,namespace)",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Namespace",
-        "multi": false,
-        "name": "namespace",
-        "options": [],
-        "query": {
-          "qryType": 1,
-          "query": "label_values(redis_streams_memory_usage,namespace)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       }
     ]
@@ -1363,5 +1220,7 @@
     "from": "now-15m",
     "to": "now"
   },
+  "timepicker": {},
+  "timezone": "",
   "title": "Redis Streams Monitor(New)"
 }

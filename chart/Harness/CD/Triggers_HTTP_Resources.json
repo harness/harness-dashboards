@@ -24,9 +24,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 333,
+  "id": 362,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "datasource": {
@@ -46,6 +45,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -109,6 +109,7 @@
           "sort": "asc"
         }
       },
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -158,6 +159,7 @@
             "axisPlacement": "auto",
             "axisSoftMax": 0.05,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -223,6 +225,7 @@
           "sort": "asc"
         }
       },
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -237,7 +240,6 @@
         }
       ],
       "title": "Error Rate (%) - $status_code [5m]",
-      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -260,6 +262,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -323,6 +326,7 @@
           "sort": "asc"
         }
       },
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -337,7 +341,6 @@
         }
       ],
       "title": "Error Rate (req/s) - $status_code [5m]",
-      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -351,7 +354,6 @@
       "id": 63,
       "panels": [],
       "repeat": "resource",
-      "repeatDirection": "h",
       "title": "$resource",
       "type": "row"
     },
@@ -375,6 +377,7 @@
             "axisPlacement": "auto",
             "axisSoftMax": 0.05,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -440,6 +443,7 @@
           "sort": "asc"
         }
       },
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -454,7 +458,6 @@
         }
       ],
       "title": "Error Rate (%) - $status_code [5m]",
-      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -477,6 +480,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -540,6 +544,7 @@
           "sort": "asc"
         }
       },
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -554,7 +559,6 @@
         }
       ],
       "title": "Error Rate (req/s) - $status_code [5m]",
-      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -576,6 +580,7 @@
             "axisPlacement": "auto",
             "axisSoftMax": 2,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -606,7 +611,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -641,6 +647,7 @@
           "sort": "asc"
         }
       },
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -677,6 +684,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -708,7 +716,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               }
             ]
           },
@@ -737,6 +746,7 @@
           "sort": "asc"
         }
       },
+      "pluginVersion": "11.3.6+security-01",
       "targets": [
         {
           "datasource": {
@@ -751,31 +761,26 @@
         }
       ],
       "title": "Incoming APIs (req/s) [5m]",
-      "transformations": [],
       "type": "timeseries"
     }
   ],
+  "preload": false,
   "refresh": "1m",
-  "schemaVersion": 39,
+  "schemaVersion": 40,
   "tags": [
     "cd",
     "triggers",
-    "http",
-    "0compatible"
+    "http"
   ],
   "templating": {
     "list": [
       {
-        "hide": 0,
         "includeAll": false,
         "label": "DataSource",
-        "multi": false,
         "name": "dataSource",
         "options": [],
         "query": "prometheus",
-        "queryValue": "",
         "refresh": 1,
-        "skipUrlSync": false,
         "type": "datasource"
       },
       {
@@ -784,10 +789,8 @@
           "uid": "${dataSource}"
         },
         "definition": "label_values(io_harness_resources_responses_count,cluster)",
-        "hide": 0,
         "includeAll": false,
         "label": "Cluster Name",
-        "multi": false,
         "name": "cluster",
         "options": [],
         "query": {
@@ -795,8 +798,6 @@
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       },
       {
@@ -805,10 +806,8 @@
           "uid": "${dataSource}"
         },
         "definition": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\"},environment)",
-        "hide": 0,
         "includeAll": false,
         "label": "Env",
-        "multi": false,
         "name": "env",
         "options": [],
         "query": {
@@ -816,7 +815,6 @@
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
         "sort": 2,
         "type": "query"
       },
@@ -826,7 +824,6 @@
           "uid": "${dataSource}"
         },
         "definition": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\", resource=~\".*Trigger.*\"},resource)",
-        "hide": 0,
         "includeAll": true,
         "label": "Resource",
         "multi": true,
@@ -837,7 +834,7 @@
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
+        "regex": "",
         "sort": 1,
         "type": "query"
       },
@@ -847,7 +844,6 @@
           "uid": "${dataSource}"
         },
         "definition": "label_values(io_harness_resources_responses_count{cluster=\"$cluster\", environment=\"$env\", serviceName=\"pipeline-service\"},statusCode)",
-        "hide": 0,
         "includeAll": true,
         "label": "Status Code",
         "multi": true,
@@ -858,15 +854,13 @@
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
+        "regex": "",
         "sort": 2,
         "type": "query"
       },
       {
-        "hide": 0,
         "includeAll": false,
         "label": "Latency",
-        "multi": false,
         "name": "latency_in_secs",
         "options": [
           {
@@ -921,8 +915,6 @@
           }
         ],
         "query": "1s : 1,2s : 2,3s : 3,4s : 4,5s : 5,7s : 7,10s : 10,15s : 15,20s : 20,30s : 30",
-        "queryValue": "",
-        "skipUrlSync": false,
         "type": "custom"
       }
     ]
@@ -931,5 +923,8 @@
     "from": "now-6h",
     "to": "now"
   },
-  "title": "Triggers - HTTP Resources"
+  "timepicker": {},
+  "timezone": "",
+  "title": "Triggers - HTTP Resources",
+  "weekStart": ""
 }

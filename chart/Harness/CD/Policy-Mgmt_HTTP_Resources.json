@@ -24,9 +24,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 328,
+  "id": 361,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "datasource": {
@@ -40,11 +39,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -53,6 +54,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -118,7 +120,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.95, sum by (Endpoint, Method, le) (rate(http_request_duration_seconds_bucket{cluster=\"$cluster\", job=\"policy-mgmt\", namespace=\"$namespace\"}[5m]))) > ${latency_in_secs:value}",
+          "expr": "histogram_quantile(0.95, sum by (Endpoint, Method, le) (rate(http_request_duration_seconds_bucket{container=\"policy-mgmt\", namespace=\"$namespace\"}[5m]))) > ${latency_in_secs:value}",
           "legendFormat": "{{Endpoint}} [{{Method}}]",
           "range": true,
           "refId": "A"
@@ -138,7 +140,6 @@
       "id": 63,
       "panels": [],
       "repeat": "endpoint",
-      "repeatDirection": "h",
       "title": "$endpoint",
       "type": "row"
     },
@@ -155,12 +156,14 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "axisSoftMax": 0.05,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -169,6 +172,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -245,14 +249,13 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(Endpoint) (rate(http_requests_total{cluster=\"$cluster\", namespace=\"$namespace\", job=\"policy-mgmt\", Endpoint=~\"$endpoint.*\", Status=~\"${status_code:pipe}\"}[5m])) \n/ \nsum by(Endpoint) (rate(http_requests_total{cluster=\"$cluster\", namespace=\"$namespace\", job=\"policy-mgmt\", Endpoint=~\"$endpoint.*\"}[5m]))",
+          "expr": "sum by(Endpoint) (rate(http_requests_total{container=\"policy-mgmt\", namespace=\"$namespace\", Endpoint=~\"$endpoint.*\", Status=~\"${status_code:pipe}\"}[5m])) \n/ \nsum by(Endpoint) (rate(http_requests_total{container=\"policy-mgmt\", namespace=\"$namespace\", Endpoint=~\"$endpoint.*\"}[5m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
       "title": "Error Rate (%) - $status_code [5m]",
-      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -269,11 +272,13 @@
             "seriesBy": "last"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -282,6 +287,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -341,14 +347,13 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(Endpoint) (rate(http_requests_total{cluster=\"$cluster\", namespace=\"$namespace\", job=\"policy-mgmt\", Endpoint=~\"$endpoint.*\", Status=~\"${status_code:pipe}\"}[5m]))",
+          "expr": "sum by(Endpoint) (rate(http_requests_total{container=\"policy-mgmt\", namespace=\"$namespace\", Endpoint=~\"$endpoint.*\", Status=~\"${status_code:pipe}\"}[5m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
       "title": "Error Rate (req/s) - $status_code [5m]",
-      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -364,12 +369,14 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "axisSoftMax": 2,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -378,6 +385,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -442,7 +450,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "histogram_quantile(0.95, sum by (Endpoint, le) (rate(http_request_duration_seconds_bucket{cluster=\"$cluster\", job=\"policy-mgmt\", namespace=\"$namespace\", Endpoint=~\"$endpoint.*\"}[5m])))",
+          "expr": "histogram_quantile(0.95, sum by (Endpoint, le) (rate(http_request_duration_seconds_bucket{container=\"policy-mgmt\", namespace=\"$namespace\", Endpoint=~\"$endpoint.*\"}[5m])))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -465,11 +473,13 @@
             "seriesBy": "last"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -478,6 +488,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -537,40 +548,34 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(Endpoint) (rate(http_requests_total{cluster=\"$cluster\", namespace=\"$namespace\", job=\"policy-mgmt\", Endpoint=~\"$endpoint.*\"}[5m]))",
+          "expr": "sum by(Endpoint) (rate(http_requests_total{container=\"policy-mgmt\", namespace=\"$namespace\", Endpoint=~\"$endpoint.*\"}[5m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
       "title": "Incoming APIs (req/s) [5m]",
-      "transformations": [],
       "type": "timeseries"
     }
   ],
+  "preload": false,
   "refresh": "1m",
-  "schemaVersion": 38,
-  "style": "dark",
+  "schemaVersion": 40,
   "tags": [
     "cd",
     "http",
     "opa",
-    "policy-mgmt",
-    "0compatible"
+    "policy-mgmt"
   ],
   "templating": {
     "list": [
       {
-        "hide": 0,
         "includeAll": false,
         "label": "DataSource",
-        "multi": false,
         "name": "dataSource",
         "options": [],
         "query": "prometheus",
-        "queryValue": "",
         "refresh": 1,
-        "skipUrlSync": false,
         "type": "datasource"
       },
       {
@@ -578,62 +583,36 @@
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(http_requests_total{job=\"policy-mgmt\"},cluster)",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Cluster",
-        "multi": false,
-        "name": "cluster",
-        "options": [],
-        "query": {
-          "query": "label_values(http_requests_total{job=\"policy-mgmt\"},cluster)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
-        },
-        "definition": "label_values(http_requests_total{cluster=\"$cluster\", job=\"policy-mgmt\"},namespace)",
-        "hide": 0,
+        "definition": "label_values(http_requests_total{container=\"policy-mgmt\"},namespace)",
         "includeAll": false,
         "label": "Namespace",
-        "multi": false,
         "name": "namespace",
         "options": [],
         "query": {
-          "query": "label_values(http_requests_total{cluster=\"$cluster\", job=\"policy-mgmt\"},namespace)",
+          "query": "label_values(http_requests_total{container=\"policy-mgmt\"},namespace)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
+        "regex": "",
         "type": "query"
       },
       {
-        "allValue": "",
         "datasource": {
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(http_requests_total{cluster=\"$cluster\", job=\"policy-mgmt\", namespace=\"$namespace\"},Endpoint)",
-        "hide": 0,
+        "definition": "label_values(http_requests_total{container=\"policy-mgmt\", namespace=\"$namespace\"},Endpoint)",
         "includeAll": true,
         "label": "Endpoint",
         "multi": true,
         "name": "endpoint",
         "options": [],
         "query": {
-          "query": "label_values(http_requests_total{cluster=\"$cluster\", job=\"policy-mgmt\", namespace=\"$namespace\"},Endpoint)",
+          "query": "label_values(http_requests_total{container=\"policy-mgmt\", namespace=\"$namespace\"},Endpoint)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
+        "regex": "/(/api/v1/\\w+).*/",
         "sort": 1,
         "type": "query"
       },
@@ -642,27 +621,24 @@
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(http_request_duration_seconds_sum{cluster=\"prod-private-uswest1-primary\", job=\"policy-mgmt\", namespace=\"$namespace\"},Status)",
-        "hide": 0,
+        "definition": "label_values(http_request_duration_seconds_sum{container=\"policy-mgmt\", namespace=\"$namespace\"},Status)",
         "includeAll": true,
         "label": "Status Code",
         "multi": true,
         "name": "status_code",
         "options": [],
         "query": {
-          "query": "label_values(http_request_duration_seconds_sum{cluster=\"prod-private-uswest1-primary\", job=\"policy-mgmt\", namespace=\"$namespace\"},Status)",
+          "query": "label_values(http_request_duration_seconds_sum{container=\"policy-mgmt\", namespace=\"$namespace\"},Status)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
+        "regex": "",
         "sort": 2,
         "type": "query"
       },
       {
-        "hide": 0,
         "includeAll": false,
         "label": "Latency",
-        "multi": false,
         "name": "latency_in_secs",
         "options": [
           {
@@ -717,15 +693,16 @@
           }
         ],
         "query": "1s : 1,2s : 2,3s : 3,4s : 4,5s : 5,7s : 7,10s : 10,15s : 15,20s : 20,30s : 30",
-        "queryValue": "",
-        "skipUrlSync": false,
         "type": "custom"
       }
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-24h",
     "to": "now"
   },
-  "title": "Policy-Mgmt - HTTP Resources"
+  "timepicker": {},
+  "timezone": "",
+  "title": "Policy-Mgmt - HTTP Resources",
+  "weekStart": ""
 }

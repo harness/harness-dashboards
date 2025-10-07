@@ -24,9 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 305,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "datasource": {
@@ -39,11 +37,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "none",
@@ -52,6 +52,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -111,7 +112,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(status) (delta(step_execution_end_count_total{cluster=\"$cluster\", environment=\"$env\", module=\"cd\"}[10m]))",
+          "expr": "sum by(status) (delta(step_execution_end_count_total{module=\"cd\"}[10m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -188,7 +189,6 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "10.0.10",
       "targets": [
         {
           "datasource": {
@@ -196,7 +196,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(stepType) (delta(step_execution_end_count_total{cluster=\"$cluster\", environment=\"$env\", module=\"cd\", status=\"FAILED\"}[10m])) > 0",
+          "expr": "sum by(stepType) (delta(step_execution_end_count_total{module=\"cd\", status=\"FAILED\"}[10m])) > 0",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -253,7 +253,6 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "10.0.10",
       "targets": [
         {
           "datasource": {
@@ -261,7 +260,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(stepType) (delta(step_execution_end_count_total{cluster=\"$cluster\", environment=\"$env\", module=\"cd\", status=\"EXPIRED\"}[10m])) > 0",
+          "expr": "sum by(stepType) (delta(step_execution_end_count_total{module=\"cd\", status=\"EXPIRED\"}[10m])) > 0",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -318,7 +317,6 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "10.0.10",
       "targets": [
         {
           "datasource": {
@@ -326,7 +324,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(stepType) (delta(step_execution_end_count_total{cluster=\"$cluster\", environment=\"$env\", module=\"cd\", status=\"SKIPPED\"}[10m])) > 0",
+          "expr": "sum by(stepType) (delta(step_execution_end_count_total{module=\"cd\", status=\"SKIPPED\"}[10m])) > 0",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -383,7 +381,6 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "10.0.10",
       "targets": [
         {
           "datasource": {
@@ -391,7 +388,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(stepType) (delta(step_execution_end_count_total{cluster=\"$cluster\", environment=\"$env\", module=\"cd\", status=\"ERRORED\"}[10m])) > 0",
+          "expr": "sum by(stepType) (delta(step_execution_end_count_total{module=\"cd\", status=\"ERRORED\"}[10m])) > 0",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -412,7 +409,6 @@
       "id": 69,
       "panels": [],
       "repeat": "step",
-      "repeatDirection": "h",
       "title": "Steps Execution Count - $step [10m]",
       "type": "row"
     },
@@ -428,11 +424,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "none",
@@ -441,6 +439,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -504,7 +503,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(status) (delta(step_execution_end_count_total{cluster=\"$cluster\", environment=\"$env\", module=\"cd\", stepType=\"$step\"}[10m]))",
+          "expr": "sum by(status) (delta(step_execution_end_count_total{module=\"cd\", stepType=\"$step\"}[10m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -530,97 +529,67 @@
       "type": "timeseries"
     }
   ],
+  "preload": false,
   "refresh": "1m",
-  "schemaVersion": 38,
-  "style": "dark",
+  "schemaVersion": 40,
   "tags": [
     "cd",
-    "steps",
-    "0compatible"
+    "steps"
   ],
   "templating": {
     "list": [
       {
+        "current": {
+          "selected": false,
+          "text": "prometheus",
+          "value": "prometheus"
+        },
         "hide": 0,
+        "multi": false,
+        "queryValue": "",
+        "skipUrlSync": false,
         "includeAll": false,
         "label": "DataSource",
-        "multi": false,
         "name": "dataSource",
         "options": [],
         "query": "prometheus",
-        "queryValue": "",
         "refresh": 1,
-        "skipUrlSync": false,
         "type": "datasource"
       },
       {
+        "current": {
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
         "datasource": {
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(step_execution_end_count_total{module=\"cd\"},cluster)",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Cluster",
-        "multi": false,
-        "name": "cluster",
-        "options": [],
-        "query": {
-          "query": "label_values(step_execution_end_count_total{module=\"cd\"},cluster)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 2,
-        "type": "query"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
-        },
-        "definition": "label_values(step_execution_end_count_total{cluster=\"$cluster\", module=\"cd\"},environment)",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Env",
-        "multi": false,
-        "name": "env",
-        "options": [],
-        "query": {
-          "query": "label_values(step_execution_end_count_total{cluster=\"$cluster\", module=\"cd\"},environment)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 2,
-        "type": "query"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
-        },
-        "definition": "label_values(step_execution_end_count_total{cluster=\"$cluster\", module=\"cd\"},stepType)",
-        "hide": 0,
+        "definition": "label_values(step_execution_end_count_total{module=\"cd\"},stepType)",
         "includeAll": true,
         "label": "Step",
         "multi": true,
         "name": "step",
         "options": [],
         "query": {
-          "query": "label_values(step_execution_end_count_total{cluster=\"$cluster\", module=\"cd\"},stepType)",
+          "query": "label_values(step_execution_end_count_total{module=\"cd\"},stepType)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
+        "regex": "",
         "sort": 1,
         "type": "query"
       }
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-3h",
     "to": "now"
   },
-  "title": "Step Execution Status"
+  "timepicker": {},
+  "timezone": "",
+  "title": "Step Execution Status",
+  "weekStart": ""
 }
