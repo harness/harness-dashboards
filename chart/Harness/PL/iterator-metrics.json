@@ -25,7 +25,6 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "datasource": {
@@ -38,11 +37,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -51,6 +52,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -110,7 +112,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "builder",
-          "expr": "sum by(environment) (rate(iterator_working_on_entity_total{cluster=\"$cluster\", environment=\"$environment\", iteratorName=\"$iteratorName\"}[3h]))",
+          "expr": "sum by(environment) (rate(iterator_working_on_entity_total{environment=\"$environment\", iteratorName=\"$iteratorName\"}[3h]))",
           "legendFormat": "Working on Entity Rate",
           "range": true,
           "refId": "A"
@@ -130,11 +132,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -143,6 +147,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -203,7 +208,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "builder",
-          "expr": "sum by(environment) (histogram_quantile(0.5, delta(iterator_delay_bucket{cluster=\"$cluster\", environment=\"$environment\", iteratorName=\"$iteratorName\"}[3h])))",
+          "expr": "sum by(environment) (histogram_quantile(0.5, delta(iterator_delay_bucket{environment=\"$environment\", iteratorName=\"$iteratorName\"}[3h])))",
           "legendFormat": "Delay",
           "range": true,
           "refId": "A"
@@ -223,11 +228,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -236,6 +243,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -296,7 +304,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "builder",
-          "expr": "avg by(environment) (histogram_quantile(0.5, delta(iterator_processing_time_bucket{cluster=\"$cluster\", environment=\"$environment\", iteratorName=\"$iteratorName\"}[3h])))",
+          "expr": "avg by(environment) (histogram_quantile(0.5, delta(iterator_processing_time_bucket{environment=\"$environment\", iteratorName=\"$iteratorName\"}[3h])))",
           "legendFormat": "Processing Time",
           "range": true,
           "refId": "A"
@@ -316,11 +324,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -329,6 +339,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -388,7 +399,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "sum by(iteratorName) (iterator_error_total{cluster=\"$cluster\", environment=\"$environment\"})",
+          "expr": "sum by(iteratorName) (iterator_error_total{environment=\"$environment\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -399,57 +410,47 @@
     }
   ],
   "refresh": "",
-  "schemaVersion": 38,
-  "style": "dark",
+  "schemaVersion": 40,
   "tags": [
     "0compatible"
   ],
   "templating": {
     "list": [
       {
+        "current": {
+          "selected": false,
+          "text": "prometheus",
+          "value": "prometheus"
+        },
         "hide": 0,
+        "multi": false,
+        "queryValue": "",
+        "skipUrlSync": false,
         "includeAll": false,
         "label": "DataSource",
-        "multi": false,
         "name": "dataSource",
         "options": [],
         "query": "prometheus",
-        "queryValue": "",
         "refresh": 1,
-        "skipUrlSync": false,
         "type": "datasource"
       },
       {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
+        "current": {
+          "selected": false,
+          "text": "",
+          "value": ""
         },
-        "definition": "label_values(iterator_working_on_entity_total,cluster)",
         "hide": 0,
-        "includeAll": false,
-        "label": "Cluster",
         "multi": false,
-        "name": "cluster",
-        "options": [],
-        "query": {
-          "query": "label_values(iterator_working_on_entity_total,cluster)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
         "skipUrlSync": false,
         "sort": 0,
-        "type": "query"
-      },
-      {
         "datasource": {
           "type": "prometheus",
           "uid": "${dataSource}"
         },
         "definition": "label_values(iterator_working_on_entity_total,environment)",
-        "hide": 0,
         "includeAll": false,
         "label": "Environment",
-        "multi": false,
         "name": "environment",
         "options": [],
         "query": {
@@ -457,29 +458,34 @@
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
+        "regex": "",
         "type": "query"
       },
       {
+        "current": {
+          "selected": false,
+          "text": "",
+          "value": ""
+        },
+        "hide": 0,
+        "multi": false,
+        "skipUrlSync": false,
+        "sort": 0,
         "datasource": {
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(iterator_working_on_entity_total{cluster=\"$cluster\",environment=\"$environment\"},iteratorName)",
-        "hide": 0,
+        "definition": "label_values(iterator_working_on_entity_total{environment=\"$environment\"},iteratorName)",
         "includeAll": false,
         "label": "IteratorName",
-        "multi": false,
         "name": "iteratorName",
         "options": [],
         "query": {
-          "query": "label_values(iterator_working_on_entity_total{cluster=\"$cluster\",environment=\"$environment\"},iteratorName)",
+          "query": "label_values(iterator_working_on_entity_total{environment=\"$environment\"},iteratorName)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
+        "regex": "",
         "type": "query"
       }
     ]
@@ -488,5 +494,7 @@
     "from": "now-6h",
     "to": "now"
   },
+  "timepicker": {},
+  "timezone": "",
   "title": "Iterator Metrics"
 }

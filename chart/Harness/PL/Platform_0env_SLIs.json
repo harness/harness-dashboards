@@ -24,9 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 369,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "collapsed": false,
@@ -39,7 +37,6 @@
       "id": 14,
       "panels": [],
       "repeat": "monitoring_project",
-      "repeatDirection": "h",
       "title": "${monitoring_project}",
       "type": "row"
     },
@@ -62,6 +59,7 @@
             "axisPlacement": "auto",
             "axisSoftMax": 0.013,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 13,
             "gradientMode": "none",
@@ -94,7 +92,7 @@
             "steps": [
               {
                 "color": "dark-green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "dark-red",
@@ -131,6 +129,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -230,6 +229,7 @@
             "axisPlacement": "auto",
             "axisSoftMax": 1.2,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 10,
             "gradientMode": "none",
@@ -261,7 +261,7 @@
             "steps": [
               {
                 "color": "dark-blue",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -292,6 +292,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -392,6 +393,7 @@
             "axisPlacement": "auto",
             "axisSoftMax": 0.013,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 13,
             "gradientMode": "none",
@@ -424,7 +426,7 @@
             "steps": [
               {
                 "color": "dark-green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "dark-red",
@@ -454,6 +456,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -553,6 +556,7 @@
             "axisPlacement": "auto",
             "axisSoftMax": 1.2,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 10,
             "gradientMode": "none",
@@ -584,7 +588,7 @@
             "steps": [
               {
                 "color": "dark-blue",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -615,6 +619,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -715,6 +720,7 @@
             "axisPlacement": "auto",
             "axisSoftMax": 0.013,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 13,
             "gradientMode": "none",
@@ -747,7 +753,7 @@
             "steps": [
               {
                 "color": "dark-green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "dark-red",
@@ -777,6 +783,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -876,6 +883,7 @@
             "axisPlacement": "auto",
             "axisSoftMax": 1.2,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 10,
             "gradientMode": "none",
@@ -907,7 +915,7 @@
             "steps": [
               {
                 "color": "dark-blue",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -938,6 +946,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -1038,6 +1047,7 @@
             "axisPlacement": "auto",
             "axisSoftMax": 0.013,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 13,
             "gradientMode": "none",
@@ -1070,7 +1080,7 @@
             "steps": [
               {
                 "color": "dark-green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "dark-red",
@@ -1100,6 +1110,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -1199,6 +1210,7 @@
             "axisPlacement": "auto",
             "axisSoftMax": 1.2,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 10,
             "gradientMode": "none",
@@ -1230,7 +1242,7 @@
             "steps": [
               {
                 "color": "dark-blue",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -1261,6 +1273,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -1343,8 +1356,9 @@
       "type": "timeseries"
     }
   ],
+  "preload": false,
   "refresh": "",
-  "schemaVersion": 39,
+  "schemaVersion": 41,
   "tags": [],
   "templating": {
     "list": [
@@ -1354,10 +1368,8 @@
           "uid": "stackdriver"
         },
         "definition": "",
-        "hide": 0,
         "includeAll": true,
         "label": "Monitoring Project",
-        "multi": false,
         "name": "monitoring_project",
         "options": [],
         "query": {
@@ -1419,8 +1431,6 @@
           ]
         },
         "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       }
     ]
@@ -1429,5 +1439,7 @@
     "from": "now-6h",
     "to": "now"
   },
-  "title": "PL SLIs (TEMP)"
+  "timepicker": {},
+  "timezone": "",
+  "title": "PL SLIs"
 }

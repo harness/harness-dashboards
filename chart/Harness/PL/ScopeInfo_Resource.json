@@ -19,11 +19,9 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "datasource": {
-        "type": "prometheus",
         "uid": "${datasource}"
       },
       "fieldConfig": {
@@ -32,6 +30,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -39,6 +38,7 @@
             "axisSoftMax": 6.4,
             "axisSoftMin": 0,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -47,6 +47,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -82,7 +83,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -96,7 +97,6 @@
         "x": 0,
         "y": 0
       },
-      "id": 2,
       "options": {
         "legend": {
           "calcs": [
@@ -107,6 +107,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -114,11 +115,10 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "(sum by(method) \n(rate(io_harness_resources_responses_count{cluster='$cluster',serviceName='ng-manager' , resource=\"ScopeInfoResource\" , namespace='$namespace' , statusCode='$statusCode'}[5m]))*100) \n/ \n(sum by(method) \n(rate(io_harness_resources_responses_count{cluster='$cluster',serviceName='ng-manager' , resource=\"ScopeInfoResource\" , namespace='$namespace'}[5m])))",
+          "expr": "(sum by(method) \n(rate(io_harness_resources_responses_count{serviceName='ng-manager', resource=\"ScopeInfoResource\", statusCode='$statusCode'}[5m]))*100) \n/ \n(sum by(method) \n(rate(io_harness_resources_responses_count{serviceName='ng-manager', resource=\"ScopeInfoResource\"}[5m])))",
           "instant": false,
           "legendFormat": "{{method}}",
           "range": true,
@@ -130,7 +130,6 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
         "uid": "${datasource}"
       },
       "fieldConfig": {
@@ -139,6 +138,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -146,6 +146,7 @@
             "axisSoftMax": -0.6,
             "axisSoftMin": 0,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -154,6 +155,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -177,7 +179,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -191,7 +193,6 @@
         "x": 0,
         "y": 7
       },
-      "id": 3,
       "options": {
         "legend": {
           "calcs": [
@@ -203,6 +204,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -210,11 +212,10 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "max by (method)(io_harness_resources_responses_latency_snapshot_95thPercentile{cluster='$cluster',resource=\"ScopeInfoResource\" , namespace='$namespace'})",
+          "expr": "max by (method)(io_harness_resources_responses_latency_snapshot_95thPercentile{resource=\"ScopeInfoResource\"})",
           "instant": false,
           "legendFormat": "{{environment}}",
           "range": true,
@@ -226,7 +227,6 @@
     },
     {
       "datasource": {
-        "type": "prometheus",
         "uid": "${datasource}"
       },
       "fieldConfig": {
@@ -235,6 +235,7 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
@@ -242,6 +243,7 @@
             "axisSoftMax": -0.6,
             "axisSoftMin": 0,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -250,6 +252,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -273,7 +276,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               }
             ]
           },
@@ -287,7 +290,6 @@
         "x": 12,
         "y": 7
       },
-      "id": 4,
       "options": {
         "legend": {
           "calcs": [
@@ -299,6 +301,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -306,11 +309,10 @@
       "targets": [
         {
           "datasource": {
-            "type": "prometheus",
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "max by (method)(io_harness_resources_responses_latency_snapshot_99thPercentile{cluster='$cluster',resource=\"ScopeInfoResource\" , namespace='$namespace'})",
+          "expr": "max by (method)(io_harness_resources_responses_latency_snapshot_99thPercentile{resource=\"ScopeInfoResource\"})",
           "instant": false,
           "legendFormat": "{{environment}}",
           "range": true,
@@ -322,71 +324,22 @@
     }
   ],
   "refresh": "10s",
-  "schemaVersion": 38,
-  "style": "dark",
+  "schemaVersion": 41,
   "tags": [
     "0compatible"
   ],
   "templating": {
     "list": [
       {
-        "hide": 0,
         "includeAll": false,
-        "multi": false,
         "name": "datasource",
         "options": [],
         "query": "prometheus",
-        "queryValue": "",
         "refresh": 1,
-        "skipUrlSync": false,
         "type": "datasource"
       },
       {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${datasource}"
-        },
-        "definition": "label_values(kubernetes_io:container_uptime{container_name=~\"ng-manager.*\"},cluster_name)",
-        "hide": 0,
         "includeAll": false,
-        "label": "cluster",
-        "multi": false,
-        "name": "cluster",
-        "options": [],
-        "query": {
-          "query": "label_values(kubernetes_io:container_uptime{container_name=~\"ng-manager.*\"},cluster_name)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${datasource}"
-        },
-        "definition": "label_values(io_harness_resources_responses_count{resource=\"ScopeInfoResource\"},namespace)",
-        "hide": 0,
-        "includeAll": false,
-        "label": "namespace",
-        "multi": false,
-        "name": "namespace",
-        "options": [],
-        "query": {
-          "query": "label_values(io_harness_resources_responses_count{resource=\"ScopeInfoResource\"},namespace)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "hide": 0,
-        "includeAll": false,
-        "multi": false,
         "name": "statusCode",
         "options": [
           {
@@ -395,7 +348,7 @@
             "value": "1xx"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "2xx",
             "value": "2xx"
           },
@@ -416,8 +369,6 @@
           }
         ],
         "query": "1xx , 2xx , 3xx , 4xx , 5xx",
-        "queryValue": "",
-        "skipUrlSync": false,
         "type": "custom"
       }
     ]
@@ -426,5 +377,7 @@
     "from": "now-24h",
     "to": "now"
   },
+  "timepicker": {},
+  "timezone": "",
   "title": "ScopeInfo Resource HTTP"
 }

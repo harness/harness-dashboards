@@ -26,7 +26,6 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "links": [],
-  "liveNow": true,
   "panels": [
     {
       "datasource": {
@@ -39,11 +38,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -52,6 +53,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -112,8 +114,8 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum(kubernetes_io:container_memory_used_bytes{cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", container_name=~\"$container.*\", pod_name=~\"$pod\"}) by(namespace_name, pod_name, container_name) ",
-          "legendFormat": "{{pod_name}}",
+          "expr": "sum(container_memory_usage_bytes{namespace=~\"$namespace\", container=~\"$container.*\", pod=~\"$pod\"}) by(namespace, pod, container)",
+          "legendFormat": "{{pod}}",
           "range": true,
           "refId": "A"
         },
@@ -123,9 +125,9 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum(kubernetes_io:container_memory_limit_bytes{cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", container_name=~\"$container.*\", pod_name=~\"$pod\"}) by (namespace_name, pod_name, container_name)",
+          "expr": "sum(container_spec_memory_limit_bytes{namespace=~\"$namespace\", container=~\"$container.*\", pod=~\"$pod\"}) by (namespace, pod, container)",
           "hide": false,
-          "legendFormat": "Limit/{{pod_name}}",
+          "legendFormat": "Limit/{{pod}}",
           "range": true,
           "refId": "B"
         }
@@ -145,11 +147,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -158,6 +162,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -217,9 +222,9 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "kubernetes_io:container_cpu_request_cores{namespace_name=~\"$namespace\", container_name=~\"$container.*\" , pod_name=~\"$pod\"}",
+          "expr": "kube_pod_container_resource_requests{namespace=~\"$namespace\", container=~\"$container.*\", pod=~\"$pod\", resource=\"cpu\"}",
           "hide": false,
-          "legendFormat": "{{pod_name}}",
+          "legendFormat": "{{pod}}",
           "range": true,
           "refId": "B"
         },
@@ -229,9 +234,9 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "rate(kubernetes_io:container_cpu_core_usage_time{namespace_name=~\"$namespace\", container_name=~\"$container\" , pod_name=~\"$pod\"}[$__interval])",
+          "expr": "rate(container_cpu_usage_seconds_total{namespace=~\"$namespace\", container=~\"$container\", pod=~\"$pod\"}[$__interval])",
           "hide": false,
-          "legendFormat": "{{pod_name}}",
+          "legendFormat": "{{pod}}",
           "range": true,
           "refId": "A"
         }
@@ -251,11 +256,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -264,6 +271,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -326,13 +334,13 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum by(namespace_name, container_name) (round(rate(kubernetes_io:container_uptime{cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", container_name=~\"$container.*\", pod_name=~\"$pod\"}[5m]), 0.001))",
-          "legendFormat": "{{container_name}}",
+          "expr": "sum by(namespace, container) (kube_pod_container_status_running{namespace=~\"$namespace\", container=~\"$container.*\", pod=~\"$pod\"} > 0)",
+          "legendFormat": "{{container}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Uptime",
+      "title": "Running Containers",
       "type": "timeseries"
     },
     {
@@ -346,11 +354,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -359,6 +369,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -418,8 +429,8 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum by(namespace_name, container_name) (delta(kubernetes_io:container_restart_count{cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", container_name=~\"$container.*\", pod_name=~\"$pod\"}[2m]) / 2)",
-          "legendFormat": "{{container_name}}",
+          "expr": "sum by(namespace, container) (increase(kube_pod_container_status_restarts_total{namespace=~\"$namespace\", container=~\"$container.*\", pod=~\"$pod\"}[5m]))",
+          "legendFormat": "{{container}}",
           "range": true,
           "refId": "A"
         }
@@ -439,12 +450,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
-            "axisSoftMin": 0,
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -453,106 +465,7 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": true,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "noValue": "0",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 24,
-        "x": 0,
-        "y": 17
-      },
-      "id": 10,
-      "maxDataPoints": 1830,
-      "maxPerRow": 2,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "right",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "repeat": "container",
-      "repeatDirection": "h",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "editorMode": "code",
-          "expr": "count_over_time(logging_googleapis_com:log_entry_count{monitored_resource=\"k8s_container\", severity=~\"ERROR\", cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", container_name=~\"$container\"}[1h])",
-          "hide": false,
-          "legendFormat": "{{pod_name}}",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "$container last 1 hr error ",
-      "transparent": true,
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${datasource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -590,7 +503,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 73
+        "y": 25
       },
       "id": 16,
       "options": {
@@ -612,7 +525,7 @@
             "uid": "${datasource}"
           },
           "editorMode": "code",
-          "expr": "sum by (namespace, container, image_spec, version) (label_replace(kube_pod_container_info{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"$container\"}, \"version\", \"$1\", \"image_spec\", \".*/([0-9a-z-]+[:@].*)\")) * 0 + 1",
+          "expr": "sum by (namespace, container, image_spec, version) (label_replace(kube_pod_container_info{namespace=~\"$namespace\", container=~\"$container\"}, \"version\", \"$1\", \"image_spec\", \".*/([0-9a-z-]+[:@].*)\")) * 0 + 1",
           "legendFormat": "{{version}}",
           "range": true,
           "refId": "A"
@@ -622,9 +535,9 @@
       "type": "timeseries"
     }
   ],
+  "preload": false,
   "refresh": "5s",
-  "schemaVersion": 37,
-  "style": "dark",
+  "schemaVersion": 40,
   "tags": [
     "PL",
     "CAE",
@@ -634,29 +547,37 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "selected": false,
+          "text": "prometheus",
+          "value": "prometheus"
+        },
         "hide": 0,
+        "multi": false,
+        "queryValue": "",
+        "skipUrlSync": false,
         "includeAll": false,
         "label": "Datasource",
-        "multi": false,
         "name": "datasource",
         "options": [],
         "query": "prometheus",
-        "queryValue": "",
         "refresh": 1,
-        "skipUrlSync": false,
+        "regex": "",
         "type": "datasource"
       },
       {
-        "hide": 0,
+        "current": {
+          "text": "access-control",
+          "value": "access-control"
+        },
         "includeAll": false,
         "label": "Container",
-        "multi": false,
         "name": "container",
         "options": [
           {
             "selected": true,
-            "text": "accesscontrol-service",
-            "value": "accesscontrol-service"
+            "text": "access-control",
+            "value": "access-control"
           },
           {
             "selected": false,
@@ -719,72 +640,57 @@
             "value": "agent-gateway"
           }
         ],
-        "query": "accesscontrol-service , platform-service , manager-iterator , manager , ng-manager , gateway , ng-dashboard-aggregator , audit-event-streaming , chatbot-service , redis-streams-monitor , ng-auth-ui , genai-service , agent-gateway",
-        "queryValue": "",
-        "skipUrlSync": false,
+        "query": "access-control , platform-service , manager-iterator , manager , ng-manager , gateway , ng-dashboard-aggregator , audit-event-streaming , chatbot-service , redis-streams-monitor , ng-auth-ui , genai-service , agent-gateway",
         "type": "custom"
       },
       {
+        "current": {
+          "selected": false,
+          "text": "",
+          "value": ""
+        },
         "datasource": {
           "type": "prometheus",
           "uid": "${datasource}"
         },
-        "definition": "kubernetes_io:container_uptime{container_name=~\"platform-service.*\"}",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Cluster",
-        "multi": false,
-        "name": "cluster",
-        "options": [],
-        "query": {
-          "query": "kubernetes_io:container_uptime{container_name=~\"platform-service.*\"}",
-          "refId": "StandardVariableQuery"
-        },
-        "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${datasource}"
-        },
-        "definition": "label_values(kube_pod_container_info{cluster=\"$cluster\", container=~\"$container\"}, namespace)\n",
-        "hide": 0,
+        "definition": "label_values(kube_pod_container_info{container=~\"$container\"}, namespace)",
         "includeAll": false,
         "label": "Namespace",
-        "multi": false,
         "name": "namespace",
         "options": [],
         "query": {
-          "query": "label_values(kube_pod_container_info{cluster=\"$cluster\", container=~\"$container\"}, namespace)\n",
+          "query": "label_values(kube_pod_container_info{container=~\"$container\"}, namespace)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
+        "regex": "",
         "sort": 1,
         "type": "query"
       },
       {
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
         "datasource": {
           "type": "prometheus",
           "uid": "${datasource}"
         },
-        "definition": "label_values(kube_pod_container_info{cluster=\"$cluster\", namespace=\"$namespace\" , container=\"$container\"}, pod)",
-        "hide": 0,
+        "definition": "label_values(kube_pod_container_info{namespace=\"$namespace\", container=\"$container\"}, pod)",
         "includeAll": true,
         "label": "Pods",
         "multi": true,
         "name": "pod",
         "options": [],
         "query": {
-          "query": "label_values(kube_pod_container_info{cluster=\"$cluster\", namespace=\"$namespace\" , container=\"$container\"}, pod)",
+          "query": "label_values(kube_pod_container_info{namespace=\"$namespace\", container=\"$container\"}, pod)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
+        "regex": "",
         "type": "query"
       }
     ]
@@ -793,5 +699,8 @@
     "from": "now-24h",
     "to": "now"
   },
-  "title": "Generic Infra Monitoring Dashboard"
+  "timepicker": {},
+  "timezone": "",
+  "title": "Generic Infra Monitoring Dashboard",
+  "uid": ""
 }

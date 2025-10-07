@@ -24,9 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 53,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "datasource": {
@@ -39,11 +37,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -52,6 +52,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -74,7 +75,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -100,6 +101,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -111,7 +113,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "max by(serviceId) (outbox_queue_size{cluster=\"$cluster\", environment=\"$environment\", serviceId=\"$serviceId\", eventType=\"AllEventTypes\"})",
+          "expr": "max by(serviceId) (outbox_queue_size{environment=\"$environment\", serviceId=\"$serviceId\", eventType=\"AllEventTypes\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -131,11 +133,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -144,6 +148,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -166,7 +171,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -192,6 +197,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -203,7 +209,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "max by(serviceId) (outbox_blocked_queue_size{cluster=\"$cluster\", environment=\"$environment\", serviceId=\"$serviceId\", eventType=\"AllEventTypes\"})",
+          "expr": "max by(serviceId) (outbox_blocked_queue_size{environment=\"$environment\", serviceId=\"$serviceId\", eventType=\"AllEventTypes\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -223,11 +229,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -236,6 +244,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -258,7 +267,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -284,6 +293,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -295,7 +305,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "max by(eventType) (outbox_queue_size{cluster=\"$cluster\", environment=\"$environment\", serviceId=\"$serviceId\", eventType!=\"AllEventTypes\"})",
+          "expr": "max by(eventType) (outbox_queue_size{environment=\"$environment\", serviceId=\"$serviceId\", eventType!=\"AllEventTypes\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -315,11 +325,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -328,6 +340,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -350,7 +363,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -376,6 +389,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -387,7 +401,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "max by(eventType) (outbox_blocked_queue_size{cluster=\"$cluster\", environment=\"$environment\", serviceId=\"$serviceId\"})",
+          "expr": "max by(eventType) (outbox_blocked_queue_size{environment=\"$environment\", serviceId=\"$serviceId\"})",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -407,11 +421,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -420,6 +436,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -442,7 +459,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -468,6 +485,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -479,7 +497,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "avg by(resourceType) (rate(outbox_event_processing_time_sum{cluster=\"$cluster\", environment=\"$environment\", serviceId=\"$serviceId\"}[1m]))",
+          "expr": "avg by(resourceType) (rate(outbox_event_processing_time_sum{environment=\"$environment\", serviceId=\"$serviceId\"}[1m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -499,11 +517,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -512,6 +532,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -534,7 +555,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -560,6 +581,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -571,7 +593,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "avg by(resourceType) (rate(outbox_event_waiting_time_sum{cluster=\"$cluster\", environment=\"$environment\", serviceId=\"$serviceId\"}[1m]))",
+          "expr": "avg by(resourceType) (rate(outbox_event_waiting_time_sum{environment=\"$environment\", serviceId=\"$serviceId\"}[1m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -591,11 +613,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -604,6 +628,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -626,7 +651,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -652,6 +677,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -663,7 +689,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "avg by(eventType) (rate(outbox_event_processing_time_sum{cluster=\"$cluster\", environment=\"$environment\", serviceId=\"$serviceId\"}[1m]))",
+          "expr": "avg by(eventType) (rate(outbox_event_processing_time_sum{environment=\"$environment\", serviceId=\"$serviceId\"}[1m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -683,11 +709,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "series",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 20,
             "gradientMode": "opacity",
@@ -696,6 +724,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -718,7 +747,7 @@
             "steps": [
               {
                 "color": "green",
-                "value": null
+                "value": 0
               },
               {
                 "color": "red",
@@ -744,6 +773,7 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
@@ -755,7 +785,7 @@
             "uid": "${dataSource}"
           },
           "editorMode": "code",
-          "expr": "avg by(eventType) (rate(outbox_event_waiting_time_sum{cluster=\"$cluster\", environment=\"$environment\", serviceId=\"$serviceId\"}[1m]))",
+          "expr": "avg by(eventType) (rate(outbox_event_waiting_time_sum{environment=\"$environment\", serviceId=\"$serviceId\"}[1m]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -766,56 +796,45 @@
     }
   ],
   "refresh": false,
-  "schemaVersion": 37,
-  "style": "dark",
+  "schemaVersion": 41,
   "tags": [],
   "templating": {
     "list": [
       {
+        "current": {
+          "selected": false,
+          "text": "prometheus",
+          "value": "prometheus"
+        },
         "hide": 0,
+        "multi": false,
+        "queryValue": "",
+        "skipUrlSync": false,
         "includeAll": false,
         "label": "DataSource",
-        "multi": false,
         "name": "dataSource",
         "options": [],
         "query": "prometheus",
-        "queryValue": "",
         "refresh": 1,
-        "skipUrlSync": false,
         "type": "datasource"
       },
       {
-        "datasource": {
-          "type": "prometheus",
-          "uid": "${dataSource}"
+        "current": {
+          "selected": false,
+          "text": "",
+          "value": ""
         },
-        "definition": "label_values({__name__=\"outbox_queue_size\"}, cluster)",
-        "description": "",
         "hide": 0,
-        "includeAll": false,
-        "label": "Cluster",
         "multi": false,
-        "name": "cluster",
-        "options": [],
-        "query": {
-          "query": "label_values({__name__=\"outbox_queue_size\"}, cluster)",
-          "refId": "StandardVariableQuery"
-        },
-        "refresh": 1,
         "skipUrlSync": false,
         "sort": 0,
-        "type": "query"
-      },
-      {
         "datasource": {
           "type": "prometheus",
           "uid": "${dataSource}"
         },
         "definition": "label_values({__name__=\"outbox_queue_size\"}, environment)",
-        "hide": 0,
         "includeAll": false,
         "label": "Environment",
-        "multi": false,
         "name": "environment",
         "options": [],
         "query": {
@@ -823,20 +842,25 @@
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       },
       {
+        "current": {
+          "selected": false,
+          "text": "",
+          "value": ""
+        },
+        "hide": 0,
+        "multi": false,
+        "skipUrlSync": false,
+        "sort": 0,
         "datasource": {
           "type": "prometheus",
           "uid": "${dataSource}"
         },
         "definition": "label_values({__name__=\"outbox_queue_size\"}, serviceId)",
-        "hide": 0,
         "includeAll": false,
         "label": "serviceId",
-        "multi": false,
         "name": "serviceId",
         "options": [],
         "query": {
@@ -844,8 +868,6 @@
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
         "type": "query"
       }
     ]
@@ -854,5 +876,7 @@
     "from": "now-3h",
     "to": "now"
   },
+  "timepicker": {},
+  "timezone": "",
   "title": "Outbox Metrics"
 }
