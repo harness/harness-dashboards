@@ -693,13 +693,13 @@
           "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "label_values(enqueue_requests_per_module_success,namespace)",
+        "definition": "label_values(echo_request_duration_seconds_bucket,namespace)",
         "includeAll": false,
         "label": "Namespace",
         "name": "namespace",
         "options": [],
         "query": {
-          "query": "label_values(enqueue_requests_per_module_success,namespace)",
+          "query": "label_values(echo_request_duration_seconds_bucket,namespace)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
