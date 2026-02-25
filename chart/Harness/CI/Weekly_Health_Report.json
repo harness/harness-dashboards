@@ -667,7 +667,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+        "uid": "${datasource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -747,7 +747,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "sum by (namespace, container, image_spec) (kube_pod_container_info{cluster=~\"$cluster\", namespace=~\"$namespace\", container=~\"$container\"}) * 0 + 1",
@@ -770,9 +770,8 @@
   "templating": {
     "list": [
       {
-        "allValue": "(ProdSetup|QASetup)-.*",
         "hide": 0,
-        "includeAll": true,
+        "includeAll": false,
         "label": "Datasource",
         "multi": true,
         "name": "datasource",
@@ -853,7 +852,7 @@
         "allValue": "ci.*|ti.*|log.*",
         "datasource": {
           "type": "prometheus",
-          "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+          "uid": "${datasource}"
         },
         "definition": "kubernetes_io:container_uptime{cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", container_name=~\"$container\", pod_name=~\"$service\"}",
         "hide": 0,
@@ -871,6 +870,11 @@
         "type": "query"
       },
       {
+        "current": {
+          "selected": true,
+          "text": "ci-.*|ti-.*|log-.*|scm.*",
+          "value": "ci-.*|ti-.*|log-.*|scm.*"
+        },
         "hide": 0,
         "includeAll": false,
         "label": "service",
