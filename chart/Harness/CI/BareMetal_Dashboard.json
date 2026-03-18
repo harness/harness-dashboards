@@ -1057,7 +1057,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "9j9hW0q4z"
+        "uid": "${dataSource}"
       },
       "description": "Red = 90%\nYellow = 75%\nBlue = 50%\n",
       "fieldConfig": {
@@ -1157,7 +1157,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "9j9hW0q4z"
+            "uid": "${dataSource}"
           },
           "editorMode": "code",
           "expr": "(sum by(driver) (harness_ci_pipeline_running_executions{driver=\"nomad\"}/654))*100",

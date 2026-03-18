@@ -31,7 +31,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+        "uid": "${datasource}"
       },
       "description": "Aggregated per 24 hrs",
       "fieldConfig": {
@@ -114,7 +114,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "sum by(container_name,namespace_name ) (delta(logging_googleapis_com:user_k8_prod_severity_error_and_above{monitored_resource=\"k8s_container\", container_name=\"$container\"}[1m]))",
@@ -130,7 +130,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+        "uid": "${datasource}"
       },
       "description": "Filters the technical debt errors, aggregated over 24hr",
       "fieldConfig": {
@@ -211,7 +211,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+            "uid": "${datasource}"
           },
           "editorMode": "code",
           "expr": "sum by(container_name, namespace_name) (delta(logging_googleapis_com:user_ci_manager_new_errors{monitored_resource=\"k8s_container\", container_name=\"ci-manager\"}[1m]))",
@@ -230,9 +230,21 @@
   "templating": {
     "list": [
       {
+        "hide": 0,
+        "includeAll": false,
+        "label": "Data Source",
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
         "datasource": {
           "type": "prometheus",
-          "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+          "uid": "${datasource}"
         },
         "definition": "kubernetes_io:container_uptime{container_name=~\"ci-manager.*\"}",
         "hide": 0,
@@ -253,7 +265,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+          "uid": "${datasource}"
         },
         "definition": "kubernetes_io:container_uptime{cluster_name=~\"$cluster\", container_name=~\"$service\"}",
         "hide": 0,
@@ -282,7 +294,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+          "uid": "${datasource}"
         },
         "definition": "kubernetes_io:container_uptime{cluster_name=~\"$cluster\", namespace_name=~\"$namespace\", container_name=~\"$service\"}",
         "hide": 0,

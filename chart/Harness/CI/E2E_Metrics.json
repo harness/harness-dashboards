@@ -1023,7 +1023,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+        "uid": "${dataSource}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1108,7 +1108,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+            "uid": "${dataSource}"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -1788,123 +1788,6 @@
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${dataSource}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "ms"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 83
-      },
-      "id": 52,
-      "options": {
-        "legend": {
-          "calcs": [
-            "mean",
-            "max"
-          ],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "11.3.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "disableTextWrap": false,
-          "editorMode": "code",
-          "expr": "histogram_quantile(0.5, sum by(le) (rate(logging_googleapis_com:user_scmlatency_bucket{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\"}[$__rate_interval]))) * 1000",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "legendFormat": "{{namespace_name}} [p50]",
-          "range": true,
-          "refId": "A",
-          "useBackend": false
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${dataSource}"
-          },
-          "editorMode": "code",
-          "expr": "histogram_quantile(.9, sum by (le) (rate(logging_googleapis_com:user_scmlatency_bucket{monitored_resource=\"k8s_container\", cluster_name=\"$cluster\"}[$__rate_interval])))*1000",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "{{namespace_name}} [p90]",
-          "range": true,
-          "refId": "B"
-        }
-      ],
-      "title": "SCM Webhook Parsing Operation Latency Across Accounts",
-      "type": "timeseries"
-    },
-    {
       "collapsed": true,
       "gridPos": {
         "h": 1,
@@ -1917,7 +1800,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+            "uid": "${dataSource}"
           },
           "fieldConfig": {
             "defaults": {
@@ -2011,7 +1894,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${datasource}"
+                "uid": "${dataSource}"
               },
               "disableTextWrap": false,
               "editorMode": "code",
@@ -2031,7 +1914,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+            "uid": "${dataSource}"
           },
           "fieldConfig": {
             "defaults": {
@@ -2125,7 +2008,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${datasource}"
+                "uid": "${dataSource}"
               },
               "editorMode": "code",
               "expr": "(sum by(method) \n(rate(io_harness_resources_responses_count{cluster='$cluster',serviceName='access-control' , resource=\"ACLResource\" , statusCode='5xx'}[5m]))*100) \n/ \n(sum by(method) \n(rate(io_harness_resources_responses_count{cluster='$cluster',serviceName='access-control' , resource=\"ACLResource\"}[5m])))",
@@ -2141,7 +2024,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+            "uid": "${dataSource}"
           },
           "fieldConfig": {
             "defaults": {
@@ -2223,7 +2106,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "${datasource}"
+                "uid": "${dataSource}"
               },
               "editorMode": "code",
               "expr": "max by (method) (io_harness_resources_responses_latency_snapshot_95thPercentile{cluster='$cluster',resource=\"ACLResource\"})",
@@ -2235,7 +2118,7 @@
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+                "uid": "${dataSource}"
               },
               "editorMode": "code",
               "expr": "max by (method) (io_harness_resources_responses_latency_snapshot_99thPercentile{cluster='$cluster',resource=\"ACLResource\"})",
@@ -2727,7 +2610,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+        "uid": "${dataSource}"
       },
       "description": "",
       "fieldConfig": {
@@ -2833,7 +2716,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+            "uid": "${dataSource}"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -2848,7 +2731,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+            "uid": "${dataSource}"
           },
           "editorMode": "code",
           "expr": "sum(increase(delegate_task_creation_by_type_total{cluster=\"$cluster\", environment=\"$env\"}[5m]))",
@@ -2878,7 +2761,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+        "uid": "${dataSource}"
       },
       "description": "",
       "fieldConfig": {
@@ -2960,7 +2843,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+            "uid": "${dataSource}"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -2977,7 +2860,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+            "uid": "${dataSource}"
           },
           "editorMode": "code",
           "expr": "sum(rate(log_service_stream_write_error_count{cluster=\"$cluster\"}[10m]))",
@@ -2994,7 +2877,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+        "uid": "${dataSource}"
       },
       "description": "",
       "fieldConfig": {
@@ -3077,7 +2960,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+            "uid": "${dataSource}"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -3347,7 +3230,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+        "uid": "${dataSource}"
       },
       "description": "",
       "fieldConfig": {
@@ -3429,7 +3312,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+            "uid": "${dataSource}"
           },
           "disableTextWrap": false,
           "editorMode": "code",
@@ -3446,7 +3329,7 @@
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "9073961d-07a4-44b8-8bfd-4b32a4ee7a74"
+            "uid": "${dataSource}"
           },
           "editorMode": "code",
           "expr": "sum(increase(log_service_blob_upload_error_count{cluster=\"$cluster\"}[10m]))",
