@@ -30,7 +30,7 @@
   "panels": [
     {
       "datasource": {
-        "type": "stackdriver",
+        "type": "prometheus",
         "uid": "${dataSource}"
       },
       "description": "",
@@ -194,115 +194,38 @@
       "targets": [
         {
           "datasource": {
-            "type": "stackdriver",
+            "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "promQLQuery": {
-            "expr": "sum by(pod) (rate(container_cpu_usage_seconds_total{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[5m]))",
-            "projectName": "$project",
-            "step": "$__interval"
-          },
-          "queryType": "promQL",
+          "editorMode": "code",
+          "legendFormat": "__auto",
+          "range": true,
           "refId": "A",
-          "timeSeriesList": {
-            "alignmentPeriod": "cloud-monitoring-auto",
-            "crossSeriesReducer": "REDUCE_NONE",
-            "filters": [
-              "resource.label.namespace",
-              "=",
-              "$namespace",
-              "AND",
-              "metric.label.resource",
-              "=",
-              "cpu",
-              "AND",
-              "metric.type",
-              "=",
-              "prometheus.googleapis.com/kube_pod_container_resource_requests/gauge"
-            ],
-            "groupBys": [],
-            "perSeriesAligner": "ALIGN_MEAN",
-            "preprocessor": "none",
-            "projectName": "$project"
-          }
+          "expr": "sum by(pod) (rate(container_cpu_usage_seconds_total{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[5m]))"
         },
         {
-          "aliasBy": "requests",
           "datasource": {
-            "type": "stackdriver",
+            "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "hide": false,
-          "queryType": "timeSeriesList",
+          "editorMode": "code",
+          "legendFormat": "requests",
+          "range": true,
           "refId": "B",
-          "timeSeriesList": {
-            "alignmentPeriod": "cloud-monitoring-auto",
-            "crossSeriesReducer": "REDUCE_MEAN",
-            "filters": [
-              "resource.label.namespace",
-              "=",
-              "$namespace",
-              "AND",
-              "metric.label.resource",
-              "=",
-              "cpu",
-              "AND",
-              "resource.label.cluster",
-              "=",
-              "$cluster",
-              "AND",
-              "metric.label.container",
-              "=",
-              "$containerName",
-              "AND",
-              "metric.type",
-              "=",
-              "prometheus.googleapis.com/kube_pod_container_resource_requests/gauge"
-            ],
-            "groupBys": [],
-            "perSeriesAligner": "ALIGN_MEAN",
-            "preprocessor": "none",
-            "projectName": "$project"
-          }
+          "hide": false,
+          "expr": "avg(kube_pod_container_resource_requests{cluster=\"$cluster\", namespace=\"$namespace\", resource=\"cpu\", container=\"$containerName\"})"
         },
         {
-          "aliasBy": "limits",
           "datasource": {
-            "type": "stackdriver",
+            "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "hide": false,
-          "queryType": "timeSeriesList",
+          "editorMode": "code",
+          "legendFormat": "limits",
+          "range": true,
           "refId": "C",
-          "timeSeriesList": {
-            "alignmentPeriod": "cloud-monitoring-auto",
-            "crossSeriesReducer": "REDUCE_MEAN",
-            "filters": [
-              "resource.label.namespace",
-              "=",
-              "$namespace",
-              "AND",
-              "metric.label.resource",
-              "=",
-              "cpu",
-              "AND",
-              "resource.label.cluster",
-              "=",
-              "$cluster",
-              "AND",
-              "metric.label.container",
-              "=",
-              "$containerName",
-              "AND",
-              "metric.type",
-              "=",
-              "prometheus.googleapis.com/kube_pod_container_resource_limits/gauge"
-            ],
-            "groupBys": [],
-            "perSeriesAligner": "ALIGN_MEAN",
-            "preprocessor": "none",
-            "projectName": "$project"
-          }
+          "hide": false,
+          "expr": "avg(kube_pod_container_resource_limits{cluster=\"$cluster\", namespace=\"$namespace\", resource=\"cpu\", container=\"$containerName\"})"
         }
       ],
       "title": "CPU usage, requests and limits",
@@ -319,7 +242,7 @@
     },
     {
       "datasource": {
-        "type": "stackdriver",
+        "type": "prometheus",
         "uid": "${dataSource}"
       },
       "fieldConfig": {
@@ -451,129 +374,39 @@
       },
       "targets": [
         {
-          "aliasBy": "q=0.99",
           "datasource": {
-            "type": "stackdriver",
+            "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "hide": false,
-          "promQLQuery": {
-            "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{namespace=\"$namespace\"}[5m])) by (le))",
-            "projectName": "$project",
-            "step": "10s"
-          },
-          "queryType": "timeSeriesList",
+          "editorMode": "code",
+          "legendFormat": "q=0.99",
+          "range": true,
           "refId": "B",
-          "timeSeriesList": {
-            "alignmentPeriod": "cloud-monitoring-auto",
-            "crossSeriesReducer": "REDUCE_PERCENTILE_99",
-            "filters": [
-              "resource.label.namespace",
-              "=",
-              "$namespace",
-              "AND",
-              "resource.label.cluster",
-              "=",
-              "$cluster",
-              "AND",
-              "metric.label.container",
-              "=",
-              "$containerName",
-              "AND",
-              "metric.type",
-              "=",
-              "prometheus.googleapis.com/http_request_duration_seconds/histogram"
-            ],
-            "groupBys": [
-              "resource.label.namespace"
-            ],
-            "perSeriesAligner": "ALIGN_DELTA",
-            "preprocessor": "none",
-            "projectName": "$project"
-          }
-        },
-        {
-          "aliasBy": "q=0.95",
-          "datasource": {
-            "type": "stackdriver",
-            "uid": "${dataSource}"
-          },
-          "promQLQuery": {
-            "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{namespace=\"$namespace\"}[5m])) by (le))",
-            "projectName": "$project",
-            "step": "10s"
-          },
-          "queryType": "timeSeriesList",
-          "refId": "A",
-          "timeSeriesList": {
-            "alignmentPeriod": "cloud-monitoring-auto",
-            "crossSeriesReducer": "REDUCE_PERCENTILE_95",
-            "filters": [
-              "resource.label.namespace",
-              "=",
-              "$namespace",
-              "AND",
-              "resource.label.cluster",
-              "=",
-              "$cluster",
-              "AND",
-              "metric.label.container",
-              "=",
-              "$containerName",
-              "AND",
-              "metric.type",
-              "=",
-              "prometheus.googleapis.com/http_request_duration_seconds/histogram"
-            ],
-            "groupBys": [
-              "resource.label.namespace"
-            ],
-            "perSeriesAligner": "ALIGN_DELTA",
-            "preprocessor": "none",
-            "projectName": "$project"
-          }
-        },
-        {
-          "aliasBy": "q=0.5",
-          "datasource": {
-            "type": "stackdriver",
-            "uid": "${dataSource}"
-          },
           "hide": false,
-          "promQLQuery": {
-            "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{namespace=\"$namespace\"}[5m])) by (le))",
-            "projectName": "$project",
-            "step": "10s"
+          "expr": "histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[5m])) by (le))"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
           },
-          "queryType": "timeSeriesList",
+          "editorMode": "code",
+          "legendFormat": "q=0.95",
+          "range": true,
+          "refId": "A",
+          "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[5m])) by (le))"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${dataSource}"
+          },
+          "editorMode": "code",
+          "legendFormat": "q=0.5",
+          "range": true,
           "refId": "D",
-          "timeSeriesList": {
-            "alignmentPeriod": "cloud-monitoring-auto",
-            "crossSeriesReducer": "REDUCE_PERCENTILE_50",
-            "filters": [
-              "resource.label.namespace",
-              "=",
-              "$namespace",
-              "AND",
-              "resource.label.cluster",
-              "=",
-              "$cluster",
-              "AND",
-              "metric.label.container",
-              "=",
-              "$containerName",
-              "AND",
-              "metric.type",
-              "=",
-              "prometheus.googleapis.com/http_request_duration_seconds/histogram"
-            ],
-            "groupBys": [
-              "resource.label.namespace"
-            ],
-            "perSeriesAligner": "ALIGN_DELTA",
-            "preprocessor": "none",
-            "projectName": "$project"
-          }
+          "hide": false,
+          "expr": "histogram_quantile(0.50, sum(rate(http_request_duration_seconds_bucket{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[5m])) by (le))"
         }
       ],
       "title": "Response Latency",
@@ -581,7 +414,7 @@
     },
     {
       "datasource": {
-        "type": "stackdriver",
+        "type": "prometheus",
         "uid": "${dataSource}"
       },
       "fieldConfig": {
@@ -752,24 +585,14 @@
       "targets": [
         {
           "datasource": {
-            "type": "stackdriver",
+            "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "promQLQuery": {
-            "expr": "sum by (namespace) (rate(http_requests_total{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[5m]))",
-            "projectName": "$project",
-            "step": "$__interval"
-          },
-          "queryType": "promQL",
+          "editorMode": "code",
+          "legendFormat": "__auto",
+          "range": true,
           "refId": "A",
-          "timeSeriesList": {
-            "alignmentPeriod": "cloud-monitoring-auto",
-            "crossSeriesReducer": "REDUCE_NONE",
-            "filters": [],
-            "groupBys": [],
-            "perSeriesAligner": "ALIGN_MEAN",
-            "projectName": "$project"
-          }
+          "expr": "sum by (namespace) (rate(http_requests_total{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[5m]))"
         }
       ],
       "title": "Total Requests",
@@ -777,7 +600,7 @@
     },
     {
       "datasource": {
-        "type": "stackdriver",
+        "type": "prometheus",
         "uid": "${dataSource}"
       },
       "description": "",
@@ -955,115 +778,38 @@
       "targets": [
         {
           "datasource": {
-            "type": "stackdriver",
+            "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "promQLQuery": {
-            "expr": "sum by (pod) (container_memory_usage_bytes{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"})",
-            "projectName": "$project",
-            "step": "$__interval"
-          },
-          "queryType": "promQL",
+          "editorMode": "code",
+          "legendFormat": "__auto",
+          "range": true,
           "refId": "A",
-          "timeSeriesList": {
-            "alignmentPeriod": "cloud-monitoring-auto",
-            "crossSeriesReducer": "REDUCE_NONE",
-            "filters": [
-              "resource.label.namespace",
-              "=",
-              "$namespace",
-              "AND",
-              "metric.label.resource",
-              "=",
-              "cpu",
-              "AND",
-              "metric.type",
-              "=",
-              "prometheus.googleapis.com/kube_pod_container_resource_requests/gauge"
-            ],
-            "groupBys": [],
-            "perSeriesAligner": "ALIGN_MEAN",
-            "preprocessor": "none",
-            "projectName": "$project"
-          }
+          "expr": "sum by (pod) (container_memory_usage_bytes{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"})"
         },
         {
-          "aliasBy": "requests",
           "datasource": {
-            "type": "stackdriver",
+            "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "hide": false,
-          "queryType": "timeSeriesList",
+          "editorMode": "code",
+          "legendFormat": "requests",
+          "range": true,
           "refId": "B",
-          "timeSeriesList": {
-            "alignmentPeriod": "cloud-monitoring-auto",
-            "crossSeriesReducer": "REDUCE_MEAN",
-            "filters": [
-              "resource.label.namespace",
-              "=",
-              "$namespace",
-              "AND",
-              "metric.label.resource",
-              "=",
-              "memory",
-              "AND",
-              "resource.label.cluster",
-              "=",
-              "$cluster",
-              "AND",
-              "metric.label.container",
-              "=",
-              "$containerName",
-              "AND",
-              "metric.type",
-              "=",
-              "prometheus.googleapis.com/kube_pod_container_resource_limits/gauge"
-            ],
-            "groupBys": [],
-            "perSeriesAligner": "ALIGN_MEAN",
-            "preprocessor": "none",
-            "projectName": "$project"
-          }
+          "hide": false,
+          "expr": "avg(kube_pod_container_resource_limits{cluster=\"$cluster\", namespace=\"$namespace\", resource=\"memory\", container=\"$containerName\"})"
         },
         {
-          "aliasBy": "limits",
           "datasource": {
-            "type": "stackdriver",
+            "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "hide": false,
-          "queryType": "timeSeriesList",
+          "editorMode": "code",
+          "legendFormat": "limits",
+          "range": true,
           "refId": "C",
-          "timeSeriesList": {
-            "alignmentPeriod": "cloud-monitoring-auto",
-            "crossSeriesReducer": "REDUCE_MEAN",
-            "filters": [
-              "resource.label.namespace",
-              "=",
-              "$namespace",
-              "AND",
-              "metric.label.resource",
-              "=",
-              "memory",
-              "AND",
-              "resource.label.cluster",
-              "=",
-              "$cluster",
-              "AND",
-              "metric.label.container",
-              "=",
-              "$containerName",
-              "AND",
-              "metric.type",
-              "=",
-              "prometheus.googleapis.com/kube_pod_container_resource_limits/gauge"
-            ],
-            "groupBys": [],
-            "perSeriesAligner": "ALIGN_INTERPOLATE",
-            "preprocessor": "none",
-            "projectName": "$project"
-          }
+          "hide": false,
+          "expr": "avg(kube_pod_container_resource_limits{cluster=\"$cluster\", namespace=\"$namespace\", resource=\"memory\", container=\"$containerName\"})"
         }
       ],
       "title": "Memory usage, requests and limits",
@@ -1077,7 +823,7 @@
     },
     {
       "datasource": {
-        "type": "stackdriver",
+        "type": "prometheus",
         "uid": "${dataSource}"
       },
       "fieldConfig": {
@@ -1253,24 +999,14 @@
       "targets": [
         {
           "datasource": {
-            "type": "stackdriver",
+            "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "promQLQuery": {
-            "expr": "sum by (namespace, code) (rate(http_requests_total{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\", code=~\"[45]..\"}[15m])) / ignoring(code) group_left sum by (namespace) (rate(http_requests_total{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[15m]))",
-            "projectName": "$project",
-            "step": "$__interval"
-          },
-          "queryType": "promQL",
+          "editorMode": "code",
+          "legendFormat": "__auto",
+          "range": true,
           "refId": "A",
-          "timeSeriesList": {
-            "alignmentPeriod": "cloud-monitoring-auto",
-            "crossSeriesReducer": "REDUCE_NONE",
-            "filters": [],
-            "groupBys": [],
-            "perSeriesAligner": "ALIGN_MEAN",
-            "projectName": "$project"
-          }
+          "expr": "sum by (namespace, code) (rate(http_requests_total{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\", code=~\"[45]..\"}[15m])) / ignoring(code) group_left sum by (namespace) (rate(http_requests_total{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[15m]))"
         }
       ],
       "title": "Error Rate by Status Code",
@@ -1287,7 +1023,7 @@
     },
     {
       "datasource": {
-        "type": "stackdriver",
+        "type": "prometheus",
         "uid": "${dataSource}"
       },
       "fieldConfig": {
@@ -1370,24 +1106,14 @@
       "targets": [
         {
           "datasource": {
-            "type": "stackdriver",
+            "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "promQLQuery": {
-            "expr": "go_goroutines{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}",
-            "projectName": "$project",
-            "step": "$__interval"
-          },
-          "queryType": "promQL",
+          "editorMode": "code",
+          "legendFormat": "__auto",
+          "range": true,
           "refId": "A",
-          "timeSeriesList": {
-            "alignmentPeriod": "cloud-monitoring-auto",
-            "crossSeriesReducer": "REDUCE_NONE",
-            "filters": [],
-            "groupBys": [],
-            "perSeriesAligner": "ALIGN_MEAN",
-            "projectName": "monitoring-play"
-          }
+          "expr": "go_goroutines{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}"
         }
       ],
       "title": "Go Routines",
@@ -1404,7 +1130,7 @@
     },
     {
       "datasource": {
-        "type": "stackdriver",
+        "type": "prometheus",
         "uid": "${dataSource}"
       },
       "fieldConfig": {
@@ -1560,24 +1286,14 @@
       "targets": [
         {
           "datasource": {
-            "type": "stackdriver",
+            "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "promQLQuery": {
-            "expr": "sum by (method) (rate(http_requests_total{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[5m]))",
-            "projectName": "$project",
-            "step": "$__interval"
-          },
-          "queryType": "promQL",
+          "editorMode": "code",
+          "legendFormat": "__auto",
+          "range": true,
           "refId": "A",
-          "timeSeriesList": {
-            "alignmentPeriod": "cloud-monitoring-auto",
-            "crossSeriesReducer": "REDUCE_NONE",
-            "filters": [],
-            "groupBys": [],
-            "perSeriesAligner": "ALIGN_MEAN",
-            "projectName": "monitoring-play"
-          }
+          "expr": "sum by (method) (rate(http_requests_total{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[5m]))"
         }
       ],
       "title": "Requests by Method",
@@ -1585,7 +1301,7 @@
     },
     {
       "datasource": {
-        "type": "stackdriver",
+        "type": "prometheus",
         "uid": "${dataSource}"
       },
       "fieldConfig": {
@@ -1666,24 +1382,14 @@
       "targets": [
         {
           "datasource": {
-            "type": "stackdriver",
+            "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "promQLQuery": {
-            "expr": "max by (quantile) (go_gc_duration_seconds{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"})",
-            "projectName": "$project",
-            "step": "$__interval"
-          },
-          "queryType": "promQL",
+          "editorMode": "code",
+          "legendFormat": "__auto",
+          "range": true,
           "refId": "A",
-          "timeSeriesList": {
-            "alignmentPeriod": "cloud-monitoring-auto",
-            "crossSeriesReducer": "REDUCE_NONE",
-            "filters": [],
-            "groupBys": [],
-            "perSeriesAligner": "ALIGN_MEAN",
-            "projectName": "monitoring-play"
-          }
+          "expr": "max by (quantile) (go_gc_duration_seconds{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"})"
         }
       ],
       "title": "Garbage Collection Time",
@@ -1700,7 +1406,7 @@
     },
     {
       "datasource": {
-        "type": "stackdriver",
+        "type": "prometheus",
         "uid": "${dataSource}"
       },
       "fieldConfig": {
@@ -1780,24 +1486,14 @@
       "targets": [
         {
           "datasource": {
-            "type": "stackdriver",
+            "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "promQLQuery": {
-            "expr": "sum by (method) (rate(http_request_size_bytes_sum{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[5m])) / sum by (method) (rate(http_request_size_bytes_count{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[5m]))",
-            "projectName": "$project",
-            "step": "$__interval"
-          },
-          "queryType": "promQL",
+          "editorMode": "code",
+          "legendFormat": "__auto",
+          "range": true,
           "refId": "A",
-          "timeSeriesList": {
-            "alignmentPeriod": "cloud-monitoring-auto",
-            "crossSeriesReducer": "REDUCE_NONE",
-            "filters": [],
-            "groupBys": [],
-            "perSeriesAligner": "ALIGN_MEAN",
-            "projectName": "monitoring-play"
-          }
+          "expr": "sum by (method) (rate(http_request_size_bytes_sum{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[5m])) / sum by (method) (rate(http_request_size_bytes_count{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[5m]))"
         }
       ],
       "title": "Request Size by Method",
@@ -1805,7 +1501,7 @@
     },
     {
       "datasource": {
-        "type": "stackdriver",
+        "type": "prometheus",
         "uid": "${dataSource}"
       },
       "fieldConfig": {
@@ -1885,24 +1581,14 @@
       "targets": [
         {
           "datasource": {
-            "type": "stackdriver",
+            "type": "prometheus",
             "uid": "${dataSource}"
           },
-          "promQLQuery": {
-            "expr": "sum by (method) (rate(http_response_size_bytes_sum{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[5m])) / sum by (method) (rate(http_response_size_bytes_count{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[5m]))",
-            "projectName": "$project",
-            "step": "$__interval"
-          },
-          "queryType": "promQL",
+          "editorMode": "code",
+          "legendFormat": "__auto",
+          "range": true,
           "refId": "A",
-          "timeSeriesList": {
-            "alignmentPeriod": "cloud-monitoring-auto",
-            "crossSeriesReducer": "REDUCE_NONE",
-            "filters": [],
-            "groupBys": [],
-            "perSeriesAligner": "ALIGN_MEAN",
-            "projectName": "monitoring-play"
-          }
+          "expr": "sum by (method) (rate(http_response_size_bytes_sum{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[5m])) / sum by (method) (rate(http_response_size_bytes_count{cluster=\"$cluster\", namespace=\"$namespace\", container=\"$containerName\"}[5m]))"
         }
       ],
       "title": "Response Size by Method",
@@ -1921,92 +1607,18 @@
         "multi": false,
         "name": "dataSource",
         "options": [],
-        "query": "stackdriver",
+        "query": "prometheus",
+        "queryValue": "",
         "refresh": 1,
         "skipUrlSync": false,
         "type": "datasource"
       },
       {
         "datasource": {
-          "type": "stackdriver",
+          "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Project",
-        "multi": false,
-        "name": "project",
-        "options": [],
-        "query": {
-          "labelKey": "",
-          "loading": false,
-          "projectName": "monitoring-play",
-          "projects": [
-            {
-              "label": "shared-services",
-              "value": "harness-zero-shared-1248"
-            },
-            {
-              "label": "shared-services",
-              "value": "qa-shared-2bcf"
-            },
-            {
-              "label": "shared-services",
-              "value": "prod-shared-3921"
-            },
-            {
-              "label": "shared-services",
-              "value": "ie-woojae-shared-22b5"
-            },
-            {
-              "label": "monitoring-play",
-              "value": "monitoring-play"
-            }
-          ],
-          "refId": "CloudMonitoringVariableQueryEditor-VariableQuery",
-          "selectedMetricType": "actions.googleapis.com/smarthome_action/camerastream/first_frame_latencies",
-          "selectedQueryType": "projects",
-          "selectedSLOService": "",
-          "selectedService": "actions.googleapis.com",
-          "sloServices": [
-            {
-              "label": "istio-ingressgateway",
-              "value": "ist:monitoring-play-location-us-central1-monitoring-istio-system-istio-ingressgateway"
-            },
-            {
-              "label": "grafana-alerting",
-              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-alerting"
-            },
-            {
-              "label": "grafana-operator-monitoring-play-metrics-service",
-              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-operator-monitoring-play-metrics-service"
-            },
-            {
-              "label": "grafana-service",
-              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-service"
-            },
-            {
-              "label": "prometheus-monitoring-play-kube-state-metrics",
-              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-prometheus-monitoring-play-kube-state-metrics"
-            },
-            {
-              "label": "prometheus-monitoring-play-server",
-              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-prometheus-monitoring-play-server"
-            }
-          ]
-        },
-        "refresh": 1,
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      },
-      {
-        "datasource": {
-          "type": "stackdriver",
-          "uid": "${dataSource}"
-        },
-        "definition": "",
+        "definition": "label_values(up,cluster)",
         "hide": 0,
         "includeAll": false,
         "label": "Cluster",
@@ -2014,74 +1626,20 @@
         "name": "cluster",
         "options": [],
         "query": {
-          "labelKey": "resource.label.cluster",
-          "loading": false,
-          "projectName": "$project",
-          "projects": [
-            {
-              "label": "shared-services",
-              "value": "harness-zero-shared-1248"
-            },
-            {
-              "label": "shared-services",
-              "value": "qa-shared-2bcf"
-            },
-            {
-              "label": "shared-services",
-              "value": "prod-shared-3921"
-            },
-            {
-              "label": "shared-services",
-              "value": "ie-woojae-shared-22b5"
-            },
-            {
-              "label": "monitoring-play",
-              "value": "monitoring-play"
-            }
-          ],
-          "refId": "CloudMonitoringVariableQueryEditor-VariableQuery",
-          "selectedMetricType": "prometheus.googleapis.com/http_request_duration_seconds/histogram",
-          "selectedQueryType": "labelValues",
-          "selectedSLOService": "",
-          "selectedService": "prometheus.googleapis.com",
-          "sloServices": [
-            {
-              "label": "istio-ingressgateway",
-              "value": "ist:monitoring-play-location-us-central1-monitoring-istio-system-istio-ingressgateway"
-            },
-            {
-              "label": "grafana-alerting",
-              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-alerting"
-            },
-            {
-              "label": "grafana-operator-monitoring-play-metrics-service",
-              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-operator-monitoring-play-metrics-service"
-            },
-            {
-              "label": "grafana-service",
-              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-service"
-            },
-            {
-              "label": "prometheus-monitoring-play-kube-state-metrics",
-              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-prometheus-monitoring-play-kube-state-metrics"
-            },
-            {
-              "label": "prometheus-monitoring-play-server",
-              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-prometheus-monitoring-play-server"
-            }
-          ]
+          "query": "label_values(up,cluster)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
         "skipUrlSync": false,
-        "sort": 0,
+        "sort": 1,
         "type": "query"
       },
       {
         "datasource": {
-          "type": "stackdriver",
+          "type": "prometheus",
           "uid": "${dataSource}"
         },
-        "definition": "",
+        "definition": "label_values(up{cluster=\"$cluster\"},namespace)",
         "hide": 0,
         "includeAll": false,
         "label": "Namespace",
@@ -2089,66 +1647,12 @@
         "name": "namespace",
         "options": [],
         "query": {
-          "labelKey": "resource.label.namespace",
-          "loading": false,
-          "projectName": "$project",
-          "projects": [
-            {
-              "label": "shared-services",
-              "value": "harness-zero-shared-1248"
-            },
-            {
-              "label": "shared-services",
-              "value": "qa-shared-2bcf"
-            },
-            {
-              "label": "shared-services",
-              "value": "prod-shared-3921"
-            },
-            {
-              "label": "shared-services",
-              "value": "ie-woojae-shared-22b5"
-            },
-            {
-              "label": "monitoring-play",
-              "value": "monitoring-play"
-            }
-          ],
-          "refId": "CloudMonitoringVariableQueryEditor-VariableQuery",
-          "selectedMetricType": "prometheus.googleapis.com/http_request_duration_seconds/histogram",
-          "selectedQueryType": "labelValues",
-          "selectedSLOService": "",
-          "selectedService": "prometheus.googleapis.com",
-          "sloServices": [
-            {
-              "label": "istio-ingressgateway",
-              "value": "ist:monitoring-play-location-us-central1-monitoring-istio-system-istio-ingressgateway"
-            },
-            {
-              "label": "grafana-alerting",
-              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-alerting"
-            },
-            {
-              "label": "grafana-operator-monitoring-play-metrics-service",
-              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-operator-monitoring-play-metrics-service"
-            },
-            {
-              "label": "grafana-service",
-              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-grafana-service"
-            },
-            {
-              "label": "prometheus-monitoring-play-kube-state-metrics",
-              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-prometheus-monitoring-play-kube-state-metrics"
-            },
-            {
-              "label": "prometheus-monitoring-play-server",
-              "value": "ist:monitoring-play-location-us-central1-monitoring-observability-prometheus-monitoring-play-server"
-            }
-          ]
+          "query": "label_values(up{cluster=\"$cluster\"},namespace)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
         "skipUrlSync": false,
-        "sort": 0,
+        "sort": 1,
         "type": "query"
       },
       {
